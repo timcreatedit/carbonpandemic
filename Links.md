@@ -24,6 +24,12 @@ https://ec.europa.eu/eurostat/web/covid-19/visualisation
 
 ## 1. Vorjahre Emissionen
 
+##### Weltweite Emissionsdaten seit 1960 (riesiger Datensatz)
+
+http://globalcarbonatlas.org/en/CO2-emissions
+
+
+
 ##### Zenodo Monthly CO2 Emissions projections from 2015-2025 modified to account for COVID-19
 
 https://zenodo.org/record/4066513#.X7KopC1Q3xU
