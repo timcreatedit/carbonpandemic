@@ -65,3 +65,15 @@ https://dataservices.gfz-potsdam.de/pik/showshort.php?id=escidoc:2959897
 - Land Use, Land Use Change, and Forestry (LULUCF) 
 - Waste 
 - Other
+
+
+## 2. Einschränkungen durch Regierungen auf Grund COVIDs
+
+##### Regierungsmaßnahmen generell seit Januar 2020 (Lockdowns, Social Distance, Movement Restrictions, ...)
+https://data.humdata.org/dataset/acaps-covid19-government-measures-dataset
+
+##### Globale Reiseeinschränkungen und Airline Informationen COVID-19
+https://data.humdata.org/dataset/covid-19-global-travel-restrictions-and-airline-information
+
+##### Crowdsourced air traffic data from The OpenSky Network 2020
+https://zenodo.org/record/4266938
