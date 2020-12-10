@@ -1,0 +1,24 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  //Text Color
+  color: white;
+  h3 {
+    color: white;
+  }
+}
+.grid-item {
+  text-align: center;
+}
+
+#diagrams {
+  width: 600px;
+}
+
+#pieChart2019,
+#pieChart2020 {
+  float: left;
+  width: 300px;
+  height: 300px;
+}
