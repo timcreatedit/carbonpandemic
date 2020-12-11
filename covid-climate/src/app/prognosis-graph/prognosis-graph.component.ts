@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -8,7 +9,7 @@ import * as d3 from 'd3';
 })
 export class PrognosisGraphComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-covid-graph',
@@ -15,7 +16,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit {
 
   private graphSvg: SVGElement;
 
-  constructor() {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
