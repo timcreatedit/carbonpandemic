@@ -14,8 +14,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit {
   @Input() selectedCountry: Countries;
   @Input() co2Data: Co2Datapoint[];
 
-  width = 100;
-  height = 100;
+  width = 960;
+  height = 500;
+  margin = 5;
+  padding = 5;
+  adj = 30;
 
   private graphSvg: SVGElement;
 
@@ -31,20 +34,45 @@ export class CovidGraphComponent implements OnInit, AfterViewInit {
   }
 
   initGraph(): void {
+    const data19 = this.co2Data.filter(dp => dp.date.getFullYear() === 2019);
+    const data20 = this.co2Data.filter(dp => dp.date.getFullYear() === 2020);
+    const values19 = data19.map(dp => dp.mtCo2);
+    const values20 = data20.map(dp => dp.mtCo2);
 
-    const x = d3.scaleTime().range([0, this.width]);
-    const y = d3.scaleLinear().range([this.height, 0]);
+    const dateExtent = d3.extent(data19.map(dp => dp.date));
+    const valueExtent = d3.extent([...values19, ...values20]);
 
-    x.domain();
+    const x = d3.scaleTime()
+      .domain(dateExtent)
+      .range([0, this.width]);
+    const y = d3.scaleLinear()
+      .domain(valueExtent)
+      .range([this.height, 0]);
 
-    const xAxis = d3.svg.axis().scale(x).orient('bottom');
-    const yAxis = d3.svg.axis().scale(y).orient('left');
-    d3.select(this.graphSvg).append('rect')
-      .attr('x', 10)
-      .attr('y', 10)
-      .attr('width', 50)
-      .attr('height', 50)
-      .style('fill', 'red');
+    const xAxis = d3.axisBottom(x)
+      .tickFormat(d3.timeFormat('%b'));
+    const yAxis = d3.axisLeft(y);
+
+    const graph = d3.select(this.graphSvg);
+
+    graph.attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '-'
+        + this.adj + ' -'
+        + this.adj + ' '
+        + (this.width + this.adj * 3) + ' '
+        + (this.height + this.adj * 3))
+      .style('padding', this.padding)
+      .style('margin', this.margin)
+      .classed('svg-content', true);
+
+    graph.append('g')
+      .attr('class', 'axis')
+      .attr('transform', 'translate(0,' + this.height + ')')
+      .call(xAxis);
+
+    graph.append('g')
+      .attr('class', 'axis')
+      .call(yAxis);
   }
 
 }

@@ -45,6 +45,7 @@ export class DataService {
   public getCo2Data(filterOptions?: {
     countryFilter?: Countries[]
     sectorFilter?: Sectors[]
+    yearFilter?: number[],
   }): Co2Datapoint[] {
     if (!filterOptions) { return this.co2Datapoints; }
     let filteredList: Co2Datapoint [] = this.co2Datapoints;
@@ -53,6 +54,9 @@ export class DataService {
     }
     if (filterOptions.sectorFilter) {
       filteredList = filteredList.filter(dp => filterOptions.sectorFilter.includes(dp.sector));
+    }
+    if (filterOptions.yearFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.yearFilter.includes(dp.date.getFullYear()));
     }
     return filteredList;
   }
