@@ -26,7 +26,7 @@ export enum Sectors {
 
 export interface Co2Datapoint {
   country: Countries;
-  date: string;
+  date: Date;
   sector: Sectors;
   mtCo2: number;
 }
