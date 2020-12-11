@@ -1,5 +1,17 @@
-svg {
-  #axis {
-    color: white;
+.covid-graph {
+
+  .axis {
+
+    text {
+      fill: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 120%;
+    }
+  }
+
+
+  .line {
+    fill: none;
+    stroke: #ed3700;
   }
 }
