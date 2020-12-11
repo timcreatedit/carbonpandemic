@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import {DataService} from '../services/data.service';
+import {DataService} from '../core/services/data.service';
 
 @Component({
   selector: 'app-prognosis-graph',
