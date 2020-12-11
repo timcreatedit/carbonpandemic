@@ -26,8 +26,9 @@ export class PieChartComponent implements OnInit, OnChanges {
 
   drawTest(): void {
     const data2019 = this.co2Data
-      .filter(d => d.date.includes('2019'));
-    const data2020 = this.co2Data.filter(d => d.date.includes('2020'));
+      .filter(d => d.date.getFullYear() === 2019);
+    const data2020 = this.co2Data
+      .filter(d => d.date.getFullYear() === 2020);
 
     const sectorData19 = Object.keys(Sectors)
       .map(s => data2019.filter(dp => dp.sector === Sectors[s]))
@@ -37,6 +38,7 @@ export class PieChartComponent implements OnInit, OnChanges {
       .map(s => data2020.filter(dp => dp.sector === Sectors[s]))
       .map(dps => dps.map(dp => dp.mtCo2).reduce((v1, v2) => v1 + v2, 0));
 
+    console.log(sectorData19);
     console.log(sectorData20);
 
     const svg1 = d3.select('#pieChart2019');

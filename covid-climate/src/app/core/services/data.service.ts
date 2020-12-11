@@ -14,6 +14,8 @@ export class DataService {
   constructor() {
     this.readCo2Data();
     console.log('All Data: ' + this.co2Datapoints.length);
+    console.log('First Datapoint: ');
+    console.log(this.co2Datapoints[0]);
   }
 
   /**
@@ -24,7 +26,7 @@ export class DataService {
     data.datas.forEach(dp => {
       this.co2Datapoints.push({
         country: dp['country / group of countries'] as Countries,
-        date: dp.date,
+        date: new Date(Date.parse(dp.date)),
         sector: dp.sector as Sectors
         ,
         mtCo2: parseFloat(dp['MtCO2 per day']),
