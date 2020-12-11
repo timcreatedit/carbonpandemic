@@ -31,6 +31,14 @@ export class CovidGraphComponent implements OnInit, AfterViewInit {
   }
 
   initGraph(): void {
+
+    const x = d3.scaleTime().range([0, this.width]);
+    const y = d3.scaleLinear().range([this.height, 0]);
+
+    x.domain();
+
+    const xAxis = d3.svg.axis().scale(x).orient('bottom');
+    const yAxis = d3.svg.axis().scale(y).orient('left');
     d3.select(this.graphSvg).append('rect')
       .attr('x', 10)
       .attr('y', 10)
