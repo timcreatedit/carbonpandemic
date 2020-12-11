@@ -27,7 +27,7 @@ export class DataService {
         date: dp.date,
         sector: dp.sector as Sectors
         ,
-        mtCo2: dp['MtCO2 per day'],
+        mtCo2: parseFloat(dp['MtCO2 per day']),
       } as Co2Datapoint);
     });
   }

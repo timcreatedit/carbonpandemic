@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
+import {Co2Datapoint, Countries} from '../core/models/co2data.model';
 
 @Component({
   selector: 'app-covid-graph',
@@ -10,6 +11,8 @@ import {DataService} from '../core/services/data.service';
 export class CovidGraphComponent implements OnInit, AfterViewInit {
 
   @ViewChild('graph') graph: ElementRef<SVGElement>;
+  @Input() selectedCountry: Countries;
+  @Input() co2Data: Co2Datapoint[];
 
   width = 100;
   height = 100;

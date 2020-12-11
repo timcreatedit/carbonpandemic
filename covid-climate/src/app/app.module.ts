@@ -6,6 +6,7 @@ import { CovidGraphComponent } from './covid-graph/covid-graph.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { PrognosisGraphComponent } from './prognosis-graph/prognosis-graph.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,10 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     PrognosisGraphComponent,
     TopBarComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

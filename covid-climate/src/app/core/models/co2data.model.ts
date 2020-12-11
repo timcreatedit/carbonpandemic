@@ -28,5 +28,5 @@ export interface Co2Datapoint {
   country: Countries;
   date: string;
   sector: Sectors;
-  mtCo2: string;
+  mtCo2: number;
 }

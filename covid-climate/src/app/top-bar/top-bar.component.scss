@@ -1,3 +1,21 @@
+$top-bar-height: 60px;
+
 #top-bar-component {
-  height: 60px;
+  width: 100%;
+  top: 0px;
+  padding: 0 1em;
+
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  // TODO Replace with a real color
+  background-color: #35324f;
+  height: $top-bar-height;
+
+  select {
+    margin-right: 2em;
+  }
 }

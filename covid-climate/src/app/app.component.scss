@@ -1,17 +1,9 @@
 @import "src/styles";
+@import "./top-bar/top-bar.component";
 
-#top-bar {
-  width: 100%;
-  top: 0px;
 
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-
-  background-color: white;
-}
-
-#main-component {
+#main-content {
+  margin-top: $top-bar-height;
   display: flex;
   align-items: center;
   justify-content: center;

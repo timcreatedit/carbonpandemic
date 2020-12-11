@@ -1,3 +1,9 @@
 <div id="top-bar-component">
-
+  <h1>Gruppe 13 Titel</h1>
+  <label>
+    Country:
+    <select [ngModel]="selectedCountry" (ngModelChange)="updateCountry($event)">
+      <option *ngFor="let country of countries">{{country}}</option>
+    </select>
+  </label>
 </div>
