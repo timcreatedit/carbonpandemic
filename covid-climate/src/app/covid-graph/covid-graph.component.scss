@@ -12,11 +12,25 @@
 
   .line19 {
     fill: none;
-    stroke: #ed3700;
+    stroke: #919191;
+    stroke-width: 1px;
   }
 
   .line20 {
     fill: none;
-    stroke: #27cda7;
+    stroke: #ffffff;
+    stroke-width: 3px;
+  }
+
+  #clip-above {
+    fill: #fff;
+  }
+
+  .area-above {
+    fill: #FF5889;
+  }
+
+  .area-below {
+    fill: #9BFFC7;
   }
 }

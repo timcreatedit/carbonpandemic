@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleCh
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries} from '../core/models/co2data.model';
+import {templateSourceUrl} from '@angular/compiler';
 
 @Component({
   selector: 'app-covid-graph',
@@ -38,12 +39,21 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   readonly yAxis = d3.axisLeft(this.y);
 
   readonly line19 = d3.line<Co2Datapoint>()
+    .curve(d3.curveNatural)
     .x(d => this.x19(d.date))
     .y(d => this.y(d.mtCo2));
 
   readonly line20 = d3.line<Co2Datapoint>()
+    .curve(d3.curveNatural)
     .x(d => this.x20(d.date))
     .y(d => this.y(d.mtCo2));
+
+  readonly differenceArea = d3.area<[Co2Datapoint, Co2Datapoint]>()
+    .curve(d3.curveNatural)
+    .x(d => this.x19(d[0].date))
+    .y0(d => this.y(d[0].mtCo2))
+    .y1(d => this.y(d[1].mtCo2));
+
 
   private svg: d3.Selection<SVGElement, unknown, null, undefined>;
   // endregion
@@ -99,6 +109,22 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .style('text-anchor', 'end')
       .text('in MtCO2');
 
+    this.svg.append('clipPath')
+      .attr('id', 'clip-below')
+      .append('path');
+
+    this.svg.append('clipPath')
+      .attr('id', 'clip-above')
+      .append('path');
+
+    this.svg.append('path')
+      .attr('clip-path', 'url(#clip-above)')
+      .attr('class', 'area-above');
+
+    this.svg.append('path')
+      .attr('clip-path', 'url(#clip-below)')
+      .attr('class', 'area-below');
+
     this.svg.append('path')
       .attr('class', 'line19');
 
@@ -124,7 +150,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     const dateExtent19 = d3.extent(data19.map(dp => dp.date));
     const dateExtent20 = d3.extent(data20.map(dp => dp.date));
-    const valueExtent = d3.extent([...values19, ...values20]);
+    const valueExtent = d3.extent([0, ...values19, ...values20]);
     this.x19.domain(dateExtent19);
     this.x20.domain(dateExtent20);
 
@@ -146,20 +172,61 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .datum(data20);
 
     line19.enter()
-      .append('path')
-      .attr('class', 'line19')
       .merge(line19 as any)
       .transition()
       .duration(1000)
       .attr('d', this.line19);
 
     line20.enter()
-      .append('path')
-      .attr('class', 'line20')
       .merge(line20 as any)
       .transition()
       .duration(1000)
       .attr('d', this.line20);
+
+    const comparisonData = data19
+      .map((dp, i) => [dp, data20[i]] as [Co2Datapoint, Co2Datapoint]);
+
+    const clipAbove = this.svg.select('#clip-above')
+      .select('path')
+      .datum(comparisonData);
+
+    clipAbove
+      .enter()
+      .merge(clipAbove as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.differenceArea.y0(d => this.y(d[1].mtCo2)).y1(this.height));
+
+    const areaAbove = this.svg.select('.area-above')
+      .datum(comparisonData);
+
+    areaAbove
+      .enter()
+      .merge(areaAbove as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.differenceArea.y0(0).y1(d => this.y(d[0].mtCo2)));
+
+    const clipBelow = this.svg.select('#clip-below')
+      .select('path')
+      .datum(comparisonData);
+
+    clipBelow
+      .enter()
+      .merge(clipBelow as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.differenceArea.y0(0).y1(d => this.y(d[1].mtCo2)));
+
+    const areaBelow = this.svg.select('.area-below')
+      .datum(comparisonData);
+
+    areaBelow
+      .enter()
+      .merge(areaBelow as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.differenceArea.y0(d => this.y(d[0].mtCo2)).y1(this.height));
 
   }
 
