@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
-import {Co2Datapoint, Countries} from '../core/models/co2data.model';
+import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {templateSourceUrl} from '@angular/compiler';
 
 @Component({
@@ -16,6 +16,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('graph') graph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
 
+  showDifference: boolean;
+
+  @Input() showSectors: boolean;
+
   // region size
   width = 960;
   height = 500;
@@ -25,6 +29,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   // endregion
 
   //region D3 Variables
+  private readonly curve = d3.curveNatural;
+
   readonly x19 = d3.scaleTime()
     .range([0, this.width]);
 
@@ -39,20 +45,38 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   readonly yAxis = d3.axisLeft(this.y);
 
   readonly line19 = d3.line<Co2Datapoint>()
-    .curve(d3.curveNatural)
+    .curve(this.curve)
     .x(d => this.x19(d.date))
     .y(d => this.y(d.mtCo2));
 
   readonly line20 = d3.line<Co2Datapoint>()
-    .curve(d3.curveNatural)
+    .curve(this.curve)
     .x(d => this.x20(d.date))
     .y(d => this.y(d.mtCo2));
 
-  readonly differenceArea = d3.area<[Co2Datapoint, Co2Datapoint]>()
-    .curve(d3.curveNatural)
-    .x(d => this.x19(d[0].date))
-    .y0(d => this.y(d[0].mtCo2))
-    .y1(d => this.y(d[1].mtCo2));
+  readonly areaBelow20 = d3.area<Co2Datapoint>()
+    .curve(this.curve)
+    .x(d => this.x20(d.date))
+    .y0(this.height)
+    .y1(d => this.y(d.mtCo2));
+
+  readonly areaAbove20 = d3.area<Co2Datapoint>()
+    .curve(this.curve)
+    .x(d => this.x20(d.date))
+    .y0(d => this.y(d.mtCo2))
+    .y1(0);
+
+  readonly areaBelow19 = d3.area<Co2Datapoint>()
+    .curve(this.curve)
+    .x(d => this.x19(d.date))
+    .y0(this.height)
+    .y1(d => this.y(d.mtCo2));
+
+  readonly areaAbove19 = d3.area<Co2Datapoint>()
+    .curve(this.curve)
+    .x(d => this.x19(d.date))
+    .y0(d => this.y(d.mtCo2))
+    .y1(0);
 
 
   private svg: d3.Selection<SVGElement, unknown, null, undefined>;
@@ -69,17 +93,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     this.graphSvg = this.graph.nativeElement;
     this.initGraph();
-    this.update();
+    this.updateGraph();
+    this.updateShowDifference(this.showDifference);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.graphSvg) {
       return;
     }
-    this.update();
+    this.updateGraph();
   }
 
-  initGraph(): void {
+  private initGraph(): void {
     this.svg = d3.select(this.graphSvg);
 
     this.svg.attr('preserveAspectRatio', 'xMinYMin meet')
@@ -130,9 +155,15 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.svg.append('path')
       .attr('class', 'line20');
+
+    for (const sector of Object.values(Sectors)) {
+      this.svg.append('path')
+        .attr('class', 'sectorArea ' + sector);
+
+    }
   }
 
-  update(): void {
+  private updateGraph(): void {
     const data19 = this.dataService.getCo2Data({
       yearFilter: [2019],
       countryFilter: [this.selectedCountry],
@@ -143,33 +174,56 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-    const values19 = data19.map(dp => dp.mtCo2);
-    const values20 = data20.map(dp => dp.mtCo2);
 
-    console.log(data19);
+    this.updateAxes(data19, data20);
+    this.updateLines(data19, data20);
+    this.updateDifferenceArea(data19, data20);
+    this.updateSectorStacks();
+  }
 
-    const dateExtent19 = d3.extent(data19.map(dp => dp.date));
-    const dateExtent20 = d3.extent(data20.map(dp => dp.date));
-    const valueExtent = d3.extent([0, ...values19, ...values20]);
-    this.x19.domain(dateExtent19);
-    this.x20.domain(dateExtent20);
+  updateShowDifference(showDifference: boolean): void {
+    const line19 = this.svg.select('.line19');
+    const areaAbove = this.svg.select('.area-above');
+    const areaBelow = this.svg.select('.area-below');
+
+    if (showDifference) {
+      line19.attr('class', 'line19 hidden');
+      areaAbove.attr('class', 'area-above');
+      areaBelow.attr('class', 'area-below');
+    } else {
+      line19.attr('class', 'line19');
+      areaAbove.attr('class', 'area-above hidden');
+      areaBelow.attr('class', 'area-below hidden');
+    }
+  }
+
+  private updateAxes(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
+    const maxValue = d3.max([...data19.map(d => d.mtCo2), ...data20.map(d => d.mtCo2)]);
+
+    this.x19.domain(d3.extent(data19.map(dp => dp.date)));
+    this.x20.domain(d3.extent(data20.map(dp => dp.date)));
+    this.y.domain([0, maxValue]);
 
     this.svg.selectAll('#xAxis')
       .transition()
       .duration(1000)
       .call(this.xAxis as any);
 
-    this.y.domain(valueExtent);
     this.svg.selectAll('#yAxis')
       .transition()
       .duration(1000)
       .call(this.yAxis as any);
+  }
 
+  private updateLines(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
     const line19 = this.svg.select('.line19')
       .datum(data19);
 
-    const line20 = this.svg.select('.line20')
-      .datum(data20);
+    if (this.showDifference) {
+      line19.attr('class', 'line19 hidden');
+    } else {
+      line19.attr('class', 'line19');
+    }
 
     line19.enter()
       .merge(line19 as any)
@@ -177,56 +231,64 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .duration(1000)
       .attr('d', this.line19);
 
+    const line20 = this.svg.select('.line20')
+      .datum(data20);
+
     line20.enter()
       .merge(line20 as any)
       .transition()
       .duration(1000)
       .attr('d', this.line20);
+  }
 
-    const comparisonData = data19
-      .map((dp, i) => [dp, data20[i]] as [Co2Datapoint, Co2Datapoint]);
-
+  private updateDifferenceArea(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
     const clipAbove = this.svg.select('#clip-above')
       .select('path')
-      .datum(comparisonData);
+      .datum(data20);
 
     clipAbove
       .enter()
       .merge(clipAbove as any)
       .transition()
       .duration(1000)
-      .attr('d', this.differenceArea.y0(d => this.y(d[1].mtCo2)).y1(this.height));
+      .attr('d', this.areaBelow20);
 
     const areaAbove = this.svg.select('.area-above')
-      .datum(comparisonData);
+      .datum(data19);
 
     areaAbove
       .enter()
       .merge(areaAbove as any)
       .transition()
       .duration(1000)
-      .attr('d', this.differenceArea.y0(0).y1(d => this.y(d[0].mtCo2)));
+      .attr('d', this.areaAbove19);
 
     const clipBelow = this.svg.select('#clip-below')
       .select('path')
-      .datum(comparisonData);
+      .datum(data20);
 
     clipBelow
       .enter()
       .merge(clipBelow as any)
       .transition()
       .duration(1000)
-      .attr('d', this.differenceArea.y0(0).y1(d => this.y(d[1].mtCo2)));
+      .attr('d', this.areaAbove20);
 
     const areaBelow = this.svg.select('.area-below')
-      .datum(comparisonData);
+      .datum(data19);
 
     areaBelow
       .enter()
       .merge(areaBelow as any)
       .transition()
       .duration(1000)
-      .attr('d', this.differenceArea.y0(d => this.y(d[0].mtCo2)).y1(this.height));
+      .attr('d', this.areaBelow19);
+  }
+
+  private updateSectorStacks(): void {
+    const data = this.dataService.getSectorsPerDay(this.selectedCountry);
+    console.log(data);
+    const sectorArea = d3.select('.sectorArea' );
 
   }
 

@@ -11,9 +11,14 @@
 
 
   .line19 {
+    transition: all 200ms ease;
     fill: none;
-    stroke: #919191;
-    stroke-width: 1px;
+    stroke: #63f2ff;
+    stroke-width: 3px;
+
+    &.hidden {
+      opacity: 0;
+    }
   }
 
   .line20 {
@@ -22,15 +27,21 @@
     stroke-width: 3px;
   }
 
-  #clip-above {
-    fill: #fff;
-  }
-
   .area-above {
+    transition: all 200ms ease;
     fill: #FF5889;
+
+    &.hidden {
+      opacity: 0;
+    }
   }
 
   .area-below {
+    transition: all 200ms ease;
     fill: #9BFFC7;
+
+    &.hidden {
+      opacity: 0;
+    }
   }
 }

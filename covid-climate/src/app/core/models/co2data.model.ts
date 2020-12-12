@@ -21,7 +21,7 @@ export enum Sectors {
   industry = 'Industry',
   residential = 'Residential',
   domesticAviation = 'Domestic Aviation',
-  internationalAviation = 'International Aviation',
+  // internationalAviation = 'International Aviation',
 }
 
 export interface Co2Datapoint {
