@@ -91,7 +91,6 @@ export class DataService {
   public getSectorsPerDay(country: Countries): {[id: string]: number | Date}[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
     const dates = Array.from(new Set<number>(d.map(dp => dp.date.getTime())));
-    console.log(dates);
     const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
     const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
     console.assert(days.length === sectorsPerDay.length);

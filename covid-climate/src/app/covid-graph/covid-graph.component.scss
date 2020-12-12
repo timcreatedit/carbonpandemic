@@ -1,47 +1,138 @@
+@import "src/colors";
+
 .covid-graph {
+  .graph-container {
+    svg {
+      .axis {
+        text {
+          fill: #fff;
+          font-family: Arial, sans-serif;
+          font-size: 120%;
+        }
+      }
 
-  .axis {
 
-    text {
-      fill: #fff;
-      font-family: Arial, sans-serif;
-      font-size: 120%;
+      .line19 {
+        transition: all 200ms ease;
+        fill: none;
+        stroke: #63f2ff;
+        stroke-width: 3px;
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .line20 {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 3px;
+      }
+
+      .area-above {
+        transition: all 200ms ease;
+        fill: #FF5889;
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .area-below {
+        transition: all 200ms ease;
+        fill: #9BFFC7;
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .sectorArea {
+        transition: all 200ms ease;
+
+        &.hidden {
+          opacity: 0;
+        }
+
+        &#power {
+          fill: $power;
+        }
+
+        &#groundTransport {
+          fill: $ground-transport;
+        }
+
+        &#industry {
+          fill: $industry;
+        }
+
+        &#residential {
+          fill: $residential;
+        }
+
+        &#domesticAviation {
+          fill: $aviation;
+        }
+
+        &#internationalAviation {
+          fill: $aviation;
+        }
+      }
+    }
+
+    ul.legend {
+      list-style-type: none;
+
+      li {
+        display: flex;
+
+        .bullet {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+          border-radius: 4px;
+        }
+
+        &.power {
+          .bullet {
+            background: $power;
+          }
+        }
+
+        &.groundTransport {
+          .bullet {
+            background: $ground-transport;
+          }
+        }
+
+        &.industry {
+          .bullet {
+            background: $industry;
+          }
+        }
+
+        &.residential {
+          .bullet {
+            background: $residential;
+          }
+        }
+
+        &.domesticAviation {
+          .bullet {
+            background: $aviation;
+          }
+        }
+
+        &.internationalAviation {
+          .bullet {
+            color: $aviation;
+          }
+        }
+      }
+
+
     }
   }
 
 
-  .line19 {
-    transition: all 200ms ease;
-    fill: none;
-    stroke: #63f2ff;
-    stroke-width: 3px;
-
-    &.hidden {
-      opacity: 0;
-    }
-  }
-
-  .line20 {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 3px;
-  }
-
-  .area-above {
-    transition: all 200ms ease;
-    fill: #FF5889;
-
-    &.hidden {
-      opacity: 0;
-    }
-  }
-
-  .area-below {
-    transition: all 200ms ease;
-    fill: #9BFFC7;
-
-    &.hidden {
-      opacity: 0;
-    }
-  }
 }

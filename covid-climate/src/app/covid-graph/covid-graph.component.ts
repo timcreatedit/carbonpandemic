@@ -20,6 +20,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() showSectors: boolean;
 
+  sectorKeys = Object.keys(Sectors);
+  sectorNames = Object.values(Sectors);
+
   // region size
   width = 960;
   height = 500;
@@ -95,6 +98,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.initGraph();
     this.updateGraph();
     this.updateShowDifference(this.showDifference);
+    this.updateShowSectors(this.showSectors);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -134,6 +138,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .style('text-anchor', 'end')
       .text('in MtCO2');
 
+    for (const sector of Object.keys(Sectors)) {
+      this.svg.append('path')
+        .attr('class', 'sectorArea')
+        .attr('id', sector);
+    }
+
     this.svg.append('clipPath')
       .attr('id', 'clip-below')
       .append('path');
@@ -155,12 +165,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.svg.append('path')
       .attr('class', 'line20');
-
-    for (const sector of Object.values(Sectors)) {
-      this.svg.append('path')
-        .attr('class', 'sectorArea ' + sector);
-
-    }
   }
 
   private updateGraph(): void {
@@ -181,19 +185,32 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.updateSectorStacks();
   }
 
-  updateShowDifference(showDifference: boolean): void {
+  updateShowDifference(show: boolean): void {
     const line19 = this.svg.select('.line19');
     const areaAbove = this.svg.select('.area-above');
     const areaBelow = this.svg.select('.area-below');
 
-    if (showDifference) {
+    if (show) {
       line19.attr('class', 'line19 hidden');
       areaAbove.attr('class', 'area-above');
       areaBelow.attr('class', 'area-below');
     } else {
-      line19.attr('class', 'line19');
+      if (!this.showSectors) { line19.attr('class', 'line19'); }
       areaAbove.attr('class', 'area-above hidden');
       areaBelow.attr('class', 'area-below hidden');
+    }
+  }
+
+  updateShowSectors(show: boolean): void {
+    const line19 = this.svg.select('.line19');
+    const sectors = this.svg.selectAll('.sectorArea');
+
+    if (show) {
+      line19.attr('class', 'line19 hidden');
+      sectors.attr('class', 'sectorArea');
+    } else {
+      if (!this.showDifference) { line19.attr('class', 'line19'); }
+      sectors.attr('class', 'sectorArea hidden');
     }
   }
 
@@ -218,12 +235,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   private updateLines(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
     const line19 = this.svg.select('.line19')
       .datum(data19);
-
-    if (this.showDifference) {
-      line19.attr('class', 'line19 hidden');
-    } else {
-      line19.attr('class', 'line19');
-    }
 
     line19.enter()
       .merge(line19 as any)
@@ -287,9 +298,19 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   private updateSectorStacks(): void {
     const data = this.dataService.getSectorsPerDay(this.selectedCountry);
-    console.log(data);
-    const sectorArea = d3.select('.sectorArea' );
+    const stack = d3.stack()
+      .keys(Object.values(Sectors))(data as Iterable<{ [key: string]: any }>);
 
+    const areaGen = d3.area<{ [key: string]: any }>()
+      .x((d) => this.x20(d.data.date))
+      .y0((d) => this.y(d[0]))
+      .y1((d) => this.y(d[1]));
+
+    this.svg.selectAll('.sectorArea')
+      .data(stack)
+      .transition()
+      .duration(1000)
+      .attr('d', areaGen);
   }
 
 }

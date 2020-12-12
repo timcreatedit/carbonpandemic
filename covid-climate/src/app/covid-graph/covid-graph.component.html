@@ -6,7 +6,12 @@
   </label>
   <label>
     Show Sectors
-    <input type="checkbox" [(ngModel)]="showSectors">
+    <input type="checkbox" [(ngModel)]="showSectors" (ngModelChange)="updateShowSectors($event)">
   </label>
-  <svg #graph [style.width]="width" [style.height]="height"></svg>
+  <div class="graph-container">
+    <svg #graph [style.width]="width" [style.height]="height"></svg>
+    <ul class="legend">
+      <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey"><div class="bullet"></div>{{sectorNames[i]}}</li>
+    </ul>
+  </div>
 </div>
