@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Countries} from '../core/models/co2data.model';
+import {Countries, Sectors} from '../core/models/co2data.model';
 
 @Component({
   selector: 'app-top-bar',
@@ -11,6 +11,7 @@ export class TopBarComponent implements OnInit{
   @Output() selectCountry: EventEmitter<Countries> = new EventEmitter<Countries>();
 
   countries: string[] = Object.keys(Countries).map(k => Countries[k]);
+  sectorKeys: any;
 
   selectedCountry: string;
 
@@ -23,4 +24,8 @@ export class TopBarComponent implements OnInit{
     this.selectCountry.emit(countryName as Countries);
   }
 
+  // TODO
+  // sectorKeysChanged(value): void {
+  //   this.sectorKeys = value;
+  // }
 }
