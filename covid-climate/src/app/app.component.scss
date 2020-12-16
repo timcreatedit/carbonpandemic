@@ -4,7 +4,6 @@
 
 #main-content {
   position: relative;
-  margin-top: 40px;
   margin: 40px;
   display: flex;
   flex-direction: row;
@@ -75,18 +74,17 @@
 
   #graphs-container {
     width: 65%;
+    position: fixed;
+    right: 1em;
 
-    #graphs {
-      position: fixed;
-
-      #covid-container,
-      #pie-chart-container,
-      #prognosis-graph-container {
-        margin-bottom: 50px;
-        padding-left: 80px;
-        padding-top: 80px;
-        width: auto;
-      }
+    #covid-container,
+    #pie-chart-container,
+    #prognosis-graph-container {
+      box-sizing: border-box;
+      margin-bottom: 50px;
+      padding-left: 80px;
+      padding-top: 80px;
+      width: 100%;
     }
   }
 }

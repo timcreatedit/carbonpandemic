@@ -1,13 +1,12 @@
 @import "src/colors";
 
 .covid-graph {
-  right: 0;
-
+  width: 100%;
   .graph-container {
-
+    width: 100%;
     svg {
-      margin: 5px;
-      padding: 5px;
+      margin: 8px;
+      padding: 8px;
 
       .axis {
         text {
