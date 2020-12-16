@@ -1,21 +1,67 @@
+@import "src/colors";
 $top-bar-height: 60px;
 
 #top-bar-component {
-  width: 100%;
+  z-index: 2;
   top: 0px;
-  padding: 0 1em;
+  right: 0px;
+  height: $top-bar-height;
 
   position: fixed;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: row-reverse;
 
-  // TODO Replace with a real color
-  background-color: #35324f;
-  height: $top-bar-height;
+  #dropDownMenu {
+    right: 50px;
+    width: 20vw;
+    min-width: 200px;
+    height: 65px;
 
-  select {
-    margin-right: 2em;
+    margin-right: 30px;
+    margin-top: 30px;
+    padding: 0px 30px;
+
+    background-color: $backgroundColorLight;
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+
+    :focus {
+      outline: none !important;
+      border: none;
+    }
+
+    option {
+      font-family: 'Inter', sans-serif;
+      font-weight: bold;
+      font-size: 22px;
+
+      p {
+        padding: 10px 0px;
+      }
+
+      position: absolute;
+
+    }
+  }
+
+  img {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+
+    top: 55px;
+    right: 50px;
+
+    width: 18px;
+    height: 18px;
   }
 }

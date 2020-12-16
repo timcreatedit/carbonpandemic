@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
-import {Co2Datapoint, Countries} from './core/models/co2data.model';
+import {Co2Datapoint, Countries, Sectors} from './core/models/co2data.model';
 import {DataService} from './core/services/data.service';
+import {fromEvent, Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {ScrollService} from './core/services/scroll.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,14 @@ export class AppComponent {
   selectedCountry: Countries = Countries.spain;
   countryFilteredData: Co2Datapoint[];
 
-  constructor(private dataService: DataService) {
+  sectorKeys = Object.keys(Sectors);
+  sectorNames = Object.values(Sectors);
+
+
+  constructor(
+    private dataService: DataService,
+    public scrollService: ScrollService,
+  ) {
   }
 
   onSelectCountry(country: Countries): void {

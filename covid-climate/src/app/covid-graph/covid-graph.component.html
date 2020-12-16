@@ -1,3 +1,5 @@
-<p>Country: {{ selectedCountry.toString() }}</p>
-<p>Datapoints: {{ co2Data.length }}</p>
-<svg #graph [style.width]="width" [style.height]="height"></svg>
+<div class="covid-graph">
+  <div class="graph-container">
+    <svg #graph></svg>
+  </div>
+</div>
