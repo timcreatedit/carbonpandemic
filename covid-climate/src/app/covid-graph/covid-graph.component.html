@@ -1,15 +1,4 @@
 <div class="covid-graph">
-  <div>
-    <label>
-      Show Difference
-      <input type="checkbox" [(ngModel)]="showDifference" (ngModelChange)="updateShowDifference($event)">
-    </label>
-    <label>
-      Show Sectors
-      <input type="checkbox" [(ngModel)]="showSectors" (ngModelChange)="updateShowSectors($event)">
-    </label>
-  </div>
-
   <div class="graph-container">
     <svg #graph></svg>
   </div>

@@ -14,9 +14,6 @@
         consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
         diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
         takimata sanctus est Lorem ipsum dolor sit amet.</p>
-      <ul class="legend">
-        <!--        <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey"><div class="bullet"></div>{{sectorNames[i]}}</li>-->
-      </ul>
       <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
         dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
         clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
@@ -55,7 +52,13 @@
         accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
         dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
         ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-        rebum. Stet clita kasd gubergren, no sea takimata sanctus.
+        rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
+      <ul class="legend">
+        <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey">
+          <div class="bullet"></div>
+          {{sectorNames[i]}}</li>
+      </ul>
+      <p>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
         dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
         clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
@@ -81,13 +84,16 @@
   </div>
 
   <div id="graphs-container">
-    <div id="covid-container">
-      <app-covid-graph [selectedCountry]="selectedCountry"></app-covid-graph>
+    <div class="graph-container" id="covid-container" [class.hidden]="!(scrollService.showCovidGraph$ | async)">
+      <app-covid-graph [selectedCountry]="selectedCountry"
+                       [showDifference]="scrollService.covidShowDifference$ | async"
+                       [showSectors]="scrollService.covidShowSectors$ | async"
+      ></app-covid-graph>
     </div>
-    <div id="pie-chart-container">
+    <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
       <app-pie-chart [selectedCountry]="selectedCountry" [co2Data]="countryFilteredData"></app-pie-chart>
     </div>
-    <div id="prognosis-graph-container">
+    <div class="graph-container" id="prognosis-graph-container" [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
       <app-prognosis-graph [selectedCountry]="selectedCountry"></app-prognosis-graph>
     </div>
   </div>

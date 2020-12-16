@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
-import {templateSourceUrl} from '@angular/compiler';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-covid-graph',
@@ -16,15 +16,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('graph') graph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
   @Input() showSectors: boolean;
-
-  // TODO
-  // @Output()  sectorKeys = new EventEmitter<string>();
-  // @Output()  sectorNames = new EventEmitter<string>();
-
-  showDifference: boolean;
-
-  sectorKeys = Object.keys(Sectors);
-  sectorNames = Object.values(Sectors);
+  @Input() showDifference: boolean;
 
   // region size
   width = 1400;
@@ -110,14 +102,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
     this.updateGraph();
-  }
-
-  sectorKeysChanged(value): void {
-    // this.sectorKeys.emit(value);
-  }
-
-  sectorNamesChanged(value): void {
-    // this.sectorNames.emit(value);
+    if (isNotNullOrUndefined(changes.showSectors?.currentValue)) {
+      this.updateShowSectors(changes.showSectors.currentValue);
+    }
+    if (isNotNullOrUndefined(changes.showDifference?.currentValue)) {
+      this.updateShowDifference(changes.showDifference.currentValue);
+    }
   }
 
   private initGraph(): void {
@@ -205,7 +195,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       areaAbove.attr('class', 'area-above');
       areaBelow.attr('class', 'area-below');
     } else {
-      if (!this.showSectors) { line19.attr('class', 'line19'); }
+      if (!this.showSectors) {
+        line19.attr('class', 'line19');
+      }
       areaAbove.attr('class', 'area-above hidden');
       areaBelow.attr('class', 'area-below hidden');
     }
@@ -219,7 +211,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       line19.attr('class', 'line19 hidden');
       sectors.attr('class', 'sectorArea');
     } else {
-      if (!this.showDifference) { line19.attr('class', 'line19'); }
+      if (!this.showDifference) {
+        line19.attr('class', 'line19');
+      }
       sectors.attr('class', 'sectorArea hidden');
     }
   }

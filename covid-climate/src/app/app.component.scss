@@ -77,14 +77,17 @@
     position: fixed;
     right: 1em;
 
-    #covid-container,
-    #pie-chart-container,
-    #prognosis-graph-container {
+    .graph-container {
+      transition: all 200ms ease;
       box-sizing: border-box;
       margin-bottom: 50px;
       padding-left: 80px;
       padding-top: 80px;
       width: 100%;
+
+      &.hidden {
+        opacity: 0;
+      }
     }
   }
 }
