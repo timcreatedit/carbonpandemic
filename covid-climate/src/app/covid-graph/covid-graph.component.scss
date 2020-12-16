@@ -1,13 +1,20 @@
 @import "src/colors";
 
 .covid-graph {
+  right: 0;
+
   .graph-container {
+
     svg {
+      margin: 5px;
+      padding: 5px;
+
       .axis {
         text {
-          fill: #fff;
-          font-family: Arial, sans-serif;
-          font-size: 120%;
+          fill: white;
+          font-family: 'Inter', sans-serif;
+          font-weight: bold;
+          font-size: 12pt;
         }
       }
 
@@ -31,7 +38,7 @@
 
       .area-above {
         transition: all 200ms ease;
-        fill: #FF5889;
+        fill: #FF5889; //85FFBB, FF5889
 
         &.hidden {
           opacity: 0;
@@ -40,7 +47,7 @@
 
       .area-below {
         transition: all 200ms ease;
-        fill: #9BFFC7;
+        fill: rgba(133, 255, 187, 0.75); //85FFBB, 9BFFC7
 
         &.hidden {
           opacity: 0;
@@ -78,59 +85,6 @@
           fill: $aviation;
         }
       }
-    }
-
-    ul.legend {
-      list-style-type: none;
-
-      li {
-        display: flex;
-
-        .bullet {
-          width: 16px;
-          height: 16px;
-          margin-right: 8px;
-          border-radius: 4px;
-        }
-
-        &.power {
-          .bullet {
-            background: $power;
-          }
-        }
-
-        &.groundTransport {
-          .bullet {
-            background: $ground-transport;
-          }
-        }
-
-        &.industry {
-          .bullet {
-            background: $industry;
-          }
-        }
-
-        &.residential {
-          .bullet {
-            background: $residential;
-          }
-        }
-
-        &.domesticAviation {
-          .bullet {
-            background: $aviation;
-          }
-        }
-
-        &.internationalAviation {
-          .bullet {
-            color: $aviation;
-          }
-        }
-      }
-
-
     }
   }
 

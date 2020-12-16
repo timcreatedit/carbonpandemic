@@ -3,17 +3,92 @@
 
 
 #main-content {
-  margin-top: $top-bar-height;
+  position: relative;
+  margin-top: 40px;
+  margin: 40px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+
+  #text-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 35%;
+    height: auto;
+
+    .big-header {
+      margin-bottom: -20px;
+    }
+
+    ul.legend {
+      height: 200px;
+      list-style-type: none;
+
+      li {
+        display: flex;
+
+        .bullet {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+          border-radius: 4px;
+        }
+
+        &.power {
+          .bullet {
+            background: $power;
+          }
+        }
+
+        &.groundTransport {
+          .bullet {
+            background: $ground-transport;
+          }
+        }
+
+        &.industry {
+          .bullet {
+            background: $industry;
+          }
+        }
+
+        &.residential {
+          .bullet {
+            background: $residential;
+          }
+        }
+
+        &.domesticAviation {
+          .bullet {
+            background: $aviation;
+          }
+        }
+
+        &.internationalAviation {
+          .bullet {
+            color: $aviation;
+          }
+        }
+      }
+    }
+  }
+
+  #graphs-container {
+    width: 65%;
+
+    #graphs {
+      position: fixed;
+
+      #covid-container,
+      #pie-chart-container,
+      #prognosis-graph-container {
+        margin-bottom: 50px;
+        padding-left: 80px;
+        padding-top: 80px;
+        width: auto;
+      }
+    }
+  }
 }
 
-#covid-container,
-#pie-chart-container,
-#prognosis-graph-container {
-  border: solid 2px white;
-  margin-bottom: 50px;
-  padding: 20px;
-}
+

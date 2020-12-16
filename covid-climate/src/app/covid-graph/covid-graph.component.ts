@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
@@ -15,28 +15,31 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('graph') graph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
+  @Input() showSectors: boolean;
+
+  // TODO
+  // @Output()  sectorKeys = new EventEmitter<string>();
+  // @Output()  sectorNames = new EventEmitter<string>();
 
   showDifference: boolean;
-
-  @Input() showSectors: boolean;
 
   sectorKeys = Object.keys(Sectors);
   sectorNames = Object.values(Sectors);
 
   // region size
-  width = 960;
-  height = 500;
-  margin = 5;
-  padding = 5;
-  adj = 30;
+  width = 1400;
+  height = 400;
+  adj = 60;
   // endregion
 
   //region D3 Variables
   private readonly curve = d3.curveNatural;
 
+  // scale 2019 data on x Axis
   readonly x19 = d3.scaleTime()
     .range([0, this.width]);
 
+  // scale 2020 data on x Axis
   readonly x20 = d3.scaleTime()
     .range([0, this.width]);
 
@@ -45,7 +48,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   readonly xAxis = d3.axisBottom(this.x19)
     .tickFormat(d3.timeFormat('%b'));
-  readonly yAxis = d3.axisLeft(this.y);
+  readonly yAxis = d3.axisLeft(this.y)
+    .ticks(5);
 
   readonly line19 = d3.line<Co2Datapoint>()
     .curve(this.curve)
@@ -108,6 +112,14 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.updateGraph();
   }
 
+  sectorKeysChanged(value): void {
+    // this.sectorKeys.emit(value);
+  }
+
+  sectorNamesChanged(value): void {
+    // this.sectorNames.emit(value);
+  }
+
   private initGraph(): void {
     this.svg = d3.select(this.graphSvg);
 
@@ -117,8 +129,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         + this.adj + ' '
         + (this.width + this.adj * 3) + ' '
         + (this.height + this.adj * 3))
-      .style('padding', this.padding)
-      .style('margin', this.margin)
       .classed('svg-content', true);
 
     this.svg.append('g')
@@ -132,9 +142,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('id', 'yAxis')
       .call(this.yAxis)
       .append('text')
-      .attr('transform', 'rotate(-90)')
       .attr('dy', '.75em')
-      .attr('y', 6)
+      .attr('y', -30)
+      .attr('x', 30)
       .style('text-anchor', 'end')
       .text('in MtCO2');
 
@@ -215,7 +225,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private updateAxes(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
-    const maxValue = d3.max([...data19.map(d => d.mtCo2), ...data20.map(d => d.mtCo2)]);
+    const maxValue = d3.max([...data19.map(d => d.mtCo2), ...data20.map(d => d.mtCo2)]) * 1.1;
 
     this.x19.domain(d3.extent(data19.map(dp => dp.date)));
     this.x20.domain(d3.extent(data20.map(dp => dp.date)));
