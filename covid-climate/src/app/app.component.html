@@ -62,7 +62,7 @@
       <h2>Influence of different Sectors</h2>
       <p>You might wonder which sectors were responsible for these emissions. Take a look at the sectors here:</p>
       <ul class="legend">
-        <li *ngFor="let sectorKey of sectorKeys.reverse(); index as i" [class]="sectorKey">
+        <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey">
           <div class="bullet"></div>
           {{sectorNames[i]}}</li>
       </ul>
