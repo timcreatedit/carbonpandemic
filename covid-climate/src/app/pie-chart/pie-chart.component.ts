@@ -11,7 +11,6 @@ import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 export class PieChartComponent implements OnInit, OnChanges {
 
   @Input() selectedCountry: Countries;
-  @Input() co2Data: Co2Datapoint[];
 
   constructor(private dataService: DataService) {
   }
@@ -25,17 +24,23 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   drawTest(): void {
-    const data2019 = this.co2Data
-      .filter(d => d.date.getFullYear() === 2019);
-    const data2020 = this.co2Data
-      .filter(d => d.date.getFullYear() === 2020);
+    const data19 = this.dataService.getCo2Data({
+      yearFilter: [2019],
+      countryFilter: [this.selectedCountry],
+      sumSectors: true,
+    });
+    const data20 = this.dataService.getCo2Data({
+      yearFilter: [2020],
+      countryFilter: [this.selectedCountry],
+      sumSectors: true,
+    });
 
     const sectorData19 = Object.keys(Sectors)
-      .map(s => data2019.filter(dp => dp.sector === Sectors[s]))
+      .map(s => data19.filter(dp => dp.sector === Sectors[s]))
       .map(dps => dps.map(dp => dp.mtCo2).reduce((v1, v2) => v1 + v2, 0));
 
     const sectorData20 = Object.keys(Sectors)
-      .map(s => data2020.filter(dp => dp.sector === Sectors[s]))
+      .map(s => data20.filter(dp => dp.sector === Sectors[s]))
       .map(dps => dps.map(dp => dp.mtCo2).reduce((v1, v2) => v1 + v2, 0));
 
     console.log(sectorData19);

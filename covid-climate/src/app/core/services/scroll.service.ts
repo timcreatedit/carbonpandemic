@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, from, fromEvent, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, map, startWith, tap, withLatestFrom} from 'rxjs/operators';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export interface SiteScrollConfig {
@@ -30,20 +30,20 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 500],
+      section: [0, 0.3],
       config: {
         covidGraphShown: true,
       }
     },
     {
-      section: [500, 900],
+      section: [0.3, 0.6],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
       }
     },
     {
-      section: [900, 1300],
+      section: [0.6, 1],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
@@ -85,11 +85,13 @@ export class ScrollService {
   );
 
   constructor() {
-    fromEvent(window, 'scroll').pipe(
-      map(() => window.scrollY),
-      map(s => this.getCurrentConfig(s)),
-      distinctUntilChanged(),
-    ).subscribe(c => this.currentScrollConfig$.next(c));
+    combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
+      fromEvent(window, 'resize').pipe(startWith(0))])
+      .pipe(
+        map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
+        map(s => this.getCurrentConfig(s)),
+        distinctUntilChanged(),
+      ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {
