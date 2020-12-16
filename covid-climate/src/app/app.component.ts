@@ -14,7 +14,7 @@ export class AppComponent {
   title = 'covid-climate';
 
   selectedCountry: Countries = Countries.spain;
-  countryFilteredData: Co2Datapoint[];
+  worstDayOf20: Co2Datapoint;
 
   sectorKeys = Object.keys(Sectors);
   sectorNames = Object.values(Sectors);
@@ -27,8 +27,8 @@ export class AppComponent {
   }
 
   onSelectCountry(country: Countries): void {
-    console.log(country);
     this.selectedCountry = country;
-    this.countryFilteredData = this.dataService.getCo2Data({countryFilter: [this.selectedCountry]});
+    const data20 = this.dataService.getCo2Data({countryFilter: [this.selectedCountry], yearFilter: [2020], sumSectors: true});
+    this.worstDayOf20 = data20.sort((a, b) => a.mtCo2 - b.mtCo2)[0];
   }
 }

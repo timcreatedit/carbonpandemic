@@ -85,11 +85,13 @@ export class ScrollService {
   );
 
   constructor() {
-    combineLatest([fromEvent(window, 'scroll'), fromEvent(window, 'resize').pipe(startWith(null))]).pipe(
-      map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
-      map(s => this.getCurrentConfig(s)),
-      distinctUntilChanged(),
-    ).subscribe(c => this.currentScrollConfig$.next(c));
+    combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
+      fromEvent(window, 'resize').pipe(startWith(0))])
+      .pipe(
+        map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
+        map(s => this.getCurrentConfig(s)),
+        distinctUntilChanged(),
+      ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {

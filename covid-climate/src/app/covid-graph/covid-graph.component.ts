@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit, Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
@@ -17,6 +28,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() selectedCountry: Countries;
   @Input() showSectors: boolean;
   @Input() showDifference: boolean;
+
+  @Output() worstDayOf20 = new EventEmitter<Co2Datapoint>();
 
   // region size
   width = 1400;
@@ -136,7 +149,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('y', -30)
       .attr('x', 30)
       .style('text-anchor', 'end')
-      .text('in MtCO2');
+      .text('in MtCO2/d');
 
     for (const sector of Object.keys(Sectors)) {
       this.svg.append('path')
@@ -178,7 +191,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-
     this.updateAxes(data19, data20);
     this.updateLines(data19, data20);
     this.updateDifferenceArea(data19, data20);

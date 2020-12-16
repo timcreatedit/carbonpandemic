@@ -24,9 +24,13 @@
       </ul>
       <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world!</i>
       <p></p>
-      <p>The unit of the y-Axis of the graph is <i>Megatons of carbon dioxide per day</i>, meaning <strong>1,000,000
-        metric tons
-        of CO<sub>2</sub></strong> each day.</p>
+      <p>The unit of the y-Axis of the graph is <i>Megatons of carbon dioxide per day</i>. One Megaton equals <strong>1,000,000
+        metric tons.</strong>
+      </p>
+      <p>
+        {{ worstDayOf20.date | date:'EEEE, MMMM d' }} was the worst day regarding emissions for {{ worstDayOf20.country }} in 2020.
+        On this day, {{ worstDayOf20.country }} emitted {{ (worstDayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons of CO<sub>2</sub>.
+      </p>
       <div class="scroll-prompt">
         <span>↓</span>
         <span>Scroll to Continue...</span>
@@ -81,7 +85,7 @@
       ></app-covid-graph>
     </div>
     <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
-      <app-pie-chart [selectedCountry]="selectedCountry" [co2Data]="countryFilteredData"></app-pie-chart>
+      <app-pie-chart [selectedCountry]="selectedCountry"></app-pie-chart>
     </div>
     <div class="graph-container" id="prognosis-graph-container"
          [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
