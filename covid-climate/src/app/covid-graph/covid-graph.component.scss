@@ -37,7 +37,7 @@
 
       .area-above {
         transition: all 200ms ease;
-        fill: #FF5889; //85FFBB, FF5889
+        fill: $negative; //85FFBB, FF5889
 
         &.hidden {
           opacity: 0;
@@ -46,7 +46,7 @@
 
       .area-below {
         transition: all 200ms ease;
-        fill: rgba(133, 255, 187, 0.75); //85FFBB, 9BFFC7
+        fill: $positive; //85FFBB, 9BFFC7
 
         &.hidden {
           opacity: 0;

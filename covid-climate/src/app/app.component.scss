@@ -15,12 +15,11 @@
     width: 35%;
     height: auto;
 
-    .big-header {
+    h1 {
       margin-bottom: -20px;
     }
 
     ul.legend {
-      height: 200px;
       list-style-type: none;
 
       li {
@@ -31,6 +30,30 @@
           height: 16px;
           margin-right: 8px;
           border-radius: 4px;
+        }
+
+        &.line2019 {
+          .bullet {
+            background: $line19;
+          }
+        }
+
+        &.line2020 {
+          .bullet {
+            background: $line20;
+          }
+        }
+
+        &.area-above {
+          .bullet {
+            background: $negative;
+          }
+        }
+
+        &.area-below {
+          .bullet {
+            background: $positive;
+          }
         }
 
         &.power {
@@ -68,6 +91,23 @@
             color: $aviation;
           }
         }
+      }
+    }
+
+    .scroll-prompt {
+      height: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      animation: blinktext 3s infinite;
+
+      @keyframes blinktext {
+        0% { opacity: 30% }
+        50% { opacity: 70% }
+        100% { opacity: 30% }
       }
     }
   }
