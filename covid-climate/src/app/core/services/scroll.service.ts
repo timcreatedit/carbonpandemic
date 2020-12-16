@@ -23,7 +23,11 @@ export interface ScrollSection {
 })
 export class ScrollService {
 
-  // region Scroll Thresholds
+  // region Scroll Configs
+  private readonly initialConfig: SiteScrollConfig = {
+    covidGraphShown: true,
+  };
+
   private readonly siteSections: ScrollSection[] = [
     {
       section: [0, 500],
@@ -48,7 +52,7 @@ export class ScrollService {
   ];
   //endregion
 
-  private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(null);
+  private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
 
   public readonly showCovidGraph$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
