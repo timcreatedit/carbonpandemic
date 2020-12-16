@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "colors";
+
+body {
+  background-color: #110F19;
+  margin: 0;
+  color: white;
+
+  font-family: 'Inter', sans-serif;
+
+  input {
+    border: solid 2px $accentColor;
+  }
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 32pt;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 20pt;
+}
+
+$top-margin: 60px;

@@ -1,0 +1,17 @@
+{
+  "name": "infovis-gruppe-13",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "./"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^6.3.1"
+  },
+  "devDependencies": {}
+}

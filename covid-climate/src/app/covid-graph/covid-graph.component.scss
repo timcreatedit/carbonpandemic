@@ -1,0 +1,91 @@
+@import "src/colors";
+
+.covid-graph {
+  width: 100%;
+  .graph-container {
+    width: 100%;
+    svg {
+      margin: 8px;
+      padding: 8px;
+
+      .axis {
+        text {
+          fill: white;
+          font-family: 'Inter', sans-serif;
+          font-weight: bold;
+          font-size: 12pt;
+        }
+      }
+
+
+      .line19 {
+        transition: all 200ms ease;
+        fill: none;
+        stroke: #63f2ff;
+        stroke-width: 3px;
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .line20 {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 3px;
+      }
+
+      .area-above {
+        transition: all 200ms ease;
+        fill: $negative; //85FFBB, FF5889
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .area-below {
+        transition: all 200ms ease;
+        fill: $positive; //85FFBB, 9BFFC7
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
+      .sectorArea {
+        transition: all 200ms ease;
+
+        &.hidden {
+          opacity: 0;
+        }
+
+        &#power {
+          fill: $power;
+        }
+
+        &#groundTransport {
+          fill: $ground-transport;
+        }
+
+        &#industry {
+          fill: $industry;
+        }
+
+        &#residential {
+          fill: $residential;
+        }
+
+        &#domesticAviation {
+          fill: $aviation;
+        }
+
+        &#internationalAviation {
+          fill: $aviation;
+        }
+      }
+    }
+  }
+
+
+}

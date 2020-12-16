@@ -1,0 +1,135 @@
+@import "src/styles";
+@import "./top-bar/top-bar.component";
+
+
+#main-content {
+  position: relative;
+  margin: 40px;
+  display: flex;
+  flex-direction: row;
+
+  #text-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 35%;
+    height: auto;
+
+    h1 {
+      margin-bottom: -20px;
+    }
+
+    ul.legend {
+      list-style-type: none;
+
+      li {
+        display: flex;
+
+        .bullet {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+          border-radius: 4px;
+        }
+
+        &.line2019 {
+          .bullet {
+            background: $line19;
+          }
+        }
+
+        &.line2020 {
+          .bullet {
+            background: $line20;
+          }
+        }
+
+        &.area-above {
+          .bullet {
+            background: $negative;
+          }
+        }
+
+        &.area-below {
+          .bullet {
+            background: $positive;
+          }
+        }
+
+        &.power {
+          .bullet {
+            background: $power;
+          }
+        }
+
+        &.groundTransport {
+          .bullet {
+            background: $ground-transport;
+          }
+        }
+
+        &.industry {
+          .bullet {
+            background: $industry;
+          }
+        }
+
+        &.residential {
+          .bullet {
+            background: $residential;
+          }
+        }
+
+        &.domesticAviation {
+          .bullet {
+            background: $aviation;
+          }
+        }
+
+        &.internationalAviation {
+          .bullet {
+            color: $aviation;
+          }
+        }
+      }
+    }
+
+    .scroll-prompt {
+      height: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      animation: blinktext 3s infinite;
+
+      @keyframes blinktext {
+        0% { opacity: 30% }
+        50% { opacity: 70% }
+        100% { opacity: 30% }
+      }
+    }
+  }
+
+  #graphs-container {
+    width: 65%;
+    position: fixed;
+    right: 1em;
+
+    .graph-container {
+      transition: all 200ms ease;
+      box-sizing: border-box;
+      margin-bottom: 50px;
+      padding-left: 80px;
+      padding-top: 80px;
+      width: 100%;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+
