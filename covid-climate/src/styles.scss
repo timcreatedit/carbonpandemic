@@ -24,3 +24,9 @@ h2 {
 }
 
 $top-margin: 60px;
+
+@keyframes blinktext {
+  0% { opacity: 30% }
+  50% { opacity: 70% }
+  100% { opacity: 30% }
+}
