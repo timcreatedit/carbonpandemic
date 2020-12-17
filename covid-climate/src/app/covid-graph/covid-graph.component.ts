@@ -68,8 +68,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     .x(d => this.x20(d.date))
     .y(d => this.y(d.mtCo2));
 
-  readonly  lineCovid = d3.line<CovidDatapoint>()
-    .curve(this.curve)
+  readonly lineCovid = d3.line<CovidDatapoint>()
+    // .curve(this.curve)
     .x(d => this.x20(d.date))
     .y(d => this.y(d.cases));
 
@@ -126,14 +126,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.graphSvg) {
       return;
     }
-    this.updateGraph();
+    if (isNotNullOrUndefined(changes.selectedCountry)) {
+      this.updateGraph();
+      this.updateCovidGraph();
+    }
     if (isNotNullOrUndefined(changes.showSectors?.currentValue)) {
       this.updateShowSectors(changes.showSectors.currentValue);
     }
     if (isNotNullOrUndefined(changes.showDifference?.currentValue)) {
       this.updateShowDifference(changes.showDifference.currentValue);
     }
-    this.updateCovidGraph();
   }
 
   private initGraph(): void {
@@ -260,10 +262,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private updateCovidGraph(): void {
-    const covidData = this.dataService.getCovidData( {
+    const covidData = this.dataService.getCovidData({
       countryFilter: [this.selectedCountry],
     });
-    console.log(covidData);
+    console.log(covidData.filter(d => d.cases < 0));
     this.updateCovidAxes(covidData);
     this.updateCovidLines(covidData);
   }
