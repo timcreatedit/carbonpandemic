@@ -249,7 +249,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     const covidData = this.dataService.getCovidData({
       countryFilter: [this.selectedCountry],
     });
-    console.log(covidData.filter(d => d.cases < 0));
     this.updateCovidAxes(covidData);
     this.updateCovidLines(covidData);
   }
