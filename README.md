@@ -11,23 +11,22 @@
   - Toggle für das Anzeigen der Sektionen
   - Toggle für das Anzeigend der Differenz 2019 zu 2020
   - Drop-Down Filter für die Auswahl eines bestimmten Landes bzw. Gesamt
- 
+
  * Ziel #2
   - Drop-Down Filter für die Auswahl eines bestimmten Landes bzw. Gesamt
-  
+
 ### Noch zu implementieren(MVP):
 * Allgemein
-  - Seitenscroll-Funktion
+  - [x] Seitenscroll-Funktion
 
 * Ziel #1
-  - Neues Datenset von Carbon Monitor (Daten bis November stehen nun zur Verfügung)
-  - Verbesserte Datenformatierung
- 
+  - [x] Neues Datenset von Carbon Monitor (Daten bis November stehen nun zur Verfügung)
+  - [ ] Verbesserte Datenformatierung
+
 * Ziel #2
-  - Hover-Effekt
+  - [ ] Hover-Effekt
 
 * Ziel #3
-  - Drop-Down Filter für die Auswahl eines bestimmten Landes bzw. Gesamt
-  - Linien-Diagramm mit Prognose-Kurven
-  - Regler für die angezeigten Jahre
-  - Anzeige der Klimaziele für das jeweils ausgewählte Land
+  - [ ] Linien-Diagramm mit Prognose-Kurven
+  - [ ] Regler für die angezeigten Jahre
+  - [ ] Anzeige der Klimaziele für das jeweils ausgewählte Land
