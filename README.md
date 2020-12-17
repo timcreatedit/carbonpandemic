@@ -16,13 +16,13 @@ Die COVID-19 Pandemie hat dazu geführt, dass viele Dinge passiert sind
 
 ### Bereits nutzbare Features
 
-##### Grafik 1: Vergleich der CO~2~Emissionen mit neune COVID-19 Fällen
+##### Grafik 1: Vergleich der CO2 Emissionen mit neune COVID-19 Fällen
 
-- [x] Anzeige der CO~2~ Emissionen von 2019 und 2020
+- [x] Anzeige der CO2 Emissionen von 2019 und 2020
 - [x] Anzeige der neuen COVID-19 Fälle von 2020
 - [x] Länderauswahl über Dropdown oben rechts
 - [x] Animierte Änderungen
-- [x] Scrollbasierte Änderungen am CO~2~ Graphen
+- [x] Scrollbasierte Änderungen am CO2 Graphen
   - [x] Anzeige der Änderung zum Vorjahr
   - [x] Aufteilung in Sektoren
 - [x] Dynamische Informationen im Erklärungstext je nach Länderwahl
@@ -31,7 +31,7 @@ Die COVID-19 Pandemie hat dazu geführt, dass viele Dinge passiert sind
 
 ### Noch zu implementieren (MVP):
 
-##### Grafik 1: Vergleich der CO~2~Emissionen mit neune COVID-19 Fällen
+##### Grafik 1: Vergleich der CO2 Emissionen mit neune COVID-19 Fällen
 
 - [ ] Detaillierte Informationen beim Hovern
 
@@ -60,7 +60,7 @@ Die COVID-19 Pandemie hat dazu geführt, dass viele Dinge passiert sind
 - [ ] Prognoselinien
   - [ ] Es geht so weiter wie 2019
   - [ ] Es geht so weiter wie 2020
-- [ ] Countdown bis zum Ablauf des CO~2~ Budgets in beiden Szenarien
+- [ ] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
 
 
 
