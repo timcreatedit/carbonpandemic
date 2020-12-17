@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 // @ts-ignore
 import * as data from 'src/assets/datasets/data/carbon-monitor-maingraphdatas.json';
+import * as records from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
+import * as d3 from 'd3';
+import {CovidDatapoint} from '../models/coviddata.model';
 
 export interface FilterOptions {
   countryFilter?: Countries[];
@@ -15,14 +18,29 @@ export interface FilterOptions {
 })
 export class DataService {
 
-  private co2Datapoints: Co2Datapoint[] = [];
-
   constructor() {
     this.readCo2Data();
+    this.readCovidData();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
+    console.log((this.covidDatapoints[0]));
   }
+
+  private co2Datapoints: Co2Datapoint[] = [];
+  private covidDatapoints: CovidDatapoint[] = [];
+  private maxDate: Date;
+
+  private static covidCountryToCountry(country: string): Countries{
+    if (country === 'United_Kingdom') {
+      return Countries.uk;
+    }
+    else if (country === 'United_States_of_America'){
+      return Countries.us;
+    }
+    return country as Countries;
+  }
+
 
   /**
    * Reads the data from the carbon monitor json and parses it into an array.
@@ -40,7 +58,27 @@ export class DataService {
       } as Co2Datapoint);
     });
     this.co2Datapoints = this.co2Datapoints.sort((a, b) => a.date as any - (b.date as any));
+    this.maxDate = d3.max(this.co2Datapoints.map(d => d.date));
     console.log(this.co2Datapoints);
+  }
+
+  private readCovidData(): void {
+    records.records.forEach(dp => {
+      const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
+      const actualDate = new Date(dateValues[2], dateValues[1], dateValues[0]);
+      if (actualDate <= this.maxDate)
+      {
+        this.covidDatapoints.push({
+          country: DataService.covidCountryToCountry(dp.countriesAndTerritories),
+          date: actualDate,
+          cases: dp.cases,
+          continent: dp.continentExp,
+        } as CovidDatapoint);
+      }
+    });
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+
+    console.log(this.covidDatapoints);
   }
 
   /**
@@ -66,6 +104,17 @@ export class DataService {
       filteredList = filteredList.filter(dp => filterOptions.yearFilter.includes(dp.date.getFullYear()));
     }
     return filterOptions.sumSectors ? this.sumSectors(filteredList) : filteredList;
+  }
+
+  public getCovidData(filterOptions?: FilterOptions): CovidDatapoint[] {
+    if (!filterOptions) {
+      return this.covidDatapoints;
+    }
+    let filteredList: CovidDatapoint [] = this.covidDatapoints;
+    if (filterOptions.countryFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    }
+    return filteredList;
   }
 
   private sumSectors(datapoints: Co2Datapoint[]): Co2Datapoint[] {
@@ -104,6 +153,5 @@ export class DataService {
     }
     return buffer;
   }
-
 }
 

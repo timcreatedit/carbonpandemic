@@ -14,6 +14,7 @@ import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import {CovidDatapoint} from '../core/models/coviddata.model';
 
 @Component({
   selector: 'app-covid-graph',
@@ -25,6 +26,7 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('graph') graph: ElementRef<SVGElement>;
+  @ViewChild('covidGraph') covidGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
   @Input() showSectors: boolean;
   @Input() showDifference: boolean;
@@ -66,6 +68,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     .x(d => this.x20(d.date))
     .y(d => this.y(d.mtCo2));
 
+  readonly  lineCovid = d3.line<CovidDatapoint>()
+    .curve(this.curve)
+    .x(d => this.x20(d.date))
+    .y(d => this.y(d.cases));
+
   readonly areaBelow20 = d3.area<Co2Datapoint>()
     .curve(this.curve)
     .x(d => this.x20(d.date))
@@ -92,9 +99,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   private svg: d3.Selection<SVGElement, unknown, null, undefined>;
+  private covidSvg: d3.Selection<SVGElement, unknown, null, undefined>;
   // endregion
 
   private graphSvg: SVGElement;
+  private covidGraphSvg: SVGElement;
 
   constructor(private dataService: DataService) {
   }
@@ -104,8 +113,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.graphSvg = this.graph.nativeElement;
+    this.covidGraphSvg = this.covidGraph.nativeElement;
     this.initGraph();
+    this.initCovidGraph();
     this.updateGraph();
+    this.updateCovidGraph();
     this.updateShowDifference(this.showDifference);
     this.updateShowSectors(this.showSectors);
   }
@@ -121,6 +133,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     if (isNotNullOrUndefined(changes.showDifference?.currentValue)) {
       this.updateShowDifference(changes.showDifference.currentValue);
     }
+    this.updateCovidGraph();
   }
 
   private initGraph(): void {
@@ -180,6 +193,55 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('class', 'line20');
   }
 
+  private initCovidGraph(): void {
+    this.covidSvg = d3.select(this.covidGraphSvg);
+
+    this.covidSvg.attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '-'
+        + this.adj + ' -'
+        + this.adj + ' '
+        + (this.width + this.adj * 3) + ' '
+        + (this.height + this.adj * 3))
+      .classed('svg-content', true);
+
+    this.covidSvg.append('g')
+      .attr('class', 'axis')
+      .attr('id', 'xAxis')
+      .attr('transform', 'translate(0,' + this.height + ')')
+      .call(this.xAxis);
+
+    this.covidSvg.append('g')
+      .attr('class', 'axis')
+      .attr('id', 'yAxis')
+      .call(this.yAxis)
+      .append('text')
+      .attr('dy', '.75em')
+      .attr('y', -30)
+      .attr('x', 30)
+      .style('text-anchor', 'end')
+      .text('New cases');
+
+    this.covidSvg.append('clipPath')
+      .attr('id', 'clip-below')
+      .append('path');
+
+    this.covidSvg.append('clipPath')
+      .attr('id', 'clip-above')
+      .append('path');
+
+    this.covidSvg.append('path')
+      .attr('clip-path', 'url(#clip-above)')
+      .attr('class', 'area-above');
+
+    this.covidSvg.append('path')
+      .attr('clip-path', 'url(#clip-below)')
+      .attr('class', 'area-below');
+
+    this.covidSvg.append('path')
+      .attr('class', 'lineCovid');
+
+  }
+
   private updateGraph(): void {
     const data19 = this.dataService.getCo2Data({
       yearFilter: [2019],
@@ -195,6 +257,15 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.updateLines(data19, data20);
     this.updateDifferenceArea(data19, data20);
     this.updateSectorStacks();
+  }
+
+  private updateCovidGraph(): void {
+    const covidData = this.dataService.getCovidData( {
+      countryFilter: [this.selectedCountry],
+    });
+    console.log(covidData);
+    this.updateCovidAxes(covidData);
+    this.updateCovidLines(covidData);
   }
 
   updateShowDifference(show: boolean): void {
@@ -248,6 +319,23 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .call(this.yAxis as any);
   }
 
+  private updateCovidAxes(data: CovidDatapoint[]): void {
+
+    const maxValue = d3.max(data.map(d => d.cases)) * 1.1;
+
+    this.y.domain([0, maxValue]);
+
+    this.covidSvg.selectAll('#xAxis')
+      .transition()
+      .duration(1000)
+      .call(this.xAxis as any);
+
+    this.covidSvg.selectAll('#yAxis')
+      .transition()
+      .duration(1000)
+      .call(this.yAxis as any);
+  }
+
   private updateLines(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
     const line19 = this.svg.select('.line19')
       .datum(data19);
@@ -266,6 +354,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .transition()
       .duration(1000)
       .attr('d', this.line20);
+  }
+
+  private updateCovidLines(data: CovidDatapoint[]): void {
+    const line = this.covidSvg.select('.lineCovid')
+      .datum(data);
+
+    line.enter()
+      .merge(line as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.lineCovid);
+
   }
 
   private updateDifferenceArea(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
