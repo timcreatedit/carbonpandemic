@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 // @ts-ignore
-import * as data from 'src/assets/datasets/data/carbon-monitor-maingraphdatas.json';
-import * as records from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
+import * as co2dataset from 'src/assets/datasets/data/co2-data.json';
+import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
 import * as d3 from 'd3';
 import {CovidDatapoint} from '../models/coviddata.model';
@@ -48,7 +48,7 @@ export class DataService {
    */
   private readCo2Data(): void {
 
-    (data as any).datas.forEach(dp => {
+    (co2dataset as any).datas.forEach(dp => {
       const dateValues = (dp.date).split('/').map(d => parseInt(d, 10));
       this.co2Datapoints.push({
         country: dp['country / group of countries'] as Countries,
@@ -62,7 +62,7 @@ export class DataService {
   }
 
   private readCovidData(): void {
-    (records as any).records.forEach(dp => {
+    (covidDataset as any).records.forEach(dp => {
       const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
       const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
       if (actualDate <= this.maxDate)
