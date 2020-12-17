@@ -48,7 +48,7 @@ export class DataService {
    */
   private readCo2Data(): void {
 
-    data.datas.forEach(dp => {
+    (data as any).datas.forEach(dp => {
       const dateValues = (dp.date).split('/').map(d => parseInt(d, 10));
       this.co2Datapoints.push({
         country: dp['country / group of countries'] as Countries,
@@ -63,9 +63,9 @@ export class DataService {
   }
 
   private readCovidData(): void {
-    records.records.forEach(dp => {
+    (records as any).records.forEach(dp => {
       const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
-      const actualDate = new Date(dateValues[2], dateValues[1], dateValues[0]);
+      const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
       if (actualDate <= this.maxDate)
       {
         this.covidDatapoints.push({
