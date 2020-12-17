@@ -28,8 +28,14 @@
         metric tons.</strong>
       </p>
       <p>
-        {{ worstDayOf20.date | date:'EEEE, MMMM d' }} was the worst day regarding emissions for {{ worstDayOf20.country }} in 2020.
-        On this day, {{ worstDayOf20.country }} emitted {{ (worstDayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons of CO<sub>2</sub>.
+        {{ worstCo2DayOf20.date | date:'EEEE, MMMM d' }} was the worst day regarding emissions for {{ worstCo2DayOf20.country }} in 2020.
+        On this day, {{ worstCo2DayOf20.country }} emitted {{ (worstCo2DayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons of CO<sub>2</sub>
+        <span *ngIf="co2OnWorstCovidDayOf20"> and had {{covidOnWorstCo2DayOf20?.cases | number}} new Covid-19 cases</span>.
+      </p>
+      <p>
+        With {{ worstCovidDayOf20.cases | number }} new cases, {{ worstCovidDayOf20.date | date:'EEEE, MMMM d' }} was the
+        worst day of 2020 regarding new cases for {{ worstCovidDayOf20.country }}. <span *ngIf="co2OnWorstCovidDayOf20">On this day, {{ worstCovidDayOf20.country }}
+        emitted {{ (co2OnWorstCovidDayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons of CO<sub>2</sub>.</span>
       </p>
       <div class="scroll-prompt">
         <span>↓</span>
