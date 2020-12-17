@@ -16,7 +16,7 @@ export class TopBarComponent implements OnInit{
   selectedCountry: string;
 
   ngOnInit(): void {
-    this.selectedCountry = Countries.world.toString();
+    this.selectedCountry = Countries.germany.toString();
     this.updateCountry(this.selectedCountry);
   }
 
