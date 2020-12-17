@@ -59,7 +59,6 @@ export class DataService {
     });
     this.co2Datapoints = this.co2Datapoints.sort((a, b) => a.date as any - (b.date as any));
     this.maxDate = d3.max(this.co2Datapoints.map(d => d.date));
-    console.log(this.co2Datapoints);
   }
 
   private readCovidData(): void {
