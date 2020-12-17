@@ -8,7 +8,10 @@
 
 
 
-Die COVID-19 Pandemie hat dazu geführt, dass viele Dinge passiert sind
+Lockdowns, Reiseverbote und eine heruntergefahrene Wirtschaft - 2020 war auf Grund der COVID19 Pandemie nicht nur für die Menschen ein einzigartiges Jahr, sondern auch in Hinblick auf deren Hauptverursacher für Co2-Emissionen interessant.
+Die Hoffnung besteht, dass die durch diese besondere Lage bedingten Einschränkungen zumindest für die Aussichten auf einen zukünftigen Co2-Ausstieg einen wichtigen Schritt in die richtige Richtung darstellen könnten.
+Doch in wie fern hat die Pandemie die Co2 Emissionen 2020 im Verhältnis zu 2019 beeinflusst? Welche Einblicke kann man für die einzelnen Sektoren sammeln, aus denen sich die Emission zusammensetzt?
+Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unser Co2-Budget?
 
 
 
