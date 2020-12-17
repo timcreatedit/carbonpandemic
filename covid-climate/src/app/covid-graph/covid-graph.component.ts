@@ -223,22 +223,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .style('text-anchor', 'end')
       .text('New cases');
 
-    this.covidSvg.append('clipPath')
-      .attr('id', 'clip-below')
-      .append('path');
-
-    this.covidSvg.append('clipPath')
-      .attr('id', 'clip-above')
-      .append('path');
-
-    this.covidSvg.append('path')
-      .attr('clip-path', 'url(#clip-above)')
-      .attr('class', 'area-above');
-
-    this.covidSvg.append('path')
-      .attr('clip-path', 'url(#clip-below)')
-      .attr('class', 'area-below');
-
     this.covidSvg.append('path')
       .attr('class', 'lineCovid');
 
