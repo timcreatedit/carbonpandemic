@@ -35,6 +35,12 @@
         stroke-width: 3px;
       }
 
+      .lineCovid {
+        fill: none;
+        stroke: $negative;
+        stroke-width: 3px;
+      }
+
       .area-above {
         transition: all 200ms ease;
         fill: $negative; //85FFBB, FF5889
