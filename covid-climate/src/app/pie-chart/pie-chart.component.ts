@@ -43,9 +43,6 @@ export class PieChartComponent implements OnInit, OnChanges {
       .map(s => data20.filter(dp => dp.sector === Sectors[s]))
       .map(dps => dps.map(dp => dp.mtCo2).reduce((v1, v2) => v1 + v2, 0));
 
-    console.log(sectorData19);
-    console.log(sectorData20);
-
     const svg1 = d3.select('#pieChart2019');
     const svg2 = d3.select('#pieChart2020');
 
