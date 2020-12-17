@@ -1,32 +1,69 @@
-# InfoVis Gruppe 13
-[![build status](https://github.com/timcreatedit/infovis-gruppe-13/workflows/Build/badge.svg)](https://github.com/timcreatedit/infovis-gruppe-13/actions)
-## Links
+# Rettet die Pandemie unser Klima?
 
-[Linkliste](./Links.md)
+### InfoVis Gruppe 13
+
+[![build status](https://github.com/timcreatedit/infovis-gruppe-13/workflows/Build/badge.svg)](https://github.com/timcreatedit/infovis-gruppe-13/actions)
+
+![Screenshot](./Screenshot.png)
+
+
+
+Die COVID-19 Pandemie hat dazu geführt, dass viele Dinge passiert sind
+
+
 
 ## Milestone 3
 
-### Funktionen, die bereits benutzt und getestet werden können:
-* Ziel #1
-  - Toggle für das Anzeigen der Sektionen
-  - Toggle für das Anzeigend der Differenz 2019 zu 2020
-  - Drop-Down Filter für die Auswahl eines bestimmten Landes bzw. Gesamt
+### Bereits nutzbare Features
 
- * Ziel #2
-  - Drop-Down Filter für die Auswahl eines bestimmten Landes bzw. Gesamt
+##### Grafik 1: Vergleich der CO~2~Emissionen mit neune COVID-19 Fällen
 
-### Noch zu implementieren(MVP):
-* Allgemein
-  - [x] Seitenscroll-Funktion
+- [x] Anzeige der CO~2~ Emissionen von 2019 und 2020
+- [x] Anzeige der neuen COVID-19 Fälle von 2020
+- [x] Länderauswahl über Dropdown oben rechts
+- [x] Animierte Änderungen
+- [x] Scrollbasierte Änderungen am CO~2~ Graphen
+  - [x] Anzeige der Änderung zum Vorjahr
+  - [x] Aufteilung in Sektoren
+- [x] Dynamische Informationen im Erklärungstext je nach Länderwahl
 
-* Ziel #1
-  - [x] Neues Datenset von Carbon Monitor (Daten bis November stehen nun zur Verfügung)
-  - [ ] Verbesserte Datenformatierung
 
-* Ziel #2
-  - [ ] Hover-Effekt
 
-* Ziel #3
-  - [ ] Linien-Diagramm mit Prognose-Kurven
-  - [ ] Regler für die angezeigten Jahre
-  - [ ] Anzeige der Klimaziele für das jeweils ausgewählte Land
+### Noch zu implementieren (MVP):
+
+##### Grafik 1: Vergleich der CO~2~Emissionen mit neune COVID-19 Fällen
+
+- [ ] Detaillierte Informationen beim Hovern
+
+- [ ] Aufsummierte COVID-Daten (WORLD, ROW, EU28)
+
+- [ ] Visualisierung der Lockdown Phasen
+
+  
+
+##### Grafik 2: Kuchendiagramme und Überblicke über die Änderungen pro Sektor
+
+- [ ] Anzeige der Sektorenverteilung 2019 und 2020
+
+- [ ] Balkendiagramm mit anteiligen Änderungen je Sektor
+
+- [ ] Balkendiagramm mit anteiligen Änderungen im Gesamtvergleich
+
+- [ ] Detaillierte Informationen beim Hover
+
+  
+
+##### Grafik 3: Gesamtkontext und Prognosen
+
+- [ ] Anzeige des verbleibenden Budgets seit Anfang der Aufzeichnungen
+- [ ] Regler für die angezeigten Jahre
+- [ ] Prognoselinien
+  - [ ] Es geht so weiter wie 2019
+  - [ ] Es geht so weiter wie 2020
+- [ ] Countdown bis zum Ablauf des CO~2~ Budgets in beiden Szenarien
+
+
+
+## Links zu Datensätzen
+
+[Linkliste](./Links.md)
