@@ -103,12 +103,6 @@
       justify-content: center;
 
       animation: blinktext 3s infinite;
-
-      @keyframes blinktext {
-        0% { opacity: 30% }
-        50% { opacity: 70% }
-        100% { opacity: 30% }
-      }
     }
   }
 
