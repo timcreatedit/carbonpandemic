@@ -77,8 +77,6 @@ export class DataService {
       }
     });
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
-
-    console.log(this.covidDatapoints);
   }
 
   /**
