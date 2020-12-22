@@ -90,12 +90,12 @@
                        [showSectors]="scrollService.covidShowSectors$ | async"
       ></app-covid-graph>
     </div>
-    <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
-      <app-pie-chart [selectedCountry]="selectedCountry"></app-pie-chart>
-    </div>
     <div class="graph-container" id="prognosis-graph-container"
          [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
       <app-prognosis-graph [selectedCountry]="selectedCountry"></app-prognosis-graph>
+    </div>
+    <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
+      <app-pie-chart [selectedCountry]="selectedCountry"></app-pie-chart>
     </div>
   </div>
 
