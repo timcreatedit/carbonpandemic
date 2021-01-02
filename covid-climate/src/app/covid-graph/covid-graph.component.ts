@@ -116,6 +116,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.covidGraphSvg = this.covidGraph.nativeElement;
     this.initGraph();
     this.initCovidGraph();
+    this.initHoverStates();
     this.updateGraph();
     this.updateCovidGraph();
     this.updateShowDifference(this.showDifference);
@@ -226,6 +227,62 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.covidSvg.append('path')
       .attr('class', 'lineCovid');
 
+  }
+
+  private initHoverStates(): void {
+
+    const line = this.svg.append('svg:rect') // this is the black vertical line to follow mouse
+        .attr('class', 'mouseLine')
+        .style('opacity', '0');
+
+    const tooltip = this.svg.append('svg:rect') // this is the black vertical line to follow mouse
+        .attr('class', 'tooltip')
+        .style('opacity', '0');
+
+    this.svg.append('svg:rect') // append a rect to catch mouse movements on canvas
+        .attr('width', this.width) // can't catch mouse events on a g element
+        .attr('height', this.height)
+        .attr('fill', 'none')
+        .attr('pointer-events', 'all')
+        .on('mouseout', () => { // on mouse out hide line, circles and text
+          console.log('out');
+          tooltip
+              .style('opacity', '0');
+          line
+              .style('opacity', '0');
+        })
+        .on('mouseover', () => { // on mouse in show line, circles and text
+          console.log('over');
+          tooltip
+              .style('opacity', '1');
+          line
+              .style('opacity', '0.7');
+        })
+        .on('mousemove', (d, i) => {
+          console.log('move');
+          const mouseCoordinates: [number, number] = d3.pointer(event);
+          const mousePosX = mouseCoordinates[0];
+          const mousePosY = mouseCoordinates[1];
+          console.log('x: ' + mousePosX);
+          tooltip
+              .attr('x', mousePosX + 20)
+              .attr('y', mousePosY - 20)
+              .append('g')
+              .append('text')
+              .text('test');
+          line
+              .attr('x', mousePosX);
+        });
+  }
+
+  private updateHoverInformation(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
+    if (this.showDifference){
+      // DIFFERENCE BETWEEN YEARS
+    } else if (this.showSectors) {
+      // SECTOR LAYERS
+    } else {
+      // LINES
+    }
   }
 
   private updateGraph(): void {

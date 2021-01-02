@@ -4,6 +4,7 @@
   width: 100%;
   .graph-container {
     width: 100%;
+
     svg {
       margin: 8px;
       padding: 8px;
@@ -90,8 +91,25 @@
           fill: $aviation;
         }
       }
+
+      .mouseLine {
+        z-index: 10;
+        height: 80%;
+        width: 2px;
+        fill: white;
+      }
+
+      .tooltip {
+        top: 0;
+        width: 200px;
+        height: 40px;
+
+        fill: $backgroundColorLight;
+        stroke: white;
+        stroke-width: 2px;
+        rx: 15px;
+        ry: 15px;
+      }
     }
   }
-
-
 }
