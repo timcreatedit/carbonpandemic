@@ -1,15 +1,26 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit, Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint} from '../core/models/historicco2data.model';
+import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 
 @Component({
   selector: 'app-prognosis-graph',
   templateUrl: './prognosis-graph.component.html',
   styleUrls: ['./prognosis-graph.component.scss']
 })
-export class PrognosisGraphComponent implements OnInit {
+export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
@@ -23,19 +34,20 @@ export class PrognosisGraphComponent implements OnInit {
   //region D3 Variables
   private readonly curve = d3.curveNatural;
 
-  readonly x = d3.scaleTime()
+  readonly x = d3.scaleLinear()
     .range([0, this.width]);
 
   readonly y = d3.scaleLinear()
     .range([this.height, 0]);
 
   readonly xAxis = d3.axisBottom(this.x)
-    .tickFormat(d3.timeFormat('%b'));
+    .ticks(10)
+    .tickFormat(d3.format('d'));
 
   readonly yAxis = d3.axisLeft(this.y)
     .ticks(5);
 
-  readonly line = d3.line<HistoricCo2Datapoint>()
+  readonly linePrognosis = d3.line<HistoricCo2Datapoint>()
     .curve(this.curve)
     .x(d => this.x(d.year))
     .y(d => this.y(d.mtCo2));
@@ -54,6 +66,15 @@ export class PrognosisGraphComponent implements OnInit {
     this.prognosisGraphSvg = this.prognosisGraph.nativeElement;
     this.initPrognosisGraph();
     this.updatePrognosisGraph();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.prognosisGraphSvg) {
+      return;
+    }
+    if (isNotNullOrUndefined(changes.selectedCountry)) {
+      this.updatePrognosisGraph();
+    }
   }
 
   private initPrognosisGraph(): void {
@@ -94,12 +115,13 @@ export class PrognosisGraphComponent implements OnInit {
       countryFilter: [null]
     });
     this.updatePrognosisAxes(prognosisData);
-    this.updatePrognosisLines(prognosisData);
+    this.updatePrognosisLine(prognosisData);
   }
 
   private updatePrognosisAxes(data: HistoricCo2Datapoint[]): void {
     const maxValue = d3.max(data.map(d => d.mtCo2)) * 1.1;
 
+    this.x.domain(d3.extent(data.map(dp => dp.year)));
     this.y.domain([0, maxValue]);
 
     this.prognosisSvg.selectAll('#xAxis')
@@ -113,15 +135,15 @@ export class PrognosisGraphComponent implements OnInit {
       .call(this.yAxis as any);
   }
 
-  private updatePrognosisLines(data: HistoricCo2Datapoint[]): void {
-    const line = this.prognosisSvg.select('.line')
+  private updatePrognosisLine(data: HistoricCo2Datapoint[]): void {
+    const linePrognosis = this.prognosisSvg.select('.linePrognosis')
       .datum(data);
 
-    line.enter()
-      .merge(line as any)
+    linePrognosis.enter()
+      .merge(linePrognosis as any)
       .transition()
       .duration(1000)
-      .attr('d', this.line);
+      .attr('d', this.linePrognosis);
   }
 
 }

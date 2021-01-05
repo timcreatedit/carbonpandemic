@@ -35,7 +35,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   // region size
   width = 1400;
-  height = 400;
+  //todo: Changed height from 400 to 100 for the Prognosis Graph to be seen for development. A different solution must be found
+  height = 100;
   adj = 60;
   // endregion
 

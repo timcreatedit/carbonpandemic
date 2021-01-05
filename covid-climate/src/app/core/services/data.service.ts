@@ -23,6 +23,7 @@ export class DataService {
   constructor() {
     this.readCo2Data();
     this.readCovidData();
+    this.readHistoricCo2Data()
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
@@ -86,7 +87,7 @@ export class DataService {
       this.historicCo2Datapoints.push({
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
         year: dp.Year,
-        mtCo2: dp.CDIAC,
+        mtCo2: dp.meandailyCO2,
       } as HistoricCo2Datapoint);
     });
   }
