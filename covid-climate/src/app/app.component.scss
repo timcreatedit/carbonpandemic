@@ -44,13 +44,13 @@
           }
         }
 
-        &.area-above {
+        &.area-above, &.linePrognosisNoLockdown {
           .bullet {
             background: $negative;
           }
         }
 
-        &.area-below {
+        &.area-below, &.linePrognosisLockdown {
           .bullet {
             background: $positive;
           }
@@ -92,6 +92,10 @@
           }
         }
       }
+    }
+
+    .end {
+      margin-top: 60%;
     }
 
     .scroll-prompt {

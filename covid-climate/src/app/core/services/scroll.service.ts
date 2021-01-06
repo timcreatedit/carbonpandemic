@@ -36,21 +36,21 @@ export class ScrollService {
       }
     },
     {
-      section: [0.25, 0.5],
+      section: [0.25, 0.55],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
       }
     },
     {
-      section: [0.5, 0.75],
+      section: [0.55, 0.85],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
       }
     },
     {
-      section: [0.75, 1],
+      section: [0.85, 1],
       config: {
         prognosisGraphShown: true,
       }
