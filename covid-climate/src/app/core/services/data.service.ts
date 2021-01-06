@@ -88,6 +88,8 @@ export class DataService {
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
         year: dp.Year,
         mtCo2: dp.meandailyCO2,
+        co2PrognosisLockdown: dp.CO2WithLockdowns,
+        co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
       } as HistoricCo2Datapoint);
     });
   }

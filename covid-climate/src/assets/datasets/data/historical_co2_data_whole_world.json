@@ -1758,7 +1758,45 @@
         {
             "Year": "2020",
             "meandailyCO2": "89.66",
-            "undefined": "-8.71%"
+            "undefined": "-8.71%",
+            "CO2WithLockdowns": "89.66",
+            "CO2WithoutLockdowns": "96.82"
+        },
+        {
+          "Year": "2025",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "89.3",
+          "CO2WithoutLockdowns": "97.82"
+        },
+        {
+          "Year": "2030",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "91.05",
+          "CO2WithoutLockdowns": "99.74"
+        },
+        {
+          "Year": "2035",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "93.68",
+          "CO2WithoutLockdowns": "102.62"
+        },
+        {
+          "Year": "2040",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "97.08",
+          "CO2WithoutLockdowns": "106.34"
+        },
+        {
+          "Year": "2045",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "102",
+          "CO2WithoutLockdowns": "111.73"
+        },
+        {
+          "Year": "2050",
+          "undefined": "-8.71%",
+          "CO2WithLockdowns": "107.76",
+          "CO2WithoutLockdowns": "118.04"
         }
     ]
 }

@@ -24,7 +24,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   // endregion
 
   //region D3 Variables
-  private readonly curve = d3.curveNatural;
+  private readonly curveHistoric = d3.curveLinear;
+
+  private readonly curvePrognosisLockdown = d3.curveLinear;
+
+  private readonly curvePrognosisNoLockdown = d3.curveLinear;
 
   readonly x = d3.scaleLinear()
     .range([0, this.width]);
@@ -39,10 +43,20 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   readonly yAxis = d3.axisLeft(this.y)
     .ticks(5);
 
-  readonly linePrognosis = d3.line<HistoricCo2Datapoint>()
-    .curve(this.curve)
+  readonly lineHistoric = d3.line<HistoricCo2Datapoint>()
+    .curve(this.curveHistoric)
     .x(d => this.x(d.year))
     .y(d => this.y(d.mtCo2));
+
+  readonly linePrognosisLockdown = d3.line<HistoricCo2Datapoint>()
+    .curve(this.curvePrognosisLockdown)
+    .x(d => this.x(d.year))
+    .y(d => this.y(d.co2PrognosisLockdown));
+
+  readonly linePrognosisNoLockdown = d3.line<HistoricCo2Datapoint>()
+    .curve(this.curvePrognosisNoLockdown)
+    .x(d => this.x(d.year))
+    .y(d => this.y(d.co2PrognosisNoLockdown));
 
   private prognosisSvg: d3.Selection<SVGElement, unknown, null, undefined>;
   // endregion
@@ -99,7 +113,15 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.prognosisSvg
       .append('path')
-      .attr('class', 'linePrognosis');
+      .attr('class', 'lineHistoric');
+
+    this.prognosisSvg
+      .append('path')
+      .attr('class', 'linePrognosisLockdown');
+
+    this.prognosisSvg
+      .append('path')
+      .attr('class', 'linePrognosisNoLockdown');
   }
 
   private updatePrognosisGraph(): void {
@@ -128,14 +150,34 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisLine(data: HistoricCo2Datapoint[]): void {
-    const linePrognosis = this.prognosisSvg.select('.linePrognosis')
+    const lineHistoric = this.prognosisSvg.select('.lineHistoric')
       .datum(data);
 
-    linePrognosis.enter()
-      .merge(linePrognosis as any)
+    lineHistoric.enter()
+      .merge(lineHistoric as any)
       .transition()
       .duration(1000)
-      .attr('d', this.linePrognosis);
+      .attr('d', this.lineHistoric);
+
+    const linePrognosisLockdown = this.prognosisSvg
+      .select('.linePrognosisLockdown')
+      .datum(data);
+
+    linePrognosisLockdown.enter()
+      .merge(linePrognosisLockdown as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.linePrognosisLockdown);
+
+    const linePrognosisNoLockdown = this.prognosisSvg
+      .select('.linePrognosisNoLockdown')
+      .datum(data);
+
+    linePrognosisNoLockdown.enter()
+      .merge(linePrognosisNoLockdown as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.linePrognosisNoLockdown);
   }
 
 }

@@ -17,9 +17,21 @@
         }
       }
 
-      .linePrognosis {
+      .lineHistoric {
         fill: none;
         stroke: #ffffff;
+        stroke-width: 3px;
+      }
+
+      .linePrognosisLockdown {
+        fill: none;
+        stroke: $positive;
+        stroke-width: 3px;
+      }
+
+      .linePrognosisNoLockdown {
+        fill: none;
+        stroke: $negative;
         stroke-width: 3px;
       }
 
