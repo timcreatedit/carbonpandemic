@@ -4,5 +4,4 @@ export interface LockdownDatapoint {
   date: Date;
   country: Countries;
   lockdown: boolean;
-  mask: boolean;
 }
