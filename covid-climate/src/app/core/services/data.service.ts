@@ -5,7 +5,7 @@ import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide
 import * as historicCo2Dataset from 'src/assets/datasets/data/historical_co2_data_whole_world.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
 import {CovidDatapoint} from '../models/coviddata.model';
-import {HistoricCo2Datapoint} from '../models/historicco2data.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/historicco2data.model';
 import * as d3 from 'd3';
 
 export interface FilterOptions {
@@ -13,6 +13,7 @@ export interface FilterOptions {
   sectorFilter?: Sectors[];
   yearFilter?: number[];
   sumSectors?: boolean;
+  prognosisDataFilter?: PrognosisDataIndicators[];
 }
 
 @Injectable({
@@ -90,6 +91,7 @@ export class DataService {
         mtCo2: dp.meandailyCO2,
         co2PrognosisLockdown: dp.CO2WithLockdowns,
         co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
+        prognosisDataIndicator: dp.PrognosisData,
       } as HistoricCo2Datapoint);
     });
   }
@@ -131,16 +133,14 @@ export class DataService {
   }
 
   public getHistoricCo2Data(filterOptions?: FilterOptions): HistoricCo2Datapoint[] {
-    // following would be useful with dataset with dataset with multiple countries
-    /*if (!filterOptions) {
+    if (!filterOptions) {
       return this.historicCo2Datapoints;
     }
     let filteredList: HistoricCo2Datapoint [] = this.historicCo2Datapoints;
-    if (filterOptions.countryFilter) {
-      filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    if (filterOptions.prognosisDataFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.prognosisDataFilter.includes(dp.prognosisDataIndicator));
     }
-    return filteredList;*/
-    return this.historicCo2Datapoints;
+    return filteredList;
   }
 
   private sumSectors(datapoints: Co2Datapoint[]): Co2Datapoint[] {

@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleCh
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
-import {HistoricCo2Datapoint} from '../core/models/historicco2data.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
@@ -125,17 +125,26 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisGraph(): void {
-    const prognosisData = this.dataService.getHistoricCo2Data({
-      countryFilter: [null]
+    const historicData = this.dataService.getHistoricCo2Data({
+      prognosisDataFilter: [PrognosisDataIndicators.historic],
     });
-    this.updatePrognosisAxes(prognosisData);
-    this.updatePrognosisLine(prognosisData);
+    const prognosisData = this.dataService.getHistoricCo2Data({
+      prognosisDataFilter: [PrognosisDataIndicators.prognosis],
+    });
+    const allData = this.dataService.getHistoricCo2Data({
+      prognosisDataFilter: null,
+    });
+    this.updatePrognosisAxes(prognosisData, allData);
+    this.updatePrognosisLine(historicData, prognosisData);
   }
 
-  private updatePrognosisAxes(data: HistoricCo2Datapoint[]): void {
-    const maxValue = d3.max(data.map(d => d.mtCo2)) * 1.1;
+  private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
+    //const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
+    //todo: for a correct functioning d3.max() implementation its data need to be parsed to int
+    const maxValue = 120;
+    console.log('maxValue' + maxValue);
 
-    this.x.domain(d3.extent(data.map(dp => dp.year)));
+    this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
     this.y.domain([0, maxValue]);
 
     this.prognosisSvg.selectAll('#xAxis')
@@ -149,9 +158,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .call(this.yAxis as any);
   }
 
-  private updatePrognosisLine(data: HistoricCo2Datapoint[]): void {
+  private updatePrognosisLine(dataHistoric: HistoricCo2Datapoint[], dataPrognosis: HistoricCo2Datapoint[]): void {
     const lineHistoric = this.prognosisSvg.select('.lineHistoric')
-      .datum(data);
+      .datum(dataHistoric);
 
     lineHistoric.enter()
       .merge(lineHistoric as any)
@@ -161,7 +170,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     const linePrognosisLockdown = this.prognosisSvg
       .select('.linePrognosisLockdown')
-      .datum(data);
+      .datum(dataPrognosis);
 
     linePrognosisLockdown.enter()
       .merge(linePrognosisLockdown as any)
@@ -171,7 +180,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     const linePrognosisNoLockdown = this.prognosisSvg
       .select('.linePrognosisNoLockdown')
-      .datum(data);
+      .datum(dataPrognosis);
 
     linePrognosisNoLockdown.enter()
       .merge(linePrognosisNoLockdown as any)
