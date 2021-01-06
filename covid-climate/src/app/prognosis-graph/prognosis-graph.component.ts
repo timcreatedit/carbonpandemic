@@ -1,24 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit, Output,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint} from '../core/models/historicco2data.model';
-import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-prognosis-graph',
   templateUrl: './prognosis-graph.component.html',
-  styleUrls: ['./prognosis-graph.component.scss']
+  styleUrls: ['./prognosis-graph.component.scss'],
+  // Needed so that d3 components get styled correctly
+  encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
@@ -27,7 +19,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   // region size
   width = 1400;
-  height = 400;
+  height = 600;
   adj = 60;
   // endregion
 
@@ -105,9 +97,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .style('text-anchor', 'end')
       .text('in MtCO2/d');
 
-    this.prognosisSvg.append('path')
+    this.prognosisSvg
+      .append('path')
       .attr('class', 'linePrognosis');
-
   }
 
   private updatePrognosisGraph(): void {
