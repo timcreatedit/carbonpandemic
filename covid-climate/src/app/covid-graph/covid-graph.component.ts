@@ -33,11 +33,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() worstDayOf20 = new EventEmitter<Co2Datapoint>();
 
+  toolX = 0;
+  toolY = 0;
   // region size
   width = 1400;
   height = 400;
   adj = 60;
   // endregion
+
+  private hoverData = [
+    {text: '0', unit: 'MtCo2', fill: '#63f2ff'},
+    {text: '0', unit: 'MtCo2', fill: 'white'}
+  ];
 
   //region D3 Variables
   private readonly curve = d3.curveNatural;
@@ -116,7 +123,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.covidGraphSvg = this.covidGraph.nativeElement;
     this.initGraph();
     this.initCovidGraph();
-    this.initHoverStates();
+    this.initHover();
     this.updateGraph();
     this.updateCovidGraph();
     this.updateShowDifference(this.showDifference);
@@ -229,61 +236,127 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   }
 
-  private initHoverStates(): void {
+  // HOVER START
+  private initHover(): void {
 
-    const line = this.svg.append('svg:rect') // this is the black vertical line to follow mouse
-        .attr('class', 'mouseLine')
-        .style('opacity', '0');
+    const data19 = this.dataService.getCo2Data({
+      yearFilter: [2019],
+      countryFilter: [this.selectedCountry],
+      sumSectors: true,
+    });
+    const data20 = this.dataService.getCo2Data({
+      yearFilter: [2020],
+      countryFilter: [this.selectedCountry],
+      sumSectors: true,
+    });
 
-    const tooltip = this.svg.append('svg:rect') // this is the black vertical line to follow mouse
-        .attr('class', 'tooltip')
-        .style('opacity', '0');
+    const line = this.svg.append('svg:rect') // this is the vertical line to follow mouse
+      .attr('class', 'mouseLine')
+      .style('opacity', '0');
+
+    const tooltipGroup = this.svg.append('g') // general group to hide or show the tooltip
+      .attr('class', 'tooltipGroup')
+      .style('opacity', '0');
+
+    const tooltipCo2 = tooltipGroup.selectAll().data(this.hoverData).enter().append('svg:rect') // the tooltip with the 2020 and 2019 Data
+      .attr('class', 'tooltip')
+      .attr('height', (data, index) => (index + 1) * 40);
+
+    const tooltipValuesText = tooltipGroup.append('g') // the group to append the text to
+      .attr('class', 'tooltipValuesText');
+
+    tooltipValuesText.selectAll('text').data(this.hoverData).enter().append('text')
+      .attr('class', 'hoverValuesText')
+      .style('fill', data => data.fill)
+      .style('font-weight', 'bold')
+      .style('font-size', '1.5em')
+      .style('text-anchor', 'end')
+      .attr('x', 85)
+      .attr('y', (data, index) => (index + 1) * 40)
+      .text(data => (data.text));
+
+    const tooltipUnitsText = tooltipGroup.append('g') // the group to append the text to
+      .attr('class', 'tooltipUnitsText');
+
+    tooltipUnitsText.selectAll('text').data(this.hoverData).enter().append('text')
+      .attr('class', 'hoverValuesText')
+      .style('fill', 'white')
+      .attr('x', 95)
+      .attr('y', (data, index) => (index + 1) * 30)
+      .text(data => (data.unit));
 
     this.svg.append('svg:rect') // append a rect to catch mouse movements on canvas
-        .attr('width', this.width) // can't catch mouse events on a g element
+        .attr('class', 'hoverContainer')
+        .attr('width', this.width)
         .attr('height', this.height)
         .attr('fill', 'none')
         .attr('pointer-events', 'all')
-        .on('mouseout', () => { // on mouse out hide line, circles and text
-          console.log('out');
-          tooltip
+        .on('mouseout', () => { // on mouse out
+          tooltipGroup
               .style('opacity', '0');
           line
               .style('opacity', '0');
         })
-        .on('mouseover', () => { // on mouse in show line, circles and text
-          console.log('over');
-          tooltip
+        .on('mouseover', () => { // on mouse in
+          tooltipGroup
               .style('opacity', '1');
           line
               .style('opacity', '0.7');
         })
-        .on('mousemove', (d, i) => {
-          console.log('move');
+        .on('mousemove', () => {
           const mouseCoordinates: [number, number] = d3.pointer(event);
           const mousePosX = mouseCoordinates[0];
           const mousePosY = mouseCoordinates[1];
-          console.log('x: ' + mousePosX);
-          tooltip
-              .attr('x', mousePosX + 20)
-              .attr('y', mousePosY - 20)
-              .append('g')
-              .append('text')
-              .text('test');
+
+          this.toolX = mousePosX;
+          this.toolY = mousePosY;
           line
-              .attr('x', mousePosX);
+            .attr('x', mousePosX);
+
+          tooltipGroup
+            .attr('transform', 'translate(' + (mousePosX + 20) + ' , ' + (mousePosY - 20) + ')');
+
+          // recover coordinate we need
+          if (this.showDifference){
+            // DIFFERENCE BETWEEN YEARS
+          } else if (this.showSectors) {
+            // SECTOR LAYERS
+          } else {
+            // LINES
+            const obj19 = this.getObjectToMousePos(mousePosX, data19, true);
+            const obj20 = this.getObjectToMousePos(mousePosX, data20, false);
+
+            this.hoverData = [
+              {text: (obj19.mtCo2).toFixed(3), unit: 'MtCo2', fill: '#63f2ff'},
+              {text: (obj20.mtCo2).toFixed(3), unit: 'MtCo2', fill: 'white'}
+            ];
+
+            this.updateHoverTextData();
+          }
         });
   }
 
-  private updateHoverInformation(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
-    if (this.showDifference){
-      // DIFFERENCE BETWEEN YEARS
-    } else if (this.showSectors) {
-      // SECTOR LAYERS
+  private getObjectToMousePos(xPos: number, data: Co2Datapoint[], is19Data: boolean): any {
+    if (is19Data){
+      const x19i = this.x19.invert(xPos);
+      const dataDates = data.map(dp => dp.date);
+      const sub = d3.bisect(dataDates, x19i);
+      return data[sub];
     } else {
-      // LINES
+      const x20i = this.x20.invert(xPos);
+      const dataDates = data.map(dp => dp.date);
+      const sub = d3.bisect(dataDates, x20i);
+      return data[sub];
     }
   }
+
+  private updateHoverTextData(): void {
+    d3.select('.tooltipValuesText').selectAll('text').data(this.hoverData)
+      .style('fill', data => data.fill)
+      .attr('y', (data, index) => 30 + index * 30)
+      .text(data => (data.text));
+  }
+  // HOVER END
 
   private updateGraph(): void {
     const data19 = this.dataService.getCo2Data({
@@ -296,6 +369,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
+
     this.updateAxes(data19, data20);
     this.updateLines(data19, data20);
     this.updateDifferenceArea(data19, data20);
