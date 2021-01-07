@@ -44,13 +44,13 @@
           }
         }
 
-        &.area-above {
+        &.area-above, &.linePrognosisNoLockdown {
           .bullet {
             background: $negative;
           }
         }
 
-        &.area-below {
+        &.area-below, &.linePrognosisLockdown {
           .bullet {
             background: $positive;
           }
@@ -94,6 +94,10 @@
       }
     }
 
+    .end {
+      margin-top: 60%;
+    }
+
     .scroll-prompt {
       height: 400px;
       width: 100%;
@@ -114,10 +118,9 @@
     .graph-container {
       transition: all 200ms ease;
       box-sizing: border-box;
-      margin-bottom: 50px;
-      padding-left: 80px;
-      padding-top: 80px;
-      width: 100%;
+      position: fixed;
+      padding: 80px 80px 50px;
+      width: inherit;
 
       &.hidden {
         opacity: 0;

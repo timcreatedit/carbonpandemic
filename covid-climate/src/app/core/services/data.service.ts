@@ -2,15 +2,18 @@ import {Injectable} from '@angular/core';
 // @ts-ignore
 import * as co2dataset from 'src/assets/datasets/data/co2-data.json';
 import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
+import * as historicCo2Dataset from 'src/assets/datasets/data/historical_co2_data_whole_world.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
-import * as d3 from 'd3';
 import {CovidDatapoint} from '../models/coviddata.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/historicco2data.model';
+import * as d3 from 'd3';
 
 export interface FilterOptions {
   countryFilter?: Countries[];
   sectorFilter?: Sectors[];
   yearFilter?: number[];
   sumSectors?: boolean;
+  prognosisDataFilter?: PrognosisDataIndicators[];
 }
 
 @Injectable({
@@ -21,6 +24,7 @@ export class DataService {
   constructor() {
     this.readCo2Data();
     this.readCovidData();
+    this.readHistoricCo2Data()
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
@@ -29,6 +33,7 @@ export class DataService {
 
   private co2Datapoints: Co2Datapoint[] = [];
   private covidDatapoints: CovidDatapoint[] = [];
+  private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
   private maxDate: Date;
 
   private static covidCountryToCountry(country: string): Countries{
@@ -78,6 +83,19 @@ export class DataService {
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
 
+  private readHistoricCo2Data(): void {
+    (historicCo2Dataset as any).Tabelle1.forEach(dp => {
+      this.historicCo2Datapoints.push({
+        country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
+        year: dp.Year,
+        mtCo2: dp.meandailyCO2,
+        co2PrognosisLockdown: dp.CO2WithLockdowns,
+        co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
+        prognosisDataIndicator: dp.PrognosisData,
+      } as HistoricCo2Datapoint);
+    });
+  }
+
   /**
    * Returns the dataset with potential filter options applied.
    * FilterOptions contains a Country and a Sectors array. If for example we want only Power Data for China, we could get it using
@@ -110,6 +128,17 @@ export class DataService {
     let filteredList: CovidDatapoint [] = this.covidDatapoints;
     if (filterOptions.countryFilter) {
       filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    }
+    return filteredList;
+  }
+
+  public getHistoricCo2Data(filterOptions?: FilterOptions): HistoricCo2Datapoint[] {
+    if (!filterOptions) {
+      return this.historicCo2Datapoints;
+    }
+    let filteredList: HistoricCo2Datapoint [] = this.historicCo2Datapoints;
+    if (filterOptions.prognosisDataFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.prognosisDataFilter.includes(dp.prognosisDataIndicator));
     }
     return filteredList;
   }
