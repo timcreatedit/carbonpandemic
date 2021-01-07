@@ -97,16 +97,32 @@
         width: 2px;
         fill: white;
       }
+      .tooltipGroup {
+        .tooltip {
+          top: 0;
+          width: 170px;
 
-      .tooltip {
-        top: 0;
-        width: 170px;
-
-        fill: $backgroundColorLight;
-        stroke: white;
-        stroke-width: 2px;
-        rx: 15px;
-        ry: 15px;
+          fill: $backgroundColorLight;
+          stroke: white;
+          stroke-width: 2px;
+          rx: 10px;
+          ry: 10px;
+        }
+        .tooltipValuesText {
+          .hoverValuesText {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-anchor: end;
+            left: 90px;
+          }
+        }
+        .tooltipUnitsText {
+          .hoverUnitsText {
+            fill: white;
+            font-weight: 300;
+            font-size: 1.2em;
+          }
+        }
       }
     }
   }
