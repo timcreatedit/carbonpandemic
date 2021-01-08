@@ -100,8 +100,6 @@
       .tooltipGroup {
         .tooltip {
           top: 0;
-          width: 170px;
-
           fill: $backgroundColorLight;
           stroke: white;
           stroke-width: 2px;
@@ -122,6 +120,18 @@
             font-weight: 300;
             font-size: 1.2em;
           }
+        }
+        .tooltipPercentText {
+          .hoverPercentText {
+            fill: white;
+            font-weight: 400;
+            font-size: 1.2em;
+          }
+        }
+        .tooltipHoverDate {
+          fill: white;
+          font-weight: bold;
+          font-size: 1.5em;
         }
       }
     }

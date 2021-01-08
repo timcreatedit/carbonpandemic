@@ -41,10 +41,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   adj = 60;
   // endregion
 
+  // hover options
   private hoverData = [
-    {text: '0', unit: 'MtCo2', fill: '#63f2ff'},
-    {text: '0', unit: 'MtCo2', fill: 'white'}
+    {text: '0', unit: 'MtCo2', percent: '', fill: '#63f2ff'},
+    {text: '0', unit: 'MtCo2', percent: '', fill: 'white'}
   ];
+  private hoverDate = [{date: 'testDate'}];
+
+  private dateTextHeight = 40;
+  private lineHeight = 30;
+  // end hover options
 
   //region D3 Variables
   private readonly curve = d3.curveNatural;
@@ -123,7 +129,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.covidGraphSvg = this.covidGraph.nativeElement;
     this.initGraph();
     this.initCovidGraph();
-    this.initHover();
+    this.initGraphOneHover();
     this.updateGraph();
     this.updateCovidGraph();
     this.updateShowDifference(this.showDifference);
@@ -237,8 +243,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   // HOVER START
-  private initHover(): void {
-
+  private initGraphOneHover(): void {
+    // Data
     const data19 = this.dataService.getCo2Data({
       yearFilter: [2019],
       countryFilter: [this.selectedCountry],
@@ -251,37 +257,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     });
     const dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry);
 
-    const line = this.svg.append('svg:rect') // this is the vertical line to follow mouse
+    // this is the vertical line to follow mouse
+    const line = this.svg.append('svg:rect')
       .attr('class', 'mouseLine')
       .style('opacity', '0');
 
-    const tooltipGroup = this.svg.append('g') // general group to hide or show the tooltip
+    // general group to hide or show the tooltip
+    const tooltipGroup = this.svg.append('g')
       .attr('class', 'tooltipGroup')
       .style('opacity', '0');
 
     // Tooltip for year 2019 and 2020
-    const tooltipNormal = tooltipGroup.append('g');
-
-    const tooltipNormalContainer = tooltipNormal.selectAll('rect').data(this.hoverData).enter().append('rect')
-      .attr('class', 'tooltip')
-      .attr('height', (data, index) => (index + 1) * 40);
-
-    const tooltipNormalValuesText = tooltipNormal.append('g') // the group to append the text to
-      .attr('class', 'tooltipValuesText')
-        .selectAll('text').data(this.hoverData).enter().append('text')
-        .attr('class', 'hoverValuesText')
-        .style('fill', data => data.fill)
-        .attr('x', 90)
-        .attr('y', (data, index) => (index + 1) * 40)
-        .text(data => (data.text));
-
-    const tooltipNormalUnitsText = tooltipNormal.append('g') // the group to append the text to
-      .attr('class', 'tooltipUnitsText')
-        .selectAll('text').data(this.hoverData).enter().append('text')
-        .attr('class', 'hoverUnitsText')
-        .attr('x', 95)
-        .attr('y', (data, index) => (index + 1) * 30)
-        .text(data => (data.unit));
+    this.initTooltipSvg(tooltipGroup);
 
     // append a rect to catch mouse movements on canvas
     this.svg.append('svg:rect')
@@ -303,6 +290,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
               .style('opacity', '0.7');
         })
         .on('mousemove', () => {
+          const tooltipSize = [240, 0]; // width, height
+
           const mouseCoordinates: [number, number] = d3.pointer(event);
           const mousePosX = mouseCoordinates[0];
           const mousePosY = mouseCoordinates[1];
@@ -312,16 +301,17 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
           line
             .attr('x', mousePosX);
 
-          tooltipGroup
-            .attr('transform', 'translate(' + (mousePosX + 20) + ' , ' + (mousePosY - 20) + ')');
-
           const obj19 = this.getObjectToMousePos(mousePosX, data19, true);
           const obj20 = this.getObjectToMousePos(mousePosX, data20, false);
           const obj20Sectors = this.getObjectToMousePos(mousePosX, dataSectors, false);
+
           // recover coordinate we need
           if (this.showDifference){
             // DIFFERENCE BETWEEN YEARS
+            tooltipSize[1] = this.dateTextHeight + 45;
+
             let difference = (obj20.mtCo2 - obj19.mtCo2).toFixed(3);
+            const percent = (Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2).toFixed(2);
             let fill = '#FF5889';
             if (parseFloat(difference) < 0) {
               fill = '#84ffbb';
@@ -329,34 +319,95 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
               difference = '+' + difference;
             }
             this.hoverData = [
-              {text: difference, unit: 'MtCo2', fill}
+              {text: difference, unit: 'MtCo2', percent: '(' + percent.toString() + '%)', fill}
             ];
-            this.updateNormalTooltip(45);
+
+            this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
+            this.updateTooltip(tooltipSize[1] , true);
           }
           if (this.showSectors) {
             // SECTOR LAYERS
-            console.log(obj20Sectors['Ground Transport'], obj20Sectors.GroundTransport);
+            tooltipSize[1] = this.dateTextHeight + 165;
+
+            this.hoverDate = [{date: this.getDateString(mousePosX, ' 2020')}];
             this.hoverData = [
-              {text: (obj20Sectors['Domestic Aviation']).toFixed(3), unit: 'MtCo2', fill: '#3497F1'},
-              {text: (obj20Sectors.Residential).toFixed(3), unit: 'MtCo2', fill: '#F63078'},
-              {text: (obj20Sectors.Industry).toFixed(3), unit: 'MtCo2', fill: '#941EF1'},
-              {text: (obj20Sectors['Ground Transport']).toFixed(3), unit: 'MtCo2', fill: '#20E74B'},
-              {text: (obj20Sectors.Power).toFixed(3), unit: 'MtCo2', fill: '#FFDB21'}
+              {text: (obj20Sectors['Domestic Aviation']).toFixed(3), unit: 'MtCo2',
+                percent: '(' +  (obj20Sectors['Domestic Aviation'] / obj20.mtCo2).toFixed(2).toString()  + '%)', fill: '#3497F1'},
+              {text: (obj20Sectors.Residential).toFixed(3), unit: 'MtCo2',
+                percent: '(' +  (obj20Sectors.Residential / obj20.mtCo2).toFixed(2).toString()  + '%)', fill: '#F63078'},
+              {text: (obj20Sectors.Industry).toFixed(3), unit: 'MtCo2',
+                percent: '(' +  (obj20Sectors.Industry / obj20.mtCo2).toFixed(2).toString()  + '%)', fill: '#941EF1'},
+              {text: (obj20Sectors['Ground Transport']).toFixed(3), unit: 'MtCo2',
+                percent: '(' +  (obj20Sectors['Ground Transport'] / obj20.mtCo2).toFixed(2).toString()  + '%)', fill: '#20E74B'},
+              {text: (obj20Sectors.Power).toFixed(3), unit: 'MtCo2',
+                percent: '(' +  (obj20Sectors.Power / obj20.mtCo2).toFixed(2).toString()  + '%)', fill: '#FFDB21'}
             ];
 
-            this.updateNormalTooltip(165);
+            this.updateTooltip(tooltipSize[1], true);
           }
           if (!this.showSectors && !this.showDifference){
             // LINES
+            tooltipSize[1] = this.dateTextHeight + 75;
+            tooltipSize[0] = 200;
 
+            this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
             this.hoverData = [
-              {text: (obj19.mtCo2).toFixed(3), unit: 'MtCo2', fill: '#63f2ff'},
-              {text: (obj20.mtCo2).toFixed(3), unit: 'MtCo2', fill: 'white'}
+              {text: (obj19.mtCo2).toFixed(3), unit: 'MtCo2', percent: '', fill: '#63f2ff'},
+              {text: (obj20.mtCo2).toFixed(3), unit: 'MtCo2', percent: '', fill: 'white'}
             ];
 
-            this.updateNormalTooltip(75);
+            this.updateTooltip(tooltipSize[1], false);
           }
+          let translateX = (mousePosX + 20);
+          let translateY = (mousePosY - 20);
+          if (mousePosY + tooltipSize[1] - 20 > parseFloat(this.svg.style('height'))){
+            translateY = (mousePosY - tooltipSize[1] + 20);
+          }
+          if (mousePosX + tooltipSize[0] + 20 > this.width) {
+            translateX = (mousePosX - (tooltipSize[0] + 20));
+          }
+          tooltipGroup
+            .attr('transform', 'translate(' + translateX + ' , ' + translateY + ')');
         });
+  }
+
+  private initTooltipSvg(group: any): void {
+    const tooltipNormal = group.append('g');
+
+    tooltipNormal.selectAll('rect').data(this.hoverData).enter().append('rect')
+      .attr('class', 'tooltip');
+
+    tooltipNormal.append('g')
+      .attr('class', 'tooltipDateGroup')
+      .selectAll('text').data(this.hoverDate).enter().append('text')
+      .attr('class', 'tooltipHoverDate')
+      .attr('y', this.lineHeight)
+      .attr('x' , 20);
+
+    tooltipNormal.append('g')
+      .attr('class', 'tooltipValuesText')
+      .selectAll('text').data(this.hoverData).enter().append('text')
+      .attr('class', 'hoverValuesText')
+      .attr('x', 90);
+
+    tooltipNormal.append('g')
+      .attr('class', 'tooltipUnitsText')
+      .selectAll('text').data(this.hoverData).enter().append('text')
+      .attr('class', 'hoverUnitsText')
+      .attr('x', 95);
+
+    tooltipNormal.append('g')
+      .attr('class', 'tooltipPercentText')
+      .selectAll('text').data(this.hoverData).enter().append('text')
+      .attr('class', 'hoverPercentText')
+      .attr('x', 160);
+  }
+
+  private getDateString(mousePosX: number, year: string): string {
+    const dateToMousePosX = this.x20.invert(mousePosX).toDateString();
+    const removeFirstWord = dateToMousePosX.substr(dateToMousePosX.indexOf(' ') + 1);
+    const resultString = removeFirstWord.substr(0, removeFirstWord.lastIndexOf(' '));
+    return resultString + year;
   }
 
   private getObjectToMousePos(xPos: number, data: any, is19Data: boolean): any {
@@ -373,35 +424,64 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  private updateNormalTooltip(heightInput: number): void {
+  private updateTooltip(tooltipHeight: number, showPercent: boolean): void {
     // Tooltip Size
-    const height = heightInput;
-    d3.select('.tooltipGroup').selectAll('.tooltip')
-      .attr('height', heightInput);
+    const tooltip = d3.select('.tooltipGroup').selectAll('.tooltip');
+    tooltip.attr('height', tooltipHeight);
+    if (showPercent) {
+      tooltip.attr('width', 240);
+    } else {
+      tooltip.attr('width', 200);
+    }
     // Text
+    // - Date
+    d3.select('.tooltipDateGroup').selectAll('text').data(this.hoverDate)
+      .text(data => data.date);
+    // - Values
     const valuesText = d3.select('.tooltipValuesText').selectAll('text').data(this.hoverData);
     valuesText.exit().remove();
     valuesText.enter().append('text')
       .attr('class', 'hoverValuesText')
       .attr('x', 90)
       .style('fill', data => data.fill)
-      .attr('y', (data, index) => 30 + index * 30)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
       .text(data => (data.text));
     valuesText
       .style('fill', data => data.fill)
-      .attr('y', (data, index) => 30 + index * 30)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
       .text(data => (data.text));
-    // Units
+    // - Units
     const unitsText = d3.select('.tooltipUnitsText').selectAll('text').data(this.hoverData);
     unitsText.exit().remove();
     unitsText.enter().append('text')
       .attr('class', 'hoverUnitsText')
       .attr('x', 95)
-      .attr('y', (data, index) => (index + 1) * 30)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
       .text(data => (data.unit));
     unitsText
-      .attr('y', (data, index) => (index + 1) * 30)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
       .text(data => (data.unit));
+    // - Percent
+    const percentText = d3.select('.tooltipPercentText').selectAll('text').data(this.hoverData);
+    percentText.exit().remove();
+    percentText.enter().append('text')
+      .attr('class', 'hoverPercentText')
+      .attr('x', 160)
+      .style('fill', data => data.fill)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
+      .text(data => (data.percent));
+    percentText
+      .style('fill', data => data.fill)
+      .attr('y', (data, index) => this.dateTextHeight + (index + 1) * this.lineHeight)
+      .text(data => (data.percent));
+  }
+
+  // covid hover - TODO
+  private initGraphCovidHover(): void {
+    // Data
+    const dataCovid = this.dataService.getCovidData({
+      countryFilter: [this.selectedCountry]
+    });
   }
   // HOVER END
 
