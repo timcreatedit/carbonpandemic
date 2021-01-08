@@ -61,7 +61,8 @@
 
       .area-lockdown {
         transition: all 200ms ease;
-        fill: $positive; //85FFBB, 9BFFC7
+        fill: #DCDCDC; //85FFBB, 9BFFC7
+        opacity: 0.1;
 
         &.hidden {
           opacity: 0;

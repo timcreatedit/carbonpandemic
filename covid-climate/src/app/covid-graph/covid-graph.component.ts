@@ -101,7 +101,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   readonly areaLockdown = d3.area<LockdownDatapoint>()
     .x0(d => this.x20(d.date))
     .y0(d => this.height)
-    .y1(d => d.lockdown ? this.height : 0);
+    .y1(d => d.lockdown ? 0 : this.height);
 
   private svg: d3.Selection<SVGElement, unknown, null, undefined>;
   private covidSvg: d3.Selection<SVGElement, unknown, null, undefined>;

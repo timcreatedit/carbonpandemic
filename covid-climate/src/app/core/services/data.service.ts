@@ -87,12 +87,13 @@ export class DataService {
     (lockdownDataset as any).lockdowndata.forEach(dp => {
       const dateString = dp.date.toString();
       const dateValues = [dateString.slice(0, 4), dateString.slice(4, 6), dateString.slice(6, 8)].map(d => parseInt(d, 10));
-      const actualDate = new Date(dateValues[0], dateValues[1], dateValues[2]);
-      this.lockdownDatapoints.push({
-          date: actualDate,
-          country: DataService.covidCountryToCountry(dp.countryName),
-          lockdown: dp.c6_Stay_at_home_requirements !== 0,
-        } as LockdownDatapoint);
+      const actualDate = new Date(dateValues[0], dateValues[1] - 1, dateValues[2]);
+      if (actualDate <= this.maxDate) {
+        this.lockdownDatapoints.push({
+        date: actualDate,
+        country: DataService.covidCountryToCountry(dp.countryName),
+        lockdown: dp.c6_Stay_at_home_requirements === 2,
+      } as LockdownDatapoint);}
     });
     this.lockdownDatapoints = this.lockdownDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
