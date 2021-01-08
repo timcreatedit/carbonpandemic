@@ -59,6 +59,15 @@
         }
       }
 
+      .area-lockdown {
+        transition: all 200ms ease;
+        fill: $positive; //85FFBB, 9BFFC7
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
       .sectorArea {
         transition: all 200ms ease;
 

@@ -15,6 +15,7 @@ import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {CovidDatapoint} from '../core/models/coviddata.model';
+import {LockdownDatapoint} from '../core/models/lockdowndata.model';
 
 @Component({
   selector: 'app-covid-graph',
@@ -97,6 +98,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     .y0(d => this.y(d.mtCo2))
     .y1(0);
 
+  readonly areaLockdown = d3.area<LockdownDatapoint>()
+    .x0(d => this.x20(d.date))
+    .y0(d => this.height)
+    .y1(d => d.lockdown ? this.height : 0);
 
   private svg: d3.Selection<SVGElement, unknown, null, undefined>;
   private covidSvg: d3.Selection<SVGElement, unknown, null, undefined>;
@@ -224,6 +229,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .text('New cases');
 
     this.covidSvg.append('path')
+      .attr('class', 'area-lockdown');
+
+    this.covidSvg.append('path')
       .attr('class', 'lineCovid');
 
   }
@@ -239,6 +247,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
+
     this.updateAxes(data19, data20);
     this.updateLines(data19, data20);
     this.updateDifferenceArea(data19, data20);
@@ -249,8 +258,14 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     const covidData = this.dataService.getCovidData({
       countryFilter: [this.selectedCountry],
     });
+
+    const lockdownData = this.dataService.getLockdownData({
+      countryFilter: [this.selectedCountry],
+    });
+
     this.updateCovidAxes(covidData);
     this.updateCovidLines(covidData);
+    this.updateLockdownArea(lockdownData);
   }
 
   updateShowDifference(show: boolean): void {
@@ -414,4 +429,15 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('d', areaGen);
   }
 
+  private updateLockdownArea(lockdownData: LockdownDatapoint[]): void {
+    const areaLockdown = this.covidSvg.select('.area-lockdown')
+      .datum(lockdownData);
+
+    areaLockdown
+      .enter()
+      .merge(areaLockdown as any)
+      .transition()
+      .duration(1000)
+      .attr('d', this.areaLockdown);
+  }
 }
