@@ -97,42 +97,41 @@
         width: 2px;
         fill: white;
       }
-      .tooltipGroup {
-        .tooltip {
-          top: 0;
-          fill: $backgroundColorLight;
-          stroke: white;
-          stroke-width: 2px;
-          rx: 10px;
-          ry: 10px;
-        }
-        .tooltipValuesText {
-          .hoverValuesText {
-            font-weight: bold;
-            font-size: 1.5em;
-            text-anchor: end;
-            left: 90px;
-          }
-        }
-        .tooltipUnitsText {
-          .hoverUnitsText {
-            fill: white;
-            font-weight: 300;
-            font-size: 1.2em;
-          }
-        }
-        .tooltipPercentText {
-          .hoverPercentText {
-            fill: white;
-            font-weight: 400;
-            font-size: 1.2em;
-          }
-        }
-        .tooltipHoverDate {
-          fill: white;
+
+      .tooltip {
+        top: 0;
+        fill: $backgroundColorLight;
+        stroke: white;
+        stroke-width: 2px;
+        rx: 10px;
+        ry: 10px;
+      }
+      .tooltipValuesText {
+        .hoverValuesText {
           font-weight: bold;
           font-size: 1.5em;
+          text-anchor: end;
+          left: 90px;
         }
+      }
+      .tooltipUnitsText {
+        .hoverUnitsText {
+          fill: white;
+          font-weight: 300;
+          font-size: 1.2em;
+        }
+      }
+      .tooltipPercentText {
+        .hoverPercentText {
+          fill: white;
+          font-weight: 400;
+          font-size: 1.2em;
+        }
+      }
+      .tooltipHoverDate {
+        fill: white;
+        font-weight: bold;
+        font-size: 1.5em;
       }
     }
   }
