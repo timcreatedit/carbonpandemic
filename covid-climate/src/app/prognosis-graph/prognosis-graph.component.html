@@ -1,5 +1,6 @@
 <div class="prognosis-graph">
   <div class="graph-container">
     <svg #prognosisGraph></svg>
+    <ng5-slider class="slider" [(value)]="sliderLowValue" [(highValue)]="sliderHighValue" [options]="options" (valueChange)="valueChange($event)" ></ng5-slider>
   </div>
 </div>

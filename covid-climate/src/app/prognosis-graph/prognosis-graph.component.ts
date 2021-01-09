@@ -4,6 +4,7 @@ import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -13,6 +14,7 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
+  constructor(private dataService: DataService) { }
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
@@ -22,6 +24,15 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   height = 600;
   adj = 60;
   // endregion
+
+  // slider values
+  sliderLowValue = 1750;
+  sliderHighValue = 2050;
+  options: Options = {
+    floor: 1750,
+    ceil: 2050
+  };
+  // endslider
 
   //region D3 Variables
   private readonly curveHistoric = d3.curveLinear;
@@ -63,7 +74,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   private prognosisGraphSvg: SVGElement;
 
-  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -139,12 +149,13 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
-    //const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
-    //todo: for a correct functioning d3.max() implementation its data need to be parsed to int
+    // const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
+    // todo: for a correct functioning d3.max() implementation its data need to be parsed to int
     const maxValue = 120;
     console.log('maxValue' + maxValue);
 
-    this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
+    // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
+    this.x.domain([this.sliderLowValue, this.sliderHighValue]);
     this.y.domain([0, maxValue]);
 
     this.prognosisSvg.selectAll('#xAxis')
@@ -187,6 +198,13 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .transition()
       .duration(1000)
       .attr('d', this.linePrognosisNoLockdown);
+  }
+
+  // slider onChange
+  valueChange(value: number): void {
+    console.log('Slider Low Value = ' + this.sliderLowValue);
+    console.log('Slider High Value = ' + this.sliderHighValue);
+    this.updatePrognosisGraph();
   }
 
 }
