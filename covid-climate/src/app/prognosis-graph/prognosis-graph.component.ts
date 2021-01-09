@@ -4,7 +4,7 @@ import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import { Options } from 'ng5-slider';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -156,7 +156,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
     this.x.domain([this.sliderLowValue, this.sliderHighValue]);
-    this.y.domain([0, maxValue]);
+    this.y.domain([0, maxValue * 1.1]);
 
     this.prognosisSvg.selectAll('#xAxis')
       .transition()
@@ -200,10 +200,14 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('d', this.linePrognosisNoLockdown);
   }
 
-  // slider onChange
+  // slider onChange low
   valueChange(value: number): void {
-    console.log('Slider Low Value = ' + this.sliderLowValue);
-    console.log('Slider High Value = ' + this.sliderHighValue);
+    this.sliderLowValue = value;
+    this.updatePrognosisGraph();
+  }
+  // slider onChange high
+  valueChangeHigh(highValue: number): void {
+    this.sliderHighValue = highValue;
     this.updatePrognosisGraph();
   }
 

@@ -7,7 +7,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { PrognosisGraphComponent } from './prognosis-graph/prognosis-graph.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FormsModule } from '@angular/forms';
-import { Ng5SliderModule } from 'ng5-slider';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -15,12 +15,12 @@ import { Ng5SliderModule } from 'ng5-slider';
     CovidGraphComponent,
     PieChartComponent,
     PrognosisGraphComponent,
-    TopBarComponent
+    TopBarComponent,
   ],
     imports: [
         BrowserModule,
         FormsModule,
-        Ng5SliderModule,
+        NgxSliderModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
