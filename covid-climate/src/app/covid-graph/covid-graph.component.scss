@@ -59,6 +59,16 @@
         }
       }
 
+      .area-lockdown {
+        transition: all 200ms ease;
+        fill: #DCDCDC; //85FFBB, 9BFFC7
+        opacity: 0.1;
+
+        &.hidden {
+          opacity: 0;
+        }
+      }
+
       .sectorArea {
         transition: all 200ms ease;
 

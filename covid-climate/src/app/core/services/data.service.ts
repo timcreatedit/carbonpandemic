@@ -2,9 +2,11 @@ import {Injectable} from '@angular/core';
 // @ts-ignore
 import * as co2dataset from 'src/assets/datasets/data/co2-data.json';
 import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
+import * as lockdownDataset from 'src/assets/datasets/data/lockdown-data.json';
 import * as historicCo2Dataset from 'src/assets/datasets/data/historical_co2_data_whole_world.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
 import {CovidDatapoint} from '../models/coviddata.model';
+import {LockdownDatapoint} from '../models/lockdowndata.model';
 import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/historicco2data.model';
 import * as d3 from 'd3';
 
@@ -24,23 +26,26 @@ export class DataService {
   constructor() {
     this.readCo2Data();
     this.readCovidData();
-    this.readHistoricCo2Data()
+    this.readLockdownData();
+    this.readHistoricCo2Data();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
     console.log((this.covidDatapoints[0]));
+    console.log((this.lockdownDatapoints[0]));
   }
 
   private co2Datapoints: Co2Datapoint[] = [];
   private covidDatapoints: CovidDatapoint[] = [];
+  private lockdownDatapoints: LockdownDatapoint[] = [];
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
   private maxDate: Date;
 
   private static covidCountryToCountry(country: string): Countries{
-    if (country === 'United_Kingdom') {
+    if (country === 'United_Kingdom' || country === 'United Kingdom') {
       return Countries.uk;
     }
-    else if (country === 'United_States_of_America'){
+    else if (country === 'United_States_of_America' || country === 'United States'){
       return Countries.us;
     }
     return country as Countries;
@@ -81,6 +86,22 @@ export class DataService {
       }
     });
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private readLockdownData(): void {
+    (lockdownDataset as any).lockdowndata.forEach(dp => {
+      const dateString = dp.date.toString();
+      const dateValues = [dateString.slice(0, 4), dateString.slice(4, 6), dateString.slice(6, 8)].map(d => parseInt(d, 10));
+      const actualDate = new Date(dateValues[0], dateValues[1] - 1, dateValues[2]);
+      if (actualDate <= this.maxDate) {
+        this.lockdownDatapoints.push({
+          date: actualDate,
+          country: DataService.covidCountryToCountry(dp.countryName),
+          lockdown: dp.c6_Stay_at_home_requirements === 2,
+        } as LockdownDatapoint);
+      }
+    });
+    this.lockdownDatapoints = this.lockdownDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
 
   private readHistoricCo2Data(): void {
@@ -126,6 +147,17 @@ export class DataService {
       return this.covidDatapoints;
     }
     let filteredList: CovidDatapoint [] = this.covidDatapoints;
+    if (filterOptions.countryFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    }
+    return filteredList;
+  }
+
+  public getLockdownData(filterOptions?: FilterOptions): LockdownDatapoint[] {
+    if (!filterOptions) {
+      return this.lockdownDatapoints;
+    }
+    let filteredList: LockdownDatapoint [] = this.lockdownDatapoints;
     if (filterOptions.countryFilter) {
       filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
     }
