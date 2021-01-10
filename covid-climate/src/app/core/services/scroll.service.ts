@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, from, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, startWith, tap, withLatestFrom} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, fromEvent, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export interface SiteScrollConfig {
@@ -30,25 +30,31 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.3],
+      section: [0, 0.25],
       config: {
         covidGraphShown: true,
       }
     },
     {
-      section: [0.3, 0.6],
+      section: [0.25, 0.55],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
       }
     },
     {
-      section: [0.6, 1],
+      section: [0.55, 0.85],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
       }
     },
+    {
+      section: [0.85, 1],
+      config: {
+        prognosisGraphShown: true,
+      }
+    }
   ];
   //endregion
 
