@@ -17,9 +17,9 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 
 ## Milestone 4
 
-##### Ziel 1:Fakten Darstellen
+### Ziel 1:Fakten Darstellen
 
-### Must Have Features
+#### Must Have Features
 
 - [x] Line Chart: CO2-Emissionen 2019/2020
 - [x] Line Chart: COVID-19 Fälle
@@ -31,7 +31,7 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 - [x] Visualisierung der Lockdown Phasen
 
 
-### Nice to Have Features
+#### Nice to Have Features
 
 - [x] Animierte Änderungen
 - [x] Detaillierte Informationen beim Hovern (Hover-Funktion)
@@ -42,16 +42,16 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 
 ***
 
-##### Ziel 2: Einfluss verdeutlichen
+### Ziel 2: Einfluss verdeutlichen
 
-### Must Have Features
+#### Must Have Features
 
 - [x] Sektoren visualisier als Stacked-area Chart
 - [x] Detaillierte Informationen beim Hover - genauere Zahlenansicht, Prozentanzeige (Hover-Funktion)
 - [x] Länderauswähl - Dropdown Menü
 - [x] Beschreibende und erklärende Texte
 
-### Nice to Have Features
+#### Nice to Have Features
 
 - [x] Animationen
 - [ ] Anzeige der anteiligen Änderungen je Sektor
@@ -59,9 +59,9 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 
 ***
   
-##### Ziel 3: Erreichen der Klimaziele
+### Ziel 3: Erreichen der Klimaziele
 
-### Must Have Features
+#### Must Have Features
 
 - [x] Line Chart: Überblick über den CO2 Ausstoßes seit 1750 
 - [x] Regler für die angezeigten Jahre
@@ -72,7 +72,7 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 - [ ] Länderauswähl - durch Dropdown Menü
 
 
-### Nice to Have Features
+#### Nice to Have Features
 
 - [x] Animationen
 - [ ] Hover Interaktion
