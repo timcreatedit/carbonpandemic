@@ -54,6 +54,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   readonly yAxis = d3.axisLeft(this.y)
     .ticks(5);
 
+
   readonly lineHistoric = d3.line<HistoricCo2Datapoint>()
     .curve(this.curveHistoric)
     .x(d => this.x(d.year))
@@ -70,7 +71,8 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     .y(d => this.y(d.co2PrognosisNoLockdown));
 
   private prognosisSvg: d3.Selection<SVGElement, unknown, null, undefined>;
-  // endregion
+  private sliderSvg: d3.Selection<SVGElement, unknown, null, undefined>;
+  // en  dregion
 
   private prognosisGraphSvg: SVGElement;
 
@@ -95,6 +97,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   private initPrognosisGraph(): void {
     this.prognosisSvg = d3.select(this.prognosisGraphSvg);
+    this.sliderSvg = this.prognosisSvg.append('g');
 
     this.prognosisSvg.attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '-'
@@ -121,15 +124,20 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .style('text-anchor', 'end')
       .text('in MtCO2/d');
 
-    this.prognosisSvg
+    this.sliderSvg = this.prognosisSvg.append('svg')
+      .attr('class', 'sliderSvg')
+      .attr('height', this.height)
+      .attr('width', this.width);
+
+    this.sliderSvg
       .append('path')
       .attr('class', 'lineHistoric');
 
-    this.prognosisSvg
+    this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisLockdown');
 
-    this.prognosisSvg
+    this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisNoLockdown');
   }
@@ -210,5 +218,4 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     this.sliderHighValue = highValue;
     this.updatePrognosisGraph();
   }
-
 }
