@@ -4,7 +4,7 @@
 
 [![build status](https://github.com/timcreatedit/infovis-gruppe-13/workflows/Build/badge.svg)](https://github.com/timcreatedit/infovis-gruppe-13/actions)
 
-![Screenshot](./Project Screenshot.png)
+![Screenshot](./Screenshot.png)
 
 
 
@@ -17,7 +17,7 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 
 ## Milestone 4
 
-### Ziel 1:Fakten Darstellen
+### Ziel 1: Fakten Darstellen
 
 #### Must Have Features
 
