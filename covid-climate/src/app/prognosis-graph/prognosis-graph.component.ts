@@ -4,6 +4,7 @@ import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -13,6 +14,7 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
+  constructor(private dataService: DataService) { }
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
@@ -22,6 +24,15 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   height = 600;
   adj = 60;
   // endregion
+
+  // slider values
+  sliderLowValue = 1750;
+  sliderHighValue = 2050;
+  options: Options = {
+    floor: 1750,
+    ceil: 2050
+  };
+  // endslider
 
   //region D3 Variables
   private readonly curveHistoric = d3.curveLinear;
@@ -43,6 +54,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   readonly yAxis = d3.axisLeft(this.y)
     .ticks(5);
 
+
   readonly lineHistoric = d3.line<HistoricCo2Datapoint>()
     .curve(this.curveHistoric)
     .x(d => this.x(d.year))
@@ -59,11 +71,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     .y(d => this.y(d.co2PrognosisNoLockdown));
 
   private prognosisSvg: d3.Selection<SVGElement, unknown, null, undefined>;
-  // endregion
+  private sliderSvg: d3.Selection<SVGElement, unknown, null, undefined>;
+  // en  dregion
 
   private prognosisGraphSvg: SVGElement;
 
-  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -85,6 +97,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   private initPrognosisGraph(): void {
     this.prognosisSvg = d3.select(this.prognosisGraphSvg);
+    this.sliderSvg = this.prognosisSvg.append('g');
 
     this.prognosisSvg.attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '-'
@@ -111,15 +124,20 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .style('text-anchor', 'end')
       .text('in MtCO2/d');
 
-    this.prognosisSvg
+    this.sliderSvg = this.prognosisSvg.append('svg')
+      .attr('class', 'sliderSvg')
+      .attr('height', this.height)
+      .attr('width', this.width);
+
+    this.sliderSvg
       .append('path')
       .attr('class', 'lineHistoric');
 
-    this.prognosisSvg
+    this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisLockdown');
 
-    this.prognosisSvg
+    this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisNoLockdown');
   }
@@ -139,13 +157,14 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
-    //const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
-    //todo: for a correct functioning d3.max() implementation its data need to be parsed to int
+    // const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
+    // todo: for a correct functioning d3.max() implementation its data need to be parsed to int
     const maxValue = 120;
     console.log('maxValue' + maxValue);
 
-    this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
-    this.y.domain([0, maxValue]);
+    // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
+    this.x.domain([this.sliderLowValue, this.sliderHighValue]);
+    this.y.domain([0, maxValue * 1.1]);
 
     this.prognosisSvg.selectAll('#xAxis')
       .transition()
@@ -189,4 +208,14 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('d', this.linePrognosisNoLockdown);
   }
 
+  // slider onChange low
+  valueChange(value: number): void {
+    this.sliderLowValue = value;
+    this.updatePrognosisGraph();
+  }
+  // slider onChange high
+  valueChangeHigh(highValue: number): void {
+    this.sliderHighValue = highValue;
+    this.updatePrognosisGraph();
+  }
 }

@@ -24,6 +24,7 @@
 
       li {
         display: flex;
+        font-weight: bold;
 
         .bullet {
           width: 16px;
@@ -94,9 +95,18 @@
       }
     }
 
-    .end {
-      margin-top: 60%;
+    .sources{
+      font-size: small;
     }
+    .end {
+      border-radius: 25px;
+      padding-left: 5%;
+      padding-right: 5%;
+      background: #1B1825;
+      position: center;
+      width: 100%;
+    }
+
 
     .scroll-prompt {
       height: 400px;
