@@ -4,7 +4,7 @@
 
 [![build status](https://github.com/timcreatedit/infovis-gruppe-13/workflows/Build/badge.svg)](https://github.com/timcreatedit/infovis-gruppe-13/actions)
 
-![Screenshot](./Screenshot.png)
+![Screenshot](./Project Screenshot.png)
 
 
 
@@ -13,7 +13,7 @@ Die Hoffnung besteht, dass die durch diese besondere Lage bedingten Einschränku
 Doch in wie fern hat die Pandemie die Co2 Emissionen 2020 im Verhältnis zu 2019 beeinflusst? Welche Einblicke kann man für die einzelnen Sektoren sammeln, aus denen sich die Emission zusammensetzt?
 Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unser Co2-Budget?
 
-
+Link to the current project status: https://timcreatedit.github.io/InfoVis-Gruppe-13/
 
 ## Milestone 3
 
