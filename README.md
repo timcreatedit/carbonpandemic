@@ -15,60 +15,70 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 
 
 
-## Milestone 3
+## Milestone 4
 
-### Bereits nutzbare Features
+##### Ziel 1:Fakten Darstellen
 
-##### Grafik 1: Vergleich der CO2 Emissionen mit neune COVID-19 Fällen
+### Must Have Features
 
-- [x] Anzeige der CO2 Emissionen von 2019 und 2020
-- [x] Anzeige der neuen COVID-19 Fälle von 2020
-- [x] Länderauswahl über Dropdown oben rechts
-- [x] Animierte Änderungen
+- [x] Line Chart: CO2-Emissionen 2019/2020
+- [x] Line Chart: COVID-19 Fälle
+- [x] Länderauswahl - Dropdown Menü
 - [x] Scrollbasierte Änderungen am CO2 Graphen
   - [x] Anzeige der Änderung zum Vorjahr
   - [x] Aufteilung in Sektoren
 - [x] Dynamische Informationen im Erklärungstext je nach Länderwahl
-
-
-
-### Fortschritt seit Milestone 3 (MVP):
-
-##### Grafik 1: Vergleich der CO2 Emissionen mit neune COVID-19 Fällen
-
-- [x] Detaillierte Informationen beim Hovern
-
-- [ ] Aufsummierte COVID-Daten (WORLD, ROW, EU28)
-
 - [x] Visualisierung der Lockdown Phasen
 
 
+### Nice to Have Features
 
+- [x] Animierte Änderungen
+- [x] Detaillierte Informationen beim Hovern (Hover-Funktion)
+- [ ] Wechsel zwischen absoluten und relativen Daten
+- [ ] Vergleichsmodus von 2 Ländern
+- [ ] Wechsel in Covid Chart zwischen Faktoren 	(Neuinfektionen, Gesamt, R-Wert)
+- [ ] Aufsummierte COVID-Daten (WORLD, ROW, EU28)
 
-##### Grafik 3: Gesamtkontext und Prognosen
+***
 
-- [ ] Anzeige des verbleibenden Budgets seit Anfang der Aufzeichnungen
+##### Ziel 2: Einfluss verdeutlichen
+
+### Must Have Features
+
+- [x] Sektoren visualisier als Stacked-area Chart
+- [x] Detaillierte Informationen beim Hover - genauere Zahlenansicht, Prozentanzeige (Hover-Funktion)
+- [x] Länderauswähl - Dropdown Menü
+- [x] Beschreibende und erklärende Texte
+
+### Nice to Have Features
+
+- [x] Animationen
+- [ ] Anzeige der anteiligen Änderungen je Sektor
+- [ ] Toggles für Sektor & Gesamtübersicht
+
+***
+  
+##### Ziel 3: Erreichen der Klimaziele
+
+### Must Have Features
+
+- [x] Line Chart: Überblick über den CO2 Ausstoßes seit 1750 
 - [x] Regler für die angezeigten Jahre
 - [x] Prognoselinien
   - [x] Es geht so weiter wie 2019
   - [x] Es geht so weiter wie 2020
+- [x] Beschreibende und erklärende Texte
+- [ ] Länderauswähl - durch Dropdown Menü
+
+
+### Nice to Have Features
+
+- [x] Animationen
+- [ ] Hover Interaktion
+- [ ] Anzeige des verbleibenden Budgets seit Anfang der Aufzeichnungen
 - [ ] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
-
-
-
-### Optionale Features (MVP):
-
-##### Grafik 2: Kuchendiagramme und Überblicke über die Änderungen pro Sektor
-
-- [ ] Anzeige der Sektorenverteilung 2019 und 2020
-
-- [ ] Balkendiagramm mit anteiligen Änderungen je Sektor
-
-- [ ] Balkendiagramm mit anteiligen Änderungen im Gesamtvergleich
-
-- [ ] Detaillierte Informationen beim Hover
-
-  
+- [ ] Anzeigen des voraussichtlichen Doomsday
 
 ## Links zu Datensätzen
 
