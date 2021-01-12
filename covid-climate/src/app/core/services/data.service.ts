@@ -28,17 +28,20 @@ export class DataService {
     this.readCovidData();
     this.readLockdownData();
     this.readHistoricCo2Data();
+    this.combineCovidData();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
-    console.log((this.covidDatapoints[0]));
+    console.log((this.covidDatapoints));
     console.log((this.lockdownDatapoints[0]));
+    console.log(this.covidWorldDatapoints);
   }
 
   private co2Datapoints: Co2Datapoint[] = [];
   private covidDatapoints: CovidDatapoint[] = [];
   private lockdownDatapoints: LockdownDatapoint[] = [];
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
+  private covidWorldDatapoints: CovidDatapoint[] = [];
   private maxDate: Date;
 
   private static covidCountryToCountry(country: string): Countries{
@@ -85,6 +88,29 @@ export class DataService {
         } as CovidDatapoint);
       }
     });
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private combineCovidData(): void {
+    const holder = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (holder.hasOwnProperty(dp.date)) {
+        holder[dp.date] = holder[dp.date] + dp.cases;
+      } else {
+        holder[dp.date] = dp.cases;
+        dates.push(dp.date);
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.world,
+        date,
+        cases: holder[date],
+      } as CovidDatapoint);
+    }
+
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
 
