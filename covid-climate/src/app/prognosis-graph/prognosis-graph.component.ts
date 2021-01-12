@@ -4,7 +4,7 @@ import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
 import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import { Options } from '@angular-slider/ngx-slider';
+import {Options} from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -14,10 +14,16 @@ import { Options } from '@angular-slider/ngx-slider';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+  }
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
+  @Input() scenario2degree = false;
+
+  get remainingBudget(): number {
+    return this.scenario2degree ? 1042800 : 293000;
+  }
 
   // region size
   width = 1400;
@@ -93,6 +99,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       return;
     }
     if (isNotNullOrUndefined(changes.selectedCountry)) {
+      this.updatePrognosisGraph();
+    }
+    else if (isNotNullOrUndefined(changes.scenario2degree)) {
       this.updatePrognosisGraph();
     }
   }
@@ -215,12 +224,12 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('class', 'budgetLine')
       .attr('id', 'budgetLineLockdowns')
       .attr('y1', 0)
-      .attr('y2', this.height)
+      .attr('y2', this.height);
     this.sliderSvg.append('svg:line')
       .attr('class', 'budgetLine')
       .attr('id', 'budgetLineNoLockdowns')
       .attr('y1', 0)
-      .attr('y2', this.height)
+      .attr('y2', this.height);
   }
 
   private updateCo2BudgetLines(): void {
@@ -230,13 +239,13 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     this.sliderSvg
       .select('#budgetLineLockdowns')
       .attr('x1', depletionYearLockdowns)
-      .attr('x2', depletionYearLockdowns)
+      .attr('x2', depletionYearLockdowns);
 
     const depletionYearNoLockdowns = this.x(this.calculateDepletionYear(!lockdowns));
     this.sliderSvg
       .select('#budgetLineNoLockdowns')
       .attr('x1', depletionYearNoLockdowns)
-      .attr('x2', depletionYearNoLockdowns)
+      .attr('x2', depletionYearNoLockdowns);
   }
 
   private calculateDepletionYear(lockdowns: boolean): number {
@@ -244,31 +253,31 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       prognosisDataFilter: [PrognosisDataIndicators.prognosis],
     });
     const upcomingYears = prognosisData.map(dp => dp.year);
-    const remainingBudget = 1042800; //remaining mtons of co2 for 2°C scenario
-    //const remainingBudget = 293000; //remaining mtons of co2 for 1,5°C scenario
-    var depletionYear, co2Emissions;
+    let depletionYear;
+    let co2Emissions;
 
-    if(lockdowns) {
+    if (lockdowns) {
       co2Emissions = prognosisData.map(dp => dp.co2PrognosisLockdown);
     } else {
       co2Emissions = prognosisData.map(dp => dp.co2PrognosisNoLockdown);
     }
 
-    var usedBudget = 0, i;
-    for(i = 0; usedBudget < remainingBudget; i++){
-      usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); //to account for leap years
+    let usedBudget = 0;
+    let i;
+    for (i = 0; usedBudget < this.remainingBudget; i++) {
+      usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); // to account for leap years
     }
 
-    if(i <= 30) {
+    if (i <= 30) {
       depletionYear = upcomingYears[i - 1];
     } else {
-      depletionYear = upcomingYears[29]; //year 2050: the last datapoint entry
+      depletionYear = upcomingYears[29]; // year 2050: the last datapoint entry
       console.log('CO2 budget will be depleted some time after 2050.');
     }
     return depletionYear;
 
-    /*without using our data and simply sticking to the mcc carbon clock source we would have:
-    //1.5°C scenario
+    /* without using our data and simply sticking to the mcc carbon clock source we would have:
+    // 1.5°C scenario
     if(lockdowns){
       return 2027.5 //for 1.5°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 293000mtons)
     } else {
@@ -279,7 +288,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       return 2047 //for 2°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 1042800mtons)
     } else {
       return 2045 //for 2°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 1042800mtons)
-    }*/
+    } */
   }
 
   // slider onChange low
@@ -288,6 +297,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     this.updatePrognosisGraph();
     this.updateCo2BudgetLines();
   }
+
   // slider onChange high
   valueChangeHigh(highValue: number): void {
     this.sliderHighValue = highValue;
