@@ -19,7 +19,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
-  @Input() scenario2degree = false;
+  @Input() scenario2degree = true;
 
   get remainingBudget(): number {
     return this.scenario2degree ? 1042800 : 293000;
