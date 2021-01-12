@@ -28,21 +28,24 @@ export class DataService {
     this.readCovidData();
     this.readLockdownData();
     this.readHistoricCo2Data();
-    this.combineCovidData();
+    this.combineCovidDataForWorld();
+    this.combineCovidDataForEU28();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
     console.log((this.covidDatapoints));
     console.log((this.lockdownDatapoints[0]));
-    console.log(this.covidWorldDatapoints);
+    console.log(this.covidEuropeDatapoints);
   }
 
   private co2Datapoints: Co2Datapoint[] = [];
   private covidDatapoints: CovidDatapoint[] = [];
   private lockdownDatapoints: LockdownDatapoint[] = [];
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
-  private covidWorldDatapoints: CovidDatapoint[] = [];
+  private covidEuropeDatapoints: CovidDatapoint[] = [];
   private maxDate: Date;
+
+  private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
 
   private static covidCountryToCountry(country: string): Countries{
     if (country === 'United_Kingdom' || country === 'United Kingdom') {
@@ -91,7 +94,7 @@ export class DataService {
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
 
-  private combineCovidData(): void {
+  private combineCovidDataForWorld(): void {
     const holder = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
@@ -108,6 +111,31 @@ export class DataService {
         country: Countries.world,
         date,
         cases: holder[date],
+      } as CovidDatapoint);
+    }
+
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private combineCovidDataForEU28(): void {
+    const holderEurope = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (this.eu28.includes(dp.country)) {
+        if (holderEurope.hasOwnProperty(dp.date)) {
+          holderEurope[dp.date] = holderEurope[dp.date] + dp.cases;
+        } else {
+          holderEurope[dp.date] = dp.cases;
+          dates.push(dp.date);
+        }
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.eu28,
+        date,
+        cases: holderEurope[date],
       } as CovidDatapoint);
     }
 
