@@ -2032,13 +2032,34 @@
             "CO2WithoutLockdowns": "96.82",
             "PrognosisData": "historic"
         },
-        {
-          "Year": "2020",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "89.66",
-          "CO2WithoutLockdowns": "96.82",
-          "PrognosisData": "prognosis"
-        },
+      {
+        "Year": "2021",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "88.57",
+        "CO2WithoutLockdowns": "97.02",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2022",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "88.75",
+        "CO2WithoutLockdowns": "97.22",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2023",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "88.94",
+        "CO2WithoutLockdowns": "97.42",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2024",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "89.12",
+        "CO2WithoutLockdowns": "97.62",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2025",
           "undefined": "-8.71%",
@@ -2046,6 +2067,34 @@
           "CO2WithoutLockdowns": "97.82",
           "PrognosisData": "prognosis"
         },
+      {
+        "Year": "2026",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "89.65",
+        "CO2WithoutLockdowns": "98.2",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2027",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "90",
+        "CO2WithoutLockdowns": "98.59",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2028",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "90.35",
+        "CO2WithoutLockdowns": "98.97",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2029",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "90.7",
+        "CO2WithoutLockdowns": "99.36",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2030",
           "undefined": "-8.71%",
@@ -2053,6 +2102,34 @@
           "CO2WithoutLockdowns": "99.74",
           "PrognosisData": "prognosis"
         },
+      {
+        "Year": "2031",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "91.57",
+        "CO2WithoutLockdowns": "100.32",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2032",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "92.1",
+        "CO2WithoutLockdowns": "100.89",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2033",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "92.63",
+        "CO2WithoutLockdowns": "101.47",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2034",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "93.15",
+        "CO2WithoutLockdowns": "102.04",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2035",
           "undefined": "-8.71%",
@@ -2060,6 +2137,34 @@
           "CO2WithoutLockdowns": "102.62",
           "PrognosisData": "prognosis"
         },
+      {
+        "Year": "2036",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "94.36",
+        "CO2WithoutLockdowns": "103.36",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2037",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "95.04",
+        "CO2WithoutLockdowns": "104.11",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2038",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "95.72",
+        "CO2WithoutLockdowns": "104.85",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2039",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "96.4",
+        "CO2WithoutLockdowns": "105.6",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2040",
           "undefined": "-8.71%",
@@ -2067,6 +2172,34 @@
           "CO2WithoutLockdowns": "106.34",
           "PrognosisData": "prognosis"
         },
+      {
+        "Year": "2041",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "98.06",
+        "CO2WithoutLockdowns": "107.42",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2042",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "99.05",
+        "CO2WithoutLockdowns": "108.5",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2043",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "100.03",
+        "CO2WithoutLockdowns": "109.57",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2044",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "101.02",
+        "CO2WithoutLockdowns": "110.65",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2045",
           "undefined": "-8.71%",
@@ -2074,6 +2207,34 @@
           "CO2WithoutLockdowns": "111.73",
           "PrognosisData": "prognosis"
         },
+      {
+        "Year": "2046",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "103.15",
+        "CO2WithoutLockdowns": "113",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2047",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "104.3",
+        "CO2WithoutLockdowns": "114.25",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2048",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "105.46",
+        "CO2WithoutLockdowns": "115.52",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2049",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "106.61",
+        "CO2WithoutLockdowns": "116.78",
+        "PrognosisData": "prognosis"
+      },
         {
           "Year": "2050",
           "undefined": "-8.71%",

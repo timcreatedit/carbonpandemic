@@ -35,6 +35,21 @@
         stroke-width: 3px;
       }
 
+      .budgetLine {
+        stroke-width: 2;
+      }
+
+      #budgetLineLockdowns {
+        stroke: $positive;
+        stroke-dasharray: 5,5;
+      }
+
+      #budgetLineNoLockdowns {
+        stroke: $negative;
+        stroke-dasharray: 5,5;
+        stroke-dashoffset: 5;
+      }
+
     }
   }
 
