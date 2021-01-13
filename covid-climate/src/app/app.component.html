@@ -11,7 +11,8 @@
       <p>Due to the Covid-19 pandemic, the world looked a little bit different in 2020. People stayed at home,
         travelling was often impossible and planes had to stay grounded for the most part.</p>
       <p>These factors have resulted in noticeable changes to CO<sub>2</sub> emissions. As can be seen in the chart
-        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year.</p>
+        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year. The data
+        shown here comes from by Carbon Monitor [1], an international platform providing science-based estimates of daily CO<sub>2</sub> emissions.</p>
       <ul class="legend">
         <li class="line2019">
           <div class="bullet"></div>
@@ -60,7 +61,7 @@
         <span>↓</span>
         <span>Scroll to Continue...</span>
       </div>
-      <h2>Influence of different Sectors</h2>
+      <h2>Influence of different sectors</h2>
       <p>You might wonder which sectors were responsible for these emissions. Take a look at the sectors here:</p>
       <ul class="legend">
         <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey">
@@ -113,6 +114,7 @@
       <div class="sources">
         <h3>Sources</h3>
         <ol>
+          <li>Carbon Monitor, (accessed 11.01.2021), https://carbonmonitor.org/</li>
           <li>U.S. Energy Information Administration (EIA),
             World Energy Projection System Plus (2019), run r_190808_161601, and Annual Energy Outlook 2019,
             (Washington, DC: January 2019), www.eia.gov/aeo</li>
