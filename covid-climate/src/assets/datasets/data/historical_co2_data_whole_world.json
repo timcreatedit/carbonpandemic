@@ -2033,6 +2033,14 @@
             "PrognosisData": "historic"
         },
       {
+        "Year": "2020",
+        "meandailyCO2": "89.66",
+        "undefined": "-8.71%",
+        "CO2WithLockdowns": "89.66",
+        "CO2WithoutLockdowns": "89.66",
+        "PrognosisData": "prognosis"
+      },
+      {
         "Year": "2021",
         "undefined": "-8.71%",
         "CO2WithLockdowns": "88.57",
@@ -2241,6 +2249,31 @@
           "CO2WithLockdowns": "107.76",
           "CO2WithoutLockdowns": "118.04",
           "PrognosisData": "prognosis"
-        }
+        },
+      {
+        "Year": "2051",
+        "undefined": "-8.71%",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2052",
+        "undefined": "-8.71%",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2053",
+        "undefined": "-8.71%",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2054",
+        "undefined": "-8.71%",
+        "PrognosisData": "prognosis"
+      },
+      {
+        "Year": "2055",
+        "undefined": "-8.71%",
+        "PrognosisData": "prognosis"
+      }
     ]
 }
