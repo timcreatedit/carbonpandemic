@@ -359,7 +359,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       tooltipSize[1] = this.dateTextHeight + 45;
 
       let difference = (obj20.mtCo2 - obj19.mtCo2).toFixed(3);
-      const percent = (Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2).toFixed(2);
+      const percent = ((Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2) * 100).toFixed(1);
       let fill = '#FF5889';
       if (parseFloat(difference) < 0) {
         fill = '#84ffbb';
@@ -367,7 +367,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         difference = '+' + difference;
       }
       this.hoverData = [
-        {text: difference, unit: 'MtCo2', percent: '(' + percent.toString() + '%)', fill}
+        {text: difference, unit: 'MtCo2', percent: '(' + percent + '%)', fill}
       ];
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
@@ -381,23 +381,23 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       this.hoverData = [
         {
           text: (obj20Sectors['Domestic Aviation']).toFixed(3), unit: 'MtCo2',
-          percent: '(' + (obj20Sectors['Domestic Aviation'] / obj20.mtCo2).toFixed(2).toString() + '%)', fill: '#3497F1'
+          percent: '(' + (obj20Sectors['Domestic Aviation'] / obj20.mtCo2 * 100).toFixed(1).toString() + '%)', fill: '#3497F1'
         },
         {
           text: (obj20Sectors.Residential).toFixed(3), unit: 'MtCo2',
-          percent: '(' + (obj20Sectors.Residential / obj20.mtCo2).toFixed(2).toString() + '%)', fill: '#F63078'
+          percent: '(' + (obj20Sectors.Residential / obj20.mtCo2 * 100).toFixed(1).toString() + '%)', fill: '#F63078'
         },
         {
           text: (obj20Sectors.Industry).toFixed(3), unit: 'MtCo2',
-          percent: '(' + (obj20Sectors.Industry / obj20.mtCo2).toFixed(2).toString() + '%)', fill: '#941EF1'
+          percent: '(' + (obj20Sectors.Industry / obj20.mtCo2 * 100).toFixed(1).toString() + '%)', fill: '#941EF1'
         },
         {
           text: (obj20Sectors['Ground Transport']).toFixed(3), unit: 'MtCo2',
-          percent: '(' + (obj20Sectors['Ground Transport'] / obj20.mtCo2).toFixed(2).toString() + '%)', fill: '#20E74B'
+          percent: '(' + (obj20Sectors['Ground Transport'] / obj20.mtCo2 * 100).toFixed(1).toString() + '%)', fill: '#20E74B'
         },
         {
           text: (obj20Sectors.Power).toFixed(3), unit: 'MtCo2',
-          percent: '(' + (obj20Sectors.Power / obj20.mtCo2).toFixed(2).toString() + '%)', fill: '#FFDB21'
+          percent: '(' + (obj20Sectors.Power / obj20.mtCo2 * 100).toFixed(1).toString() + '%)', fill: '#FFDB21'
         }
       ];
 
@@ -406,7 +406,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.showSectors && !this.showDifference) {
       // LINES
       tooltipSize[1] = this.dateTextHeight + 75;
-      tooltipSize[0] = 200;
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
       this.hoverData = [
