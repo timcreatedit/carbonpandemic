@@ -39,7 +39,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   // region size
   width = 1400;
   height = 300;
-  adj = 60;
+  adj = 70;
   // endregion
 
   // hover options
