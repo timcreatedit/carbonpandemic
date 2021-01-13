@@ -77,3 +77,6 @@ https://data.humdata.org/dataset/covid-19-global-travel-restrictions-and-airline
 
 ##### Crowdsourced air traffic data from The OpenSky Network 2020
 https://zenodo.org/record/4266938
+
+##### Covid Policy Tracker
+https://github.com/OxCGRT/covid-policy-tracker

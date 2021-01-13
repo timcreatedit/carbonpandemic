@@ -35,6 +35,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() worstDayOf20 = new EventEmitter<Co2Datapoint>();
 
   private mouseOverGraph = false;
+  private mouseCoordinates: [number, number];
 
   toolX = 0;
   toolY = 0;
@@ -331,6 +332,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   private mousemoveGraphOne(): void {
     // Data
+    // TODO cache data so that it is only retreived when it changed
     const data19 = this.dataService.getCo2Data({
       yearFilter: [2019],
       countryFilter: [this.selectedCountry],
@@ -341,13 +343,17 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
+
+    // TODO get this only when necessary
     const dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry);
 
     const tooltipSize = [240, 0]; // width, height
 
-    const mouseCoordinates: [number, number] = d3.pointer(event);
-    const mousePosX = mouseCoordinates[0];
-    const mousePosY = mouseCoordinates[1];
+    // Only update mouseCoordinates when d3 actually has any
+    // TODO fix this shit
+    this.mouseCoordinates = d3.pointer(event)[0] ? d3.pointer(event) : this.mouseCoordinates;
+    const mousePosX = this.mouseCoordinates[0];
+    const mousePosY = this.mouseCoordinates[1];
 
     const obj19 = this.getObjectToMousePos(mousePosX, data19, true);
     const obj20 = this.getObjectToMousePos(mousePosX, data20, false);
