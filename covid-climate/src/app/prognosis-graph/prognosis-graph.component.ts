@@ -33,10 +33,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   // slider values
   sliderLowValue = 1750;
-  sliderHighValue = 2050;
+  sliderHighValue = 2055;
   options: Options = {
     floor: 1750,
-    ceil: 2050
+    ceil: 2055
   };
   // endslider
 
@@ -168,10 +168,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
-    // const maxValue = d3.max(dataPrognosis.map(d => d.co2PrognosisNoLockdown)); with this solution the maxValue is not correct
-    // todo: for a correct functioning d3.max() implementation its data need to be parsed to int
-    const maxValue = 120;
-    console.log('maxValue' + maxValue);
+    const maxValue = 120; // can be hardcoded because we only use one dataset (world)
 
     // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
     this.x.domain([this.sliderLowValue, this.sliderHighValue]);
@@ -264,16 +261,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     let usedBudget = 0;
     let i;
-    for (i = 0; usedBudget < this.remainingBudget; i++) {
-      usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); // to account for leap years
+    for (i = 1; usedBudget < this.remainingBudget; i++) { // i = 1 because our prognosis data begins with 2020 but the calculation should start with 2021
+      usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); // 365.25 to account for leap years
     }
+    depletionYear = upcomingYears[i - 1];
 
-    if (i <= 30) {
-      depletionYear = upcomingYears[i - 1];
-    } else {
-      depletionYear = upcomingYears[29]; // year 2050: the last datapoint entry
-      console.log('CO2 budget will be depleted some time after 2050.');
-    }
     return depletionYear;
 
     /* without using our data and simply sticking to the mcc carbon clock source we would have:
