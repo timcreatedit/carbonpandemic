@@ -23,6 +23,8 @@ export class AppComponent {
   sectorKeys = Object.keys(Sectors);
   sectorNames = Object.values(Sectors);
 
+  budgetDepletionYearWithRestrictions: number;
+  budgetDepletionYearWithoutRestrictions: number;
 
   constructor(
     private dataService: DataService,
