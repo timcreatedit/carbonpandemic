@@ -4,7 +4,7 @@
 
 [![build status](https://github.com/timcreatedit/infovis-gruppe-13/workflows/Build/badge.svg)](https://github.com/timcreatedit/infovis-gruppe-13/actions)
 
-![Screenshot](./Project Screenshot.png)
+![Screenshot](./Screenshot.png)
 
 
 
