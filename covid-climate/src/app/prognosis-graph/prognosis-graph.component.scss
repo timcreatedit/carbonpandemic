@@ -1,0 +1,61 @@
+@import "src/colors";
+
+.prognosis-graph {
+  width: 100%;
+  .graph-container {
+    width: 100%;
+    svg {
+      margin: 8px;
+      padding: 8px;
+
+      .axis {
+        text {
+          fill: white;
+          font-family: 'Inter', sans-serif;
+          font-weight: bold;
+          font-size: 12pt;
+        }
+      }
+
+      .lineHistoric {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 3px;
+      }
+
+      .linePrognosisLockdown {
+        fill: none;
+        stroke: $positive;
+        stroke-width: 3px;
+      }
+
+      .linePrognosisNoLockdown {
+        fill: none;
+        stroke: $negative;
+        stroke-width: 3px;
+      }
+
+      .budgetLine {
+        stroke-width: 2;
+      }
+
+      #budgetLineLockdowns {
+        stroke: $positive;
+        stroke-dasharray: 5,5;
+      }
+
+      #budgetLineNoLockdowns {
+        stroke: $negative;
+        stroke-dasharray: 5,5;
+        stroke-dashoffset: 5;
+      }
+
+    }
+  }
+
+  .slider{
+    position: center;
+    width: 85%;
+    margin-left: 5%;
+  }
+}

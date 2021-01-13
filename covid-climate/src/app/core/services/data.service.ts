@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
 // @ts-ignore
-import * as data from 'src/assets/datasets/data/carbon-monitor-maingraphdatas.json';
-import * as records from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
+import * as co2dataset from 'src/assets/datasets/data/co2-data.json';
+import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
+import * as lockdownDataset from 'src/assets/datasets/data/lockdown-data.json';
+import * as historicCo2Dataset from 'src/assets/datasets/data/historical_co2_data_whole_world.json';
 import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
-import * as d3 from 'd3';
 import {CovidDatapoint} from '../models/coviddata.model';
+import {LockdownDatapoint} from '../models/lockdowndata.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/historicco2data.model';
+import * as d3 from 'd3';
 
 export interface FilterOptions {
   countryFilter?: Countries[];
   sectorFilter?: Sectors[];
   yearFilter?: number[];
   sumSectors?: boolean;
+  prognosisDataFilter?: PrognosisDataIndicators[];
 }
 
 @Injectable({
@@ -21,21 +26,32 @@ export class DataService {
   constructor() {
     this.readCo2Data();
     this.readCovidData();
+    this.readLockdownData();
+    this.readHistoricCo2Data();
+    this.combineCovidDataForWorld();
+    this.combineCovidDataForEU28();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
-    console.log((this.covidDatapoints[0]));
+    console.log((this.covidDatapoints));
+    console.log((this.lockdownDatapoints[0]));
+    console.log(this.covidEuropeDatapoints);
   }
 
   private co2Datapoints: Co2Datapoint[] = [];
   private covidDatapoints: CovidDatapoint[] = [];
+  private lockdownDatapoints: LockdownDatapoint[] = [];
+  private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
+  private covidEuropeDatapoints: CovidDatapoint[] = [];
   private maxDate: Date;
 
+  private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
+
   private static covidCountryToCountry(country: string): Countries{
-    if (country === 'United_Kingdom') {
+    if (country === 'United_Kingdom' || country === 'United Kingdom') {
       return Countries.uk;
     }
-    else if (country === 'United_States_of_America'){
+    else if (country === 'United_States_of_America' || country === 'United States'){
       return Countries.us;
     }
     return country as Countries;
@@ -48,7 +64,7 @@ export class DataService {
    */
   private readCo2Data(): void {
 
-    (data as any).datas.forEach(dp => {
+    (co2dataset as any).datas.forEach(dp => {
       const dateValues = (dp.date).split('/').map(d => parseInt(d, 10));
       this.co2Datapoints.push({
         country: dp['country / group of countries'] as Countries,
@@ -62,7 +78,7 @@ export class DataService {
   }
 
   private readCovidData(): void {
-    (records as any).records.forEach(dp => {
+    (covidDataset as any).records.forEach(dp => {
       const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
       const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
       if (actualDate <= this.maxDate)
@@ -76,6 +92,83 @@ export class DataService {
       }
     });
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private combineCovidDataForWorld(): void {
+    const holder = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (holder.hasOwnProperty(dp.date)) {
+        holder[dp.date] = holder[dp.date] + dp.cases;
+      } else {
+        holder[dp.date] = dp.cases;
+        dates.push(dp.date);
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.world,
+        date,
+        cases: holder[date],
+      } as CovidDatapoint);
+    }
+
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private combineCovidDataForEU28(): void {
+    const holderEurope = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (this.eu28.includes(dp.country)) {
+        if (holderEurope.hasOwnProperty(dp.date)) {
+          holderEurope[dp.date] = holderEurope[dp.date] + dp.cases;
+        } else {
+          holderEurope[dp.date] = dp.cases;
+          dates.push(dp.date);
+        }
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.eu28,
+        date,
+        cases: holderEurope[date],
+      } as CovidDatapoint);
+    }
+
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private readLockdownData(): void {
+    (lockdownDataset as any).lockdowndata.forEach(dp => {
+      const dateString = dp.date.toString();
+      const dateValues = [dateString.slice(0, 4), dateString.slice(4, 6), dateString.slice(6, 8)].map(d => parseInt(d, 10));
+      const actualDate = new Date(dateValues[0], dateValues[1] - 1, dateValues[2]);
+      if (actualDate <= this.maxDate) {
+        this.lockdownDatapoints.push({
+          date: actualDate,
+          country: DataService.covidCountryToCountry(dp.countryName),
+          lockdown: dp.c6_Stay_at_home_requirements === 2,
+        } as LockdownDatapoint);
+      }
+    });
+    this.lockdownDatapoints = this.lockdownDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private readHistoricCo2Data(): void {
+    (historicCo2Dataset as any).Tabelle1.forEach(dp => {
+      this.historicCo2Datapoints.push({
+        country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
+        year: dp.Year,
+        mtCo2: dp.meandailyCO2,
+        co2PrognosisLockdown: dp.CO2WithLockdowns,
+        co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
+        prognosisDataIndicator: dp.PrognosisData,
+      } as HistoricCo2Datapoint);
+    });
   }
 
   /**
@@ -110,6 +203,28 @@ export class DataService {
     let filteredList: CovidDatapoint [] = this.covidDatapoints;
     if (filterOptions.countryFilter) {
       filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    }
+    return filteredList;
+  }
+
+  public getLockdownData(filterOptions?: FilterOptions): LockdownDatapoint[] {
+    if (!filterOptions) {
+      return this.lockdownDatapoints;
+    }
+    let filteredList: LockdownDatapoint [] = this.lockdownDatapoints;
+    if (filterOptions.countryFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.countryFilter.includes(dp.country));
+    }
+    return filteredList;
+  }
+
+  public getHistoricCo2Data(filterOptions?: FilterOptions): HistoricCo2Datapoint[] {
+    if (!filterOptions) {
+      return this.historicCo2Datapoints;
+    }
+    let filteredList: HistoricCo2Datapoint [] = this.historicCo2Datapoints;
+    if (filterOptions.prognosisDataFilter) {
+      filteredList = filteredList.filter(dp => filterOptions.prognosisDataFilter.includes(dp.prognosisDataIndicator));
     }
     return filteredList;
   }

@@ -24,6 +24,7 @@
 
       li {
         display: flex;
+        font-weight: bold;
 
         .bullet {
           width: 16px;
@@ -44,13 +45,13 @@
           }
         }
 
-        &.area-above {
+        &.area-above, &.linePrognosisNoLockdown {
           .bullet {
             background: $negative;
           }
         }
 
-        &.area-below {
+        &.area-below, &.linePrognosisLockdown {
           .bullet {
             background: $positive;
           }
@@ -94,6 +95,20 @@
       }
     }
 
+    .sources{
+      font-size: small;
+    }
+    .end {
+      margin-top: 150px;
+      border-radius: 25px;
+      padding-left: 5%;
+      padding-right: 5%;
+      background: #1B1825;
+      position: center;
+      width: 100%;
+    }
+
+
     .scroll-prompt {
       height: 400px;
       width: 100%;
@@ -101,8 +116,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
-      animation: blinktext 3s infinite;
+      opacity: 50%;
     }
   }
 
@@ -114,13 +128,13 @@
     .graph-container {
       transition: all 200ms ease;
       box-sizing: border-box;
-      margin-bottom: 50px;
-      padding-left: 80px;
-      padding-top: 80px;
-      width: 100%;
+      position: fixed;
+      padding: 80px 80px 50px;
+      width: inherit;
 
       &.hidden {
         opacity: 0;
+        pointer-events: none;
       }
     }
   }

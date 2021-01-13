@@ -1,1 +1,6 @@
-<p>Country: {{ selectedCountry }}</p>
+<div class="prognosis-graph">
+  <div class="graph-container">
+    <svg #prognosisGraph></svg>
+    <ngx-slider class="slider" [(value)]="sliderLowValue" [(highValue)]="sliderHighValue" [options]="options" (highValueChange)="valueChangeHigh($event)"  (valueChange)="valueChange($event)" ></ngx-slider>
+  </div>
+</div>

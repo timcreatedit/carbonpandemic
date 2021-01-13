@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Countries, Sectors} from '../core/models/co2data.model';
+import {ScrollService} from '../core/services/scroll.service';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.scss']
 })
-export class TopBarComponent implements OnInit{
+export class TopBarComponent implements OnInit {
 
   @Output() selectCountry: EventEmitter<Countries> = new EventEmitter<Countries>();
 
@@ -14,6 +15,9 @@ export class TopBarComponent implements OnInit{
   sectorKeys: any;
 
   selectedCountry: string;
+
+  constructor(readonly scrollService: ScrollService) {
+  }
 
   ngOnInit(): void {
     this.selectedCountry = Countries.germany.toString();
