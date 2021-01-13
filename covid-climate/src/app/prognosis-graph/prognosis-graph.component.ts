@@ -1,4 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
 import {Countries} from '../core/models/co2data.model';
@@ -24,6 +36,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   get remainingBudget(): number {
     return this.scenario2degree ? 1042800 : 293000;
   }
+
+  @Output() budgetDepletionYearWithRestrictions = new EventEmitter<number>();
+  @Output() budgetDepletionYearWithoutRestrictions = new EventEmitter<number>();
 
   // region size
   width = 1400;
@@ -100,8 +115,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     }
     if (isNotNullOrUndefined(changes.selectedCountry)) {
       this.updatePrognosisGraph();
-    }
-    else if (isNotNullOrUndefined(changes.scenario2degree)) {
+    } else if (isNotNullOrUndefined(changes.scenario2degree)) {
       this.updatePrognosisGraph();
     }
   }
@@ -261,26 +275,41 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     let usedBudget = 0;
     let i;
-    for (i = 1; usedBudget < this.remainingBudget; i++) { // i = 1 because our prognosis data begins with 2020 but the calculation should start with 2021
+    for (i = 1; usedBudget < this.remainingBudget; i++) {
+      // i = 1 because our prognosis data begins with 2020 but the calculation should start with 2021
       usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); // 365.25 to account for leap years
     }
-    depletionYear = upcomingYears[i - 1];
+    if (i <= 30) {
+      depletionYear = upcomingYears[i - 1];
+    } else {
+      depletionYear = upcomingYears[29]; // year 2050: the last datapoint entry
+      console.log('CO2 budget will be depleted some time after 2050.');
+    }
+    if (lockdowns) {
+      this.budgetDepletionYearWithRestrictions.emit(depletionYear);
+    } else {
+      this.budgetDepletionYearWithoutRestrictions.emit(depletionYear);
+    }
 
     return depletionYear;
 
-    /* without using our data and simply sticking to the mcc carbon clock source we would have:
+    /*// Without using our data and simply sticking to the mcc carbon clock source we would have:
     // 1.5°C scenario
-    if(lockdowns){
-      return 2027.5 //for 1.5°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 293000mtons)
+    if (lockdowns) {
+      return 2027.5;
+      // for 1.5°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 293000mtons)
     } else {
-      return 2027 //for 1.5°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 293000mtons)
+      return 2027;
+      // for 1.5°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 293000mtons)
     }
-    //2°C scenario
-    if(lockdowns) {
-      return 2047 //for 2°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 1042800mtons)
+    // 2°C scenario
+    if (lockdowns) {
+      return 2047;
+      // for 2°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 1042800mtons)
     } else {
-      return 2045 //for 2°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 1042800mtons)
-    } */
+      return 2045;
+      // for 2°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 1042800mtons)
+    }*/
   }
 
   // slider onChange low

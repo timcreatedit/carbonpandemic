@@ -109,6 +109,13 @@
         2°C more than pre industrial levels. The two vertical, dashed lines are showing in which year the remaining CO<sub>2</sub> budget will
         be depleted, with and without continuing regulations.
       </p>
+      <h5>When will the CO<sub>2</sub> Budget be Depleted?</h5>
+      <p>
+        According to the prognosis from [1], we <strong>will exceed the 2° C goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
+        <br>When factoring in the reduction in emissions that the lockdown has entailed, by our calculations
+        <strong>we will exceed 2° C of global warming by {{ budgetDepletionYearWithRestrictions }}</strong>.
+      </p>
+      <p>These years are represented in the graph on the right as vertical lines.</p>
     </div>
     <div class="end">
       <div class="sources">
@@ -134,7 +141,10 @@
     </div>
     <div class="graph-container" id="prognosis-graph-container"
          [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
-      <app-prognosis-graph [selectedCountry]="selectedCountry"></app-prognosis-graph>
+      <app-prognosis-graph [selectedCountry]="selectedCountry"
+        (budgetDepletionYearWithRestrictions)="budgetDepletionYearWithRestrictions = $event"
+        (budgetDepletionYearWithoutRestrictions)="budgetDepletionYearWithoutRestrictions = $event"
+      ></app-prognosis-graph>
     </div>
     <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
       <app-pie-chart [selectedCountry]="selectedCountry"></app-pie-chart>
