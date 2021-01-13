@@ -24,11 +24,12 @@ Link to the current project status: https://timcreatedit.github.io/InfoVis-Grupp
 - [x] Line Chart: CO2-Emissionen 2019/2020
 - [x] Line Chart: COVID-19 Fälle
 - [x] Länderauswahl - Dropdown Menü
+- [x] Visualisierung der Lockdown Phasen
 - [x] Scrollbasierte Änderungen am CO2 Graphen
   - [x] Anzeige der Änderung zum Vorjahr
   - [x] Aufteilung in Sektoren
+- [X] Beschreibende und erklärende Texte
 - [x] Dynamische Informationen im Erklärungstext je nach Länderwahl
-- [x] Visualisierung der Lockdown Phasen
 
 
 #### Nice to Have Features
@@ -38,7 +39,6 @@ Link to the current project status: https://timcreatedit.github.io/InfoVis-Grupp
 - [ ] Wechsel zwischen absoluten und relativen Daten
 - [ ] Vergleichsmodus von 2 Ländern
 - [ ] Wechsel in Covid Chart zwischen Faktoren 	(Neuinfektionen, Gesamt, R-Wert)
-- [ ] Aufsummierte COVID-Daten (WORLD, ROW, EU28)
 
 ***
 
@@ -55,7 +55,6 @@ Link to the current project status: https://timcreatedit.github.io/InfoVis-Grupp
 
 - [x] Animationen
 - [ ] Anzeige der anteiligen Änderungen je Sektor
-- [ ] Toggles für Sektor & Gesamtübersicht
 
 ***
   
@@ -69,16 +68,15 @@ Link to the current project status: https://timcreatedit.github.io/InfoVis-Grupp
   - [x] Es geht so weiter wie 2019
   - [x] Es geht so weiter wie 2020
 - [x] Beschreibende und erklärende Texte
-- [ ] Länderauswähl - durch Dropdown Menü
 
 
 #### Nice to Have Features
 
 - [x] Animationen
+- [X] Anzeigen des voraussichtlichen Doomsday
+- [X] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
 - [ ] Hover Interaktion
-- [ ] Anzeige des verbleibenden Budgets seit Anfang der Aufzeichnungen
-- [ ] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
-- [ ] Anzeigen des voraussichtlichen Doomsday
+
 
 ## Links zu Datensätzen
 
