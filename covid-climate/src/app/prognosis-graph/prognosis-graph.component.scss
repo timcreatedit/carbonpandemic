@@ -50,12 +50,76 @@
         stroke-dashoffset: 5;
       }
 
+      // HOVER
+      .mouseLine {
+        z-index: 10;
+        height: 80%;
+        width: 2px;
+        fill: white;
+      }
+
+      .tooltip {
+        top: 0;
+        fill: $backgroundColorLight;
+        stroke: white;
+        stroke-width: 2px;
+        rx: 10px;
+        ry: 10px;
+      }
+      .tooltipValuesText {
+        .hoverValuesText {
+          font-weight: bold;
+          font-size: 1.5em;
+          text-anchor: end;
+          left: 90px;
+        }
+      }
+      .tooltipUnitsText {
+        .hoverUnitsText {
+          fill: white;
+          font-weight: 300;
+          font-size: 1.2em;
+        }
+      }
+      .tooltipDescribeText {
+        .hoverDescribeText {
+          fill: white;
+          text-align: center;
+          font-weight: bold;
+          font-size: 1.5em;
+        }
+      }
+      .tooltipHoverDate {
+        fill: white;
+        font-weight: bold;
+        font-size: 1.5em;
+      }
+
+      .separationLine {
+        stroke: rgba(255, 255, 255, 0.5);
+        stroke-width: 2;
+      }
     }
   }
 
   .slider{
     position: center;
-    width: 85%;
+    width: 88%; //85%
     margin-left: 5%;
+
+    font-weight: normal;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
+
+    .ngx-slider-pointer {
+      background-color: $accentColor2;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    .ngx-slider-selection {
+      background: $accentColor2;
+    }
   }
 }
