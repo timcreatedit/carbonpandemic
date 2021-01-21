@@ -64,10 +64,14 @@
       <h2>Influence of different sectors</h2>
       <p>You might wonder which sectors were responsible for these emissions. Take a look at the sectors here:</p>
       <ul class="legend">
-        <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey">
+        <li *ngFor="let sectorKey of sectorKeys.slice().reverse(); index as i" [class]="sectorKey">
           <div class="bullet"></div>
-          {{sectorNames[i]}}</li>
+          {{sectorNames.slice().reverse()[i]}}</li>
       </ul>
+      <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
+        <option>All</option>
+        <option *ngFor="let sector of sectorNames">{{sector}}</option>
+      </select>
       <p>This breakdown clearly shows that a whole range of sectors contribute to the amount of global emissions.
         The energy sector is primarily made up of the energy used for electricity, heat and transport. Road transport
         emissions result from passenger vehicles such as cars and buses, as well as from trucks transporting goods.
@@ -136,6 +140,7 @@
       <app-covid-graph [selectedCountry]="selectedCountry"
                        [showDifference]="scrollService.covidShowDifference$ | async"
                        [showSectors]="scrollService.covidShowSectors$ | async"
+                       [selectedSectors]="sectorsToDisplay"
       ></app-covid-graph>
     </div>
     <div class="graph-container" id="prognosis-graph-container"

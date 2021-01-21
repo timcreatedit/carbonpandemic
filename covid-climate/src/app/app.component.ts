@@ -15,6 +15,10 @@ export class AppComponent {
   title = 'covid-climate';
 
   selectedCountry: Countries = Countries.spain;
+
+  selectedSector = 'All';
+  sectorsToDisplay: Sectors[];
+
   worstCo2DayOf20: Co2Datapoint;
   covidOnWorstCo2DayOf20: CovidDatapoint;
   worstCovidDayOf20: CovidDatapoint;
@@ -42,5 +46,14 @@ export class AppComponent {
 
     this.worstCovidDayOf20 = covidData20.sort((a, b) => b.cases - a.cases)[0];
     this.co2OnWorstCovidDayOf20 = co2Data20.filter(dp => dp.date.getTime() === this.worstCovidDayOf20.date.getTime())[0];
+  }
+
+  updateSelectedSector(sector: string): void {
+    this.selectedSector = sector;
+    if (sector === 'All') {
+      this.sectorsToDisplay = Object.values(Sectors);
+    } else {
+      this.sectorsToDisplay = [sector as Sectors];
+    }
   }
 }

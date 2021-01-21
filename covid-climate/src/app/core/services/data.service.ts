@@ -47,11 +47,10 @@ export class DataService {
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
 
-  private static covidCountryToCountry(country: string): Countries{
+  private static covidCountryToCountry(country: string): Countries {
     if (country === 'United_Kingdom' || country === 'United Kingdom') {
       return Countries.uk;
-    }
-    else if (country === 'United_States_of_America' || country === 'United States'){
+    } else if (country === 'United_States_of_America' || country === 'United States') {
       return Countries.us;
     }
     return country as Countries;
@@ -81,8 +80,7 @@ export class DataService {
     (covidDataset as any).records.forEach(dp => {
       const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
       const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
-      if (actualDate <= this.maxDate)
-      {
+      if (actualDate <= this.maxDate) {
         this.covidDatapoints.push({
           country: DataService.covidCountryToCountry(dp.countriesAndTerritories),
           date: actualDate,
@@ -249,16 +247,21 @@ export class DataService {
     return countrySummed.reduce((a, b) => [...a, ...b], []);
   }
 
-  public getSectorsPerDay(country: Countries): {[id: string]: number | Date}[] {
+  public getSectorsPerDay(country: Countries, sectors: Sectors[] = Object.values(Sectors), setRemainingToZero = false): { [id: string]: number | Date }[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
     const dates = Array.from(new Set<number>(d.map(dp => dp.date.getTime())));
     const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
     const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
-    console.assert(days.length === sectorsPerDay.length);
-    const buffer: {[id: string]: number | Date}[] = [];
+    const buffer: { [id: string]: number | Date }[] = [];
     for (let i = 0; i < dates.length; i++) {
-      const val = { ['date']: dates[i]};
+      const val = {['date']: new Date(dates[i])};
       for (const sector of sectorsPerDay[i]) {
+        if (!sectors.includes(sector)) {
+          if (setRemainingToZero) {
+            val[sector.valueOf()] = 0;
+          }
+          continue;
+        }
         val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
       }
       buffer.push(val);
