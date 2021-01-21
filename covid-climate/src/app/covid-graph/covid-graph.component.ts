@@ -664,15 +664,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   updateShowSectors(show: boolean): void {
     const line19 = this.svg.select('.line19');
+    const line20 = this.svg.select('.line20');
     const sectors = this.svg.selectAll('.sectorArea');
 
     if (show) {
       line19.attr('class', 'line19 hidden');
+      line20.attr('class', 'line20 hidden');
       sectors.attr('class', 'sectorArea');
     } else {
       if (!this.showDifference) {
         line19.attr('class', 'line19');
       }
+      line20.attr('class', 'line20');
       sectors.attr('class', 'sectorArea hidden');
     }
   }
