@@ -770,6 +770,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private updateDifferenceArea(data19: Co2Datapoint[], data20: Co2Datapoint[]): void {
+    // Red Area
     const clipAbove = this.svg.select('#clip-above')
       .select('path')
       .datum(data20);
@@ -791,6 +792,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .duration(1000)
       .attr('d', this.areaAbove19);
 
+    // Green Area
     const clipBelow = this.svg.select('#clip-below')
       .select('path')
       .datum(data20);

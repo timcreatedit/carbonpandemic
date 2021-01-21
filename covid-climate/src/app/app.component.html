@@ -68,10 +68,14 @@
           <div class="bullet"></div>
           {{sectorNames.slice().reverse()[i]}}</li>
       </ul>
-      <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
-        <option>All</option>
-        <option *ngFor="let sector of sectorNames">{{sector}}</option>
-      </select>
+      <label>
+        Sectors to display:
+        <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
+          <option>All</option>
+          <option *ngFor="let sector of sectorNames">{{sector}}</option>
+        </select>
+      </label>
+
       <p>This breakdown clearly shows that a whole range of sectors contribute to the amount of global emissions.
         The energy sector is primarily made up of the energy used for electricity, heat and transport. Road transport
         emissions result from passenger vehicles such as cars and buses, as well as from trucks transporting goods.
