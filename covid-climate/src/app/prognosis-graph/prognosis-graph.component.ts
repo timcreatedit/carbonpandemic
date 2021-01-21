@@ -67,6 +67,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   private smallLineHeight = 35;
   // endregion
 
+  //region sum variables
+  private isSum = false;
+  // endregion
+
   //region D3 Variables
   private readonly curveHistoric = d3.curveLinear;
 
@@ -94,7 +98,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   readonly lineHistoric = d3.line<HistoricCo2Datapoint>()
     .curve(this.curveHistoric)
     .x(d => this.x(d.year))
-    .y(d => this.y(d.mtCo2));
+    .y(d => this.y(this.isSum ? d.co2Sum : d.mtCo2));
 
   readonly linePrognosisLockdown = d3.line<HistoricCo2Datapoint>()
     .curve(this.curvePrognosisLockdown)
@@ -200,8 +204,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
-    const maxValue = 120; // can be hardcoded because we only use one dataset (world)
-
+    const maxValue = this.isSum ? d3.max([...dataAll.map(d => d.mtCo2), ...dataAll.map(d => d.co2Sum)]) : 120;
     // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
     this.x.domain([this.sliderLowValue, this.sliderHighValue]);
     this.y.domain([0, maxValue * 1.1]);

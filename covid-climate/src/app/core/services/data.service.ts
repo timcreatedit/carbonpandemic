@@ -159,11 +159,16 @@ export class DataService {
   }
 
   private readHistoricCo2Data(): void {
+    let sumBuffer = 0;
+    let isLeapYear = false;
     (historicCo2Dataset as any).Tabelle1.forEach(dp => {
+      isLeapYear = !(dp.Year % 4 !== 0 || (dp.Year % 100 === 0 && dp.Year % 400 !== 0));
+      sumBuffer += (dp.meandailyCO2 * (isLeapYear ? 364 : 365));
       this.historicCo2Datapoints.push({
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
         year: dp.Year,
         mtCo2: dp.meandailyCO2,
+        co2Sum: sumBuffer + (dp.meandailyCO2 * (isLeapYear ? 364 : 365)),
         co2PrognosisLockdown: dp.CO2WithLockdowns,
         co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
         prognosisDataIndicator: dp.PrognosisData,
