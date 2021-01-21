@@ -12,7 +12,7 @@ $top-bar-height: 60px;
   flex-direction: row-reverse;
 
   #dropDownMenu {
-    transition: .2s ease;
+    transition: 500ms ease;
     right: 50px;
     width: 20vw;
     min-width: 200px;
@@ -70,7 +70,7 @@ $top-bar-height: 60px;
     width: 18px;
     height: 18px;
 
-    transition: .2s ease;
+    transition: 500s ease;
 
     &.hidden {
       opacity: 0;
