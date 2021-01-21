@@ -23,6 +23,8 @@ export interface ScrollSection {
 })
 export class ScrollService {
 
+  public isSmallLayout = true;
+
   // region Scroll Configs
   private readonly initialConfig: SiteScrollConfig = {
     covidGraphShown: true,
@@ -51,6 +53,35 @@ export class ScrollService {
     },
     {
       section: [0.85, 1],
+      config: {
+        prognosisGraphShown: true,
+      }
+    }
+  ];
+  // when window is resized
+  private readonly siteSectionsSmall: ScrollSection[] = [
+    {
+      section: [0, 0.1],
+      config: {
+        covidGraphShown: true,
+      }
+    },
+    {
+      section: [0.1, 0.2],
+      config: {
+        covidGraphShown: true,
+        covidShowDifference: true,
+      }
+    },
+    {
+      section: [0.2, 0.3],
+      config: {
+        covidGraphShown: true,
+        covidShowSectors: true,
+      }
+    },
+    {
+      section: [0.3, 1],
       config: {
         prognosisGraphShown: true,
       }
@@ -101,7 +132,12 @@ export class ScrollService {
   }
 
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {
-    const relevantSections = this.siteSections.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
+    let relevantSections;
+    if (this.isSmallLayout) {
+      relevantSections = this.siteSectionsSmall.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
+    } else {
+      relevantSections = this.siteSections.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
+    }
     if (relevantSections.length === 0) {
       return null;
     }
