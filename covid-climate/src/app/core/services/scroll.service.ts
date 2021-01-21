@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, combineLatest, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, startWith, tap} from 'rxjs/operators';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export interface SiteScrollConfig {
@@ -22,8 +22,6 @@ export interface ScrollSection {
   providedIn: 'root'
 })
 export class ScrollService {
-
-  public isSmallLayout = true;
 
   // region Scroll Configs
   private readonly initialConfig: SiteScrollConfig = {
@@ -58,35 +56,7 @@ export class ScrollService {
       }
     }
   ];
-  // when window is resized
-  private readonly siteSectionsSmall: ScrollSection[] = [
-    {
-      section: [0, 0.1],
-      config: {
-        covidGraphShown: true,
-      }
-    },
-    {
-      section: [0.1, 0.2],
-      config: {
-        covidGraphShown: true,
-        covidShowDifference: true,
-      }
-    },
-    {
-      section: [0.2, 0.3],
-      config: {
-        covidGraphShown: true,
-        covidShowSectors: true,
-      }
-    },
-    {
-      section: [0.3, 1],
-      config: {
-        prognosisGraphShown: true,
-      }
-    }
-  ];
+
   //endregion
 
   private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
@@ -125,19 +95,23 @@ export class ScrollService {
     combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
       fromEvent(window, 'resize').pipe(startWith(0))])
       .pipe(
-        map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
+        map(() => window.scrollY / (this.getDocumentHeight() - window.innerHeight)),
+        tap(console.log),
         map(s => this.getCurrentConfig(s)),
         distinctUntilChanged(),
       ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
+  private getDocumentHeight(): number {
+    const body = document.body;
+    const html = document.documentElement;
+
+    return Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
+  }
+
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {
-    let relevantSections;
-    if (this.isSmallLayout) {
-      relevantSections = this.siteSectionsSmall.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
-    } else {
-      relevantSections = this.siteSections.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
-    }
+    const relevantSections = this.siteSections.filter(s => s.section[0] <= scrollTop && s.section[1] > scrollTop);
     if (relevantSections.length === 0) {
       return null;
     }
