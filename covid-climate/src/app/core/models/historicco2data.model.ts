@@ -9,6 +9,7 @@ export interface HistoricCo2Datapoint {
   year: number;
   country: Countries;
   mtCo2: number;
+  co2Sum: number;
   co2PrognosisLockdown: number;
   co2PrognosisNoLockdown: number;
   prognosisDataIndicator: PrognosisDataIndicators;

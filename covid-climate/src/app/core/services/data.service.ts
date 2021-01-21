@@ -30,6 +30,7 @@ export class DataService {
     this.readHistoricCo2Data();
     this.combineCovidDataForWorld();
     this.combineCovidDataForEU28();
+    this.combineCovidDataForRestOfWorld();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
@@ -46,6 +47,7 @@ export class DataService {
   private maxDate: Date;
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
+  private usedLands = [Countries];
 
   private static covidCountryToCountry(country: string): Countries {
     if (country === 'United_Kingdom' || country === 'United Kingdom') {
@@ -115,6 +117,33 @@ export class DataService {
     this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
   }
 
+  private combineCovidDataForRestOfWorld(): void {
+    const holder = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (!Object.values(Countries).includes(dp.country)) {
+        if (dp.country) {
+          if (holder.hasOwnProperty(dp.date)) {
+            holder[dp.date] = holder[dp.date] + dp.cases;
+          } else {
+            holder[dp.date] = dp.cases;
+            dates.push(dp.date);
+          }
+        }
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.rest,
+        date,
+        cases: holder[date],
+      } as CovidDatapoint);
+    }
+
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
   private combineCovidDataForEU28(): void {
     const holderEurope = {};
     const dates = [];
@@ -157,11 +186,16 @@ export class DataService {
   }
 
   private readHistoricCo2Data(): void {
+    let sumBuffer = 0;
+    let isLeapYear = false;
     (historicCo2Dataset as any).Tabelle1.forEach(dp => {
+      isLeapYear = !(dp.Year % 4 !== 0 || (dp.Year % 100 === 0 && dp.Year % 400 !== 0));
+      sumBuffer += (dp.meandailyCO2 * (isLeapYear ? 364 : 365));
       this.historicCo2Datapoints.push({
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
         year: dp.Year,
         mtCo2: dp.meandailyCO2,
+        co2Sum: sumBuffer + (dp.meandailyCO2 * (isLeapYear ? 364 : 365)),
         co2PrognosisLockdown: dp.CO2WithLockdowns,
         co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
         prognosisDataIndicator: dp.PrognosisData,
