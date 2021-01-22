@@ -2,8 +2,10 @@
 
 .prognosis-graph {
   width: 100%;
+
   .graph-container {
     width: 100%;
+
     svg {
       margin: 8px;
       padding: 8px;
@@ -36,19 +38,35 @@
       }
 
       .budgetLine {
+        transition: 500ms ease;
         stroke-width: 2;
+        stroke-dasharray: 5, 5;
+
+        &.hidden {
+          opacity: 0;
+        }
+
+        &#budgetLineHorizontal {
+          stroke: lightgrey;
+
+          text {
+            stroke: none;
+            fill: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 12pt;
+          }
+        }
+
+        &#budgetLineLockdowns {
+          stroke: $positive;
+        }
+
+        &#budgetLineNoLockdowns {
+          stroke: $negative;
+        }
       }
 
-      #budgetLineLockdowns {
-        stroke: $positive;
-        stroke-dasharray: 5,5;
-      }
-
-      #budgetLineNoLockdowns {
-        stroke: $negative;
-        stroke-dasharray: 5,5;
-        stroke-dashoffset: 5;
-      }
 
       // HOVER
       .mouseLine {
@@ -66,6 +84,7 @@
         rx: 10px;
         ry: 10px;
       }
+
       .tooltipValuesText {
         .hoverValuesText {
           font-weight: bold;
@@ -74,6 +93,7 @@
           left: 90px;
         }
       }
+
       .tooltipUnitsText {
         .hoverUnitsText {
           fill: white;
@@ -81,6 +101,7 @@
           font-size: 1.2em;
         }
       }
+
       .tooltipDescribeText {
         .hoverDescribeText {
           fill: white;
@@ -89,6 +110,7 @@
           font-size: 1.5em;
         }
       }
+
       .tooltipHoverDate {
         fill: white;
         font-weight: bold;
@@ -102,13 +124,18 @@
     }
   }
 
-  .slider{
+  .slider {
     position: center;
     width: 88%; //85%
     margin-left: 5%;
 
     font-weight: normal;
     -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
+
+    .ngx-slider-model-value, .ngx-slider-model-high, .ngx-slider-floor, .ngx-slider-ceil {
+      padding-bottom: 8px;
+      // TODO niki hier label abstand
+    }
 
     .ngx-slider-pointer {
       background-color: $accentColor2;

@@ -11,8 +11,10 @@
       <p>Due to the Covid-19 pandemic, the world looked a little bit different in 2020. People stayed at home,
         travelling was often impossible and planes had to stay grounded for the most part.</p>
       <p>These factors have resulted in noticeable changes to CO<sub>2</sub> emissions. As can be seen in the chart
-        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year. The data
-        shown here comes from by Carbon Monitor [1], an international platform providing science-based estimates of daily CO<sub>2</sub> emissions.</p>
+        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year. The
+        data
+        shown here comes from by Carbon Monitor [1], an international platform providing science-based estimates of
+        daily CO<sub>2</sub> emissions.</p>
       <ul class="legend">
         <li class="line2019">
           <div class="bullet"></div>
@@ -26,17 +28,23 @@
       <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world!</i>
       <p></p>
       <p>The unit of the y-Axis of the graph is <i>Megatons of carbon dioxide per day</i>. One Megaton equals <strong>1,000,000
-        metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases, while the transparent areas illustrate the periods of
+        metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases, while the
+        transparent areas illustrate the periods of
         when the selected country had a lockdown.</p>
       <p *ngIf="worstCo2DayOf20">
-        {{ worstCo2DayOf20.date | date:'EEEE, MMMM d' }} was the worst day regarding emissions for {{ worstCo2DayOf20.country }} in 2020.
-        On this day, {{ worstCo2DayOf20.country }} emitted <b>{{ (worstCo2DayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons</b> of CO<sub>2</sub>
-        <span *ngIf="co2OnWorstCovidDayOf20"> and had <b>{{covidOnWorstCo2DayOf20?.cases | number}} new Covid-19 cases</b></span>.
+        {{ worstCo2DayOf20.date | date:'EEEE, MMMM d' }} was the worst day regarding emissions
+        for {{ worstCo2DayOf20.country }} in 2020.
+        On this day, {{ worstCo2DayOf20.country }} emitted <b>{{ (worstCo2DayOf20.mtCo2 * 1000000) | number:'1.0-0' }}
+        metric tons</b> of CO<sub>2</sub>
+        <span *ngIf="co2OnWorstCovidDayOf20"> and had <b>{{covidOnWorstCo2DayOf20?.cases | number}}
+          new Covid-19 cases</b></span>.
       </p>
       <p *ngIf="worstCovidDayOf20">
-        With <b>{{ worstCovidDayOf20.cases | number }} new cases</b>, {{ worstCovidDayOf20.date | date:'EEEE, MMMM d' }} was the
+        With <b>{{ worstCovidDayOf20.cases | number }} new cases</b>, {{ worstCovidDayOf20.date | date:'EEEE, MMMM d' }}
+        was the
         worst day of 2020 regarding new cases for {{ worstCovidDayOf20.country }}. <span *ngIf="co2OnWorstCovidDayOf20">On this day, {{ worstCovidDayOf20.country }}
-        emitted <b>{{ (co2OnWorstCovidDayOf20.mtCo2 * 1000000) | number:'1.0-0' }} metric tons</b> of CO<sub>2</sub>.</span>
+        emitted <b>{{ (co2OnWorstCovidDayOf20.mtCo2 * 1000000) | number:'1.0-0' }}
+          metric tons</b> of CO<sub>2</sub>.</span>
       </p>
       <div class="scroll-prompt">
         <span>↓</span>
@@ -64,17 +72,28 @@
       <h2>Influence of different sectors</h2>
       <p>You might wonder which sectors were responsible for these emissions. Take a look at the sectors here:</p>
       <ul class="legend">
-        <li *ngFor="let sectorKey of sectorKeys; index as i" [class]="sectorKey">
+        <li *ngFor="let sectorKey of sectorKeys.slice().reverse(); index as i" [class]="sectorKey">
           <div class="bullet"></div>
-          {{sectorNames[i]}}</li>
+          {{sectorNames.slice().reverse()[i]}}</li>
       </ul>
+      <label>
+        Sectors to display:
+        <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
+          <option>All</option>
+          <option *ngFor="let sector of sectorNames">{{sector}}</option>
+        </select>
+      </label>
+
       <p>This breakdown clearly shows that a whole range of sectors contribute to the amount of global emissions.
         The energy sector is primarily made up of the energy used for electricity, heat and transport. Road transport
         emissions result from passenger vehicles such as cars and buses, as well as from trucks transporting goods.
-        The industry sector represents CO<sub>2</sub> emissions resulting from industrial processes, and the residential sector
+        The industry sector represents CO<sub>2</sub> emissions resulting from industrial processes, and the residential
+        sector
         shows the emissions from residential structures that mainly derive from the amount of energy they consume.
-        Finally, the domestic aviation sector summarizes the CO<sub>2</sub> emissions caused by domestic flights in the selected country.
-        By being aware of the impact of each sector on our total CO<sub>2</sub> emissions figure, we can better understand which areas
+        Finally, the domestic aviation sector summarizes the CO<sub>2</sub> emissions caused by domestic flights in the
+        selected country.
+        By being aware of the impact of each sector on our total CO<sub>2</sub> emissions figure, we can better
+        understand which areas
         need to - and can - be targeted, in order to effectively reduce our carbon footprint.</p>
       <div class="scroll-prompt">
         <span>↓</span>
@@ -87,6 +106,18 @@
         the containment measures? Could these measures also be used to help us meet our climate goals?
         We set up two prognosis lines, that give insight into just that:
       </p>
+      <label>
+        Scenario
+        <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
+          <option [ngValue]="true">2° C Goal</option>
+          <option [ngValue]="false">1.5° C Goal</option>
+        </select>
+      </label>
+      <br>
+      <label>
+        Sum up Emissions
+        <input type="checkbox" [(ngModel)]="prognosisGraphSum">
+      </label>
       <ul class="legend">
         <li class="linePrognosisLockdown">
           <div class="bullet"></div>
@@ -99,19 +130,26 @@
       </ul>
       <p>
         The y-axis depicts the amount of CO<sub>2</sub> emissions per day, while the x-axis shows the years.
-        The white graph represents the global CO<sub>2</sub> of an average day from 1750 to 2020. From there, our prognosis graphs begin.
-        The data for the prognosis for continuing without regulations, was calculated by the U.S. Energy Information Administration [2].
+        The white graph represents the global CO<sub>2</sub> of an average day from 1750 to 2020. From there, our
+        prognosis graphs begin.
+        The data for the prognosis for continuing without regulations, was calculated by the U.S. Energy Information
+        Administration [2].
         Based on this data, we calculated a forecast for continuing with regulations by mapping this years percentage
-        decrease in CO<sub>2</sub> emissions to the data from [2]. This of course means a decrease in emissions, but what
-        could be the impacts on climate warming if we continued with the regulations experienced 2020 in all the upcoming years?
-        According to the Mercator Research Institute on Global Commons and Climate Change (MCC) [3] the atmosphere can absorb
+        decrease in CO<sub>2</sub> emissions to the data from [2]. This of course means a decrease in emissions, but
+        what
+        could be the impacts on climate warming if we continued with the regulations experienced 2020 in all the
+        upcoming years?
+        According to the Mercator Research Institute on Global Commons and Climate Change (MCC) [3] the atmosphere can
+        absorb
         roughly 1042 gigatons of CO<sub>2</sub> from the beginning of 2021 on until the global temperature will be
-        2°C more than pre industrial levels. The two vertical, dashed lines are showing in which year the remaining CO<sub>2</sub> budget will
+        2°C more than pre industrial levels. The two vertical, dashed lines are showing in which year the remaining
+        CO<sub>2</sub> budget will
         be depleted, with and without continuing regulations.
       </p>
       <h5>When will the CO<sub>2</sub> Budget be Depleted?</h5>
       <p>
-        According to the prognosis from [2] and given the budget calculations from [3], we <strong>will exceed the 2° C goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
+        According to the prognosis from [2] and given the budget calculations from [3], we <strong>will exceed the 2° C
+        goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
         <br>When factoring in the reduction in emissions that the lockdown has entailed, by our calculations
         <strong>we will exceed 2° C of global warming by {{ budgetDepletionYearWithRestrictions }}</strong>.
       </p>
@@ -123,9 +161,11 @@
           <li>Carbon Monitor, (accessed 11.01.2021), https://carbonmonitor.org/</li>
           <li>U.S. Energy Information Administration (EIA),
             World Energy Projection System Plus (2019), run r_190808_161601, and Annual Energy Outlook 2019,
-            (Washington, DC: January 2019), www.eia.gov/aeo</li>
+            (Washington, DC: January 2019), www.eia.gov/aeo
+          </li>
           <li>Mercator Research Institute on Global Commons and Climate Change (MCC),
-            (accessed 11.01.2021), https://www.mcc-berlin.net/en/research/co2-budget.html</li>
+            (accessed 11.01.2021), https://www.mcc-berlin.net/en/research/co2-budget.html
+          </li>
         </ol>
       </div>
     </div>
@@ -136,13 +176,14 @@
       <app-covid-graph [selectedCountry]="selectedCountry"
                        [showDifference]="scrollService.covidShowDifference$ | async"
                        [showSectors]="scrollService.covidShowSectors$ | async"
+                       [selectedSectors]="sectorsToDisplay"
       ></app-covid-graph>
     </div>
     <div class="graph-container" id="prognosis-graph-container"
          [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
       <app-prognosis-graph [selectedCountry]="selectedCountry"
-        (budgetDepletionYearWithRestrictions)="budgetDepletionYearWithRestrictions = $event"
-        (budgetDepletionYearWithoutRestrictions)="budgetDepletionYearWithoutRestrictions = $event"
+                           [isSum]="prognosisGraphSum"
+                           [scenario2degree]="scenario2Degree"
       ></app-prognosis-graph>
     </div>
     <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">

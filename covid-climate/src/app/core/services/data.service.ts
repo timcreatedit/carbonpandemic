@@ -23,22 +23,8 @@ export interface FilterOptions {
 })
 export class DataService {
 
-  constructor() {
-    this.readCo2Data();
-    this.readCovidData();
-    this.readLockdownData();
-    this.readHistoricCo2Data();
-    this.combineCovidDataForWorld();
-    this.combineCovidDataForEU28();
-    console.log('All Data: ' + this.co2Datapoints.length);
-    console.log('First Datapoint: ');
-    console.log(this.co2Datapoints[0]);
-    console.log((this.covidDatapoints));
-    console.log((this.lockdownDatapoints[0]));
-    console.log(this.covidEuropeDatapoints);
-  }
-
   private co2Datapoints: Co2Datapoint[] = [];
+
   private covidDatapoints: CovidDatapoint[] = [];
   private lockdownDatapoints: LockdownDatapoint[] = [];
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
@@ -47,16 +33,24 @@ export class DataService {
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
 
-  private static covidCountryToCountry(country: string): Countries{
-    if (country === 'United_Kingdom' || country === 'United Kingdom') {
-      return Countries.uk;
-    }
-    else if (country === 'United_States_of_America' || country === 'United States'){
-      return Countries.us;
-    }
-    return country as Countries;
+  constructor() {
+    this.readCo2Data();
+    this.readCovidData();
+    this.readLockdownData();
+    this.readHistoricCo2Data();
+    this.combineCovidDataForWorld();
+    this.combineCovidDataForEU28();
+    this.combineCovidDataForRestOfWorld();
+    console.log('All Data: ' + this.co2Datapoints.length);
+    console.log('First Datapoint: ');
+    console.log(this.co2Datapoints[0]);
+    console.log((this.covidDatapoints));
+    console.log((this.lockdownDatapoints[0]));
+    console.log(this.covidEuropeDatapoints);
   }
 
+
+  // region Initialization
 
   /**
    * Reads the data from the carbon monitor json and parses it into an array.
@@ -81,10 +75,9 @@ export class DataService {
     (covidDataset as any).records.forEach(dp => {
       const dateValues = (dp.dateRep).split('/').map(d => parseInt(d, 10));
       const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
-      if (actualDate <= this.maxDate)
-      {
+      if (actualDate <= this.maxDate) {
         this.covidDatapoints.push({
-          country: DataService.covidCountryToCountry(dp.countriesAndTerritories),
+          country: this.covidCountryToCountry(dp.countriesAndTerritories),
           date: actualDate,
           cases: dp.cases,
           continent: dp.continentExp,
@@ -109,6 +102,33 @@ export class DataService {
     for (const date of dates) {
       this.covidDatapoints.push({
         country: Countries.world,
+        date,
+        cases: holder[date],
+      } as CovidDatapoint);
+    }
+
+    this.covidDatapoints = this.covidDatapoints.sort((a, b) => a.date as any - (b.date as any));
+  }
+
+  private combineCovidDataForRestOfWorld(): void {
+    const holder = {};
+    const dates = [];
+    (this.covidDatapoints as any).forEach(dp => {
+      if (!Object.values(Countries).includes(dp.country)) {
+        if (dp.country) {
+          if (holder.hasOwnProperty(dp.date)) {
+            holder[dp.date] = holder[dp.date] + dp.cases;
+          } else {
+            holder[dp.date] = dp.cases;
+            dates.push(dp.date);
+          }
+        }
+      }
+    });
+
+    for (const date of dates) {
+      this.covidDatapoints.push({
+        country: Countries.rest,
         date,
         cases: holder[date],
       } as CovidDatapoint);
@@ -150,7 +170,7 @@ export class DataService {
       if (actualDate <= this.maxDate) {
         this.lockdownDatapoints.push({
           date: actualDate,
-          country: DataService.covidCountryToCountry(dp.countryName),
+          country: this.covidCountryToCountry(dp.countryName),
           lockdown: dp.c6_Stay_at_home_requirements === 2,
         } as LockdownDatapoint);
       }
@@ -159,17 +179,46 @@ export class DataService {
   }
 
   private readHistoricCo2Data(): void {
-    (historicCo2Dataset as any).Tabelle1.forEach(dp => {
-      this.historicCo2Datapoints.push({
+    let sumBuffer = 0;
+    let sumBufferLockdown = 0;
+    let sumBufferNoLockdown = 0;
+    const uniqueYears = new Set((historicCo2Dataset as any).Tabelle1.map(d => d.Year));
+    uniqueYears.forEach(year => {
+      const dps = (historicCo2Dataset as any).Tabelle1.filter(d => d.Year === year);
+      if (dps.length === 0 || dps.length > 2) {
+        throw new Error('Too many historic datapoints for year ' + year);
+      }
+      const historicDp = dps.filter(d => d.PrognosisData === 'historic')[0];
+      const prognosisDp = dps.filter(d => d.PrognosisData === 'prognosis')[0];
+      const isLeapYear = !(dps[0].Year % 4 !== 0 || (dps[0].Year % 100 === 0 && dps[0].Year % 400 !== 0));
+
+      const addedCo2: number = historicDp ? (parseFloat(historicDp.meandailyCO2) * (isLeapYear ? 364 : 365)) : 0;
+      sumBuffer += addedCo2;
+
+      const addedCo2Lockdown = prognosisDp ? (parseFloat(prognosisDp.CO2WithLockdowns) * (isLeapYear ? 364 : 365)) : addedCo2;
+      sumBufferLockdown += addedCo2Lockdown;
+
+      const addedCo2NoLockdown = prognosisDp ? (parseFloat(prognosisDp.CO2WithoutLockdowns) * (isLeapYear ? 364 : 365)) : addedCo2;
+      sumBufferNoLockdown += addedCo2NoLockdown;
+
+      dps.forEach(dp => this.historicCo2Datapoints.push({
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
-        year: dp.Year,
-        mtCo2: dp.meandailyCO2,
-        co2PrognosisLockdown: dp.CO2WithLockdowns,
-        co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
+        year: parseInt(dp.Year, 10),
+        mtCo2: parseFloat(dp.meandailyCO2),
+        co2Sum: sumBuffer,
+        co2PrognosisLockdown: parseFloat(dp.CO2WithLockdowns),
+        co2SumLockdown: sumBufferLockdown,
+        co2PrognosisNoLockdown: parseFloat(dp.CO2WithoutLockdowns),
+        co2SumNoLockdown: sumBufferNoLockdown,
         prognosisDataIndicator: dp.PrognosisData,
-      } as HistoricCo2Datapoint);
+      } as HistoricCo2Datapoint));
+
     });
   }
+
+  // endregion
+
+  // region Public Data Accessors
 
   /**
    * Returns the dataset with potential filter options applied.
@@ -229,6 +278,63 @@ export class DataService {
     return filteredList;
   }
 
+  public getTotalEmissionsUntilYear(year: number): number {
+    return this.historicCo2Datapoints
+      .filter(dp => dp.year === 2020 && dp.prognosisDataIndicator === PrognosisDataIndicators.historic)
+      [0].co2Sum;
+  }
+
+  public get2020RemainingBudget(scenario2Degree: boolean): number {
+    return scenario2Degree ? 1042800 : 293000;
+  }
+
+  public getDepletionYear(totalBudget: number, lockdowns: boolean): number {
+    const data = this.historicCo2Datapoints;
+
+    return lockdowns
+      ? data.filter(dp => dp.co2SumLockdown > totalBudget)[0].year
+      : data.filter(dp => dp.co2SumNoLockdown > totalBudget)[0].year;
+  }
+
+  public getSectorsPerDay(
+    country: Countries,
+    sectors: Sectors[] = Object.values(Sectors),
+    setRemainingToZero = false
+  ): { [id: string]: number | Date }[] {
+    const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
+    const dates = Array.from(new Set<number>(d.map(dp => dp.date.getTime())));
+    const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
+    const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
+    const buffer: { [id: string]: number | Date }[] = [];
+    for (let i = 0; i < dates.length; i++) {
+      const val = {['date']: new Date(dates[i])};
+      for (const sector of sectorsPerDay[i]) {
+        if (!sectors.includes(sector)) {
+          if (setRemainingToZero) {
+            val[sector.valueOf()] = 0;
+          }
+          continue;
+        }
+        val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
+      }
+      buffer.push(val);
+    }
+    return buffer;
+  }
+
+  // endregion
+
+  //region Helpers
+
+  private covidCountryToCountry(country: string): Countries {
+    if (country === 'United_Kingdom' || country === 'United Kingdom') {
+      return Countries.uk;
+    } else if (country === 'United_States_of_America' || country === 'United States') {
+      return Countries.us;
+    }
+    return country as Countries;
+  }
+
   private sumSectors(datapoints: Co2Datapoint[]): Co2Datapoint[] {
     if (datapoints.length < 2) {
       return datapoints;
@@ -249,21 +355,6 @@ export class DataService {
     return countrySummed.reduce((a, b) => [...a, ...b], []);
   }
 
-  public getSectorsPerDay(country: Countries): {[id: string]: number | Date}[] {
-    const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
-    const dates = Array.from(new Set<number>(d.map(dp => dp.date.getTime())));
-    const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
-    const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
-    console.assert(days.length === sectorsPerDay.length);
-    const buffer: {[id: string]: number | Date}[] = [];
-    for (let i = 0; i < dates.length; i++) {
-      const val = { ['date']: dates[i]};
-      for (const sector of sectorsPerDay[i]) {
-        val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
-      }
-      buffer.push(val);
-    }
-    return buffer;
-  }
+  //endregion
 }
 
