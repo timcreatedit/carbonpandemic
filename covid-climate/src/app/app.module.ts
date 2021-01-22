@@ -8,6 +8,7 @@ import { PrognosisGraphComponent } from './prognosis-graph/prognosis-graph.compo
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import {DecimalPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
         FormsModule,
         NgxSliderModule,
     ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

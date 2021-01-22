@@ -18,6 +18,7 @@ import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/hist
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {Options} from '@angular-slider/ngx-slider';
 import {HoverService} from '../core/services/hover.service';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -27,7 +28,9 @@ import {HoverService} from '../core/services/hover.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
-  constructor(private dataService: DataService, private hoverService: HoverService) {
+  constructor(private dataService: DataService,
+              private hoverService: HoverService,
+              private decimalPipe: DecimalPipe) {
   }
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
@@ -35,6 +38,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   @Input() scenario2degree = true;
   @Input() isSum = true;
 
+  get unit(): string {
+    return this.isSum ? 'total MtCo2' : 'MtCo2/d';
+  }
 
   get remainingBudget(): number {
     return this.scenario2degree ? 1042800 : 293000;
@@ -46,7 +52,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   // region size
   width = 1400;
   height = 600;
-  adj = 60;
+  adj = 80;
   // endregion
 
   // region slider values
@@ -171,8 +177,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('dy', '.75em')
       .attr('y', -30)
       .attr('x', 30)
-      .style('text-anchor', 'end')
-      .text('in MtCO2/d');
+      .style('text-anchor', 'end');
 
     this.sliderSvg = this.prognosisSvg.append('svg')
       .attr('class', 'sliderSvg')
@@ -218,13 +223,17 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.prognosisSvg.selectAll('#xAxis')
       .transition()
-      .duration(1)
+      .duration(1000)
       .call(this.xAxis as any);
 
     this.prognosisSvg.selectAll('#yAxis')
       .transition()
-      .duration(1)
+      .duration(1000)
       .call(this.yAxis as any);
+
+    this.prognosisSvg.select('#yAxis > text')
+      .text('in ' + this.unit);
+
   }
 
   private updatePrognosisLine(dataHistoric: HistoricCo2Datapoint[], dataPrognosis: HistoricCo2Datapoint[]): void {
@@ -234,7 +243,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     lineHistoric.enter()
       .merge(lineHistoric as any)
       .transition()
-      .duration(1)
+      .duration(1000)
       .attr('d', this.lineHistoric);
 
     const linePrognosisLockdown = this.prognosisSvg
@@ -244,7 +253,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     linePrognosisLockdown.enter()
       .merge(linePrognosisLockdown as any)
       .transition()
-      .duration(1)
+      .duration(1000)
       .attr('d', this.linePrognosisLockdown);
 
     const linePrognosisNoLockdown = this.prognosisSvg
@@ -254,7 +263,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     linePrognosisNoLockdown.enter()
       .merge(linePrognosisNoLockdown as any)
       .transition()
-      .duration(1)
+      .duration(1000)
       .attr('d', this.linePrognosisNoLockdown);
   }
 
@@ -364,23 +373,39 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     const mousePosX = mouseCoordinates[0];
     const mousePosY = mouseCoordinates[1];
 
-    const objCo2 = this.hoverService.getObjectToMousePos(mousePosX, historicData, this.x, historicData.map(d => d.year));
+    const objCo2 = this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, historicData, this.x, historicData.map(d => d.year));
     const year = this.x.invert(mousePosX).toFixed(0);
 
     if (!objCo2) {
-      const objPrognosis = this.hoverService.getObjectToMousePos(mousePosX, prognosisData, this.x, prognosisData.map((d => d.year)));
+      const objPrognosis =
+        this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, prognosisData, this.x, prognosisData.map((d => d.year)));
 
       tooltipSize[1] = 220;
       this.hoverSelectedDate = [{date: year}];
 
       this.hoverData = [
-        {detail: 'Prognosis 1: ', text: objPrognosis.co2PrognosisNoLockdown, unit: 'MtCo2/d', fill: '#FF5889'},
-        {detail: 'Prognosis 2: ', text: objPrognosis.co2PrognosisLockdown, unit: 'MtCo2/d', fill: '#85FFBB'}
+        {
+          detail: 'Prognosis 1: ',
+          text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumNoLockdown : objPrognosis.co2PrognosisNoLockdown),
+          unit: this.unit,
+          fill: '#FF5889'
+        },
+        {
+          detail: 'Prognosis 2: ',
+          text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumLockdown : objPrognosis.co2PrognosisLockdown),
+          unit: this.unit,
+          fill: '#85FFBB'
+        }
       ];
     } else {
       this.hoverSelectedDate = [{date: year}];
       this.hoverData = [
-        {detail: 'Emission', text: objCo2.mtCo2, unit: 'MtCo2/d', fill: 'white'}
+        {
+          detail: 'Emission',
+          text: this.decimalPipe.transform(this.isSum ? objCo2.co2Sum : objCo2.mtCo2),
+          unit: this.unit,
+          fill: 'white'
+        }
       ];
     }
     this.updateTooltip('tooltipPrognosisGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverSelectedDate);
@@ -468,6 +493,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('id', 'budgetLineLockdowns')
       .attr('y1', 0)
       .attr('y2', this.height);
+
     this.sliderSvg.append('svg:line')
       .attr('class', 'budgetLine')
       .attr('id', 'budgetLineNoLockdowns')
@@ -491,17 +517,20 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.sliderSvg
       .select('#budgetLineHorizontal')
+      .attr('class', this.isSum ? 'budgetLine' : 'budgetLine hidden')
       .attr('y1', this.isSum ? this.y(totalBudget) : 0)
       .attr('y2', this.isSum ? this.y(totalBudget) : 0);
 
 
     this.sliderSvg
       .select('#budgetLineLockdowns')
+      .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
       .attr('x1', depletionYearLockdowns)
       .attr('x2', depletionYearLockdowns);
 
     this.sliderSvg
       .select('#budgetLineNoLockdowns')
+      .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
       .attr('x1', depletionYearNoLockdowns)
       .attr('x2', depletionYearNoLockdowns);
   }

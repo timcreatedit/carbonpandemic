@@ -1,17 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as d3 from 'd3';
+import {ScaleLinear} from 'd3';
+import {HistoricCo2Datapoint} from '../models/historicco2data.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HoverService {
 
-  constructor() { }
+  constructor() {
+  }
 
-  public getObjectToMousePos(xPos: number, data: any, xAxis: any, mapedData: any): any {
+  public getHistoricDatapointAtMousePosition(xPos: number, data: HistoricCo2Datapoint[], xAxis: ScaleLinear<number, number>, years: number[]): HistoricCo2Datapoint {
     const xi = xAxis.invert(xPos);
-    const sub = d3.bisect(mapedData, xi);
-    return data[sub];
+    const yearIndex = d3.bisect(years, xi);
+    return data[yearIndex];
   }
 
   public getDateString(mousePosX: number, year: string, xAxis: any): string {
