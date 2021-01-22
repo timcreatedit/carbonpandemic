@@ -529,7 +529,8 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .select('.budgetLine > text')
       .transition()
       .duration(1000)
-      .attr('y', this.isSum ? this.y(totalBudget) : 0);
+      .text(`${this.scenario2degree ? '2° C' : '1.5° C'} Budget`)
+      .attr('y', this.isSum ? this.y(totalBudget) - 5 : 0);
 
 
     this.sliderSvg
