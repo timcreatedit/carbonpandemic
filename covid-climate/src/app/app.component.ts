@@ -62,4 +62,11 @@ export class AppComponent {
       this.sectorsToDisplay = [sector as Sectors];
     }
   }
+
+  updateScenario(scenario2Degree: boolean): void {
+    this.scenario2Degree = scenario2Degree;
+    const totalBudget = this.dataService.getTotalEmissionsUntilYear(2020) + this.dataService.get2020RemainingBudget(this.scenario2Degree);
+    this.budgetDepletionYearWithRestrictions = this.dataService.getDepletionYear(totalBudget, true);
+    this.budgetDepletionYearWithoutRestrictions = this.dataService.getDepletionYear(totalBudget, false);
+  }
 }

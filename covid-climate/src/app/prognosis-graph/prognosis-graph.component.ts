@@ -42,13 +42,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     return this.isSum ? 'total MtCo2' : 'MtCo2/d';
   }
 
-  get remainingBudget(): number {
-    return this.scenario2degree ? 1042800 : 293000;
-  }
-
-  @Output() budgetDepletionYearWithRestrictions = new EventEmitter<number>();
-  @Output() budgetDepletionYearWithoutRestrictions = new EventEmitter<number>();
-
   // region size
   width = 1400;
   height = 600;
@@ -142,6 +135,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       this.updatePrognosisGraph();
     } else if (isNotNullOrUndefined(changes.scenario2degree)) {
       this.updatePrognosisGraph();
+      this.updateCo2BudgetLines();
     } else if (isNotNullOrUndefined(changes.isSum)) {
       this.updatePrognosisGraph();
       this.updateCo2BudgetLines();
@@ -500,73 +494,59 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('y1', 0)
       .attr('y2', this.height);
 
-    this.sliderSvg.append('svg:line')
+    const horizontalLineGroup = this.sliderSvg.append('g')
       .attr('class', 'budgetLine')
-      .attr('id', 'budgetLineHorizontal')
+      .attr('id', 'budgetLineHorizontal');
+
+    horizontalLineGroup
+      .append('svg:line')
       .attr('x1', 0)
       .attr('x2', this.width);
+
+    horizontalLineGroup.append('text')
+      .attr('x', 10)
+      .text('Text');
   }
 
   private updateCo2BudgetLines(): void {
-    const totalBudget = this.dataService.getHistoricCo2Data()
-      .filter(dp => dp.year === 2020 && dp.prognosisDataIndicator === PrognosisDataIndicators.historic)[0].co2Sum + this.remainingBudget;
+    const total2020 = this.dataService.getTotalEmissionsUntilYear(2020);
+    const totalBudget = total2020 + this.dataService.get2020RemainingBudget(this.scenario2degree);
 
-    const depletionYearLockdowns = this.x(this.calculateDepletionYear(totalBudget, true));
-    const depletionYearNoLockdowns = this.x(this.calculateDepletionYear(totalBudget, false));
+    const depletionYearLockdowns = this.x(this.dataService.getDepletionYear(totalBudget, true));
+    const depletionYearNoLockdowns = this.x(this.dataService.getDepletionYear(totalBudget, false));
 
 
     this.sliderSvg
       .select('#budgetLineHorizontal')
       .attr('class', this.isSum ? 'budgetLine' : 'budgetLine hidden')
+      .select('line')
+      .transition()
+      .duration(1000)
       .attr('y1', this.isSum ? this.y(totalBudget) : 0)
       .attr('y2', this.isSum ? this.y(totalBudget) : 0);
+
+    this.sliderSvg
+      .select('.budgetLine > text')
+      .transition()
+      .duration(1000)
+      .attr('y', this.isSum ? this.y(totalBudget) : 0);
 
 
     this.sliderSvg
       .select('#budgetLineLockdowns')
       .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
+      .transition()
+      .duration(1000)
       .attr('x1', depletionYearLockdowns)
       .attr('x2', depletionYearLockdowns);
 
     this.sliderSvg
       .select('#budgetLineNoLockdowns')
       .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
+      .transition()
+      .duration(1000)
       .attr('x1', depletionYearNoLockdowns)
       .attr('x2', depletionYearNoLockdowns);
-  }
-
-  private calculateDepletionYear(totalBudget: number, lockdowns: boolean): number {
-    const data = this.dataService.getHistoricCo2Data();
-
-    const depletionYear = lockdowns
-      ? data.filter(dp => dp.co2SumLockdown > totalBudget)[0].year
-      : data.filter(dp => dp.co2SumNoLockdown > totalBudget)[0].year;
-
-    if (lockdowns) {
-      this.budgetDepletionYearWithRestrictions.emit(depletionYear);
-    } else {
-      this.budgetDepletionYearWithoutRestrictions.emit(depletionYear);
-    }
-
-    return depletionYear;
-
-    /*// Without using our data and simply sticking to the mcc carbon clock source we would have:
-    // 1.5°C scenario
-    if (lockdowns) {
-      return 2027.5;
-      // for 1.5°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 293000mtons)
-    } else {
-      return 2027;
-      // for 1.5°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 293000mtons)
-    }
-    // 2°C scenario
-    if (lockdowns) {
-      return 2047;
-      // for 2°C scenario with lockdowns (38.341mtons ( = 91,29% of 42000mtons) CO2 annually, divided to the remaining 1042800mtons)
-    } else {
-      return 2045;
-      // for 2°C scenario without lockdowns (42000mtons CO2 annually, divided to the remaining 1042800mtons)
-    }*/
   }
 
   // slider onChange low

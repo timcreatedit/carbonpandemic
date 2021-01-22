@@ -23,6 +23,16 @@ export interface FilterOptions {
 })
 export class DataService {
 
+  private co2Datapoints: Co2Datapoint[] = [];
+
+  private covidDatapoints: CovidDatapoint[] = [];
+  private lockdownDatapoints: LockdownDatapoint[] = [];
+  private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
+  private covidEuropeDatapoints: CovidDatapoint[] = [];
+  private maxDate: Date;
+
+  private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
+
   constructor() {
     this.readCo2Data();
     this.readCovidData();
@@ -39,24 +49,8 @@ export class DataService {
     console.log(this.covidEuropeDatapoints);
   }
 
-  private co2Datapoints: Co2Datapoint[] = [];
-  private covidDatapoints: CovidDatapoint[] = [];
-  private lockdownDatapoints: LockdownDatapoint[] = [];
-  private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
-  private covidEuropeDatapoints: CovidDatapoint[] = [];
-  private maxDate: Date;
 
-  private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
-
-  private static covidCountryToCountry(country: string): Countries {
-    if (country === 'United_Kingdom' || country === 'United Kingdom') {
-      return Countries.uk;
-    } else if (country === 'United_States_of_America' || country === 'United States') {
-      return Countries.us;
-    }
-    return country as Countries;
-  }
-
+  // region Initialization
 
   /**
    * Reads the data from the carbon monitor json and parses it into an array.
@@ -83,7 +77,7 @@ export class DataService {
       const actualDate = new Date(dateValues[2], dateValues[1] - 1, dateValues[0]);
       if (actualDate <= this.maxDate) {
         this.covidDatapoints.push({
-          country: DataService.covidCountryToCountry(dp.countriesAndTerritories),
+          country: this.covidCountryToCountry(dp.countriesAndTerritories),
           date: actualDate,
           cases: dp.cases,
           continent: dp.continentExp,
@@ -176,7 +170,7 @@ export class DataService {
       if (actualDate <= this.maxDate) {
         this.lockdownDatapoints.push({
           date: actualDate,
-          country: DataService.covidCountryToCountry(dp.countryName),
+          country: this.covidCountryToCountry(dp.countryName),
           lockdown: dp.c6_Stay_at_home_requirements === 2,
         } as LockdownDatapoint);
       }
@@ -220,9 +214,11 @@ export class DataService {
       } as HistoricCo2Datapoint));
 
     });
-
-    console.log(this.historicCo2Datapoints);
   }
+
+  // endregion
+
+  // region Public Data Accessors
 
   /**
    * Returns the dataset with potential filter options applied.
@@ -282,24 +278,22 @@ export class DataService {
     return filteredList;
   }
 
-  private sumSectors(datapoints: Co2Datapoint[]): Co2Datapoint[] {
-    if (datapoints.length < 2) {
-      return datapoints;
-    }
-    const dates = new Set<number>(datapoints.map(dp => dp.date.getTime()));
-    const datesArray = Array.from(dates).map(t => new Date(t));
-    const dailyPoints = datesArray.map(date => datapoints.filter(dp => dp.date.getTime() === date.getTime()));
-    const relevantCountries = Object.values(Countries)
-      .filter(c => datapoints.map(dp => dp.country).includes(c));
-    const countrySummed = relevantCountries.map(c => dailyPoints
-      .map(dps => dps.filter(dp => dp.country === c).reduce((a, b) => {
-        return {
-          ...a,
-          sector: undefined,
-          mtCo2: a.mtCo2 + b.mtCo2,
-        } as Co2Datapoint;
-      })));
-    return countrySummed.reduce((a, b) => [...a, ...b], []);
+  public getTotalEmissionsUntilYear(year: number): number {
+    return this.historicCo2Datapoints
+      .filter(dp => dp.year === 2020 && dp.prognosisDataIndicator === PrognosisDataIndicators.historic)
+      [0].co2Sum;
+  }
+
+  public get2020RemainingBudget(scenario2Degree: boolean): number {
+    return scenario2Degree ? 1042800 : 293000;
+  }
+
+  public getDepletionYear(totalBudget: number, lockdowns: boolean): number {
+    const data = this.historicCo2Datapoints;
+
+    return lockdowns
+      ? data.filter(dp => dp.co2SumLockdown > totalBudget)[0].year
+      : data.filter(dp => dp.co2SumNoLockdown > totalBudget)[0].year;
   }
 
   public getSectorsPerDay(
@@ -327,5 +321,40 @@ export class DataService {
     }
     return buffer;
   }
+
+  // endregion
+
+  //region Helpers
+
+  private covidCountryToCountry(country: string): Countries {
+    if (country === 'United_Kingdom' || country === 'United Kingdom') {
+      return Countries.uk;
+    } else if (country === 'United_States_of_America' || country === 'United States') {
+      return Countries.us;
+    }
+    return country as Countries;
+  }
+
+  private sumSectors(datapoints: Co2Datapoint[]): Co2Datapoint[] {
+    if (datapoints.length < 2) {
+      return datapoints;
+    }
+    const dates = new Set<number>(datapoints.map(dp => dp.date.getTime()));
+    const datesArray = Array.from(dates).map(t => new Date(t));
+    const dailyPoints = datesArray.map(date => datapoints.filter(dp => dp.date.getTime() === date.getTime()));
+    const relevantCountries = Object.values(Countries)
+      .filter(c => datapoints.map(dp => dp.country).includes(c));
+    const countrySummed = relevantCountries.map(c => dailyPoints
+      .map(dps => dps.filter(dp => dp.country === c).reduce((a, b) => {
+        return {
+          ...a,
+          sector: undefined,
+          mtCo2: a.mtCo2 + b.mtCo2,
+        } as Co2Datapoint;
+      })));
+    return countrySummed.reduce((a, b) => [...a, ...b], []);
+  }
+
+  //endregion
 }
 

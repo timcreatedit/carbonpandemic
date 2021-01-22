@@ -17,6 +17,7 @@ import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {CovidDatapoint} from '../core/models/coviddata.model';
 import {LockdownDatapoint} from '../core/models/lockdowndata.model';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-covid-graph',
@@ -44,7 +45,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   // region size
   width = 1400;
   height = 300;
-  adj = 40;
+  adj = 80;
   // endregion
 
   // hover options
@@ -133,7 +134,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   private graphSvg: SVGElement;
   private covidGraphSvg: SVGElement;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private decimalPipe: DecimalPipe) {
   }
 
   ngOnInit(): void {
@@ -370,16 +371,17 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       // DIFFERENCE BETWEEN YEARS
       tooltipSize[1] = this.dateTextHeight + 45;
 
-      let difference = (obj20.mtCo2 - obj19.mtCo2).toFixed(3);
+      const difference = obj20.mtCo2 - obj19.mtCo2;
       const percent = ((Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2) * 100).toFixed(1);
-      let fill = '#FF5889';
-      if (parseFloat(difference) < 0) {
-        fill = '#84ffbb';
-      } else {
-        difference = '+' + difference;
-      }
+      const fill = difference < 0 ? '#84ffbb' : '#FF5889';
+      const prefix = difference < 0 ? '' : '+';
       this.hoverData = [
-        {text: difference, unit: 'MtCo2', percent: '(' + percent + '%)', fill}
+        {
+          text: `${prefix} ${this.decimalPipe.transform(difference)}`,
+          unit: 'MtCo2',
+          percent: '(' + percent + '%)',
+          fill
+        }
       ];
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
@@ -393,7 +395,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         const value = obj20Sectors[sector] as number;
         this.hoverData.push(
           {
-            text: value.toFixed(3),
+            text: this.decimalPipe.transform(value),
             unit: 'MtCo2',
             percent: '(' + (value * 100).toFixed(1).toString() + '%)',
             fill: this.getColorForSector(sector as Sectors),
@@ -409,8 +411,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
       this.hoverData = [
-        {text: (obj19.mtCo2).toFixed(3), unit: 'MtCo2', percent: '', fill: '#63f2ff'},
-        {text: (obj20.mtCo2).toFixed(3), unit: 'MtCo2', percent: '', fill: 'white'}
+        {text: this.decimalPipe.transform(obj19.mtCo2), unit: 'MtCo2', percent: '', fill: '#63f2ff'},
+        {text: this.decimalPipe.transform(obj20.mtCo2), unit: 'MtCo2', percent: '', fill: 'white'}
       ];
       this.updateTooltip('tooltipGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverDate);
     }
@@ -515,7 +517,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     const objCovid = this.getCovidDataAtMousePosition(mousePosX, dataCovid);
     this.hoverCovidDate = [{date: this.getDateString(mousePosX, ' 2020')}];
-    this.hoverCovidData = [{text: objCovid.cases.toString(), unit: 'New cases', percent: '', fill: '#FF5889'}];
+    this.hoverCovidData = [{text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: '#FF5889'}];
 
     this.updateTooltip('tooltipCovidGroup', tooltipSize[1], tooltipSize[0], this.hoverCovidData, this.hoverCovidDate);
 
@@ -709,12 +711,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.x20.domain(d3.extent(data20.map(dp => dp.date)));
     this.y.domain([0, maxValue]);
 
-    this.svg.selectAll('#xAxis')
+    this.svg.select('#xAxis')
       .transition()
-      .duration(1000)
+      .duration(1)
       .call(this.xAxis as any);
 
-    this.svg.selectAll('#yAxis')
+    this.svg.select('#yAxis')
       .transition()
       .duration(1000)
       .call(this.yAxis as any);

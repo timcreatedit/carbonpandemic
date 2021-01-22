@@ -2,8 +2,10 @@
 
 .prognosis-graph {
   width: 100%;
+
   .graph-container {
     width: 100%;
+
     svg {
       margin: 8px;
       padding: 8px;
@@ -38,7 +40,7 @@
       .budgetLine {
         transition: 500ms ease;
         stroke-width: 2;
-        stroke-dasharray: 5,5;
+        stroke-dasharray: 5, 5;
 
         &.hidden {
           opacity: 0;
@@ -46,6 +48,14 @@
 
         &#budgetLineHorizontal {
           stroke: lightgrey;
+
+          text {
+            stroke: none;
+            fill: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 12pt;
+          }
         }
 
         &#budgetLineLockdowns {
@@ -56,7 +66,6 @@
           stroke: $negative;
         }
       }
-
 
 
       // HOVER
@@ -75,6 +84,7 @@
         rx: 10px;
         ry: 10px;
       }
+
       .tooltipValuesText {
         .hoverValuesText {
           font-weight: bold;
@@ -83,6 +93,7 @@
           left: 90px;
         }
       }
+
       .tooltipUnitsText {
         .hoverUnitsText {
           fill: white;
@@ -90,6 +101,7 @@
           font-size: 1.2em;
         }
       }
+
       .tooltipDescribeText {
         .hoverDescribeText {
           fill: white;
@@ -98,6 +110,7 @@
           font-size: 1.5em;
         }
       }
+
       .tooltipHoverDate {
         fill: white;
         font-weight: bold;
@@ -111,7 +124,7 @@
     }
   }
 
-  .slider{
+  .slider {
     position: center;
     width: 88%; //85%
     margin-left: 5%;

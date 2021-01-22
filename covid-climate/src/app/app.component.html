@@ -107,6 +107,14 @@
         We set up two prognosis lines, that give insight into just that:
       </p>
       <label>
+        Scenario
+        <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
+          <option [ngValue]="true">2° C Goal</option>
+          <option [ngValue]="false">1.5° C Goal</option>
+        </select>
+      </label>
+      <br>
+      <label>
         Sum up Emissions
         <input type="checkbox" [(ngModel)]="prognosisGraphSum">
       </label>
@@ -175,8 +183,7 @@
          [class.hidden]="!(scrollService.showPrognosisGraph$ | async)">
       <app-prognosis-graph [selectedCountry]="selectedCountry"
                            [isSum]="prognosisGraphSum"
-                           (budgetDepletionYearWithRestrictions)="budgetDepletionYearWithRestrictions = $event"
-                           (budgetDepletionYearWithoutRestrictions)="budgetDepletionYearWithoutRestrictions = $event"
+                           [scenario2degree]="scenario2Degree"
       ></app-prognosis-graph>
     </div>
     <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
