@@ -284,7 +284,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('fill', 'none')
-      .attr('pointer-events', 'all')
       .on('mouseout', () => { // on mouse out
         this.mouseout();
       })

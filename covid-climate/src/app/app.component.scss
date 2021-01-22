@@ -2,12 +2,24 @@
 @import "src/variables";
 @import "./top-bar/top-bar.component";
 
+@keyframes blinktext {
+  0% {
+    opacity: 0.3
+  }
+  50% {
+    opacity: 0.7
+  }
+  100% {
+    opacity: 0.3
+  }
+}
 
 #main-content {
   position: relative;
-  margin: $basicMargin;
+  padding: $basicPadding;
   display: flex;
   flex-direction: row;
+
 
   #text-container {
     position: relative;
@@ -18,15 +30,22 @@
     height: auto;
 
     h1 {
-      margin-bottom: -20px;
+      margin-bottom: 0px;
     }
 
     ul.legend {
       list-style-type: none;
+      margin: 2em 0;
+      padding: 1em;
+      background-color: #1B1825;
 
       li {
         display: flex;
         font-weight: bold;
+
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
 
         .bullet {
           width: 16px;
@@ -97,16 +116,17 @@
       }
     }
 
-    .sources{
+    .sources {
       font-size: small;
     }
+
     .end {
       margin-top: 100px;
       border-radius: 25px;
-      padding: 0 $basicMargin;
+      padding: 0 $basicPadding;
       background: #1B1825;
       position: center;
-      width: calc(100% - 2 * #{$basicMargin});
+      width: calc(100% - 2 * #{$basicPadding});
     }
 
 
@@ -121,32 +141,37 @@
     }
   }
 
-  @keyframes blinktext {
-    0% { opacity: 0.3 }
-    50% { opacity: 0.7 }
-    100% { opacity: 0.3 }
-  }
-
   #graphs-container {
-    width: calc(65% - #{$middleMargin} );
+    width: auto;
     position: fixed;
+    top: $basicPadding;
+    right: $basicPadding;
     left: $leftTextWidth;
+    display: grid;
+
     .graph-container {
       transition: opacity 500ms ease;
       box-sizing: border-box;
-      position: fixed;
-      padding: 60px 0 0 $middleMargin;
-      width: inherit;
-      top: 0px;
+      grid-column: 1;
+      grid-row: 1;
+
+      rect.hoverContainer {
+        pointer-events: all;
+      }
 
       &.hidden {
         opacity: 0;
         pointer-events: none;
         top: 2000px;
+
+        rect.hoverContainer {
+          pointer-events: none;
+        }
       }
     }
   }
 }
+
 @media (max-width: $changeLayoutWidth) {
   /* Breite beträgt höchstens 1350px */
   #main-content {
@@ -160,7 +185,7 @@
       top: 60vw;
       padding: 0 $middleMargin;
 
-      .end{
+      .end {
         margin-top: 60px;
         padding: 0 $middleMargin;
         width: calc(100% - 2 * #{$middleMargin});

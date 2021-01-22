@@ -44,8 +44,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   toolY = 0;
   // region size
   width = 1400;
-  height = 300;
-  adj = 80;
+  height = 400;
+
+  // top right bottom left
+  padding: [number, number, number, number] = [50, 0, 20, 80];
+
   // endregion
 
   // hover options
@@ -183,10 +186,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.svg.attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '-'
-        + this.adj + ' -'
-        + this.adj + ' '
-        + (this.width + this.adj * 3) + ' '
-        + (this.height + this.adj * 3))
+        + this.padding[3] + ' -'
+        + this.padding[0] + ' '
+        + (this.width + this.padding[1] + this.padding[3]) + ' '
+        + (this.height + this.padding[0] + this.padding[2]))
       .classed('svg-content', true);
 
     this.svg.append('g')
@@ -240,10 +243,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.covidSvg.attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '-'
-        + this.adj + ' -'
-        + this.adj + ' '
-        + (this.width + this.adj * 3) + ' '
-        + (this.height + this.adj * 3))
+        + this.padding[3] + ' -'
+        + this.padding[0] + ' '
+        + (this.width + this.padding[1] + this.padding[3]) + ' '
+        + (this.height + this.padding[0] + this.padding[2]))
       .classed('svg-content', true);
 
     this.covidSvg.append('g')
@@ -324,7 +327,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('fill', 'none')
-      .attr('pointer-events', 'all')
       .on('mouseout', () => { // on mouse out
         this.mouseout();
       })
@@ -391,13 +393,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 2020')}];
       this.hoverData = [];
       const sectorsInDate = Object.keys(obj20Sectors).filter(k => k !== 'date').reverse();
+      const sectorSum: number = Object.keys(obj20Sectors)
+        .filter(k => k !== 'date')
+        .map(k => obj20Sectors[k] as number)
+        .reduce((a, b) => a + b);
+
       for (const sector of sectorsInDate) {
         const value = obj20Sectors[sector] as number;
         this.hoverData.push(
           {
             text: this.decimalPipe.transform(value),
             unit: 'MtCo2',
-            percent: '(' + (value * 100).toFixed(1).toString() + '%)',
+            percent: '(' + ((value / sectorSum) * 100).toFixed(1).toString() + '%)',
             fill: this.getColorForSector(sector as Sectors),
           }
         );
@@ -490,7 +497,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('fill', 'none')
-      .attr('pointer-events', 'all')
       .on('mouseout', () => { // on mouse out
         this.mouseout();
       })

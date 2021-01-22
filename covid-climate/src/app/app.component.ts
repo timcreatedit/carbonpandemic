@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {Co2Datapoint, Countries, Sectors} from './core/models/co2data.model';
 import {DataService} from './core/services/data.service';
-import {fromEvent, Observable} from 'rxjs';
-import {filter, map, tap} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {ScrollService} from './core/services/scroll.service';
 import {CovidDatapoint} from './core/models/coviddata.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
   title = 'covid-climate';

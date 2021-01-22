@@ -6,14 +6,20 @@
 
   <div id="text-container">
     <div>
-      <h1> CO<sub>2</sub>-Emissions </h1>
-      <h2> 2019 & 2020 </h2>
+      <h1> Will the Pandemic save our Climate? </h1>
+      <h3> A look at the CO<sub>2</sub> Emissions in the context of the COVID-19 pandemic.</h3>
       <p>Due to the Covid-19 pandemic, the world looked a little bit different in 2020. People stayed at home,
         travelling was often impossible and planes had to stay grounded for the most part.</p>
       <p>These factors have resulted in noticeable changes to CO<sub>2</sub> emissions. As can be seen in the chart
-        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year. The
-        data
-        shown here comes from by Carbon Monitor [1], an international platform providing science-based estimates of
+        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year.</p>
+
+      <div class="scroll-prompt">
+        <span>↓</span>
+        <span>Scroll to Continue...</span>
+      </div>
+
+      <h2>How did CO<sub>2</sub> emissions change in 2020?</h2>
+      <p>The data shown here comes from by Carbon Monitor [1], an international platform providing science-based estimates of
         daily CO<sub>2</sub> emissions.</p>
       <ul class="legend">
         <li class="line2019">
@@ -185,9 +191,6 @@
                            [isSum]="prognosisGraphSum"
                            [scenario2degree]="scenario2Degree"
       ></app-prognosis-graph>
-    </div>
-    <div class="graph-container" id="pie-chart-container" [class.hidden]="!(scrollService.showPieGraph$ | async)">
-      <app-pie-chart [selectedCountry]="selectedCountry"></app-pie-chart>
     </div>
   </div>
 
