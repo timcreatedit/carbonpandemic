@@ -8,6 +8,8 @@ import { PrognosisGraphComponent } from './prognosis-graph/prognosis-graph.compo
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
         BrowserModule,
         FormsModule,
         NgxSliderModule,
+        MatButtonModule,
+        MatButtonToggleModule
     ],
   providers: [],
   bootstrap: [AppComponent]
