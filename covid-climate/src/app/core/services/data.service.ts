@@ -47,7 +47,6 @@ export class DataService {
   private maxDate: Date;
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
-  private usedLands = [Countries];
 
   private static covidCountryToCountry(country: string): Countries {
     if (country === 'United_Kingdom' || country === 'United Kingdom') {
@@ -187,20 +186,42 @@ export class DataService {
 
   private readHistoricCo2Data(): void {
     let sumBuffer = 0;
-    let isLeapYear = false;
-    (historicCo2Dataset as any).Tabelle1.forEach(dp => {
-      isLeapYear = !(dp.Year % 4 !== 0 || (dp.Year % 100 === 0 && dp.Year % 400 !== 0));
-      sumBuffer += (dp.meandailyCO2 * (isLeapYear ? 364 : 365));
-      this.historicCo2Datapoints.push({
+    let sumBufferLockdown = 0;
+    let sumBufferNoLockdown = 0;
+    const uniqueYears = new Set((historicCo2Dataset as any).Tabelle1.map(d => d.Year));
+    uniqueYears.forEach(year => {
+      const dps = (historicCo2Dataset as any).Tabelle1.filter(d => d.Year === year);
+      if (dps.length === 0 || dps.length > 2) {
+        throw new Error('Too many historic datapoints for year ' + year);
+      }
+      const historicDp = dps.filter(d => d.PrognosisData === 'historic')[0];
+      const prognosisDp = dps.filter(d => d.PrognosisData === 'prognosis')[0];
+      const isLeapYear = !(dps[0].Year % 4 !== 0 || (dps[0].Year % 100 === 0 && dps[0].Year % 400 !== 0));
+
+      const addedCo2: number = historicDp ? (parseFloat(historicDp.meandailyCO2) * (isLeapYear ? 364 : 365)) : 0;
+      sumBuffer += addedCo2;
+
+      const addedCo2Lockdown = prognosisDp ? (parseFloat(prognosisDp.CO2WithLockdowns) * (isLeapYear ? 364 : 365)) : addedCo2;
+      sumBufferLockdown += addedCo2Lockdown;
+
+      const addedCo2NoLockdown = prognosisDp ? (parseFloat(prognosisDp.CO2WithoutLockdowns) * (isLeapYear ? 364 : 365)) : addedCo2;
+      sumBufferNoLockdown += addedCo2NoLockdown;
+
+      dps.forEach(dp => this.historicCo2Datapoints.push({
         country: Countries.world, // the dataset used right now only contains world data; subject of discussion!
-        year: dp.Year,
-        mtCo2: dp.meandailyCO2,
-        co2Sum: sumBuffer + (dp.meandailyCO2 * (isLeapYear ? 364 : 365)),
-        co2PrognosisLockdown: dp.CO2WithLockdowns,
-        co2PrognosisNoLockdown: dp.CO2WithoutLockdowns,
+        year: parseInt(dp.Year, 10),
+        mtCo2: parseFloat(dp.meandailyCO2),
+        co2Sum: sumBuffer,
+        co2PrognosisLockdown: parseFloat(dp.CO2WithLockdowns),
+        co2SumLockdown: sumBufferLockdown,
+        co2PrognosisNoLockdown: parseFloat(dp.CO2WithoutLockdowns),
+        co2SumNoLockdown: sumBufferNoLockdown,
         prognosisDataIndicator: dp.PrognosisData,
-      } as HistoricCo2Datapoint);
+      } as HistoricCo2Datapoint));
+
     });
+
+    console.log(this.historicCo2Datapoints);
   }
 
   /**
@@ -281,7 +302,11 @@ export class DataService {
     return countrySummed.reduce((a, b) => [...a, ...b], []);
   }
 
-  public getSectorsPerDay(country: Countries, sectors: Sectors[] = Object.values(Sectors), setRemainingToZero = false): { [id: string]: number | Date }[] {
+  public getSectorsPerDay(
+    country: Countries,
+    sectors: Sectors[] = Object.values(Sectors),
+    setRemainingToZero = false
+  ): { [id: string]: number | Date }[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
     const dates = Array.from(new Set<number>(d.map(dp => dp.date.getTime())));
     const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));

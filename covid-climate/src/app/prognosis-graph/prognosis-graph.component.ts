@@ -33,6 +33,8 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
   @Input() scenario2degree = true;
+  @Input() isSum = true;
+
 
   get remainingBudget(): number {
     return this.scenario2degree ? 1042800 : 293000;
@@ -49,10 +51,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   // region slider values
   sliderLowValue = 1750;
-  sliderHighValue = 2055;
+  sliderHighValue = 2050;
   options: Options = {
     floor: 1750,
-    ceil: 2055
+    ceil: 2050
   };
   // endregion
 
@@ -67,9 +69,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   private smallLineHeight = 35;
   // endregion
 
-  //region sum variables
-  private isSum = false;
-  // endregion
 
   //region D3 Variables
   private readonly curveHistoric = d3.curveLinear;
@@ -103,12 +102,12 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   readonly linePrognosisLockdown = d3.line<HistoricCo2Datapoint>()
     .curve(this.curvePrognosisLockdown)
     .x(d => this.x(d.year))
-    .y(d => this.y(d.co2PrognosisLockdown));
+    .y(d => this.y(this.isSum ? d.co2SumLockdown : d.co2PrognosisLockdown));
 
   readonly linePrognosisNoLockdown = d3.line<HistoricCo2Datapoint>()
     .curve(this.curvePrognosisNoLockdown)
     .x(d => this.x(d.year))
-    .y(d => this.y(d.co2PrognosisNoLockdown));
+    .y(d => this.y(this.isSum ? d.co2SumNoLockdown : d.co2PrognosisNoLockdown));
 
   private prognosisSvg: d3.Selection<SVGElement, unknown, null, undefined>;
   private sliderSvg: d3.Selection<SVGElement, unknown, null, undefined>;
@@ -137,8 +136,12 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       this.updatePrognosisGraph();
     } else if (isNotNullOrUndefined(changes.scenario2degree)) {
       this.updatePrognosisGraph();
+    } else if (isNotNullOrUndefined(changes.isSum)) {
+      this.updatePrognosisGraph();
+      this.updateCo2BudgetLines();
     }
   }
+
   // endregion
 
   // region Prognosis Graph
@@ -204,7 +207,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
-    const maxValue = this.isSum ? d3.max([...dataAll.map(d => d.mtCo2), ...dataAll.map(d => d.co2Sum)]) : 120;
+    const maxValue = this.isSum ? d3.max([
+      ...dataAll.map(d => d.co2Sum),
+      ...dataAll.map(d => d.co2SumNoLockdown),
+      ...dataAll.map(d => d.co2SumLockdown),
+    ]) : 120;
     // this.x.domain(d3.extent(dataAll.map(dp => dp.year)));
     this.x.domain([this.sliderLowValue, this.sliderHighValue]);
     this.y.domain([0, maxValue * 1.1]);
@@ -250,6 +257,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .duration(1)
       .attr('d', this.linePrognosisNoLockdown);
   }
+
   // endregion
 
   // region Hover
@@ -373,7 +381,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       this.hoverSelectedDate = [{date: year}];
       this.hoverData = [
         {detail: 'Emission', text: objCo2.mtCo2, unit: 'MtCo2/d', fill: 'white'}
-        ];
+      ];
     }
     this.updateTooltip('tooltipPrognosisGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverSelectedDate);
     // line and tooltip movement
@@ -422,11 +430,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('class', 'hoverValuesText')
       .attr('x', 100)
       .style('fill', data => data.fill)
-      .attr('y', (data, index) => this.dateTextHeight + (index ) * this.bigLineHeight)
+      .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.text));
     valuesText
       .style('fill', data => data.fill)
-      .attr('y', (data, index) => this.dateTextHeight + (index ) * this.bigLineHeight)
+      .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.text));
     // - Units
     const unitsText = tooltipGroup.selectAll('.tooltipUnitsText').selectAll('text').data(tooltipData);
@@ -434,10 +442,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     unitsText.enter().append('text')
       .attr('class', 'hoverUnitsText')
       .attr('x', 105)
-      .attr('y', (data, index) => this.dateTextHeight + (index ) * this.bigLineHeight)
+      .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.unit));
     unitsText
-      .attr('y', (data, index) => this.dateTextHeight + (index ) * this.bigLineHeight)
+      .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.unit));
     // - Details
     const describeText = tooltipGroup.selectAll('.tooltipDescribeText').selectAll('text').data(tooltipData);
@@ -451,6 +459,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('y', (data, index) => this.dateTextHeight + index * this.bigLineHeight - this.smallLineHeight)
       .text(data => (data.detail));
   }
+
   // endregion
 
   private initCo2BudgetLines(): void {
@@ -464,50 +473,46 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('id', 'budgetLineNoLockdowns')
       .attr('y1', 0)
       .attr('y2', this.height);
+
+    this.sliderSvg.append('svg:line')
+      .attr('class', 'budgetLine')
+      .attr('id', 'budgetLineHorizontal')
+      .attr('x1', 0)
+      .attr('x2', this.width);
   }
 
   private updateCo2BudgetLines(): void {
-    const lockdowns = true;
+    const totalBudget = this.dataService.getHistoricCo2Data()
+      .filter(dp => dp.year === 2020 && dp.prognosisDataIndicator === PrognosisDataIndicators.historic)[0].co2Sum + this.remainingBudget;
 
-    const depletionYearLockdowns = this.x(this.calculateDepletionYear(lockdowns));
+    const depletionYearLockdowns = this.x(this.calculateDepletionYear(totalBudget, true));
+    const depletionYearNoLockdowns = this.x(this.calculateDepletionYear(totalBudget, false));
+
+
+    this.sliderSvg
+      .select('#budgetLineHorizontal')
+      .attr('y1', this.isSum ? this.y(totalBudget) : 0)
+      .attr('y2', this.isSum ? this.y(totalBudget) : 0);
+
+
     this.sliderSvg
       .select('#budgetLineLockdowns')
       .attr('x1', depletionYearLockdowns)
       .attr('x2', depletionYearLockdowns);
 
-    const depletionYearNoLockdowns = this.x(this.calculateDepletionYear(!lockdowns));
     this.sliderSvg
       .select('#budgetLineNoLockdowns')
       .attr('x1', depletionYearNoLockdowns)
       .attr('x2', depletionYearNoLockdowns);
   }
 
-  private calculateDepletionYear(lockdowns: boolean): number {
-    const prognosisData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: [PrognosisDataIndicators.prognosis],
-    });
-    const upcomingYears = prognosisData.map(dp => dp.year);
-    let depletionYear;
-    let co2Emissions;
+  private calculateDepletionYear(totalBudget: number, lockdowns: boolean): number {
+    const data = this.dataService.getHistoricCo2Data();
 
-    if (lockdowns) {
-      co2Emissions = prognosisData.map(dp => dp.co2PrognosisLockdown);
-    } else {
-      co2Emissions = prognosisData.map(dp => dp.co2PrognosisNoLockdown);
-    }
+    const depletionYear = lockdowns
+      ? data.filter(dp => dp.co2SumLockdown > totalBudget)[0].year
+      : data.filter(dp => dp.co2SumNoLockdown > totalBudget)[0].year;
 
-    let usedBudget = 0;
-    let i;
-    for (i = 1; usedBudget < this.remainingBudget; i++) {
-      // i = 1 because our prognosis data begins with 2020 but the calculation should start with 2021
-      usedBudget = usedBudget + (Number(co2Emissions[i]) * 365.25); // 365.25 to account for leap years
-    }
-    if (i <= 30) {
-      depletionYear = upcomingYears[i - 1];
-    } else {
-      depletionYear = upcomingYears[29]; // year 2050: the last datapoint entry
-      console.log('CO2 budget will be depleted some time after 2050.');
-    }
     if (lockdowns) {
       this.budgetDepletionYearWithRestrictions.emit(depletionYear);
     } else {

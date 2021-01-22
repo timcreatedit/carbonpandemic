@@ -36,19 +36,28 @@
       }
 
       .budgetLine {
+        transition: 500ms ease;
         stroke-width: 2;
+        stroke-dasharray: 5,5;
+
+        &.hidden {
+          opacity: 0;
+        }
+
+        &#budgetLineHorizontal {
+          stroke: lightgrey;
+        }
+
+        &#budgetLineLockdowns {
+          stroke: $positive;
+        }
+
+        &#budgetLineNoLockdowns {
+          stroke: $negative;
+        }
       }
 
-      #budgetLineLockdowns {
-        stroke: $positive;
-        stroke-dasharray: 5,5;
-      }
 
-      #budgetLineNoLockdowns {
-        stroke: $negative;
-        stroke-dasharray: 5,5;
-        stroke-dashoffset: 5;
-      }
 
       // HOVER
       .mouseLine {

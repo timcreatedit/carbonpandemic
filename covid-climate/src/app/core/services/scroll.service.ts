@@ -30,28 +30,30 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.25],
+      section: [0, 0.23],
       config: {
         covidGraphShown: true,
       }
     },
     {
-      section: [0.25, 0.55],
+      section: [0.23, 0.47],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
       }
     },
     {
-      section: [0.55, 0.85],
+      section: [0.47, 0.8],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
       }
     },
     {
-      section: [0.85, 1],
+      section: [0.8, 1],
       config: {
+        covidGraphShown: false,
+        covidShowSectors: true,
         prognosisGraphShown: true,
       }
     }
@@ -92,17 +94,18 @@ export class ScrollService {
   );
 
   constructor() {
-    combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
+    combineLatest([
+      fromEvent(window, 'scroll').pipe(startWith(0)),
       fromEvent(window, 'resize').pipe(startWith(0))])
       .pipe(
-        map(() => window.scrollY / (this.getDocumentHeight() - window.innerHeight)),
+        map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
         tap(console.log),
         map(s => this.getCurrentConfig(s)),
         distinctUntilChanged(),
       ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
-  private getDocumentHeight(): number {
+  private static getDocumentHeight(): number {
     const body = document.body;
     const html = document.documentElement;
 

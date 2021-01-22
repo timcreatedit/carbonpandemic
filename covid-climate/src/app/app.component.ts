@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Co2Datapoint, Countries, Sectors} from './core/models/co2data.model';
 import {DataService} from './core/services/data.service';
 import {fromEvent, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {filter, map, tap} from 'rxjs/operators';
 import {ScrollService} from './core/services/scroll.service';
 import {CovidDatapoint} from './core/models/coviddata.model';
 
@@ -27,6 +27,9 @@ export class AppComponent {
   sectorKeys = Object.keys(Sectors);
   sectorNames = Object.values(Sectors);
 
+  scenario2Degree = false;
+  prognosisGraphSum = true;
+
   budgetDepletionYearWithRestrictions: number;
   budgetDepletionYearWithoutRestrictions: number;
 
@@ -34,6 +37,9 @@ export class AppComponent {
     private dataService: DataService,
     public scrollService: ScrollService,
   ) {
+    this.scrollService.covidShowSectors$.pipe(
+      filter(d => !d)
+    ).subscribe(() => this.updateSelectedSector('All'));
   }
 
   onSelectCountry(country: Countries): void {
