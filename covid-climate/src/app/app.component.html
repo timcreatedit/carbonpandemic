@@ -10,8 +10,8 @@
       <h3> A look at the CO<sub>2</sub> Emissions in the context of the COVID-19 pandemic.</h3>
       <p>Due to the Covid-19 pandemic, the world looked a little bit different in 2020. People stayed at home,
         travelling was often impossible and planes had to stay grounded for the most part.</p>
-      <p>These factors have resulted in noticeable changes to CO<sub>2</sub> emissions. As can be seen in the chart
-        on the right, the daily CO<sub>2</sub> emissions for 2020 look fairly different from those of last year.</p>
+      <p>These factors have resulted in noticeable changes to CO<sub>2</sub> emissions. But just how much difference did
+        it make?</p>
 
       <div class="scroll-prompt">
         <span>↓</span>
@@ -50,8 +50,9 @@
 
       <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world!</i>
       <p></p>
-      <p>The unit of the y-Axis of the graph is <i>Megatons of carbon dioxide per day</i>. One Megaton equals <strong>1,000,000
-        metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases, while the
+      <p>Emissions are displayed in <i>Megatons of carbon dioxide per day</i>. One Megaton equals
+        <strong> {{ 1000000 | number}}
+          metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases, while the
         transparent areas illustrate the periods of
         when the selected country had a lockdown.</p>
 
@@ -133,7 +134,8 @@
           </select>
         </label>
       </p>
-      <i>Tip: The influences of the pandemic on singular sectors can be quite pronounced – try filtering for domestic aviation for example!</i>
+      <i>Tip: The influences of the pandemic on singular sectors can be quite pronounced – try filtering for domestic
+        aviation for example!</i>
       <div class="key">
         <h4>Bottom Graph</h4>
         <ul>
@@ -233,10 +235,14 @@
         be depleted, with and without continuing regulations.
       </p>
       <div class="info">
-        According to the prognosis from [2] and given the budget calculations from [3], we <strong>will exceed the 2° C
-        goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
-        <br>When factoring in the reduction in emissions that the lockdown has entailed, by our calculations
-        <strong>we will exceed 2° C of global warming by {{ budgetDepletionYearWithRestrictions }}</strong>.
+        <p>
+          According to the prognosis from [2] and given the budget calculations from [3], we <strong>will exceed the 2°
+          C
+          goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
+        </p>
+        <p>When factoring in the reduction in emissions that the lockdown has entailed, by our calculations
+          <strong>we will exceed 2° C of global warming by {{ budgetDepletionYearWithRestrictions }}</strong>.
+        </p>
       </div>
     </div>
     <div class="end">

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Co2Datapoint, Countries, Sectors} from './core/models/co2data.model';
 import {DataService} from './core/services/data.service';
 import {filter} from 'rxjs/operators';
@@ -11,7 +11,7 @@ import {CovidDatapoint} from './core/models/coviddata.model';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'covid-climate';
 
   selectedCountry: Countries = Countries.spain;
@@ -28,7 +28,6 @@ export class AppComponent {
   sectorNames = Object.values(Sectors);
 
   scenario2Degree = false;
-  prognosisGraphSum = true;
 
   budgetDepletionYearWithRestrictions: number;
   budgetDepletionYearWithoutRestrictions: number;
@@ -40,6 +39,10 @@ export class AppComponent {
     this.scrollService.covidShowSectors$.pipe(
       filter(d => !d)
     ).subscribe(() => this.updateSelectedSector('All'));
+  }
+
+  ngOnInit(): void {
+    this.updateScenario(this.scenario2Degree);
   }
 
   onSelectCountry(country: Countries): void {
