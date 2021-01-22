@@ -44,8 +44,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   // region size
   width = 1400;
-  height = 600;
-  adj = 80;
+  height = 800;
+
+  // top right bottom left
+  padding: [number, number, number, number] = [50, 0, 20, 80];
   // endregion
 
   // region slider values
@@ -151,10 +153,10 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.prognosisSvg.attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '-'
-        + this.adj + ' -'
-        + this.adj + ' '
-        + (this.width + this.adj * 3) + ' '
-        + (this.height + this.adj * 3))
+        + this.padding[3] + ' -'
+        + this.padding[0] + ' '
+        + (this.width + this.padding[1] + this.padding[3]) + ' '
+        + (this.height + this.padding[0] + this.padding[2]))
       .classed('svg-content', true);
 
     this.prognosisSvg.append('g')

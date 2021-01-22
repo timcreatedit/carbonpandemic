@@ -11,6 +11,7 @@ export interface SiteScrollConfig {
   readonly pieGraphShown?: boolean;
 
   readonly prognosisGraphShown?: boolean;
+  readonly prognosisSummedUp?: boolean;
 }
 
 export interface ScrollSection {
@@ -30,31 +31,45 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.23],
+      section: [0, 0.1],
+      config: {
+      }
+    },
+    {
+      section: [0.1, 0.3],
       config: {
         covidGraphShown: true,
       }
     },
     {
-      section: [0.23, 0.47],
+      section: [0.3, 0.47],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
       }
     },
     {
-      section: [0.47, 0.8],
+      section: [0.47, 0.7],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
       }
     },
     {
-      section: [0.8, 1],
+      section: [0.7, .9],
       config: {
         covidGraphShown: false,
         covidShowSectors: true,
         prognosisGraphShown: true,
+      }
+    },
+    {
+      section: [0.9, 1],
+      config: {
+        covidGraphShown: false,
+        covidShowSectors: true,
+        prognosisGraphShown: true,
+        prognosisSummedUp: true,
       }
     }
   ];
@@ -90,6 +105,12 @@ export class ScrollService {
   public readonly showPrognosisGraph$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
     map(c => c.prognosisGraphShown ?? false),
+    distinctUntilChanged(),
+  );
+
+  public readonly prognosisSummedUp$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+    map(c => c.prognosisSummedUp ?? false),
     distinctUntilChanged(),
   );
 

@@ -72,7 +72,7 @@
     height: 18px;
 
     transition: 500s ease;
-
+    opacity: 1;
     &.hidden {
       opacity: 0;
       pointer-events: none;

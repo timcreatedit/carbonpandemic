@@ -43,7 +43,7 @@
 
       .lineCovid {
         fill: none;
-        stroke: $negative;
+        stroke: $covid;
         stroke-width: 3px;
       }
 
@@ -67,8 +67,8 @@
 
       .area-lockdown {
         transition: all 500ms ease;
-        fill: #DCDCDC; //85FFBB, 9BFFC7
-        opacity: 0.1;
+        fill: $lockdownColor; //85FFBB, 9BFFC7
+        opacity: $lockdownOpacity;
 
         &.hidden {
           opacity: 0;

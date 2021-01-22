@@ -1,6 +1,6 @@
 <div id="top-bar-component">
-  <select id="dropDownMenu" [ngModel]="selectedCountry" (ngModelChange)="updateCountry($event)" [class.hidden]="scrollService.showPrognosisGraph$ | async">
+  <select id="dropDownMenu" [ngModel]="selectedCountry" (ngModelChange)="updateCountry($event)" [class.hidden]="!(scrollService.showCovidGraph$ | async)">
     <option *ngFor="let country of countries">{{country}}</option>
   </select>
-  <img src="assets/icons/dropDownArrow.svg" alt="no svg found" [class.hidden]="scrollService.showPrognosisGraph$ | async">
+  <img src="assets/icons/dropDownArrow.svg" alt="Dropdown Arrow" [class.hidden]="!(scrollService.showCovidGraph$ | async)">
 </div>
