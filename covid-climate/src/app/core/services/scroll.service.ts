@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, combineLatest, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, startWith, tap} from 'rxjs/operators';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export interface SiteScrollConfig {
@@ -56,6 +56,7 @@ export class ScrollService {
       }
     }
   ];
+
   //endregion
 
   private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
@@ -94,10 +95,19 @@ export class ScrollService {
     combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
       fromEvent(window, 'resize').pipe(startWith(0))])
       .pipe(
-        map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
+        map(() => window.scrollY / (this.getDocumentHeight() - window.innerHeight)),
+        tap(console.log),
         map(s => this.getCurrentConfig(s)),
         distinctUntilChanged(),
       ).subscribe(c => this.currentScrollConfig$.next(c));
+  }
+
+  private getDocumentHeight(): number {
+    const body = document.body;
+    const html = document.documentElement;
+
+    return Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
   }
 
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {
