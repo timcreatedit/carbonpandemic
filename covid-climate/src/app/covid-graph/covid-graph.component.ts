@@ -37,6 +37,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() worstDayOf20 = new EventEmitter<Co2Datapoint>();
 
+  private showAbsolute = true;
   private mouseOverGraph = false;
   private mouseCoordinates: [number, number];
 
@@ -50,6 +51,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   padding: [number, number, number, number] = [50, 0, 20, 80];
 
   // endregion
+  yAxisText = 'in MtCO2/d';
 
   // hover options
   private hoverData: { unit: string; text: string; fill: string; percent: string }[] = [
@@ -181,6 +183,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  onToggleChange(value): void {
+    if (this.showAbsolute !== value) {
+      this.showAbsolute = value;
+      this.updateGraph();
+      console.log('Absolute= ' + this.showAbsolute);
+    }else {
+      this.showAbsolute = value;
+    }
+  }
+
   private initGraph(): void {
     this.svg = d3.select(this.graphSvg);
 
@@ -203,11 +215,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('id', 'yAxis')
       .call(this.yAxis)
       .append('text')
+      .attr('id', 'yAxisText')
       .attr('dy', '.75em')
       .attr('y', -30)
       .attr('x', 30)
       .style('text-anchor', 'end')
-      .text('in MtCO2/d');
+      .text(this.yAxisText);
 
     for (const sector of Object.keys(Sectors)) {
       this.svg.append('path')
@@ -634,17 +647,48 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   // HOVER END
 
   private updateGraph(): void {
-    const data19 = this.dataService.getCo2Data({
+    let data19 = this.dataService.getCo2Data({
       yearFilter: [2019],
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-    const data20 = this.dataService.getCo2Data({
+    let data20 = this.dataService.getCo2Data({
       yearFilter: [2020],
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
     const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, true);
+
+    // RELATIVE DATA
+    const dataWorld19 = this.dataService.getCo2Data({
+      yearFilter: [2019],
+      countryFilter: [Countries.world],
+      sumSectors: true,
+    });
+    const dataWorld20 = this.dataService.getCo2Data({
+      yearFilter: [2020],
+      countryFilter: [Countries.world],
+      sumSectors: true,
+    });
+
+    if (this.showAbsolute.toString() === 'false') {
+      this.yAxisText = 'in %';
+      console.log('compute and show relative dataset');
+
+      data19 = data19.map( (d, i) => {
+        // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
+        d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
+        // console.log('--> ' + d.mtCo2);
+        return d;
+      });
+      data20 = data20.map( (d, i) => {
+        d.mtCo2 = (d.mtCo2 / dataWorld20[i].mtCo2) * 100;
+        return d;
+      });
+    }else{
+      this.yAxisText = 'in MtCO2/d';
+    }
+    // END RELATIVE DATA
 
     this.updateAxes(data19, data20);
     this.updateLines(data19, data20);
@@ -715,7 +759,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.x19.domain(d3.extent(data19.map(dp => dp.date)));
     this.x20.domain(d3.extent(data20.map(dp => dp.date)));
-    this.y.domain([0, maxValue]);
+
+    if (this.showAbsolute.toString() === 'true') {
+      this.y.domain([0, maxValue]);
+    } else {
+      this.y.domain([0, 100]);
+    }
 
     this.svg.select('#xAxis')
       .transition()
@@ -726,6 +775,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .transition()
       .duration(1000)
       .call(this.yAxis as any);
+
+    document.getElementById('yAxisText').textContent = this.yAxisText;
   }
 
   private updateCovidAxes(data: CovidDatapoint[]): void {

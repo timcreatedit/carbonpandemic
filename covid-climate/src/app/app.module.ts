@@ -7,7 +7,9 @@ import { PrognosisGraphComponent } from './prognosis-graph/prognosis-graph.compo
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import {DecimalPipe} from '@angular/common';
+import { DecimalPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {DecimalPipe} from '@angular/common';
         BrowserModule,
         FormsModule,
         NgxSliderModule,
+        MatButtonModule,
+        MatButtonToggleModule
     ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent]
