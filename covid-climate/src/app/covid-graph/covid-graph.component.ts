@@ -205,6 +205,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .attr('id', 'yAxis')
       .call(this.yAxis)
       .append('text')
+      .attr('id', 'yAxisText')
       .attr('dy', '.75em')
       .attr('y', -30)
       .attr('x', 30)
@@ -649,13 +650,13 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     });
 
     if (this.showAbsolute.toString() === 'false') {
-      this.yAxisText = 'in MtCO2/d';
+      this.yAxisText = 'in %';
       console.log('compute and show relative dataset');
 
       data19 = data19.map( (d, i) => {
-        console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
+        // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
         d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
-        console.log('--> ' + d.mtCo2);
+        // console.log('--> ' + d.mtCo2);
         return d;
       });
       data20 = data20.map( (d, i) => {
@@ -663,7 +664,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         return d;
       });
     }else{
-      this.yAxisText = 'in %';
+      this.yAxisText = 'in MtCO2/d';
     }
     // END RELATIVE DATA
 
@@ -741,6 +742,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       .transition()
       .duration(1000)
       .call(this.yAxis as any);
+
+    document.getElementById('yAxisText').textContent = this.yAxisText;
   }
 
   private updateCovidAxes(data: CovidDatapoint[]): void {

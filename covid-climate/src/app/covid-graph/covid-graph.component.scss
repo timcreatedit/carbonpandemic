@@ -21,7 +21,7 @@
       .line19 {
         transition: all 200ms ease;
         fill: none;
-        stroke: #63f2ff;
+        stroke: $line19;
         stroke-width: 3px;
 
         &.hidden {
@@ -31,7 +31,7 @@
 
       .line20 {
         fill: none;
-        stroke: #ffffff;
+        stroke: $line20;
         stroke-width: 3px;
       }
 
