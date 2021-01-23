@@ -12,6 +12,8 @@ export interface SiteScrollConfig {
 
   readonly prognosisGraphShown?: boolean;
   readonly prognosisSummedUp?: boolean;
+
+  readonly topBarDropdownShown?: boolean;
 }
 
 export interface ScrollSection {
@@ -39,6 +41,7 @@ export class ScrollService {
       section: [0.1, 0.3],
       config: {
         covidGraphShown: true,
+        topBarDropdownShown: true,
       }
     },
     {
@@ -46,6 +49,7 @@ export class ScrollService {
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
+        topBarDropdownShown: true,
       }
     },
     {
@@ -53,6 +57,7 @@ export class ScrollService {
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
+        topBarDropdownShown: true,
       }
     },
     {
@@ -61,6 +66,7 @@ export class ScrollService {
         covidGraphShown: false,
         covidShowSectors: true,
         prognosisGraphShown: true,
+        topBarDropdownShown: true,
       }
     },
     {
@@ -70,6 +76,7 @@ export class ScrollService {
         covidShowSectors: true,
         prognosisGraphShown: true,
         prognosisSummedUp: true,
+        topBarDropdownShown: true,
       }
     }
   ];
@@ -113,6 +120,12 @@ export class ScrollService {
     map(c => c.prognosisSummedUp ?? false),
     distinctUntilChanged(),
   );
+
+  public readonly showTopBarDropdown$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+  map(c => c.topBarDropdownShown ?? false),
+  distinctUntilChanged(),
+);
 
   constructor() {
     combineLatest([
