@@ -104,6 +104,12 @@
           .bullet {
             background: $line20;
           }
+
+          .customSub {
+            padding-top: 0.5em;
+            padding-right: 0.25em;
+            font-size: 85%;
+          }
         }
 
         &.lineCovid {
@@ -241,7 +247,7 @@
   /* Breite beträgt höchstens 1350px */
   #main-content {
     flex-direction: row;
-    margin: 0px;
+    margin: 0;
     padding: 40px;
 
     #text-container {
