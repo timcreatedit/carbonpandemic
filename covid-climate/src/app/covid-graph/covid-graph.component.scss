@@ -20,7 +20,7 @@
       }
 
       .line19 {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
         fill: none;
         stroke: $line19;
         stroke-width: 3px;
@@ -31,7 +31,7 @@
       }
 
       .line20 {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
         fill: none;
         stroke: $line20;
         stroke-width: 3px;
@@ -48,7 +48,7 @@
       }
 
       .area-above {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
         fill: $negative; //85FFBB, FF5889
 
         &.hidden {
@@ -57,7 +57,7 @@
       }
 
       .area-below {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
         fill: $positive; //85FFBB, 9BFFC7
 
         &.hidden {
@@ -66,7 +66,7 @@
       }
 
       .area-lockdown {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
         fill: $lockdownColor; //85FFBB, 9BFFC7
         opacity: $lockdownOpacity;
 
@@ -76,7 +76,7 @@
       }
 
       .sectorArea {
-        transition: all 500ms ease;
+        transition: opacity 500ms ease;
 
         &.hidden {
           opacity: 0;
