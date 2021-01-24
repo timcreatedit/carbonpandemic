@@ -60,6 +60,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   // endregion
 
   // region hover variables
+  private colorPositive = '#4ff396';
+  private colorNegative = '#fc7407';
+
   private hoverData = [
     {detail: '', text: '', unit: 'MtCo2', fill: 'white'}
   ];
@@ -270,6 +273,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     // this is the vertical line to follow mouse
     this.prognosisSvg.append('svg:rect')
       .attr('class', 'mouseLine')
+      .attr('height', this.height)
       .style('opacity', '0');
 
     // general group to hide or show the tooltip
@@ -383,13 +387,13 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
           detail: 'Prognosis 1: ',
           text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumNoLockdown : objPrognosis.co2PrognosisNoLockdown),
           unit: this.unit,
-          fill: '#FF5889'
+          fill: this.colorNegative
         },
         {
           detail: 'Prognosis 2: ',
           text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumLockdown : objPrognosis.co2PrognosisLockdown),
           unit: this.unit,
-          fill: '#85FFBB'
+          fill: this.colorPositive
         }
       ];
     } else {

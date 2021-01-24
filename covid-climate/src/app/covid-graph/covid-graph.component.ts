@@ -54,12 +54,26 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   yAxisText = 'in MtCO2/d';
 
   // hover options
+  private colorLine19 = '#6690ff';
+  private colorLine20 = '#ffffff';
+
+  private colorPositive = '#4ff396';
+  private colorNegative = '#fc7407';
+
+  private colorPower = '#ffdb21';
+  private colorGroundTransport = '#20E74B';
+  private colorIndustry = '#b968ff';
+  private colorResidential = '#f6304e';
+  private colorAviation = '#388bef';
+
+  private colorCovidCases = '#ff5889';
+
   private hoverData: { unit: string; text: string; fill: string; percent: string }[] = [
     {text: '0', unit: 'MtCo2', percent: '', fill: '#63f2ff'},
     {text: '0', unit: 'MtCo2', percent: '', fill: 'white'}
   ];
   private hoverCovidData = [
-    {text: '0', unit: 'New cases', percent: '', fill: '#FF5889'}
+    {text: '0', unit: 'New cases', percent: '', fill: this.colorCovidCases}
   ];
 
   private hoverDate = [{date: '-'}];
@@ -324,6 +338,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     // this is the vertical line to follow mouse
     const line = this.svg.append('svg:rect')
       .attr('class', 'mouseLine')
+      .attr('height', this.height)
       .style('opacity', '0');
 
     // general group to hide or show the tooltip
@@ -388,7 +403,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       const difference = obj20.mtCo2 - obj19.mtCo2;
       const percent = ((Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2) * 100).toFixed(1);
-      const fill = difference < 0 ? '#84ffbb' : '#FF5889';
+      const fill = difference < 0 ? this.colorPositive : this.colorNegative;
       const prefix = difference < 0 ? '' : '+';
       this.hoverData = [
         {
@@ -431,8 +446,8 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
       this.hoverData = [
-        {text: this.decimalPipe.transform(obj19.mtCo2), unit: 'MtCo2', percent: '', fill: '#63f2ff'},
-        {text: this.decimalPipe.transform(obj20.mtCo2), unit: 'MtCo2', percent: '', fill: 'white'}
+        {text: this.decimalPipe.transform(obj19.mtCo2), unit: 'MtCo2', percent: '', fill: this.colorLine19},
+        {text: this.decimalPipe.transform(obj20.mtCo2), unit: 'MtCo2', percent: '', fill: this.colorLine20}
       ];
       this.updateTooltip('tooltipGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverDate);
     }
@@ -454,15 +469,15 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   private getColorForSector(sector: Sectors): string {
     switch (sector) {
       case Sectors.power:
-        return '#FFDB21';
+        return this.colorPower;
       case Sectors.groundTransport:
-        return '#20E74B';
+        return this.colorGroundTransport;
       case Sectors.industry:
-        return '#941EF1';
+        return this.colorIndustry;
       case Sectors.residential:
-        return '#F63078';
+        return this.colorResidential;
       case Sectors.domesticAviation:
-        return '#3497F1';
+        return this.colorAviation;
     }
   }
 
@@ -495,6 +510,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     // this is the vertical line to follow mouse
     const line = this.covidSvg.append('svg:rect')
       .attr('class', 'mouseLine')
+      .attr('height', this.height)
       .style('opacity', '0');
 
     // general group to hide or show the tooltip
@@ -536,7 +552,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     const objCovid = this.getCovidDataAtMousePosition(mousePosX, dataCovid);
     this.hoverCovidDate = [{date: this.getDateString(mousePosX, ' 2020')}];
-    this.hoverCovidData = [{text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: '#FF5889'}];
+    this.hoverCovidData = [{text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases}];
 
     this.updateTooltip('tooltipCovidGroup', tooltipSize[1], tooltipSize[0], this.hoverCovidData, this.hoverCovidDate);
 
