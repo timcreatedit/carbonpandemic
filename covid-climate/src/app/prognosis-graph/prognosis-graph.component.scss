@@ -60,6 +60,7 @@
 
         &#budgetLineLockdowns {
           stroke: $positive;
+          stroke-dashoffset: 5;
         }
 
         &#budgetLineNoLockdowns {

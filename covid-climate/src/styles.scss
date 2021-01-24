@@ -13,6 +13,10 @@ body {
   }
 }
 
+a {
+  color: $linkColor;
+}
+
 h1 {
   font-weight: bold;
   font-size: 32pt;

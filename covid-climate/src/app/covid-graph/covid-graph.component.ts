@@ -39,7 +39,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   private showAbsolute = true;
   private mouseOverGraph = false;
-  private mouseCoordinates: [number, number];
+  private mouseCoordinates: [number, number] = [0, 0];
 
   toolX = 0;
   toolY = 0;

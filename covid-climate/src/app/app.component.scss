@@ -30,7 +30,12 @@
     height: auto;
 
     h1 {
-      margin-bottom: 0px;
+      color: $headlineColor;
+      margin-bottom: 0;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     p {
@@ -184,7 +189,6 @@
       padding: 2em;
       background: #1B1825;
       position: center;
-      width: 100%;
 
       :first-child {
         margin-top: 0;
@@ -254,7 +258,7 @@
 
     #graphs-container {
       width: auto;
-      height: fit-content;
+      height: 40vh;
       top: 0;
       left: 0;
       right: 1em;
@@ -272,8 +276,3 @@
     }
   }
 }
-
-@media (max-width: $minimalWidth) {
-
-}
-

@@ -16,9 +16,9 @@ export enum Countries {
 }
 
 export enum Sectors {
-  power = 'Power',
-  groundTransport = 'Ground Transport',
   industry = 'Industry',
+  groundTransport = 'Ground Transport',
+  power = 'Power',
   residential = 'Residential',
   domesticAviation = 'Domestic Aviation',
   // internationalAviation = 'International Aviation',

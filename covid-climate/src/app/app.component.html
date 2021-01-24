@@ -19,7 +19,8 @@
       </div>
 
       <h2>How did CO<sub>2</sub> emissions change in 2020?</h2>
-      <p>The data shown here comes from by Carbon Monitor [1], an international platform providing science-based
+      <p>The data shown here comes from by Carbon Monitor <a href="#sourceBox">[1]</a>, an international platform
+        providing science-based
         estimates of
         daily CO<sub>2</sub> emissions.</p>
 
@@ -48,7 +49,8 @@
         </ul>
       </div>
 
-      <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world and switch between relative and absolute data presentation using the toggle underneath the graph!</i>
+      <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world and switch between
+        relative and absolute data presentation using the toggle underneath the graph!</i>
       <p></p>
       <p>Emissions are displayed in <i>Megatons of carbon dioxide per day</i>. One Megaton equals
         <strong> {{ 1000000 | number}}
@@ -202,13 +204,14 @@
       </div>
       <i>Tip: Use the slider below the graph to see a specific period!</i>
       <p>
-        <label>
-          Scenario
-          <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
-            <option [ngValue]="true">2° C Goal</option>
-            <option [ngValue]="false">1.5° C Goal</option>
-          </select>
-        </label>
+        The y-axis depicts the amount of CO<sub>2</sub> emissions per day, while the x-axis shows the years.
+        The data for the prognosis for continuing without regulations, was calculated by the U.S. Energy Information
+        Administration <a href="#sourceBox">[2]</a>.
+        Based on this data, we calculated a forecast for continuing with regulations by mapping this years percentage
+        decrease in CO<sub>2</sub> emissions to the data from <a href="#sourceBox">[2]</a>. This of course means a
+        decrease in emissions, but
+        what could be the impacts on climate warming if we continued with the regulations experienced 2020 in all the
+        upcoming years?
       </p>
 
       <div class="scroll-prompt">
@@ -218,44 +221,75 @@
 
       <h2>Achieving the Climate Goals</h2>
       <p>
-        The y-axis depicts the amount of CO<sub>2</sub> emissions per day, while the x-axis shows the years.
-        The data for the prognosis for continuing without regulations, was calculated by the U.S. Energy Information
-        Administration [2].
-        Based on this data, we calculated a forecast for continuing with regulations by mapping this years percentage
-        decrease in CO<sub>2</sub> emissions to the data from [2]. This of course means a decrease in emissions, but
-        what could be the impacts on climate warming if we continued with the regulations experienced 2020 in all the
-        upcoming years?
-      </p>
-      <p>
-        According to the Mercator Research Institute on Global Commons and Climate Change (MCC) [3] the atmosphere can
+        According to the Mercator Research Institute on Global Commons and Climate Change (MCC) <a
+        href="#sourceBox">[3]</a> the atmosphere can
         absorb
         roughly 1042 gigatons of CO<sub>2</sub> from the beginning of 2021 on until the global temperature will be
-        2°C more than pre industrial levels. The two vertical, dashed lines are showing in which year the remaining
-        CO<sub>2</sub> budget will
+        2° C more than pre industrial levels. If the warming should stay below 1.5° C, the remaining budget is roughly
+        293 gigatons of CO<sub>2</sub>.
+      </p>
+      <p>
+        <label>
+          Scenario
+          <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
+            <option [ngValue]="true">2° C Goal</option>
+            <option [ngValue]="false">1.5° C Goal</option>
+          </select>
+        </label>
+      </p>
+      <div class="key">
+        <h4>Key</h4>
+        <ul>
+          <li class="line2020">
+            <div class="bullet"></div>
+            Total Historic Emissions
+          </li>
+          <li class="linePrognosisLockdown">
+            <div class="bullet"></div>
+            Continuation with regulations
+          </li>
+          <li class="linePrognosisNoLockdown">
+            <div class="bullet"></div>
+            Continuation without regulations
+          </li>
+        </ul>
+      </div>
+      <p>
+        The horizontal dashed line marks the total budget that cannot be exceeded without exceeding the respective goal.
+        We calculated this value by adding the remaining budget from <a href="#sourceBox">[3]</a> to the historic
+        emissions until 2020 from <a href="#sourceBox">[2]</a>
+      </p>
+      <p>
+        The two vertical, dashed lines are showing in which year the remaining CO<sub>2</sub> budget will
         be depleted, with and without continuing regulations.
       </p>
       <div class="info">
         <p>
-          According to the prognosis from [2] and given the budget calculations from [3], we <strong>will exceed the 2°
-          C
+          According to the prognosis from <a href="#sourceBox">[2]</a> and given the budget calculations from <a
+          href="#sourceBox">[3]</a>, we <strong>will exceed the {{ scenario2Degree ? '2' : '1.5'}}° C
           goal in {{ budgetDepletionYearWithoutRestrictions }}</strong>.
         </p>
         <p>When factoring in the reduction in emissions that the lockdown has entailed, by our calculations
-          <strong>we will exceed 2° C of global warming by {{ budgetDepletionYearWithRestrictions }}</strong>.
+          <strong>we will exceed {{ scenario2Degree ? '2' : '1.5'}}° C of global warming
+            by {{ budgetDepletionYearWithRestrictions }}</strong>.
         </p>
       </div>
     </div>
-    <div class="end">
+    <div class="end" id="sourceBox">
       <div class="sources">
         <h3>Sources</h3>
         <ol>
-          <li>Carbon Monitor, (accessed 11.01.2021), https://carbonmonitor.org/</li>
+          <li>Carbon Monitor, (accessed 11.01.2021),
+            <br><a href="https://carbonmonitor.org/">https://carbonmonitor.org/</a>
+          </li>
           <li>U.S. Energy Information Administration (EIA),
             World Energy Projection System Plus (2019), run r_190808_161601, and Annual Energy Outlook 2019,
-            (Washington, DC: January 2019), www.eia.gov/aeo
+            (Washington, DC: January 2019),
+            <br><a href="https://www.eia.gov/aeo">https://www.eia.gov/aeo</a>
           </li>
           <li>Mercator Research Institute on Global Commons and Climate Change (MCC),
-            (accessed 11.01.2021), https://www.mcc-berlin.net/en/research/co2-budget.html
+            (accessed 11.01.2021),
+            <br> <a href="https://www.mcc-berlin.net/en/research/co2-budget.html">https://www.mcc-berlin.net/en/research/co2-budget.html</a>
           </li>
         </ol>
       </div>

@@ -193,7 +193,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('class', 'linePrognosisNoLockdown');
   }
 
-  private updatePrognosisGraph(): void {
+  private updatePrognosisGraph(animate: boolean = true): void {
     const historicData = this.dataService.getHistoricCo2Data({
       prognosisDataFilter: [PrognosisDataIndicators.historic],
     });
@@ -203,11 +203,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     const allData = this.dataService.getHistoricCo2Data({
       prognosisDataFilter: null,
     });
-    this.updatePrognosisAxes(prognosisData, allData);
-    this.updatePrognosisLine(historicData, prognosisData);
+    this.updatePrognosisAxes(prognosisData, allData, animate);
+    this.updatePrognosisLine(historicData, prognosisData, animate);
   }
 
-  private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[]): void {
+  private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[], animate: boolean = true): void {
     const maxValue = this.isSum ? d3.max([
       ...dataAll.map(d => d.co2Sum),
       ...dataAll.map(d => d.co2SumNoLockdown),
@@ -219,12 +219,12 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.prognosisSvg.selectAll('#xAxis')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .call(this.xAxis as any);
 
     this.prognosisSvg.selectAll('#yAxis')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .call(this.yAxis as any);
 
     this.prognosisSvg.select('#yAxis > text')
@@ -232,14 +232,14 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   }
 
-  private updatePrognosisLine(dataHistoric: HistoricCo2Datapoint[], dataPrognosis: HistoricCo2Datapoint[]): void {
+  private updatePrognosisLine(dataHistoric: HistoricCo2Datapoint[], dataPrognosis: HistoricCo2Datapoint[], animate: boolean = true): void {
     const lineHistoric = this.prognosisSvg.select('.lineHistoric')
       .datum(dataHistoric);
 
     lineHistoric.enter()
       .merge(lineHistoric as any)
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('d', this.lineHistoric);
 
     const linePrognosisLockdown = this.prognosisSvg
@@ -249,7 +249,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     linePrognosisLockdown.enter()
       .merge(linePrognosisLockdown as any)
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('d', this.linePrognosisLockdown);
 
     const linePrognosisNoLockdown = this.prognosisSvg
@@ -259,7 +259,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     linePrognosisNoLockdown.enter()
       .merge(linePrognosisNoLockdown as any)
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('d', this.linePrognosisNoLockdown);
   }
 
@@ -509,7 +509,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .text('Text');
   }
 
-  private updateCo2BudgetLines(): void {
+  private updateCo2BudgetLines(animate: boolean = true): void {
     const total2020 = this.dataService.getTotalEmissionsUntilYear(2020);
     const totalBudget = total2020 + this.dataService.get2020RemainingBudget(this.scenario2degree);
 
@@ -522,31 +522,31 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('class', this.isSum ? 'budgetLine' : 'budgetLine hidden')
       .select('line')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('y1', this.isSum ? this.y(totalBudget) : 0)
       .attr('y2', this.isSum ? this.y(totalBudget) : 0);
 
     this.sliderSvg
       .select('.budgetLine > text')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .text(`${this.scenario2degree ? '2° C' : '1.5° C'} Budget`)
       .attr('y', this.isSum ? this.y(totalBudget) - 5 : 0);
 
 
     this.sliderSvg
       .select('#budgetLineLockdowns')
-      .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
+      .attr('class', this.isSum ? 'budgetLine' : 'budgetLine hidden')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('x1', depletionYearLockdowns)
       .attr('x2', depletionYearLockdowns);
 
     this.sliderSvg
       .select('#budgetLineNoLockdowns')
-      .attr('class', this.isSum ? 'budgetLine hidden' : 'budgetLine')
+      .attr('class', this.isSum ? 'budgetLine' : 'budgetLine hidden')
       .transition()
-      .duration(1000)
+      .duration(animate ? 1000 : 0)
       .attr('x1', depletionYearNoLockdowns)
       .attr('x2', depletionYearNoLockdowns);
   }
@@ -554,14 +554,14 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   // slider onChange low
   valueChange(value: number): void {
     this.sliderLowValue = value;
-    this.updatePrognosisGraph();
-    this.updateCo2BudgetLines();
+    this.updatePrognosisGraph(false);
+    this.updateCo2BudgetLines(false);
   }
 
   // slider onChange high
   valueChangeHigh(highValue: number): void {
     this.sliderHighValue = highValue;
-    this.updatePrognosisGraph();
-    this.updateCo2BudgetLines();
+    this.updatePrognosisGraph(false);
+    this.updateCo2BudgetLines(false);
   }
 }
