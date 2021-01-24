@@ -39,6 +39,10 @@ export class AppComponent implements OnInit {
     this.scrollService.covidShowSectors$.pipe(
       filter(d => !d)
     ).subscribe(() => this.updateSelectedSector('All'));
+
+    this.scrollService.showPrognosisGraph$.pipe(
+      filter(d => d)
+    ).subscribe( () => this.onSelectCountry(Countries.world));
   }
 
   ngOnInit(): void {

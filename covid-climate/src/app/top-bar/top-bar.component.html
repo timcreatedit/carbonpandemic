@@ -1,5 +1,5 @@
 <div id="top-bar-component">
-  <select id="dropDownMenu" [ngModel]="selectedCountry" (ngModelChange)="updateCountry($event)" [disabled]="(scrollService.showPrognosisGraph$ | async)"
+  <select id="dropDownMenu" [(ngModel)]="selectedCountry" (ngModelChange)="updateCountry($event)" [disabled]="(scrollService.showPrognosisGraph$ | async)"
           [class.hidden]="!(scrollService.showTopBarDropdown$ | async)">
     <option *ngFor="let country of countries">{{country}}</option>
   </select>
