@@ -159,31 +159,31 @@
   .toggle{
     width: 88%;
     margin: auto;
+    font-weight: bold;
   }
 
   mat-button-toggle-group {
     box-shadow: none;
+
   }
 
   mat-button-toggle {
     border: 1px rgba(0,0,0,0) solid;
-    margin-top: 5px;
-    padding: 0 5px;
-    z-index: 3;
+    margin-top: 2px;
+    padding: 0 2px;
+    z-index: 2;
     background-color: $toggle;
     color: $toggleChecked;
   }
 
   mat-button-toggle:hover {
-    border: 1px #000 solid;
     background-color: $toggleChecked;
     color: $toggle;
     border-radius: 5px;
   }
 
   .mat-button-toggle-checked {
-    box-shadow: 0 0 30px #000;
-    border: 1px #000 solid;
+    border: 1px $backgroundColor solid;
     border-radius: 5px;
     background-color: $toggleChecked;
     color: $toggle;
