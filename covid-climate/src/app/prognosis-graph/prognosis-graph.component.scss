@@ -125,16 +125,17 @@
   }
 
   .slider {
-    position: center;
-    width: 88%; //85%
-    margin-left: 5%;
+    width: 90%;
+    background-color: $backgroundColorLight;
+    margin-top: 10%;
+    margin-left: 7%;
 
     font-weight: normal;
     -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
 
-    .ngx-slider-model-value, .ngx-slider-model-high, .ngx-slider-floor, .ngx-slider-ceil {
-      padding-bottom: 8px;
-      // TODO niki hier label abstand
+    .ngx-slider-bubble  { //includes all slider labels
+      padding-bottom: 10px;
+      font-size: small;
     }
 
     .ngx-slider-pointer {
@@ -143,10 +144,6 @@
       &:after {
         display: none;
       }
-    }
-
-    .ngx-slider-bubble {
-      padding-bottom: 10px;
     }
 
     .ngx-slider-selection {

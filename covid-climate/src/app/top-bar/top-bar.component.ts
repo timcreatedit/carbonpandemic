@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Countries, Sectors} from '../core/models/co2data.model';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Countries} from '../core/models/co2data.model';
 import {ScrollService} from '../core/services/scroll.service';
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-top-bar',
@@ -25,6 +26,9 @@ export class TopBarComponent implements OnInit {
   }
 
   updateCountry(countryName: string): void {
+    this.scrollService.showPrognosisGraph$.pipe(
+      filter(d => d)
+    ).subscribe( () => this.selectedCountry = Countries.world.toString());
     this.selectCountry.emit(countryName as Countries);
   }
 

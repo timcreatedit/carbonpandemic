@@ -45,6 +45,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   // region size
   width = 1400;
   height = 800;
+  adj = 25;
 
   // top right bottom left
   padding: [number, number, number, number] = [50, 0, 20, 80];
@@ -188,7 +189,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('viewBox', '-'
         + this.padding[3] + ' -'
         + this.padding[0] + ' '
-        + (this.width + this.padding[1] + this.padding[3]) + ' '
+        + (this.width + this.padding[1] + this.padding[3] + this.adj) + ' '
         + (this.height + this.padding[0] + this.padding[2]))
       .classed('svg-content', true);
 
