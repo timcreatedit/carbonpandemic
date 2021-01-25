@@ -130,10 +130,11 @@
       <p>
         <label>
           Sectors to display:
-          <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
+          <select class="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
             <option>All</option>
             <option *ngFor="let sector of sectorNames">{{sector}}</option>
           </select>
+          <img class="dropdownArrow" src="assets/icons/dropDownArrow.svg" alt="">
         </label>
       </p>
       <i>Tip: The influences of the pandemic on singular sectors can be quite pronounced – try filtering for domestic
@@ -231,10 +232,11 @@
       <p>
         <label>
           Scenario
-          <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
+          <select class="dropDownMenu" [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
             <option [ngValue]="true">2° C Goal</option>
             <option [ngValue]="false">1.5° C Goal</option>
           </select>
+          <img class="dropdownArrow" src="assets/icons/dropDownArrow.svg" alt="">
         </label>
       </p>
       <div class="key">
