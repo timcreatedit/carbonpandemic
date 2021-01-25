@@ -12,6 +12,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import * as d3 from 'd3';
+import { distinctUntilChanged } from 'rxjs/operators';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
@@ -598,11 +599,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       ];
     } else {
       tooltipSize[1] = this.tooltipCovidHeight;
+      // const test = this.lockdownData.find(d => d.lockdown === true);
+      const test = this.lockdownData.findIndex(d => d.lockdown === true);
+      // const test = this.lockdownData.filter(d => d.lockdown === true);
+      // const test = this.lockdownData.pipe(distinctUntilChanged());
+      console.log(test);
 
       const objLockdown = this.getLockdownDataAtMousePosition(mousePosX, this.lockdownData);
       let lockdownStatus = 'Active';
       if (!objLockdown.lockdown){
-        lockdownStatus = 'Inactive';
+        lockdownStatus = 'No';
       }
 
       this.hoverCovidData = [
