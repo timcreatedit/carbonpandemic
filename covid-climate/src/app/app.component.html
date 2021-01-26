@@ -19,7 +19,7 @@
       </div>
 
       <h2>How did CO<sub>2</sub> emissions change in 2020?</h2>
-      <p>The data shown here comes from by Carbon Monitor <a href="#sourceBox">[1]</a>, an international platform
+      <p>The data shown here comes from Carbon Monitor <a href="#sourceBox">[1]</a>, an international platform
         providing science-based
         estimates of
         daily CO<sub>2</sub> emissions.</p>
@@ -49,8 +49,8 @@
         </ul>
       </div>
 
-      <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world and switch between
-        relative and absolute data presentation using the toggle underneath the graph!</i>
+      <i>Tip: Use the dropdown in the upper-right corner to look at different parts of the world! Also, use the toggle underneath the graph
+        to switch from ABSOLUTE to RELATIVE (to world) data presentation!</i>
       <p></p>
       <p>Emissions are displayed in <i>Megatons of carbon dioxide per day</i>. One Megaton equals
         <strong> {{ 1000000 | number}}
@@ -130,10 +130,11 @@
       <p>
         <label>
           Sectors to display:
-          <select id="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
+          <select class="dropDownMenu" [ngModel]="selectedSector" (ngModelChange)="updateSelectedSector($event)">
             <option>All</option>
             <option *ngFor="let sector of sectorNames">{{sector}}</option>
           </select>
+          <img class="dropdownArrow" src="assets/icons/dropDownArrow.svg" alt="">
         </label>
       </p>
       <i>Tip: The influences of the pandemic on singular sectors can be quite pronounced – try filtering for domestic
@@ -231,10 +232,11 @@
       <p>
         <label>
           Scenario
-          <select [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
+          <select class="dropDownMenu" [ngModel]="scenario2Degree" (ngModelChange)="updateScenario($event)">
             <option [ngValue]="true">2° C Goal</option>
             <option [ngValue]="false">1.5° C Goal</option>
           </select>
+          <img class="dropdownArrow" src="assets/icons/dropDownArrow.svg" alt="">
         </label>
       </p>
       <div class="key">

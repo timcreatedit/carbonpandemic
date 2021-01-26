@@ -299,6 +299,7 @@ export class DataService {
   public getSectorsPerDay(
     country: Countries,
     sectors: Sectors[] = Object.values(Sectors),
+    showAbsolute: boolean,
     setRemainingToZero = false
   ): { [id: string]: number | Date }[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
@@ -306,6 +307,14 @@ export class DataService {
     const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
     const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
     const buffer: { [id: string]: number | Date }[] = [];
+
+    // For Relative Data
+    const dataWorld20 = this.getCo2Data({
+      yearFilter: [2020],
+      countryFilter: [Countries.world],
+      sumSectors: true,
+    });
+
     for (let i = 0; i < dates.length; i++) {
       const val = {['date']: new Date(dates[i])};
       for (const sector of sectorsPerDay[i]) {
@@ -315,8 +324,17 @@ export class DataService {
           }
           continue;
         }
-        val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
-      }
+
+        // RELATIVE DATA
+        if (showAbsolute.toString() === 'false') {
+          val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / dataWorld20[i].mtCo2 * 100;
+        } else {
+           val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
+        }
+        // END RELATIVE DATA
+
+        }
+
       buffer.push(val);
     }
     return buffer;
