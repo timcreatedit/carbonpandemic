@@ -33,19 +33,18 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.1],
-      config: {
-      }
+      section: [0, 0.06],
+      config: {}
     },
     {
-      section: [0.1, 0.3],
+      section: [0.06, 0.24],
       config: {
         covidGraphShown: true,
         topBarDropdownShown: true,
       }
     },
     {
-      section: [0.3, 0.47],
+      section: [0.24, 0.38],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
@@ -53,7 +52,7 @@ export class ScrollService {
       }
     },
     {
-      section: [0.47, 0.7],
+      section: [0.38, 0.59],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
@@ -61,7 +60,7 @@ export class ScrollService {
       }
     },
     {
-      section: [0.7, .9],
+      section: [0.59, .75],
       config: {
         covidGraphShown: false,
         covidShowSectors: true,
@@ -70,13 +69,18 @@ export class ScrollService {
       }
     },
     {
-      section: [0.9, 1],
+      section: [0.75, 0.9],
       config: {
         covidGraphShown: false,
         covidShowSectors: true,
         prognosisGraphShown: true,
         prognosisSummedUp: true,
         topBarDropdownShown: true,
+      }
+    },
+    {
+      section: [0.9, 1],
+      config: {
       }
     }
   ];
@@ -123,9 +127,9 @@ export class ScrollService {
 
   public readonly showTopBarDropdown$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
-  map(c => c.topBarDropdownShown ?? false),
-  distinctUntilChanged(),
-);
+    map(c => c.topBarDropdownShown ?? false),
+    distinctUntilChanged(),
+  );
 
   constructor() {
     combineLatest([
