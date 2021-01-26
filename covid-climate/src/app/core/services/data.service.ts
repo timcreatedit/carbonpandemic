@@ -47,6 +47,9 @@ export class DataService {
     console.log((this.covidDatapoints));
     console.log((this.lockdownDatapoints[0]));
     console.log(this.covidEuropeDatapoints);
+    console.log('Population Rest: ' + this.getPopulation(Countries.rest));
+    console.log('Population World: ' + this.getPopulation(Countries.world));
+    console.log('Population EU28: ' + this.getPopulation(Countries.eu28));
   }
 
 
@@ -81,6 +84,7 @@ export class DataService {
           date: actualDate,
           cases: dp.cases,
           continent: dp.continentExp,
+          population: dp.popData2019,
         } as CovidDatapoint);
       }
     });
@@ -89,12 +93,15 @@ export class DataService {
 
   private combineCovidDataForWorld(): void {
     const holder = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (holder.hasOwnProperty(dp.date)) {
         holder[dp.date] = holder[dp.date] + dp.cases;
+        holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
       } else {
         holder[dp.date] = dp.cases;
+        holderPopulation[dp.date] = dp.population;
         dates.push(dp.date);
       }
     });
@@ -104,6 +111,7 @@ export class DataService {
         country: Countries.world,
         date,
         cases: holder[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -112,17 +120,18 @@ export class DataService {
 
   private combineCovidDataForRestOfWorld(): void {
     const holder = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (!Object.values(Countries).includes(dp.country)) {
-        if (dp.country) {
           if (holder.hasOwnProperty(dp.date)) {
             holder[dp.date] = holder[dp.date] + dp.cases;
+            holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
           } else {
             holder[dp.date] = dp.cases;
+            holderPopulation[dp.date] = dp.population;
             dates.push(dp.date);
           }
-        }
       }
     });
 
@@ -131,6 +140,7 @@ export class DataService {
         country: Countries.rest,
         date,
         cases: holder[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -139,13 +149,16 @@ export class DataService {
 
   private combineCovidDataForEU28(): void {
     const holderEurope = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (this.eu28.includes(dp.country)) {
         if (holderEurope.hasOwnProperty(dp.date)) {
           holderEurope[dp.date] = holderEurope[dp.date] + dp.cases;
+          holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
         } else {
           holderEurope[dp.date] = dp.cases;
+          holderPopulation[dp.date] = dp.population;
           dates.push(dp.date);
         }
       }
@@ -156,6 +169,7 @@ export class DataService {
         country: Countries.eu28,
         date,
         cases: holderEurope[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -171,7 +185,7 @@ export class DataService {
         this.lockdownDatapoints.push({
           date: actualDate,
           country: this.covidCountryToCountry(dp.countryName),
-          lockdown: dp.c6_Stay_at_home_requirements === 2,
+          lockdown: (dp.c6_Stay_at_home_requirements >= 2),
         } as LockdownDatapoint);
       }
     });
@@ -321,6 +335,13 @@ export class DataService {
     }
     return buffer;
   }
+
+
+  public getPopulation(selectedCountry: Countries): number {
+    const filteredList = this.getCovidData({countryFilter: [selectedCountry]});
+    return filteredList[filteredList.length - 1].population;
+  }
+
 
   // endregion
 
