@@ -782,18 +782,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
         break;
       case 'relativeToPopulation':
-        this.yAxisText = 'in MtCO2/d per person';
+        this.yAxisText = 'in tCO2/d p.P.';
         console.log('compute and show relative dataset');
 
         data19 = data19.map( (d, i) => {
           // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
-          d.mtCo2 = (d.mtCo2 / countryPopulation);
+          d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           // console.log('--> ' + d.mtCo2);
           return d;
         });
 
         data20 = data20.map( (d, i) => {
-          d.mtCo2 = (d.mtCo2 / countryPopulation);
+          d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
 
@@ -883,7 +883,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         this.y.domain([0, 100]);
         break;
       case 'relativeToPopulation':
-        this.y.domain([0, 0.00000007]);
+        this.y.domain([0, 0.07]);
         break;
       default:
         console.log('none');

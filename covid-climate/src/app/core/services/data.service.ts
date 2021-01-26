@@ -326,7 +326,7 @@ export class DataService {
   public getSectorsPerDay(
     country: Countries,
     sectors: Sectors[] = Object.values(Sectors),
-    showAbsolute: boolean,
+    showAbsolute: string,
     setRemainingToZero = false
   ): { [id: string]: number | Date }[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
@@ -342,6 +342,8 @@ export class DataService {
       sumSectors: true,
     });
 
+    const population = this.getPopulation(country);
+
     for (let i = 0; i < dates.length; i++) {
       const val = {['date']: new Date(dates[i])};
       for (const sector of sectorsPerDay[i]) {
@@ -353,10 +355,19 @@ export class DataService {
         }
 
         // RELATIVE DATA
-        if (showAbsolute.toString() === 'false') {
-          val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / dataWorld20[i].mtCo2 * 100;
-        } else {
-           val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
+        switch (showAbsolute) {
+          case 'absolute':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
+            break;
+          case 'relativeToWorld':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / dataWorld20[i].mtCo2 * 100;
+            break;
+          case 'relativeToPopulation':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / population * 1000000;
+            break;
+          default:
+            console.log('none');
+            break;
         }
         // END RELATIVE DATA
 
