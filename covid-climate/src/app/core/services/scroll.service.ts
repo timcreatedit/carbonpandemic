@@ -14,6 +14,8 @@ export interface SiteScrollConfig {
   readonly prognosisSummedUp?: boolean;
 
   readonly topBarDropdownShown?: boolean;
+
+  readonly globeShown?: boolean;
 }
 
 export interface ScrollSection {
@@ -81,6 +83,7 @@ export class ScrollService {
     {
       section: [0.9, 1],
       config: {
+        globeShown: true,
       }
     }
   ];
@@ -132,6 +135,12 @@ export class ScrollService {
   public readonly showTopBarDropdown$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
     map(c => c.topBarDropdownShown ?? false),
+    distinctUntilChanged(),
+  );
+
+  public readonly showGlobe$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+    map(c => c.globeShown ?? false),
     distinctUntilChanged(),
   );
 

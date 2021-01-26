@@ -325,7 +325,8 @@
     </div>
   </div>
 </div>
-<app-globe [relativeScroll]="scrollService.currentScrollValue$ | async"></app-globe>
+<app-globe [relativeScroll]="scrollService.currentScrollValue$ | async"
+           [active]="scrollService.showGlobe$ | async"></app-globe>
 
 
 

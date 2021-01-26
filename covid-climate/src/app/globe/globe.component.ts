@@ -23,7 +23,7 @@ export class GlobeComponent implements AfterViewInit {
 
   @ViewChild('scene') threeScene: ElementRef<HTMLDivElement>;
 
-  @Input() relativeScroll: number = 0;
+  @Input() relativeScroll = 0;
   @Input() active: boolean;
 
   camera: THREE.PerspectiveCamera;
@@ -86,7 +86,7 @@ export class GlobeComponent implements AfterViewInit {
   animation(time: number): void {
     this.setSize();
     this.globe.rotation.y = time / 10000;
-    this.camera.position.y = 70 - this.relativeScroll * 1800;
+    this.camera.position.y = -70 + (1 - this.relativeScroll) * 2400;
     this.renderer.render(this.scene, this.camera);
   }
 }
