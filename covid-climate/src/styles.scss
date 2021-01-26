@@ -2,9 +2,9 @@
 @import "colors";
 
 body {
-  background-color: #110F19;
+  background-color: $backgroundColor;
   margin: 0;
-  color: #d4d4d4;
+  color: $textColor;
 
   font-family: 'Inter', sans-serif;
 
@@ -13,9 +13,14 @@ body {
   }
 }
 
+a {
+  color: $linkColor;
+}
+
 h1 {
   font-weight: bold;
   font-size: 32pt;
+  line-height: 90%;
 }
 
 h2 {

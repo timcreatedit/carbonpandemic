@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, combineLatest, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, startWith, tap} from 'rxjs/operators';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export interface SiteScrollConfig {
@@ -11,6 +11,9 @@ export interface SiteScrollConfig {
   readonly pieGraphShown?: boolean;
 
   readonly prognosisGraphShown?: boolean;
+  readonly prognosisSummedUp?: boolean;
+
+  readonly topBarDropdownShown?: boolean;
 }
 
 export interface ScrollSection {
@@ -30,32 +33,54 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.25],
+      section: [0, 0.1],
       config: {
-        covidGraphShown: true,
       }
     },
     {
-      section: [0.25, 0.55],
+      section: [0.1, 0.3],
+      config: {
+        covidGraphShown: true,
+        topBarDropdownShown: true,
+      }
+    },
+    {
+      section: [0.3, 0.47],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
+        topBarDropdownShown: true,
       }
     },
     {
-      section: [0.55, 0.85],
+      section: [0.47, 0.7],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
+        topBarDropdownShown: true,
       }
     },
     {
-      section: [0.85, 1],
+      section: [0.7, .9],
       config: {
+        covidGraphShown: false,
+        covidShowSectors: true,
         prognosisGraphShown: true,
+        topBarDropdownShown: true,
+      }
+    },
+    {
+      section: [0.9, 1],
+      config: {
+        covidGraphShown: false,
+        covidShowSectors: true,
+        prognosisGraphShown: true,
+        prognosisSummedUp: true,
+        topBarDropdownShown: true,
       }
     }
   ];
+
   //endregion
 
   private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
@@ -90,14 +115,36 @@ export class ScrollService {
     distinctUntilChanged(),
   );
 
+  public readonly prognosisSummedUp$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+    map(c => c.prognosisSummedUp ?? false),
+    distinctUntilChanged(),
+  );
+
+  public readonly showTopBarDropdown$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+  map(c => c.topBarDropdownShown ?? false),
+  distinctUntilChanged(),
+);
+
   constructor() {
-    combineLatest([fromEvent(window, 'scroll').pipe(startWith(0)),
+    combineLatest([
+      fromEvent(window, 'scroll').pipe(startWith(0)),
       fromEvent(window, 'resize').pipe(startWith(0))])
       .pipe(
-        map(() => window.scrollY / (document.body.clientHeight - window.innerHeight)),
+        map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
+        tap(console.log),
         map(s => this.getCurrentConfig(s)),
         distinctUntilChanged(),
       ).subscribe(c => this.currentScrollConfig$.next(c));
+  }
+
+  private static getDocumentHeight(): number {
+    const body = document.body;
+    const html = document.documentElement;
+
+    return Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
   }
 
   private getCurrentConfig(scrollTop: number): SiteScrollConfig {

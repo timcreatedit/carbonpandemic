@@ -2,6 +2,7 @@
 
 .covid-graph {
   width: 100%;
+
   .graph-container {
     width: 100%;
 
@@ -19,9 +20,9 @@
       }
 
       .line19 {
-        transition: all 200ms ease;
+        transition: opacity 500ms ease;
         fill: none;
-        stroke: #63f2ff;
+        stroke: $line19;
         stroke-width: 3px;
 
         &.hidden {
@@ -30,19 +31,24 @@
       }
 
       .line20 {
+        transition: opacity 500ms ease;
         fill: none;
-        stroke: #ffffff;
+        stroke: $line20;
         stroke-width: 3px;
+
+        &.hidden {
+          opacity: 0;
+        }
       }
 
       .lineCovid {
         fill: none;
-        stroke: $negative;
+        stroke: $covid;
         stroke-width: 3px;
       }
 
       .area-above {
-        transition: all 200ms ease;
+        transition: opacity 500ms ease;
         fill: $negative; //85FFBB, FF5889
 
         &.hidden {
@@ -51,7 +57,7 @@
       }
 
       .area-below {
-        transition: all 200ms ease;
+        transition: opacity 500ms ease;
         fill: $positive; //85FFBB, 9BFFC7
 
         &.hidden {
@@ -60,9 +66,9 @@
       }
 
       .area-lockdown {
-        transition: all 200ms ease;
-        fill: #DCDCDC; //85FFBB, 9BFFC7
-        opacity: 0.1;
+        transition: opacity 500ms ease;
+        fill: $lockdownColor; //85FFBB, 9BFFC7
+        opacity: $lockdownOpacity;
 
         &.hidden {
           opacity: 0;
@@ -70,7 +76,7 @@
       }
 
       .sectorArea {
-        transition: all 200ms ease;
+        transition: opacity 500ms ease;
 
         &.hidden {
           opacity: 0;
@@ -103,7 +109,6 @@
 
       .mouseLine {
         z-index: 10;
-        height: 80%;
         width: 2px;
         fill: white;
       }
@@ -116,6 +121,7 @@
         rx: 10px;
         ry: 10px;
       }
+
       .tooltipValuesText {
         .hoverValuesText {
           font-weight: bold;
@@ -124,6 +130,7 @@
           left: 90px;
         }
       }
+
       .tooltipUnitsText {
         .hoverUnitsText {
           fill: white;
@@ -131,6 +138,7 @@
           font-size: 1.2em;
         }
       }
+
       .tooltipPercentText {
         .hoverPercentText {
           fill: white;
@@ -138,6 +146,7 @@
           font-size: 1.2em;
         }
       }
+
       .tooltipHoverDate {
         fill: white;
         font-weight: bold;
@@ -145,4 +154,43 @@
       }
     }
   }
+
+  .toggle{
+    width: 88%;
+    margin: auto;
+    font-weight: bold;
+  }
+
+  mat-button-toggle-group {
+    box-shadow: none;
+
+  }
+
+  mat-button-toggle {
+    transition: 200ms ease;
+    border: 1px rgba(0,0,0,0) solid;
+    margin-top: 2px;
+    padding: 0 2px;
+    z-index: 2;
+    background-color: $toggle;
+    color: $toggleChecked;
+  }
+
+  mat-button-toggle:hover {
+    background-color: $toggleHover;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.3);
+    color: $toggle;
+    border-radius: 5px;
+  }
+
+  .mat-button-toggle-checked {
+    border-radius: 5px;
+    background-color: $toggleChecked;
+    color: $toggle;
+
+    &:hover {
+      background-color: $toggleChecked;
+    }
+  }
+
 }

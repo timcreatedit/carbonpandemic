@@ -1,2279 +1,2250 @@
 ﻿{
-    "Tabelle1": [
-        {
-            "Year": "1751",
-            "meandailyCO2": "0.02",
-            "Old\r\n(Only EDGAR)": "1970",
-            "Mean Daily CO2\r\n(Original Data）": "1751",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1752",
-            "meandailyCO2": "0.02",
-            "Old\r\n(Only EDGAR)": "1971",
-            "Mean Daily CO2\r\n(Original Data）": "1752",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1753",
-            "meandailyCO2": "0.02",
-            "Old\r\n(Only EDGAR)": "1972",
-            "Mean Daily CO2\r\n(Original Data）": "1753",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1754",
-            "meandailyCO2": "0.02",
-            "Old\r\n(Only EDGAR)": "1973",
-            "Mean Daily CO2\r\n(Original Data）": "1754",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1755",
-            "meandailyCO2": "0.02",
-            "Old\r\n(Only EDGAR)": "1974",
-            "Mean Daily CO2\r\n(Original Data）": "1755",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1756",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1975",
-            "Mean Daily CO2\r\n(Original Data）": "1756",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1757",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1976",
-            "Mean Daily CO2\r\n(Original Data）": "1757",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1758",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1977",
-            "Mean Daily CO2\r\n(Original Data）": "1758",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1759",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1978",
-            "Mean Daily CO2\r\n(Original Data）": "1759",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1760",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1979",
-            "Mean Daily CO2\r\n(Original Data）": "1760",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1761",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1980",
-            "Mean Daily CO2\r\n(Original Data）": "1761",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1762",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1981",
-            "Mean Daily CO2\r\n(Original Data）": "1762",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1763",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1982",
-            "Mean Daily CO2\r\n(Original Data）": "1763",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1764",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1983",
-            "Mean Daily CO2\r\n(Original Data）": "1764",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1765",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1984",
-            "Mean Daily CO2\r\n(Original Data）": "1765",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1766",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1985",
-            "Mean Daily CO2\r\n(Original Data）": "1766",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1767",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1986",
-            "Mean Daily CO2\r\n(Original Data）": "1767",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1768",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1987",
-            "Mean Daily CO2\r\n(Original Data）": "1768",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1769",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1988",
-            "Mean Daily CO2\r\n(Original Data）": "1769",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1770",
-            "meandailyCO2": "0.03",
-            "Old\r\n(Only EDGAR)": "1989",
-            "Mean Daily CO2\r\n(Original Data）": "1770",
-            "CDIAC": "0.03",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1771",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1990",
-            "Mean Daily CO2\r\n(Original Data）": "1771",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1772",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1991",
-            "Mean Daily CO2\r\n(Original Data）": "1772",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1773",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1992",
-            "Mean Daily CO2\r\n(Original Data）": "1773",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1774",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1993",
-            "Mean Daily CO2\r\n(Original Data）": "1774",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1775",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1994",
-            "Mean Daily CO2\r\n(Original Data）": "1775",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1776",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1995",
-            "Mean Daily CO2\r\n(Original Data）": "1776",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1777",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1996",
-            "Mean Daily CO2\r\n(Original Data）": "1777",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1778",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1997",
-            "Mean Daily CO2\r\n(Original Data）": "1778",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1779",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1998",
-            "Mean Daily CO2\r\n(Original Data）": "1779",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1780",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "1999",
-            "Mean Daily CO2\r\n(Original Data）": "1780",
-            "CDIAC": "0.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1781",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "2000",
-            "Mean Daily CO2\r\n(Original Data）": "1781",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1782",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "2001",
-            "Mean Daily CO2\r\n(Original Data）": "1782",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1783",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "2002",
-            "Mean Daily CO2\r\n(Original Data）": "1783",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1784",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "2003",
-            "Mean Daily CO2\r\n(Original Data）": "1784",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1785",
-            "meandailyCO2": "0.04",
-            "Old\r\n(Only EDGAR)": "2004",
-            "Mean Daily CO2\r\n(Original Data）": "1785",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1786",
-            "meandailyCO2": "0.05",
-            "Old\r\n(Only EDGAR)": "2005",
-            "Mean Daily CO2\r\n(Original Data）": "1786",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1787",
-            "meandailyCO2": "0.05",
-            "Old\r\n(Only EDGAR)": "2006",
-            "Mean Daily CO2\r\n(Original Data）": "1787",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1788",
-            "meandailyCO2": "0.05",
-            "Old\r\n(Only EDGAR)": "2007",
-            "Mean Daily CO2\r\n(Original Data）": "1788",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1789",
-            "meandailyCO2": "0.05",
-            "Old\r\n(Only EDGAR)": "2008",
-            "Mean Daily CO2\r\n(Original Data）": "1789",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1790",
-            "meandailyCO2": "0.05",
-            "Old\r\n(Only EDGAR)": "2009",
-            "Mean Daily CO2\r\n(Original Data）": "1790",
-            "CDIAC": "0.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1791",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2010",
-            "Mean Daily CO2\r\n(Original Data）": "1791",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1792",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2011",
-            "Mean Daily CO2\r\n(Original Data）": "1792",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1793",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2012",
-            "Mean Daily CO2\r\n(Original Data）": "1793",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1794",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2013",
-            "Mean Daily CO2\r\n(Original Data）": "1794",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1795",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2014",
-            "Mean Daily CO2\r\n(Original Data）": "1795",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1796",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2015",
-            "Mean Daily CO2\r\n(Original Data）": "1796",
-            "CDIAC": "0.06",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1797",
-            "meandailyCO2": "0.06",
-            "Old\r\n(Only EDGAR)": "2016",
-            "Mean Daily CO2\r\n(Original Data）": "1797",
-            "CDIAC": "0.07",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1798",
-            "meandailyCO2": "0.07",
-            "Old\r\n(Only EDGAR)": "2017",
-            "Mean Daily CO2\r\n(Original Data）": "1798",
-            "CDIAC": "0.07",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1799",
-            "meandailyCO2": "0.07",
-            "Old\r\n(Only EDGAR)": "2018",
-            "Mean Daily CO2\r\n(Original Data）": "1799",
-            "CDIAC": "0.07",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1800",
-            "meandailyCO2": "0.07",
-            "Mean Daily CO2\r\n(Original Data）": "1800",
-            "CDIAC": "0.08",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1801",
-            "meandailyCO2": "0.07",
-            "Mean Daily CO2\r\n(Original Data）": "1801",
-            "CDIAC": "0.08",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1802",
-            "meandailyCO2": "0.10",
-            "Mean Daily CO2\r\n(Original Data）": "1802",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1803",
-            "meandailyCO2": "0.08",
-            "Mean Daily CO2\r\n(Original Data）": "1803",
-            "CDIAC": "0.09",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1804",
-            "meandailyCO2": "0.09",
-            "Mean Daily CO2\r\n(Original Data）": "1804",
-            "CDIAC": "0.09",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1805",
-            "meandailyCO2": "0.09",
-            "Mean Daily CO2\r\n(Original Data）": "1805",
-            "CDIAC": "0.09",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1806",
-            "meandailyCO2": "0.09",
-            "Mean Daily CO2\r\n(Original Data）": "1806",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1807",
-            "meandailyCO2": "0.10",
-            "Mean Daily CO2\r\n(Original Data）": "1807",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1808",
-            "meandailyCO2": "0.09",
-            "Mean Daily CO2\r\n(Original Data）": "1808",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1809",
-            "meandailyCO2": "0.09",
-            "Mean Daily CO2\r\n(Original Data）": "1809",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1810",
-            "meandailyCO2": "0.10",
-            "Mean Daily CO2\r\n(Original Data）": "1810",
-            "CDIAC": "0.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1811",
-            "meandailyCO2": "0.10",
-            "Mean Daily CO2\r\n(Original Data）": "1811",
-            "CDIAC": "0.11",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1812",
-            "meandailyCO2": "0.11",
-            "Mean Daily CO2\r\n(Original Data）": "1812",
-            "CDIAC": "0.11",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1813",
-            "meandailyCO2": "0.11",
-            "Mean Daily CO2\r\n(Original Data）": "1813",
-            "CDIAC": "0.11",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1814",
-            "meandailyCO2": "0.11",
-            "Mean Daily CO2\r\n(Original Data）": "1814",
-            "CDIAC": "0.12",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1815",
-            "meandailyCO2": "0.11",
-            "Mean Daily CO2\r\n(Original Data）": "1815",
-            "CDIAC": "0.12",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1816",
-            "meandailyCO2": "0.12",
-            "Mean Daily CO2\r\n(Original Data）": "1816",
-            "CDIAC": "0.13",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1817",
-            "meandailyCO2": "0.13",
-            "Mean Daily CO2\r\n(Original Data）": "1817",
-            "CDIAC": "0.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1818",
-            "meandailyCO2": "0.13",
-            "Mean Daily CO2\r\n(Original Data）": "1818",
-            "CDIAC": "0.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1819",
-            "meandailyCO2": "0.13",
-            "Mean Daily CO2\r\n(Original Data）": "1819",
-            "CDIAC": "0.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1820",
-            "meandailyCO2": "0.13",
-            "Mean Daily CO2\r\n(Original Data）": "1820",
-            "CDIAC": "0.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1821",
-            "meandailyCO2": "0.13",
-            "Mean Daily CO2\r\n(Original Data）": "1821",
-            "CDIAC": "0.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1822",
-            "meandailyCO2": "0.14",
-            "Mean Daily CO2\r\n(Original Data）": "1822",
-            "CDIAC": "0.15",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1823",
-            "meandailyCO2": "0.15",
-            "Mean Daily CO2\r\n(Original Data）": "1823",
-            "CDIAC": "0.16",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1824",
-            "meandailyCO2": "0.15",
-            "Mean Daily CO2\r\n(Original Data）": "1824",
-            "CDIAC": "0.16",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1825",
-            "meandailyCO2": "0.16",
-            "Mean Daily CO2\r\n(Original Data）": "1825",
-            "CDIAC": "0.17",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1826",
-            "meandailyCO2": "0.16",
-            "Mean Daily CO2\r\n(Original Data）": "1826",
-            "CDIAC": "0.17",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1827",
-            "meandailyCO2": "0.17",
-            "Mean Daily CO2\r\n(Original Data）": "1827",
-            "CDIAC": "0.18",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1828",
-            "meandailyCO2": "0.17",
-            "Mean Daily CO2\r\n(Original Data）": "1828",
-            "CDIAC": "0.18",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1829",
-            "meandailyCO2": "0.17",
-            "Mean Daily CO2\r\n(Original Data）": "1829",
-            "CDIAC": "0.18",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1830",
-            "meandailyCO2": "0.23",
-            "Mean Daily CO2\r\n(Original Data）": "1830",
-            "CDIAC": "0.24",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1831",
-            "meandailyCO2": "0.22",
-            "Mean Daily CO2\r\n(Original Data）": "1831",
-            "CDIAC": "0.23",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1832",
-            "meandailyCO2": "0.22",
-            "Mean Daily CO2\r\n(Original Data）": "1832",
-            "CDIAC": "0.23",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1833",
-            "meandailyCO2": "0.23",
-            "Mean Daily CO2\r\n(Original Data）": "1833",
-            "CDIAC": "0.24",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1834",
-            "meandailyCO2": "0.23",
-            "Mean Daily CO2\r\n(Original Data）": "1834",
-            "CDIAC": "0.24",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1835",
-            "meandailyCO2": "0.24",
-            "Mean Daily CO2\r\n(Original Data）": "1835",
-            "CDIAC": "0.25",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1836",
-            "meandailyCO2": "0.27",
-            "Mean Daily CO2\r\n(Original Data）": "1836",
-            "CDIAC": "0.29",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1837",
-            "meandailyCO2": "0.27",
-            "Mean Daily CO2\r\n(Original Data）": "1837",
-            "CDIAC": "0.29",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1838",
-            "meandailyCO2": "0.28",
-            "Mean Daily CO2\r\n(Original Data）": "1838",
-            "CDIAC": "0.30",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1839",
-            "meandailyCO2": "0.29",
-            "Mean Daily CO2\r\n(Original Data）": "1839",
-            "CDIAC": "0.31",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1840",
-            "meandailyCO2": "0.31",
-            "Mean Daily CO2\r\n(Original Data）": "1840",
-            "CDIAC": "0.33",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1841",
-            "meandailyCO2": "0.32",
-            "Mean Daily CO2\r\n(Original Data）": "1841",
-            "CDIAC": "0.34",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1842",
-            "meandailyCO2": "0.34",
-            "Mean Daily CO2\r\n(Original Data）": "1842",
-            "CDIAC": "0.36",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1843",
-            "meandailyCO2": "0.35",
-            "Mean Daily CO2\r\n(Original Data）": "1843",
-            "CDIAC": "0.36",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1844",
-            "meandailyCO2": "0.37",
-            "Mean Daily CO2\r\n(Original Data）": "1844",
-            "CDIAC": "0.39",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1845",
-            "meandailyCO2": "0.40",
-            "Mean Daily CO2\r\n(Original Data）": "1845",
-            "CDIAC": "0.43",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1846",
-            "meandailyCO2": "0.41",
-            "Mean Daily CO2\r\n(Original Data）": "1846",
-            "CDIAC": "0.43",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1847",
-            "meandailyCO2": "0.45",
-            "Mean Daily CO2\r\n(Original Data）": "1847",
-            "CDIAC": "0.47",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1848",
-            "meandailyCO2": "0.45",
-            "Mean Daily CO2\r\n(Original Data）": "1848",
-            "CDIAC": "0.48",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1849",
-            "meandailyCO2": "0.48",
-            "Mean Daily CO2\r\n(Original Data）": "1849",
-            "CDIAC": "0.50",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1850",
-            "meandailyCO2": "0.51",
-            "Mean Daily CO2\r\n(Original Data）": "1850",
-            "CDIAC": "0.54",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1851",
-            "meandailyCO2": "0.52",
-            "Mean Daily CO2\r\n(Original Data）": "1851",
-            "CDIAC": "0.54",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1852",
-            "meandailyCO2": "0.54",
-            "Mean Daily CO2\r\n(Original Data）": "1852",
-            "CDIAC": "0.57",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1853",
-            "meandailyCO2": "0.56",
-            "Mean Daily CO2\r\n(Original Data）": "1853",
-            "CDIAC": "0.60",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1854",
-            "meandailyCO2": "0.66",
-            "Mean Daily CO2\r\n(Original Data）": "1854",
-            "CDIAC": "0.70",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1855",
-            "meandailyCO2": "0.68",
-            "Mean Daily CO2\r\n(Original Data）": "1855",
-            "CDIAC": "0.71",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1856",
-            "meandailyCO2": "0.72",
-            "Mean Daily CO2\r\n(Original Data）": "1856",
-            "CDIAC": "0.76",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1857",
-            "meandailyCO2": "0.73",
-            "Mean Daily CO2\r\n(Original Data）": "1857",
-            "CDIAC": "0.77",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1858",
-            "meandailyCO2": "0.74",
-            "Mean Daily CO2\r\n(Original Data）": "1858",
-            "CDIAC": "0.78",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1859",
-            "meandailyCO2": "0.78",
-            "Mean Daily CO2\r\n(Original Data）": "1859",
-            "CDIAC": "0.83",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1860",
-            "meandailyCO2": "0.86",
-            "Mean Daily CO2\r\n(Original Data）": "1860",
-            "CDIAC": "0.90",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1861",
-            "meandailyCO2": "0.91",
-            "Mean Daily CO2\r\n(Original Data）": "1861",
-            "CDIAC": "0.95",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1862",
-            "meandailyCO2": "0.92",
-            "Mean Daily CO2\r\n(Original Data）": "1862",
-            "CDIAC": "0.97",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1863",
-            "meandailyCO2": "0.98",
-            "Mean Daily CO2\r\n(Original Data）": "1863",
-            "CDIAC": "1.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1864",
-            "meandailyCO2": "1.06",
-            "Mean Daily CO2\r\n(Original Data）": "1864",
-            "CDIAC": "1.11",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1865",
-            "meandailyCO2": "1.13",
-            "Mean Daily CO2\r\n(Original Data）": "1865",
-            "CDIAC": "1.19",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1866",
-            "meandailyCO2": "1.16",
-            "Mean Daily CO2\r\n(Original Data）": "1866",
-            "CDIAC": "1.22",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1867",
-            "meandailyCO2": "1.24",
-            "Mean Daily CO2\r\n(Original Data）": "1867",
-            "CDIAC": "1.31",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1868",
-            "meandailyCO2": "1.27",
-            "Mean Daily CO2\r\n(Original Data）": "1868",
-            "CDIAC": "1.34",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1869",
-            "meandailyCO2": "1.36",
-            "Mean Daily CO2\r\n(Original Data）": "1869",
-            "CDIAC": "1.43",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1870",
-            "meandailyCO2": "1.39",
-            "Mean Daily CO2\r\n(Original Data）": "1870",
-            "CDIAC": "1.46",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1871",
-            "meandailyCO2": "1.47",
-            "Mean Daily CO2\r\n(Original Data）": "1871",
-            "CDIAC": "1.55",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1872",
-            "meandailyCO2": "1.63",
-            "Mean Daily CO2\r\n(Original Data）": "1872",
-            "CDIAC": "1.71",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1873",
-            "meandailyCO2": "1.73",
-            "Mean Daily CO2\r\n(Original Data）": "1873",
-            "CDIAC": "1.82",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1874",
-            "meandailyCO2": "1.62",
-            "Mean Daily CO2\r\n(Original Data）": "1874",
-            "CDIAC": "1.71",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1875",
-            "meandailyCO2": "1.76",
-            "Mean Daily CO2\r\n(Original Data）": "1875",
-            "CDIAC": "1.85",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1876",
-            "meandailyCO2": "1.78",
-            "Mean Daily CO2\r\n(Original Data）": "1876",
-            "CDIAC": "1.87",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1877",
-            "meandailyCO2": "1.82",
-            "Mean Daily CO2\r\n(Original Data）": "1877",
-            "CDIAC": "1.92",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1878",
-            "meandailyCO2": "1.83",
-            "Mean Daily CO2\r\n(Original Data）": "1878",
-            "CDIAC": "1.93",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1879",
-            "meandailyCO2": "1.96",
-            "Mean Daily CO2\r\n(Original Data）": "1879",
-            "CDIAC": "2.07",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1880",
-            "meandailyCO2": "2.22",
-            "Mean Daily CO2\r\n(Original Data）": "1880",
-            "CDIAC": "2.33",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1881",
-            "meandailyCO2": "2.30",
-            "Mean Daily CO2\r\n(Original Data）": "1881",
-            "CDIAC": "2.42",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1882",
-            "meandailyCO2": "2.43",
-            "Mean Daily CO2\r\n(Original Data）": "1882",
-            "CDIAC": "2.56",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1883",
-            "meandailyCO2": "2.58",
-            "Mean Daily CO2\r\n(Original Data）": "1883",
-            "CDIAC": "2.72",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1884",
-            "meandailyCO2": "2.60",
-            "Mean Daily CO2\r\n(Original Data）": "1884",
-            "CDIAC": "2.74",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1885",
-            "meandailyCO2": "2.63",
-            "Mean Daily CO2\r\n(Original Data）": "1885",
-            "CDIAC": "2.77",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1886",
-            "meandailyCO2": "2.67",
-            "Mean Daily CO2\r\n(Original Data）": "1886",
-            "CDIAC": "2.81",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1887",
-            "meandailyCO2": "2.80",
-            "Mean Daily CO2\r\n(Original Data）": "1887",
-            "CDIAC": "2.95",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1888",
-            "meandailyCO2": "3.10",
-            "Mean Daily CO2\r\n(Original Data）": "1888",
-            "CDIAC": "3.26",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1889",
-            "meandailyCO2": "3.10",
-            "Mean Daily CO2\r\n(Original Data）": "1889",
-            "CDIAC": "3.27",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1890",
-            "meandailyCO2": "3.38",
-            "Mean Daily CO2\r\n(Original Data）": "1890",
-            "CDIAC": "3.56",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1891",
-            "meandailyCO2": "3.54",
-            "Mean Daily CO2\r\n(Original Data）": "1891",
-            "CDIAC": "3.73",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1892",
-            "meandailyCO2": "3.56",
-            "Mean Daily CO2\r\n(Original Data）": "1892",
-            "CDIAC": "3.75",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1893",
-            "meandailyCO2": "3.52",
-            "Mean Daily CO2\r\n(Original Data）": "1893",
-            "CDIAC": "3.71",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1894",
-            "meandailyCO2": "3.65",
-            "Mean Daily CO2\r\n(Original Data）": "1894",
-            "CDIAC": "3.84",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1895",
-            "meandailyCO2": "3.87",
-            "Mean Daily CO2\r\n(Original Data）": "1895",
-            "CDIAC": "4.07",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1896",
-            "meandailyCO2": "3.98",
-            "Mean Daily CO2\r\n(Original Data）": "1896",
-            "CDIAC": "4.20",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1897",
-            "meandailyCO2": "4.18",
-            "Mean Daily CO2\r\n(Original Data）": "1897",
-            "CDIAC": "4.41",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1898",
-            "meandailyCO2": "4.41",
-            "Mean Daily CO2\r\n(Original Data）": "1898",
-            "CDIAC": "4.65",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1899",
-            "meandailyCO2": "4.82",
-            "Mean Daily CO2\r\n(Original Data）": "1899",
-            "CDIAC": "5.08",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1900",
-            "meandailyCO2": "5.07",
-            "Mean Daily CO2\r\n(Original Data）": "1900",
-            "CDIAC": "5.34",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1901",
-            "meandailyCO2": "5.25",
-            "Mean Daily CO2\r\n(Original Data）": "1901",
-            "CDIAC": "5.53",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1902",
-            "meandailyCO2": "5.38",
-            "Mean Daily CO2\r\n(Original Data）": "1902",
-            "CDIAC": "5.67",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1903",
-            "meandailyCO2": "5.87",
-            "Mean Daily CO2\r\n(Original Data）": "1903",
-            "CDIAC": "6.19",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1904",
-            "meandailyCO2": "5.92",
-            "Mean Daily CO2\r\n(Original Data）": "1904",
-            "CDIAC": "6.24",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1905",
-            "meandailyCO2": "6.32",
-            "Mean Daily CO2\r\n(Original Data）": "1905",
-            "CDIAC": "6.66",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1906",
-            "meandailyCO2": "6.64",
-            "Mean Daily CO2\r\n(Original Data）": "1906",
-            "CDIAC": "6.99",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1907",
-            "meandailyCO2": "7.51",
-            "Mean Daily CO2\r\n(Original Data）": "1907",
-            "CDIAC": "7.91",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1908",
-            "meandailyCO2": "7.20",
-            "Mean Daily CO2\r\n(Original Data）": "1908",
-            "CDIAC": "7.59",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1909",
-            "meandailyCO2": "7.51",
-            "Mean Daily CO2\r\n(Original Data）": "1909",
-            "CDIAC": "7.91",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1910",
-            "meandailyCO2": "7.87",
-            "Mean Daily CO2\r\n(Original Data）": "1910",
-            "CDIAC": "8.30",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1911",
-            "meandailyCO2": "8.02",
-            "Mean Daily CO2\r\n(Original Data）": "1911",
-            "CDIAC": "8.45",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1912",
-            "meandailyCO2": "8.37",
-            "Mean Daily CO2\r\n(Original Data）": "1912",
-            "CDIAC": "8.82",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1913",
-            "meandailyCO2": "9.09",
-            "Mean Daily CO2\r\n(Original Data）": "1913",
-            "CDIAC": "9.57",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1914",
-            "meandailyCO2": "8.24",
-            "Mean Daily CO2\r\n(Original Data）": "1914",
-            "CDIAC": "8.69",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1915",
-            "meandailyCO2": "8.13",
-            "Mean Daily CO2\r\n(Original Data）": "1915",
-            "CDIAC": "8.57",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1916",
-            "meandailyCO2": "8.75",
-            "Mean Daily CO2\r\n(Original Data）": "1916",
-            "CDIAC": "9.22",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1917",
-            "meandailyCO2": "9.18",
-            "Mean Daily CO2\r\n(Original Data）": "1917",
-            "CDIAC": "9.67",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1918",
-            "meandailyCO2": "9.06",
-            "Mean Daily CO2\r\n(Original Data）": "1918",
-            "CDIAC": "9.54",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1919",
-            "meandailyCO2": "7.85",
-            "Mean Daily CO2\r\n(Original Data）": "1919",
-            "CDIAC": "8.27",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1920",
-            "meandailyCO2": "9.10",
-            "Mean Daily CO2\r\n(Original Data）": "1920",
-            "CDIAC": "9.59",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1921",
-            "meandailyCO2": "8.01",
-            "Mean Daily CO2\r\n(Original Data）": "1921",
-            "CDIAC": "8.44",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1922",
-            "meandailyCO2": "8.40",
-            "Mean Daily CO2\r\n(Original Data）": "1922",
-            "CDIAC": "8.85",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1923",
-            "meandailyCO2": "9.53",
-            "Mean Daily CO2\r\n(Original Data）": "1923",
-            "CDIAC": "10.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1924",
-            "meandailyCO2": "9.53",
-            "Mean Daily CO2\r\n(Original Data）": "1924",
-            "CDIAC": "10.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1925",
-            "meandailyCO2": "9.63",
-            "Mean Daily CO2\r\n(Original Data）": "1925",
-            "CDIAC": "10.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1926",
-            "meandailyCO2": "9.48",
-            "Mean Daily CO2\r\n(Original Data）": "1926",
-            "CDIAC": "9.99",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1927",
-            "meandailyCO2": "10.35",
-            "Mean Daily CO2\r\n(Original Data）": "1927",
-            "CDIAC": "10.90",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1928",
-            "meandailyCO2": "10.36",
-            "Mean Daily CO2\r\n(Original Data）": "1928",
-            "CDIAC": "10.91",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1929",
-            "meandailyCO2": "11.17",
-            "Mean Daily CO2\r\n(Original Data）": "1929",
-            "CDIAC": "11.76",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1930",
-            "meandailyCO2": "10.32",
-            "Mean Daily CO2\r\n(Original Data）": "1930",
-            "CDIAC": "10.87",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1931",
-            "meandailyCO2": "9.22",
-            "Mean Daily CO2\r\n(Original Data）": "1931",
-            "CDIAC": "9.71",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1932",
-            "meandailyCO2": "8.30",
-            "Mean Daily CO2\r\n(Original Data）": "1932",
-            "CDIAC": "8.74",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1933",
-            "meandailyCO2": "8.76",
-            "Mean Daily CO2\r\n(Original Data）": "1933",
-            "CDIAC": "9.23",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1934",
-            "meandailyCO2": "9.53",
-            "Mean Daily CO2\r\n(Original Data）": "1934",
-            "CDIAC": "10.04",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1935",
-            "meandailyCO2": "10.01",
-            "Mean Daily CO2\r\n(Original Data）": "1935",
-            "CDIAC": "10.55",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1936",
-            "meandailyCO2": "10.96",
-            "Mean Daily CO2\r\n(Original Data）": "1936",
-            "CDIAC": "11.55",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1937",
-            "meandailyCO2": "11.77",
-            "Mean Daily CO2\r\n(Original Data）": "1937",
-            "CDIAC": "12.40",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1938",
-            "meandailyCO2": "11.10",
-            "Mean Daily CO2\r\n(Original Data）": "1938",
-            "CDIAC": "11.69",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1939",
-            "meandailyCO2": "11.72",
-            "Mean Daily CO2\r\n(Original Data）": "1939",
-            "CDIAC": "12.35",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1940",
-            "meandailyCO2": "12.73",
-            "Mean Daily CO2\r\n(Original Data）": "1940",
-            "CDIAC": "13.41",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1941",
-            "meandailyCO2": "13.08",
-            "Mean Daily CO2\r\n(Original Data）": "1941",
-            "CDIAC": "13.78",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1942",
-            "meandailyCO2": "13.12",
-            "Mean Daily CO2\r\n(Original Data）": "1942",
-            "CDIAC": "13.82",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1943",
-            "meandailyCO2": "13.57",
-            "Mean Daily CO2\r\n(Original Data）": "1943",
-            "CDIAC": "14.30",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1944",
-            "meandailyCO2": "13.45",
-            "Mean Daily CO2\r\n(Original Data）": "1944",
-            "CDIAC": "14.17",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1945",
-            "meandailyCO2": "11.28",
-            "Mean Daily CO2\r\n(Original Data）": "1945",
-            "CDIAC": "11.88",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1946",
-            "meandailyCO2": "12.31",
-            "Mean Daily CO2\r\n(Original Data）": "1946",
-            "CDIAC": "12.97",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1947",
-            "meandailyCO2": "13.63",
-            "Mean Daily CO2\r\n(Original Data）": "1947",
-            "CDIAC": "14.36",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1948",
-            "meandailyCO2": "14.29",
-            "Mean Daily CO2\r\n(Original Data）": "1948",
-            "CDIAC": "15.05",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1949",
-            "meandailyCO2": "13.65",
-            "Mean Daily CO2\r\n(Original Data）": "1949",
-            "CDIAC": "14.38",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1950",
-            "meandailyCO2": "15.39",
-            "Mean Daily CO2\r\n(Original Data）": "1950",
-            "CDIAC": "16.22",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1951",
-            "meandailyCO2": "16.60",
-            "Mean Daily CO2\r\n(Original Data）": "1951",
-            "CDIAC": "17.49",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1952",
-            "meandailyCO2": "16.78",
-            "Mean Daily CO2\r\n(Original Data）": "1952",
-            "CDIAC": "17.68",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1953",
-            "meandailyCO2": "17.30",
-            "Mean Daily CO2\r\n(Original Data）": "1953",
-            "CDIAC": "18.23",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1954",
-            "meandailyCO2": "17.68",
-            "Mean Daily CO2\r\n(Original Data）": "1954",
-            "CDIAC": "18.62",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1955",
-            "meandailyCO2": "19.38",
-            "Mean Daily CO2\r\n(Original Data）": "1955",
-            "CDIAC": "20.41",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1956",
-            "meandailyCO2": "20.57",
-            "Mean Daily CO2\r\n(Original Data）": "1956",
-            "CDIAC": "21.67",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1957",
-            "meandailyCO2": "21.31",
-            "Mean Daily CO2\r\n(Original Data）": "1957",
-            "CDIAC": "22.45",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1958",
-            "meandailyCO2": "21.92",
-            "Mean Daily CO2\r\n(Original Data）": "1958",
-            "CDIAC": "23.09",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1959",
-            "meandailyCO2": "23.06",
-            "Mean Daily CO2\r\n(Original Data）": "1959",
-            "CDIAC": "24.29",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1960",
-            "meandailyCO2": "24.26",
-            "Mean Daily CO2\r\n(Original Data）": "1960",
-            "CDIAC": "25.56",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1961",
-            "meandailyCO2": "24.38",
-            "Mean Daily CO2\r\n(Original Data）": "1961",
-            "CDIAC": "25.69",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1962",
-            "meandailyCO2": "25.24",
-            "Mean Daily CO2\r\n(Original Data）": "1962",
-            "CDIAC": "26.60",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1963",
-            "meandailyCO2": "26.67",
-            "Mean Daily CO2\r\n(Original Data）": "1963",
-            "CDIAC": "28.10",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1964",
-            "meandailyCO2": "27.99",
-            "Mean Daily CO2\r\n(Original Data）": "1964",
-            "CDIAC": "29.48",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1965",
-            "meandailyCO2": "29.36",
-            "Mean Daily CO2\r\n(Original Data）": "1965",
-            "CDIAC": "30.94",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1966",
-            "meandailyCO2": "30.73",
-            "Mean Daily CO2\r\n(Original Data）": "1966",
-            "CDIAC": "32.37",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1967",
-            "meandailyCO2": "31.71",
-            "Mean Daily CO2\r\n(Original Data）": "1967",
-            "CDIAC": "33.41",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1968",
-            "meandailyCO2": "33.35",
-            "Mean Daily CO2\r\n(Original Data）": "1968",
-            "CDIAC": "35.14",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1969",
-            "meandailyCO2": "35.67",
-            "Mean Daily CO2\r\n(Original Data）": "1969",
-            "CDIAC": "37.58",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1970",
-            "meandailyCO2": "38.96",
-            "Mean Daily CO2\r\n(Original Data）": "1970",
-            "CDIAC": "40.69",
-            "EDGAR": "38.96",
-            "undefined": "0.957370297",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1971",
-            "meandailyCO2": "38.75",
-            "Mean Daily CO2\r\n(Original Data）": "1971",
-            "CDIAC": "42.35",
-            "EDGAR": "38.75",
-            "undefined": "0.914993956",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1972",
-            "meandailyCO2": "40.57",
-            "Mean Daily CO2\r\n(Original Data）": "1972",
-            "CDIAC": "44.21",
-            "EDGAR": "40.57",
-            "undefined": "0.917809628",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1973",
-            "meandailyCO2": "43.03",
-            "Mean Daily CO2\r\n(Original Data）": "1973",
-            "CDIAC": "46.69",
-            "EDGAR": "43.03",
-            "undefined": "0.92157772",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1974",
-            "meandailyCO2": "42.95",
-            "Mean Daily CO2\r\n(Original Data）": "1974",
-            "CDIAC": "46.49",
-            "EDGAR": "42.95",
-            "undefined": "0.923965943",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1975",
-            "meandailyCO2": "43.08",
-            "Mean Daily CO2\r\n(Original Data）": "1975",
-            "CDIAC": "46.43",
-            "EDGAR": "43.08",
-            "undefined": "0.927824995",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1976",
-            "meandailyCO2": "45.30",
-            "Mean Daily CO2\r\n(Original Data）": "1976",
-            "CDIAC": "48.76",
-            "EDGAR": "45.30",
-            "undefined": "0.929050528",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1977",
-            "meandailyCO2": "46.96",
-            "Mean Daily CO2\r\n(Original Data）": "1977",
-            "CDIAC": "50.25",
-            "EDGAR": "46.96",
-            "undefined": "0.93446607",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1978",
-            "meandailyCO2": "48.46",
-            "Mean Daily CO2\r\n(Original Data）": "1978",
-            "CDIAC": "52.12",
-            "EDGAR": "48.46",
-            "undefined": "0.929806485",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1979",
-            "meandailyCO2": "49.89",
-            "Mean Daily CO2\r\n(Original Data）": "1979",
-            "CDIAC": "53.51",
-            "EDGAR": "49.89",
-            "undefined": "0.932481258",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1980",
-            "meandailyCO2": "49.29",
-            "Mean Daily CO2\r\n(Original Data）": "1980",
-            "CDIAC": "53.13",
-            "EDGAR": "49.29",
-            "undefined": "0.927642513",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1981",
-            "meandailyCO2": "48.72",
-            "Mean Daily CO2\r\n(Original Data）": "1981",
-            "CDIAC": "51.85",
-            "EDGAR": "48.72",
-            "undefined": "0.939757593",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1982",
-            "meandailyCO2": "48.23",
-            "Mean Daily CO2\r\n(Original Data）": "1982",
-            "CDIAC": "51.47",
-            "EDGAR": "48.23",
-            "undefined": "0.936998434",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1983",
-            "meandailyCO2": "48.57",
-            "Mean Daily CO2\r\n(Original Data）": "1983",
-            "CDIAC": "51.96",
-            "EDGAR": "48.57",
-            "undefined": "0.934829475",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1984",
-            "meandailyCO2": "50.02",
-            "Mean Daily CO2\r\n(Original Data）": "1984",
-            "CDIAC": "53.34",
-            "EDGAR": "50.02",
-            "undefined": "0.937767427",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1985",
-            "meandailyCO2": "50.89",
-            "Mean Daily CO2\r\n(Original Data）": "1985",
-            "CDIAC": "55.40",
-            "EDGAR": "50.89",
-            "undefined": "0.918525117",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1986",
-            "meandailyCO2": "51.84",
-            "Mean Daily CO2\r\n(Original Data）": "1986",
-            "CDIAC": "56.22",
-            "EDGAR": "51.84",
-            "undefined": "0.92207952",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1987",
-            "meandailyCO2": "53.65",
-            "Mean Daily CO2\r\n(Original Data）": "1987",
-            "CDIAC": "58.03",
-            "EDGAR": "53.65",
-            "undefined": "0.924528029",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1988",
-            "meandailyCO2": "55.37",
-            "Mean Daily CO2\r\n(Original Data）": "1988",
-            "CDIAC": "60.09",
-            "EDGAR": "55.37",
-            "undefined": "0.921547776",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1989",
-            "meandailyCO2": "56.59",
-            "Mean Daily CO2\r\n(Original Data）": "1989",
-            "CDIAC": "61.19",
-            "EDGAR": "56.59",
-            "undefined": "0.924814709",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1990",
-            "meandailyCO2": "57.61",
-            "Mean Daily CO2\r\n(Original Data）": "1990",
-            "CDIAC": "59.80",
-            "EDGAR": "57.61",
-            "undefined": "0.963271085",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1991",
-            "meandailyCO2": "57.93",
-            "Mean Daily CO2\r\n(Original Data）": "1991",
-            "CDIAC": "61.37",
-            "EDGAR": "57.93",
-            "undefined": "0.943929739",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1992",
-            "meandailyCO2": "57.70",
-            "Mean Daily CO2\r\n(Original Data）": "1992",
-            "CDIAC": "60.41",
-            "EDGAR": "57.70",
-            "undefined": "0.955105253",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1993",
-            "meandailyCO2": "58.25",
-            "Mean Daily CO2\r\n(Original Data）": "1993",
-            "CDIAC": "61.21",
-            "EDGAR": "58.25",
-            "undefined": "0.95160026",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1994",
-            "meandailyCO2": "58.71",
-            "Mean Daily CO2\r\n(Original Data）": "1994",
-            "CDIAC": "61.47",
-            "EDGAR": "58.71",
-            "undefined": "0.955059661",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1995",
-            "meandailyCO2": "60.37",
-            "Mean Daily CO2\r\n(Original Data）": "1995",
-            "CDIAC": "62.70",
-            "EDGAR": "60.37",
-            "undefined": "0.962871723",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1996",
-            "meandailyCO2": "61.49",
-            "Mean Daily CO2\r\n(Original Data）": "1996",
-            "CDIAC": "64.39",
-            "EDGAR": "61.49",
-            "undefined": "0.955007897",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1997",
-            "meandailyCO2": "62.44",
-            "Mean Daily CO2\r\n(Original Data）": "1997",
-            "CDIAC": "64.87",
-            "EDGAR": "62.44",
-            "undefined": "0.96254945",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1998",
-            "meandailyCO2": "62.80",
-            "Mean Daily CO2\r\n(Original Data）": "1998",
-            "CDIAC": "64.59",
-            "EDGAR": "62.80",
-            "undefined": "0.972312477",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "1999",
-            "meandailyCO2": "63.28",
-            "Mean Daily CO2\r\n(Original Data）": "1999",
-            "CDIAC": "65.69",
-            "EDGAR": "63.28",
-            "undefined": "0.963413718",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2000",
-            "meandailyCO2": "65.23",
-            "Mean Daily CO2\r\n(Original Data）": "2000",
-            "CDIAC": "67.50",
-            "EDGAR": "65.23",
-            "undefined": "0.966343211",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2001",
-            "meandailyCO2": "66.41",
-            "Mean Daily CO2\r\n(Original Data）": "2001",
-            "CDIAC": "68.11",
-            "EDGAR": "66.41",
-            "undefined": "0.975041742",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2002",
-            "meandailyCO2": "67.66",
-            "Mean Daily CO2\r\n(Original Data）": "2002",
-            "CDIAC": "69.69",
-            "EDGAR": "67.66",
-            "undefined": "0.970835732",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2003",
-            "meandailyCO2": "70.75",
-            "Mean Daily CO2\r\n(Original Data）": "2003",
-            "CDIAC": "73.18",
-            "EDGAR": "70.75",
-            "undefined": "0.966831519",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2004",
-            "meandailyCO2": "73.94",
-            "Mean Daily CO2\r\n(Original Data）": "2004",
-            "CDIAC": "76.50",
-            "EDGAR": "73.94",
-            "undefined": "0.966507981",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2005",
-            "meandailyCO2": "76.90",
-            "Mean Daily CO2\r\n(Original Data）": "2005",
-            "CDIAC": "79.35",
-            "EDGAR": "76.90",
-            "undefined": "0.969096396",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2006",
-            "meandailyCO2": "79.53",
-            "Mean Daily CO2\r\n(Original Data）": "2006",
-            "CDIAC": "82.20",
-            "EDGAR": "79.53",
-            "undefined": "0.967551198",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2007",
-            "meandailyCO2": "82.83",
-            "Mean Daily CO2\r\n(Original Data）": "2007",
-            "CDIAC": "83.72",
-            "EDGAR": "82.83",
-            "undefined": "0.989380366",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2008",
-            "meandailyCO2": "83.04",
-            "Mean Daily CO2\r\n(Original Data）": "2008",
-            "CDIAC": "86.71",
-            "EDGAR": "83.04",
-            "undefined": "0.95770424",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2009",
-            "meandailyCO2": "82.23",
-            "Mean Daily CO2\r\n(Original Data）": "2009",
-            "CDIAC": "84.72",
-            "EDGAR": "82.23",
-            "undefined": "0.970588925",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2010",
-            "meandailyCO2": "87.09",
-            "Mean Daily CO2\r\n(Original Data）": "2010",
-            "CDIAC": "90.39",
-            "EDGAR": "87.09",
-            "undefined": "0.963521941",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2011",
-            "meandailyCO2": "89.87",
-            "Mean Daily CO2\r\n(Original Data）": "2011",
-            "CDIAC": "93.66",
-            "EDGAR": "89.87",
-            "undefined": "0.959540917",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2012",
-            "meandailyCO2": "90.47",
-            "Mean Daily CO2\r\n(Original Data）": "2012",
-            "CDIAC": "94.92",
-            "EDGAR": "90.47",
-            "undefined": "0.953060179",
-          "PrognosisData": "historic"
-        },
-        {
-            "Year": "2013",
-            "meandailyCO2": "92.22",
-            "Mean Daily CO2\r\n(Original Data）": "2013",
-            "CDIAC": "95.66",
-            "EDGAR": "92.22",
-            "undefined": "0.964021255",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2014",
-            "meandailyCO2": "93.00",
-            "Mean Daily CO2\r\n(Original Data）": "2014",
-            "CDIAC": "96.33",
-            "EDGAR": "93.00",
-            "undefined": "0.965456988",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2015",
-            "meandailyCO2": "92.84",
-            "Mean Daily CO2\r\n(Original Data）": "2015",
-            "CDIAC": "96.37",
-            "EDGAR": "92.84",
-            "undefined": "0.963409631",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2016",
-            "meandailyCO2": "93.71",
-            "Mean Daily CO2\r\n(Original Data）": "2016",
-            "CDIAC": "95.65",
-            "EDGAR": "93.71",
-            "undefined": "0.979646036",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2017",
-            "meandailyCO2": "95.08",
-            "Mean Daily CO2\r\n(Original Data）": "2017",
-            "EDGAR": "95.08",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2018",
-            "meandailyCO2": "96.84",
-            "Mean Daily CO2\r\n(Original Data）": "2018",
-            "EDGAR": "96.84",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2019",
-            "meandailyCO2": "98.21",
-            "PrognosisData": "historic"
-        },
-        {
-            "Year": "2020",
-            "meandailyCO2": "89.66",
-            "undefined": "-8.71%",
-            "CO2WithLockdowns": "89.66",
-            "CO2WithoutLockdowns": "96.82",
-            "PrognosisData": "historic"
-        },
-      {
-        "Year": "2020",
-        "meandailyCO2": "89.66",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "89.66",
-        "CO2WithoutLockdowns": "89.66",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2021",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "88.57",
-        "CO2WithoutLockdowns": "97.02",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2022",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "88.75",
-        "CO2WithoutLockdowns": "97.22",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2023",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "88.94",
-        "CO2WithoutLockdowns": "97.42",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2024",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "89.12",
-        "CO2WithoutLockdowns": "97.62",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2025",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "89.3",
-          "CO2WithoutLockdowns": "97.82",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2026",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "89.65",
-        "CO2WithoutLockdowns": "98.2",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2027",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "90",
-        "CO2WithoutLockdowns": "98.59",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2028",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "90.35",
-        "CO2WithoutLockdowns": "98.97",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2029",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "90.7",
-        "CO2WithoutLockdowns": "99.36",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2030",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "91.05",
-          "CO2WithoutLockdowns": "99.74",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2031",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "91.57",
-        "CO2WithoutLockdowns": "100.32",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2032",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "92.1",
-        "CO2WithoutLockdowns": "100.89",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2033",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "92.63",
-        "CO2WithoutLockdowns": "101.47",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2034",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "93.15",
-        "CO2WithoutLockdowns": "102.04",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2035",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "93.68",
-          "CO2WithoutLockdowns": "102.62",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2036",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "94.36",
-        "CO2WithoutLockdowns": "103.36",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2037",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "95.04",
-        "CO2WithoutLockdowns": "104.11",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2038",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "95.72",
-        "CO2WithoutLockdowns": "104.85",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2039",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "96.4",
-        "CO2WithoutLockdowns": "105.6",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2040",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "97.08",
-          "CO2WithoutLockdowns": "106.34",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2041",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "98.06",
-        "CO2WithoutLockdowns": "107.42",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2042",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "99.05",
-        "CO2WithoutLockdowns": "108.5",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2043",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "100.03",
-        "CO2WithoutLockdowns": "109.57",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2044",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "101.02",
-        "CO2WithoutLockdowns": "110.65",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2045",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "102",
-          "CO2WithoutLockdowns": "111.73",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2046",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "103.15",
-        "CO2WithoutLockdowns": "113",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2047",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "104.3",
-        "CO2WithoutLockdowns": "114.25",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2048",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "105.46",
-        "CO2WithoutLockdowns": "115.52",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2049",
-        "undefined": "-8.71%",
-        "CO2WithLockdowns": "106.61",
-        "CO2WithoutLockdowns": "116.78",
-        "PrognosisData": "prognosis"
-      },
-        {
-          "Year": "2050",
-          "undefined": "-8.71%",
-          "CO2WithLockdowns": "107.76",
-          "CO2WithoutLockdowns": "118.04",
-          "PrognosisData": "prognosis"
-        },
-      {
-        "Year": "2051",
-        "undefined": "-8.71%",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2052",
-        "undefined": "-8.71%",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2053",
-        "undefined": "-8.71%",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2054",
-        "undefined": "-8.71%",
-        "PrognosisData": "prognosis"
-      },
-      {
-        "Year": "2055",
-        "undefined": "-8.71%",
-        "PrognosisData": "prognosis"
-      }
-    ]
+  "Tabelle1": [
+    {
+      "Year": "1751",
+      "meandailyCO2": "0.02",
+      "Old\r\n(Only EDGAR)": "1970",
+      "Mean Daily CO2\r\n(Original Data）": "1751",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1752",
+      "meandailyCO2": "0.02",
+      "Old\r\n(Only EDGAR)": "1971",
+      "Mean Daily CO2\r\n(Original Data）": "1752",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1753",
+      "meandailyCO2": "0.02",
+      "Old\r\n(Only EDGAR)": "1972",
+      "Mean Daily CO2\r\n(Original Data）": "1753",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1754",
+      "meandailyCO2": "0.02",
+      "Old\r\n(Only EDGAR)": "1973",
+      "Mean Daily CO2\r\n(Original Data）": "1754",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1755",
+      "meandailyCO2": "0.02",
+      "Old\r\n(Only EDGAR)": "1974",
+      "Mean Daily CO2\r\n(Original Data）": "1755",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1756",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1975",
+      "Mean Daily CO2\r\n(Original Data）": "1756",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1757",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1976",
+      "Mean Daily CO2\r\n(Original Data）": "1757",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1758",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1977",
+      "Mean Daily CO2\r\n(Original Data）": "1758",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1759",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1978",
+      "Mean Daily CO2\r\n(Original Data）": "1759",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1760",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1979",
+      "Mean Daily CO2\r\n(Original Data）": "1760",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1761",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1980",
+      "Mean Daily CO2\r\n(Original Data）": "1761",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1762",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1981",
+      "Mean Daily CO2\r\n(Original Data）": "1762",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1763",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1982",
+      "Mean Daily CO2\r\n(Original Data）": "1763",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1764",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1983",
+      "Mean Daily CO2\r\n(Original Data）": "1764",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1765",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1984",
+      "Mean Daily CO2\r\n(Original Data）": "1765",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1766",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1985",
+      "Mean Daily CO2\r\n(Original Data）": "1766",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1767",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1986",
+      "Mean Daily CO2\r\n(Original Data）": "1767",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1768",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1987",
+      "Mean Daily CO2\r\n(Original Data）": "1768",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1769",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1988",
+      "Mean Daily CO2\r\n(Original Data）": "1769",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1770",
+      "meandailyCO2": "0.03",
+      "Old\r\n(Only EDGAR)": "1989",
+      "Mean Daily CO2\r\n(Original Data）": "1770",
+      "CDIAC": "0.03",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1771",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1990",
+      "Mean Daily CO2\r\n(Original Data）": "1771",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1772",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1991",
+      "Mean Daily CO2\r\n(Original Data）": "1772",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1773",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1992",
+      "Mean Daily CO2\r\n(Original Data）": "1773",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1774",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1993",
+      "Mean Daily CO2\r\n(Original Data）": "1774",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1775",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1994",
+      "Mean Daily CO2\r\n(Original Data）": "1775",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1776",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1995",
+      "Mean Daily CO2\r\n(Original Data）": "1776",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1777",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1996",
+      "Mean Daily CO2\r\n(Original Data）": "1777",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1778",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1997",
+      "Mean Daily CO2\r\n(Original Data）": "1778",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1779",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1998",
+      "Mean Daily CO2\r\n(Original Data）": "1779",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1780",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "1999",
+      "Mean Daily CO2\r\n(Original Data）": "1780",
+      "CDIAC": "0.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1781",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "2000",
+      "Mean Daily CO2\r\n(Original Data）": "1781",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1782",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "2001",
+      "Mean Daily CO2\r\n(Original Data）": "1782",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1783",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "2002",
+      "Mean Daily CO2\r\n(Original Data）": "1783",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1784",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "2003",
+      "Mean Daily CO2\r\n(Original Data）": "1784",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1785",
+      "meandailyCO2": "0.04",
+      "Old\r\n(Only EDGAR)": "2004",
+      "Mean Daily CO2\r\n(Original Data）": "1785",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1786",
+      "meandailyCO2": "0.05",
+      "Old\r\n(Only EDGAR)": "2005",
+      "Mean Daily CO2\r\n(Original Data）": "1786",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1787",
+      "meandailyCO2": "0.05",
+      "Old\r\n(Only EDGAR)": "2006",
+      "Mean Daily CO2\r\n(Original Data）": "1787",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1788",
+      "meandailyCO2": "0.05",
+      "Old\r\n(Only EDGAR)": "2007",
+      "Mean Daily CO2\r\n(Original Data）": "1788",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1789",
+      "meandailyCO2": "0.05",
+      "Old\r\n(Only EDGAR)": "2008",
+      "Mean Daily CO2\r\n(Original Data）": "1789",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1790",
+      "meandailyCO2": "0.05",
+      "Old\r\n(Only EDGAR)": "2009",
+      "Mean Daily CO2\r\n(Original Data）": "1790",
+      "CDIAC": "0.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1791",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2010",
+      "Mean Daily CO2\r\n(Original Data）": "1791",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1792",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2011",
+      "Mean Daily CO2\r\n(Original Data）": "1792",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1793",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2012",
+      "Mean Daily CO2\r\n(Original Data）": "1793",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1794",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2013",
+      "Mean Daily CO2\r\n(Original Data）": "1794",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1795",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2014",
+      "Mean Daily CO2\r\n(Original Data）": "1795",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1796",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2015",
+      "Mean Daily CO2\r\n(Original Data）": "1796",
+      "CDIAC": "0.06",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1797",
+      "meandailyCO2": "0.06",
+      "Old\r\n(Only EDGAR)": "2016",
+      "Mean Daily CO2\r\n(Original Data）": "1797",
+      "CDIAC": "0.07",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1798",
+      "meandailyCO2": "0.07",
+      "Old\r\n(Only EDGAR)": "2017",
+      "Mean Daily CO2\r\n(Original Data）": "1798",
+      "CDIAC": "0.07",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1799",
+      "meandailyCO2": "0.07",
+      "Old\r\n(Only EDGAR)": "2018",
+      "Mean Daily CO2\r\n(Original Data）": "1799",
+      "CDIAC": "0.07",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1800",
+      "meandailyCO2": "0.07",
+      "Mean Daily CO2\r\n(Original Data）": "1800",
+      "CDIAC": "0.08",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1801",
+      "meandailyCO2": "0.07",
+      "Mean Daily CO2\r\n(Original Data）": "1801",
+      "CDIAC": "0.08",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1802",
+      "meandailyCO2": "0.10",
+      "Mean Daily CO2\r\n(Original Data）": "1802",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1803",
+      "meandailyCO2": "0.08",
+      "Mean Daily CO2\r\n(Original Data）": "1803",
+      "CDIAC": "0.09",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1804",
+      "meandailyCO2": "0.09",
+      "Mean Daily CO2\r\n(Original Data）": "1804",
+      "CDIAC": "0.09",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1805",
+      "meandailyCO2": "0.09",
+      "Mean Daily CO2\r\n(Original Data）": "1805",
+      "CDIAC": "0.09",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1806",
+      "meandailyCO2": "0.09",
+      "Mean Daily CO2\r\n(Original Data）": "1806",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1807",
+      "meandailyCO2": "0.10",
+      "Mean Daily CO2\r\n(Original Data）": "1807",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1808",
+      "meandailyCO2": "0.09",
+      "Mean Daily CO2\r\n(Original Data）": "1808",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1809",
+      "meandailyCO2": "0.09",
+      "Mean Daily CO2\r\n(Original Data）": "1809",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1810",
+      "meandailyCO2": "0.10",
+      "Mean Daily CO2\r\n(Original Data）": "1810",
+      "CDIAC": "0.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1811",
+      "meandailyCO2": "0.10",
+      "Mean Daily CO2\r\n(Original Data）": "1811",
+      "CDIAC": "0.11",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1812",
+      "meandailyCO2": "0.11",
+      "Mean Daily CO2\r\n(Original Data）": "1812",
+      "CDIAC": "0.11",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1813",
+      "meandailyCO2": "0.11",
+      "Mean Daily CO2\r\n(Original Data）": "1813",
+      "CDIAC": "0.11",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1814",
+      "meandailyCO2": "0.11",
+      "Mean Daily CO2\r\n(Original Data）": "1814",
+      "CDIAC": "0.12",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1815",
+      "meandailyCO2": "0.11",
+      "Mean Daily CO2\r\n(Original Data）": "1815",
+      "CDIAC": "0.12",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1816",
+      "meandailyCO2": "0.12",
+      "Mean Daily CO2\r\n(Original Data）": "1816",
+      "CDIAC": "0.13",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1817",
+      "meandailyCO2": "0.13",
+      "Mean Daily CO2\r\n(Original Data）": "1817",
+      "CDIAC": "0.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1818",
+      "meandailyCO2": "0.13",
+      "Mean Daily CO2\r\n(Original Data）": "1818",
+      "CDIAC": "0.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1819",
+      "meandailyCO2": "0.13",
+      "Mean Daily CO2\r\n(Original Data）": "1819",
+      "CDIAC": "0.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1820",
+      "meandailyCO2": "0.13",
+      "Mean Daily CO2\r\n(Original Data）": "1820",
+      "CDIAC": "0.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1821",
+      "meandailyCO2": "0.13",
+      "Mean Daily CO2\r\n(Original Data）": "1821",
+      "CDIAC": "0.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1822",
+      "meandailyCO2": "0.14",
+      "Mean Daily CO2\r\n(Original Data）": "1822",
+      "CDIAC": "0.15",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1823",
+      "meandailyCO2": "0.15",
+      "Mean Daily CO2\r\n(Original Data）": "1823",
+      "CDIAC": "0.16",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1824",
+      "meandailyCO2": "0.15",
+      "Mean Daily CO2\r\n(Original Data）": "1824",
+      "CDIAC": "0.16",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1825",
+      "meandailyCO2": "0.16",
+      "Mean Daily CO2\r\n(Original Data）": "1825",
+      "CDIAC": "0.17",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1826",
+      "meandailyCO2": "0.16",
+      "Mean Daily CO2\r\n(Original Data）": "1826",
+      "CDIAC": "0.17",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1827",
+      "meandailyCO2": "0.17",
+      "Mean Daily CO2\r\n(Original Data）": "1827",
+      "CDIAC": "0.18",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1828",
+      "meandailyCO2": "0.17",
+      "Mean Daily CO2\r\n(Original Data）": "1828",
+      "CDIAC": "0.18",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1829",
+      "meandailyCO2": "0.17",
+      "Mean Daily CO2\r\n(Original Data）": "1829",
+      "CDIAC": "0.18",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1830",
+      "meandailyCO2": "0.23",
+      "Mean Daily CO2\r\n(Original Data）": "1830",
+      "CDIAC": "0.24",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1831",
+      "meandailyCO2": "0.22",
+      "Mean Daily CO2\r\n(Original Data）": "1831",
+      "CDIAC": "0.23",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1832",
+      "meandailyCO2": "0.22",
+      "Mean Daily CO2\r\n(Original Data）": "1832",
+      "CDIAC": "0.23",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1833",
+      "meandailyCO2": "0.23",
+      "Mean Daily CO2\r\n(Original Data）": "1833",
+      "CDIAC": "0.24",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1834",
+      "meandailyCO2": "0.23",
+      "Mean Daily CO2\r\n(Original Data）": "1834",
+      "CDIAC": "0.24",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1835",
+      "meandailyCO2": "0.24",
+      "Mean Daily CO2\r\n(Original Data）": "1835",
+      "CDIAC": "0.25",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1836",
+      "meandailyCO2": "0.27",
+      "Mean Daily CO2\r\n(Original Data）": "1836",
+      "CDIAC": "0.29",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1837",
+      "meandailyCO2": "0.27",
+      "Mean Daily CO2\r\n(Original Data）": "1837",
+      "CDIAC": "0.29",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1838",
+      "meandailyCO2": "0.28",
+      "Mean Daily CO2\r\n(Original Data）": "1838",
+      "CDIAC": "0.30",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1839",
+      "meandailyCO2": "0.29",
+      "Mean Daily CO2\r\n(Original Data）": "1839",
+      "CDIAC": "0.31",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1840",
+      "meandailyCO2": "0.31",
+      "Mean Daily CO2\r\n(Original Data）": "1840",
+      "CDIAC": "0.33",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1841",
+      "meandailyCO2": "0.32",
+      "Mean Daily CO2\r\n(Original Data）": "1841",
+      "CDIAC": "0.34",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1842",
+      "meandailyCO2": "0.34",
+      "Mean Daily CO2\r\n(Original Data）": "1842",
+      "CDIAC": "0.36",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1843",
+      "meandailyCO2": "0.35",
+      "Mean Daily CO2\r\n(Original Data）": "1843",
+      "CDIAC": "0.36",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1844",
+      "meandailyCO2": "0.37",
+      "Mean Daily CO2\r\n(Original Data）": "1844",
+      "CDIAC": "0.39",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1845",
+      "meandailyCO2": "0.40",
+      "Mean Daily CO2\r\n(Original Data）": "1845",
+      "CDIAC": "0.43",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1846",
+      "meandailyCO2": "0.41",
+      "Mean Daily CO2\r\n(Original Data）": "1846",
+      "CDIAC": "0.43",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1847",
+      "meandailyCO2": "0.45",
+      "Mean Daily CO2\r\n(Original Data）": "1847",
+      "CDIAC": "0.47",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1848",
+      "meandailyCO2": "0.45",
+      "Mean Daily CO2\r\n(Original Data）": "1848",
+      "CDIAC": "0.48",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1849",
+      "meandailyCO2": "0.48",
+      "Mean Daily CO2\r\n(Original Data）": "1849",
+      "CDIAC": "0.50",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1850",
+      "meandailyCO2": "0.51",
+      "Mean Daily CO2\r\n(Original Data）": "1850",
+      "CDIAC": "0.54",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1851",
+      "meandailyCO2": "0.52",
+      "Mean Daily CO2\r\n(Original Data）": "1851",
+      "CDIAC": "0.54",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1852",
+      "meandailyCO2": "0.54",
+      "Mean Daily CO2\r\n(Original Data）": "1852",
+      "CDIAC": "0.57",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1853",
+      "meandailyCO2": "0.56",
+      "Mean Daily CO2\r\n(Original Data）": "1853",
+      "CDIAC": "0.60",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1854",
+      "meandailyCO2": "0.66",
+      "Mean Daily CO2\r\n(Original Data）": "1854",
+      "CDIAC": "0.70",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1855",
+      "meandailyCO2": "0.68",
+      "Mean Daily CO2\r\n(Original Data）": "1855",
+      "CDIAC": "0.71",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1856",
+      "meandailyCO2": "0.72",
+      "Mean Daily CO2\r\n(Original Data）": "1856",
+      "CDIAC": "0.76",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1857",
+      "meandailyCO2": "0.73",
+      "Mean Daily CO2\r\n(Original Data）": "1857",
+      "CDIAC": "0.77",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1858",
+      "meandailyCO2": "0.74",
+      "Mean Daily CO2\r\n(Original Data）": "1858",
+      "CDIAC": "0.78",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1859",
+      "meandailyCO2": "0.78",
+      "Mean Daily CO2\r\n(Original Data）": "1859",
+      "CDIAC": "0.83",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1860",
+      "meandailyCO2": "0.86",
+      "Mean Daily CO2\r\n(Original Data）": "1860",
+      "CDIAC": "0.90",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1861",
+      "meandailyCO2": "0.91",
+      "Mean Daily CO2\r\n(Original Data）": "1861",
+      "CDIAC": "0.95",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1862",
+      "meandailyCO2": "0.92",
+      "Mean Daily CO2\r\n(Original Data）": "1862",
+      "CDIAC": "0.97",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1863",
+      "meandailyCO2": "0.98",
+      "Mean Daily CO2\r\n(Original Data）": "1863",
+      "CDIAC": "1.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1864",
+      "meandailyCO2": "1.06",
+      "Mean Daily CO2\r\n(Original Data）": "1864",
+      "CDIAC": "1.11",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1865",
+      "meandailyCO2": "1.13",
+      "Mean Daily CO2\r\n(Original Data）": "1865",
+      "CDIAC": "1.19",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1866",
+      "meandailyCO2": "1.16",
+      "Mean Daily CO2\r\n(Original Data）": "1866",
+      "CDIAC": "1.22",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1867",
+      "meandailyCO2": "1.24",
+      "Mean Daily CO2\r\n(Original Data）": "1867",
+      "CDIAC": "1.31",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1868",
+      "meandailyCO2": "1.27",
+      "Mean Daily CO2\r\n(Original Data）": "1868",
+      "CDIAC": "1.34",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1869",
+      "meandailyCO2": "1.36",
+      "Mean Daily CO2\r\n(Original Data）": "1869",
+      "CDIAC": "1.43",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1870",
+      "meandailyCO2": "1.39",
+      "Mean Daily CO2\r\n(Original Data）": "1870",
+      "CDIAC": "1.46",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1871",
+      "meandailyCO2": "1.47",
+      "Mean Daily CO2\r\n(Original Data）": "1871",
+      "CDIAC": "1.55",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1872",
+      "meandailyCO2": "1.63",
+      "Mean Daily CO2\r\n(Original Data）": "1872",
+      "CDIAC": "1.71",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1873",
+      "meandailyCO2": "1.73",
+      "Mean Daily CO2\r\n(Original Data）": "1873",
+      "CDIAC": "1.82",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1874",
+      "meandailyCO2": "1.62",
+      "Mean Daily CO2\r\n(Original Data）": "1874",
+      "CDIAC": "1.71",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1875",
+      "meandailyCO2": "1.76",
+      "Mean Daily CO2\r\n(Original Data）": "1875",
+      "CDIAC": "1.85",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1876",
+      "meandailyCO2": "1.78",
+      "Mean Daily CO2\r\n(Original Data）": "1876",
+      "CDIAC": "1.87",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1877",
+      "meandailyCO2": "1.82",
+      "Mean Daily CO2\r\n(Original Data）": "1877",
+      "CDIAC": "1.92",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1878",
+      "meandailyCO2": "1.83",
+      "Mean Daily CO2\r\n(Original Data）": "1878",
+      "CDIAC": "1.93",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1879",
+      "meandailyCO2": "1.96",
+      "Mean Daily CO2\r\n(Original Data）": "1879",
+      "CDIAC": "2.07",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1880",
+      "meandailyCO2": "2.22",
+      "Mean Daily CO2\r\n(Original Data）": "1880",
+      "CDIAC": "2.33",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1881",
+      "meandailyCO2": "2.30",
+      "Mean Daily CO2\r\n(Original Data）": "1881",
+      "CDIAC": "2.42",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1882",
+      "meandailyCO2": "2.43",
+      "Mean Daily CO2\r\n(Original Data）": "1882",
+      "CDIAC": "2.56",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1883",
+      "meandailyCO2": "2.58",
+      "Mean Daily CO2\r\n(Original Data）": "1883",
+      "CDIAC": "2.72",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1884",
+      "meandailyCO2": "2.60",
+      "Mean Daily CO2\r\n(Original Data）": "1884",
+      "CDIAC": "2.74",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1885",
+      "meandailyCO2": "2.63",
+      "Mean Daily CO2\r\n(Original Data）": "1885",
+      "CDIAC": "2.77",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1886",
+      "meandailyCO2": "2.67",
+      "Mean Daily CO2\r\n(Original Data）": "1886",
+      "CDIAC": "2.81",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1887",
+      "meandailyCO2": "2.80",
+      "Mean Daily CO2\r\n(Original Data）": "1887",
+      "CDIAC": "2.95",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1888",
+      "meandailyCO2": "3.10",
+      "Mean Daily CO2\r\n(Original Data）": "1888",
+      "CDIAC": "3.26",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1889",
+      "meandailyCO2": "3.10",
+      "Mean Daily CO2\r\n(Original Data）": "1889",
+      "CDIAC": "3.27",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1890",
+      "meandailyCO2": "3.38",
+      "Mean Daily CO2\r\n(Original Data）": "1890",
+      "CDIAC": "3.56",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1891",
+      "meandailyCO2": "3.54",
+      "Mean Daily CO2\r\n(Original Data）": "1891",
+      "CDIAC": "3.73",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1892",
+      "meandailyCO2": "3.56",
+      "Mean Daily CO2\r\n(Original Data）": "1892",
+      "CDIAC": "3.75",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1893",
+      "meandailyCO2": "3.52",
+      "Mean Daily CO2\r\n(Original Data）": "1893",
+      "CDIAC": "3.71",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1894",
+      "meandailyCO2": "3.65",
+      "Mean Daily CO2\r\n(Original Data）": "1894",
+      "CDIAC": "3.84",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1895",
+      "meandailyCO2": "3.87",
+      "Mean Daily CO2\r\n(Original Data）": "1895",
+      "CDIAC": "4.07",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1896",
+      "meandailyCO2": "3.98",
+      "Mean Daily CO2\r\n(Original Data）": "1896",
+      "CDIAC": "4.20",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1897",
+      "meandailyCO2": "4.18",
+      "Mean Daily CO2\r\n(Original Data）": "1897",
+      "CDIAC": "4.41",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1898",
+      "meandailyCO2": "4.41",
+      "Mean Daily CO2\r\n(Original Data）": "1898",
+      "CDIAC": "4.65",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1899",
+      "meandailyCO2": "4.82",
+      "Mean Daily CO2\r\n(Original Data）": "1899",
+      "CDIAC": "5.08",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1900",
+      "meandailyCO2": "5.07",
+      "Mean Daily CO2\r\n(Original Data）": "1900",
+      "CDIAC": "5.34",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1901",
+      "meandailyCO2": "5.25",
+      "Mean Daily CO2\r\n(Original Data）": "1901",
+      "CDIAC": "5.53",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1902",
+      "meandailyCO2": "5.38",
+      "Mean Daily CO2\r\n(Original Data）": "1902",
+      "CDIAC": "5.67",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1903",
+      "meandailyCO2": "5.87",
+      "Mean Daily CO2\r\n(Original Data）": "1903",
+      "CDIAC": "6.19",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1904",
+      "meandailyCO2": "5.92",
+      "Mean Daily CO2\r\n(Original Data）": "1904",
+      "CDIAC": "6.24",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1905",
+      "meandailyCO2": "6.32",
+      "Mean Daily CO2\r\n(Original Data）": "1905",
+      "CDIAC": "6.66",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1906",
+      "meandailyCO2": "6.64",
+      "Mean Daily CO2\r\n(Original Data）": "1906",
+      "CDIAC": "6.99",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1907",
+      "meandailyCO2": "7.51",
+      "Mean Daily CO2\r\n(Original Data）": "1907",
+      "CDIAC": "7.91",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1908",
+      "meandailyCO2": "7.20",
+      "Mean Daily CO2\r\n(Original Data）": "1908",
+      "CDIAC": "7.59",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1909",
+      "meandailyCO2": "7.51",
+      "Mean Daily CO2\r\n(Original Data）": "1909",
+      "CDIAC": "7.91",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1910",
+      "meandailyCO2": "7.87",
+      "Mean Daily CO2\r\n(Original Data）": "1910",
+      "CDIAC": "8.30",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1911",
+      "meandailyCO2": "8.02",
+      "Mean Daily CO2\r\n(Original Data）": "1911",
+      "CDIAC": "8.45",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1912",
+      "meandailyCO2": "8.37",
+      "Mean Daily CO2\r\n(Original Data）": "1912",
+      "CDIAC": "8.82",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1913",
+      "meandailyCO2": "9.09",
+      "Mean Daily CO2\r\n(Original Data）": "1913",
+      "CDIAC": "9.57",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1914",
+      "meandailyCO2": "8.24",
+      "Mean Daily CO2\r\n(Original Data）": "1914",
+      "CDIAC": "8.69",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1915",
+      "meandailyCO2": "8.13",
+      "Mean Daily CO2\r\n(Original Data）": "1915",
+      "CDIAC": "8.57",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1916",
+      "meandailyCO2": "8.75",
+      "Mean Daily CO2\r\n(Original Data）": "1916",
+      "CDIAC": "9.22",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1917",
+      "meandailyCO2": "9.18",
+      "Mean Daily CO2\r\n(Original Data）": "1917",
+      "CDIAC": "9.67",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1918",
+      "meandailyCO2": "9.06",
+      "Mean Daily CO2\r\n(Original Data）": "1918",
+      "CDIAC": "9.54",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1919",
+      "meandailyCO2": "7.85",
+      "Mean Daily CO2\r\n(Original Data）": "1919",
+      "CDIAC": "8.27",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1920",
+      "meandailyCO2": "9.10",
+      "Mean Daily CO2\r\n(Original Data）": "1920",
+      "CDIAC": "9.59",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1921",
+      "meandailyCO2": "8.01",
+      "Mean Daily CO2\r\n(Original Data）": "1921",
+      "CDIAC": "8.44",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1922",
+      "meandailyCO2": "8.40",
+      "Mean Daily CO2\r\n(Original Data）": "1922",
+      "CDIAC": "8.85",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1923",
+      "meandailyCO2": "9.53",
+      "Mean Daily CO2\r\n(Original Data）": "1923",
+      "CDIAC": "10.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1924",
+      "meandailyCO2": "9.53",
+      "Mean Daily CO2\r\n(Original Data）": "1924",
+      "CDIAC": "10.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1925",
+      "meandailyCO2": "9.63",
+      "Mean Daily CO2\r\n(Original Data）": "1925",
+      "CDIAC": "10.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1926",
+      "meandailyCO2": "9.48",
+      "Mean Daily CO2\r\n(Original Data）": "1926",
+      "CDIAC": "9.99",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1927",
+      "meandailyCO2": "10.35",
+      "Mean Daily CO2\r\n(Original Data）": "1927",
+      "CDIAC": "10.90",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1928",
+      "meandailyCO2": "10.36",
+      "Mean Daily CO2\r\n(Original Data）": "1928",
+      "CDIAC": "10.91",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1929",
+      "meandailyCO2": "11.17",
+      "Mean Daily CO2\r\n(Original Data）": "1929",
+      "CDIAC": "11.76",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1930",
+      "meandailyCO2": "10.32",
+      "Mean Daily CO2\r\n(Original Data）": "1930",
+      "CDIAC": "10.87",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1931",
+      "meandailyCO2": "9.22",
+      "Mean Daily CO2\r\n(Original Data）": "1931",
+      "CDIAC": "9.71",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1932",
+      "meandailyCO2": "8.30",
+      "Mean Daily CO2\r\n(Original Data）": "1932",
+      "CDIAC": "8.74",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1933",
+      "meandailyCO2": "8.76",
+      "Mean Daily CO2\r\n(Original Data）": "1933",
+      "CDIAC": "9.23",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1934",
+      "meandailyCO2": "9.53",
+      "Mean Daily CO2\r\n(Original Data）": "1934",
+      "CDIAC": "10.04",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1935",
+      "meandailyCO2": "10.01",
+      "Mean Daily CO2\r\n(Original Data）": "1935",
+      "CDIAC": "10.55",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1936",
+      "meandailyCO2": "10.96",
+      "Mean Daily CO2\r\n(Original Data）": "1936",
+      "CDIAC": "11.55",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1937",
+      "meandailyCO2": "11.77",
+      "Mean Daily CO2\r\n(Original Data）": "1937",
+      "CDIAC": "12.40",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1938",
+      "meandailyCO2": "11.10",
+      "Mean Daily CO2\r\n(Original Data）": "1938",
+      "CDIAC": "11.69",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1939",
+      "meandailyCO2": "11.72",
+      "Mean Daily CO2\r\n(Original Data）": "1939",
+      "CDIAC": "12.35",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1940",
+      "meandailyCO2": "12.73",
+      "Mean Daily CO2\r\n(Original Data）": "1940",
+      "CDIAC": "13.41",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1941",
+      "meandailyCO2": "13.08",
+      "Mean Daily CO2\r\n(Original Data）": "1941",
+      "CDIAC": "13.78",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1942",
+      "meandailyCO2": "13.12",
+      "Mean Daily CO2\r\n(Original Data）": "1942",
+      "CDIAC": "13.82",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1943",
+      "meandailyCO2": "13.57",
+      "Mean Daily CO2\r\n(Original Data）": "1943",
+      "CDIAC": "14.30",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1944",
+      "meandailyCO2": "13.45",
+      "Mean Daily CO2\r\n(Original Data）": "1944",
+      "CDIAC": "14.17",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1945",
+      "meandailyCO2": "11.28",
+      "Mean Daily CO2\r\n(Original Data）": "1945",
+      "CDIAC": "11.88",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1946",
+      "meandailyCO2": "12.31",
+      "Mean Daily CO2\r\n(Original Data）": "1946",
+      "CDIAC": "12.97",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1947",
+      "meandailyCO2": "13.63",
+      "Mean Daily CO2\r\n(Original Data）": "1947",
+      "CDIAC": "14.36",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1948",
+      "meandailyCO2": "14.29",
+      "Mean Daily CO2\r\n(Original Data）": "1948",
+      "CDIAC": "15.05",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1949",
+      "meandailyCO2": "13.65",
+      "Mean Daily CO2\r\n(Original Data）": "1949",
+      "CDIAC": "14.38",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1950",
+      "meandailyCO2": "15.39",
+      "Mean Daily CO2\r\n(Original Data）": "1950",
+      "CDIAC": "16.22",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1951",
+      "meandailyCO2": "16.60",
+      "Mean Daily CO2\r\n(Original Data）": "1951",
+      "CDIAC": "17.49",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1952",
+      "meandailyCO2": "16.78",
+      "Mean Daily CO2\r\n(Original Data）": "1952",
+      "CDIAC": "17.68",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1953",
+      "meandailyCO2": "17.30",
+      "Mean Daily CO2\r\n(Original Data）": "1953",
+      "CDIAC": "18.23",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1954",
+      "meandailyCO2": "17.68",
+      "Mean Daily CO2\r\n(Original Data）": "1954",
+      "CDIAC": "18.62",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1955",
+      "meandailyCO2": "19.38",
+      "Mean Daily CO2\r\n(Original Data）": "1955",
+      "CDIAC": "20.41",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1956",
+      "meandailyCO2": "20.57",
+      "Mean Daily CO2\r\n(Original Data）": "1956",
+      "CDIAC": "21.67",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1957",
+      "meandailyCO2": "21.31",
+      "Mean Daily CO2\r\n(Original Data）": "1957",
+      "CDIAC": "22.45",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1958",
+      "meandailyCO2": "21.92",
+      "Mean Daily CO2\r\n(Original Data）": "1958",
+      "CDIAC": "23.09",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1959",
+      "meandailyCO2": "23.06",
+      "Mean Daily CO2\r\n(Original Data）": "1959",
+      "CDIAC": "24.29",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1960",
+      "meandailyCO2": "24.26",
+      "Mean Daily CO2\r\n(Original Data）": "1960",
+      "CDIAC": "25.56",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1961",
+      "meandailyCO2": "24.38",
+      "Mean Daily CO2\r\n(Original Data）": "1961",
+      "CDIAC": "25.69",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1962",
+      "meandailyCO2": "25.24",
+      "Mean Daily CO2\r\n(Original Data）": "1962",
+      "CDIAC": "26.60",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1963",
+      "meandailyCO2": "26.67",
+      "Mean Daily CO2\r\n(Original Data）": "1963",
+      "CDIAC": "28.10",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1964",
+      "meandailyCO2": "27.99",
+      "Mean Daily CO2\r\n(Original Data）": "1964",
+      "CDIAC": "29.48",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1965",
+      "meandailyCO2": "29.36",
+      "Mean Daily CO2\r\n(Original Data）": "1965",
+      "CDIAC": "30.94",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1966",
+      "meandailyCO2": "30.73",
+      "Mean Daily CO2\r\n(Original Data）": "1966",
+      "CDIAC": "32.37",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1967",
+      "meandailyCO2": "31.71",
+      "Mean Daily CO2\r\n(Original Data）": "1967",
+      "CDIAC": "33.41",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1968",
+      "meandailyCO2": "33.35",
+      "Mean Daily CO2\r\n(Original Data）": "1968",
+      "CDIAC": "35.14",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1969",
+      "meandailyCO2": "35.67",
+      "Mean Daily CO2\r\n(Original Data）": "1969",
+      "CDIAC": "37.58",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1970",
+      "meandailyCO2": "38.96",
+      "Mean Daily CO2\r\n(Original Data）": "1970",
+      "CDIAC": "40.69",
+      "EDGAR": "38.96",
+      "undefined": "0.957370297",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1971",
+      "meandailyCO2": "38.75",
+      "Mean Daily CO2\r\n(Original Data）": "1971",
+      "CDIAC": "42.35",
+      "EDGAR": "38.75",
+      "undefined": "0.914993956",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1972",
+      "meandailyCO2": "40.57",
+      "Mean Daily CO2\r\n(Original Data）": "1972",
+      "CDIAC": "44.21",
+      "EDGAR": "40.57",
+      "undefined": "0.917809628",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1973",
+      "meandailyCO2": "43.03",
+      "Mean Daily CO2\r\n(Original Data）": "1973",
+      "CDIAC": "46.69",
+      "EDGAR": "43.03",
+      "undefined": "0.92157772",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1974",
+      "meandailyCO2": "42.95",
+      "Mean Daily CO2\r\n(Original Data）": "1974",
+      "CDIAC": "46.49",
+      "EDGAR": "42.95",
+      "undefined": "0.923965943",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1975",
+      "meandailyCO2": "43.08",
+      "Mean Daily CO2\r\n(Original Data）": "1975",
+      "CDIAC": "46.43",
+      "EDGAR": "43.08",
+      "undefined": "0.927824995",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1976",
+      "meandailyCO2": "45.30",
+      "Mean Daily CO2\r\n(Original Data）": "1976",
+      "CDIAC": "48.76",
+      "EDGAR": "45.30",
+      "undefined": "0.929050528",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1977",
+      "meandailyCO2": "46.96",
+      "Mean Daily CO2\r\n(Original Data）": "1977",
+      "CDIAC": "50.25",
+      "EDGAR": "46.96",
+      "undefined": "0.93446607",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1978",
+      "meandailyCO2": "48.46",
+      "Mean Daily CO2\r\n(Original Data）": "1978",
+      "CDIAC": "52.12",
+      "EDGAR": "48.46",
+      "undefined": "0.929806485",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1979",
+      "meandailyCO2": "49.89",
+      "Mean Daily CO2\r\n(Original Data）": "1979",
+      "CDIAC": "53.51",
+      "EDGAR": "49.89",
+      "undefined": "0.932481258",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1980",
+      "meandailyCO2": "49.29",
+      "Mean Daily CO2\r\n(Original Data）": "1980",
+      "CDIAC": "53.13",
+      "EDGAR": "49.29",
+      "undefined": "0.927642513",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1981",
+      "meandailyCO2": "48.72",
+      "Mean Daily CO2\r\n(Original Data）": "1981",
+      "CDIAC": "51.85",
+      "EDGAR": "48.72",
+      "undefined": "0.939757593",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1982",
+      "meandailyCO2": "48.23",
+      "Mean Daily CO2\r\n(Original Data）": "1982",
+      "CDIAC": "51.47",
+      "EDGAR": "48.23",
+      "undefined": "0.936998434",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1983",
+      "meandailyCO2": "48.57",
+      "Mean Daily CO2\r\n(Original Data）": "1983",
+      "CDIAC": "51.96",
+      "EDGAR": "48.57",
+      "undefined": "0.934829475",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1984",
+      "meandailyCO2": "50.02",
+      "Mean Daily CO2\r\n(Original Data）": "1984",
+      "CDIAC": "53.34",
+      "EDGAR": "50.02",
+      "undefined": "0.937767427",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1985",
+      "meandailyCO2": "50.89",
+      "Mean Daily CO2\r\n(Original Data）": "1985",
+      "CDIAC": "55.40",
+      "EDGAR": "50.89",
+      "undefined": "0.918525117",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1986",
+      "meandailyCO2": "51.84",
+      "Mean Daily CO2\r\n(Original Data）": "1986",
+      "CDIAC": "56.22",
+      "EDGAR": "51.84",
+      "undefined": "0.92207952",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1987",
+      "meandailyCO2": "53.65",
+      "Mean Daily CO2\r\n(Original Data）": "1987",
+      "CDIAC": "58.03",
+      "EDGAR": "53.65",
+      "undefined": "0.924528029",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1988",
+      "meandailyCO2": "55.37",
+      "Mean Daily CO2\r\n(Original Data）": "1988",
+      "CDIAC": "60.09",
+      "EDGAR": "55.37",
+      "undefined": "0.921547776",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1989",
+      "meandailyCO2": "56.59",
+      "Mean Daily CO2\r\n(Original Data）": "1989",
+      "CDIAC": "61.19",
+      "EDGAR": "56.59",
+      "undefined": "0.924814709",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1990",
+      "meandailyCO2": "57.61",
+      "Mean Daily CO2\r\n(Original Data）": "1990",
+      "CDIAC": "59.80",
+      "EDGAR": "57.61",
+      "undefined": "0.963271085",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1991",
+      "meandailyCO2": "57.93",
+      "Mean Daily CO2\r\n(Original Data）": "1991",
+      "CDIAC": "61.37",
+      "EDGAR": "57.93",
+      "undefined": "0.943929739",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1992",
+      "meandailyCO2": "57.70",
+      "Mean Daily CO2\r\n(Original Data）": "1992",
+      "CDIAC": "60.41",
+      "EDGAR": "57.70",
+      "undefined": "0.955105253",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1993",
+      "meandailyCO2": "58.25",
+      "Mean Daily CO2\r\n(Original Data）": "1993",
+      "CDIAC": "61.21",
+      "EDGAR": "58.25",
+      "undefined": "0.95160026",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1994",
+      "meandailyCO2": "58.71",
+      "Mean Daily CO2\r\n(Original Data）": "1994",
+      "CDIAC": "61.47",
+      "EDGAR": "58.71",
+      "undefined": "0.955059661",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1995",
+      "meandailyCO2": "60.37",
+      "Mean Daily CO2\r\n(Original Data）": "1995",
+      "CDIAC": "62.70",
+      "EDGAR": "60.37",
+      "undefined": "0.962871723",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1996",
+      "meandailyCO2": "61.49",
+      "Mean Daily CO2\r\n(Original Data）": "1996",
+      "CDIAC": "64.39",
+      "EDGAR": "61.49",
+      "undefined": "0.955007897",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1997",
+      "meandailyCO2": "62.44",
+      "Mean Daily CO2\r\n(Original Data）": "1997",
+      "CDIAC": "64.87",
+      "EDGAR": "62.44",
+      "undefined": "0.96254945",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1998",
+      "meandailyCO2": "62.80",
+      "Mean Daily CO2\r\n(Original Data）": "1998",
+      "CDIAC": "64.59",
+      "EDGAR": "62.80",
+      "undefined": "0.972312477",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "1999",
+      "meandailyCO2": "63.28",
+      "Mean Daily CO2\r\n(Original Data）": "1999",
+      "CDIAC": "65.69",
+      "EDGAR": "63.28",
+      "undefined": "0.963413718",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2000",
+      "meandailyCO2": "65.23",
+      "Mean Daily CO2\r\n(Original Data）": "2000",
+      "CDIAC": "67.50",
+      "EDGAR": "65.23",
+      "undefined": "0.966343211",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2001",
+      "meandailyCO2": "66.41",
+      "Mean Daily CO2\r\n(Original Data）": "2001",
+      "CDIAC": "68.11",
+      "EDGAR": "66.41",
+      "undefined": "0.975041742",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2002",
+      "meandailyCO2": "67.66",
+      "Mean Daily CO2\r\n(Original Data）": "2002",
+      "CDIAC": "69.69",
+      "EDGAR": "67.66",
+      "undefined": "0.970835732",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2003",
+      "meandailyCO2": "70.75",
+      "Mean Daily CO2\r\n(Original Data）": "2003",
+      "CDIAC": "73.18",
+      "EDGAR": "70.75",
+      "undefined": "0.966831519",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2004",
+      "meandailyCO2": "73.94",
+      "Mean Daily CO2\r\n(Original Data）": "2004",
+      "CDIAC": "76.50",
+      "EDGAR": "73.94",
+      "undefined": "0.966507981",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2005",
+      "meandailyCO2": "76.90",
+      "Mean Daily CO2\r\n(Original Data）": "2005",
+      "CDIAC": "79.35",
+      "EDGAR": "76.90",
+      "undefined": "0.969096396",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2006",
+      "meandailyCO2": "79.53",
+      "Mean Daily CO2\r\n(Original Data）": "2006",
+      "CDIAC": "82.20",
+      "EDGAR": "79.53",
+      "undefined": "0.967551198",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2007",
+      "meandailyCO2": "82.83",
+      "Mean Daily CO2\r\n(Original Data）": "2007",
+      "CDIAC": "83.72",
+      "EDGAR": "82.83",
+      "undefined": "0.989380366",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2008",
+      "meandailyCO2": "83.04",
+      "Mean Daily CO2\r\n(Original Data）": "2008",
+      "CDIAC": "86.71",
+      "EDGAR": "83.04",
+      "undefined": "0.95770424",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2009",
+      "meandailyCO2": "82.23",
+      "Mean Daily CO2\r\n(Original Data）": "2009",
+      "CDIAC": "84.72",
+      "EDGAR": "82.23",
+      "undefined": "0.970588925",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2010",
+      "meandailyCO2": "87.09",
+      "Mean Daily CO2\r\n(Original Data）": "2010",
+      "CDIAC": "90.39",
+      "EDGAR": "87.09",
+      "undefined": "0.963521941",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2011",
+      "meandailyCO2": "89.87",
+      "Mean Daily CO2\r\n(Original Data）": "2011",
+      "CDIAC": "93.66",
+      "EDGAR": "89.87",
+      "undefined": "0.959540917",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2012",
+      "meandailyCO2": "90.47",
+      "Mean Daily CO2\r\n(Original Data）": "2012",
+      "CDIAC": "94.92",
+      "EDGAR": "90.47",
+      "undefined": "0.953060179",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2013",
+      "meandailyCO2": "92.22",
+      "Mean Daily CO2\r\n(Original Data）": "2013",
+      "CDIAC": "95.66",
+      "EDGAR": "92.22",
+      "undefined": "0.964021255",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2014",
+      "meandailyCO2": "93.00",
+      "Mean Daily CO2\r\n(Original Data）": "2014",
+      "CDIAC": "96.33",
+      "EDGAR": "93.00",
+      "undefined": "0.965456988",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2015",
+      "meandailyCO2": "92.84",
+      "Mean Daily CO2\r\n(Original Data）": "2015",
+      "CDIAC": "96.37",
+      "EDGAR": "92.84",
+      "undefined": "0.963409631",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2016",
+      "meandailyCO2": "93.71",
+      "Mean Daily CO2\r\n(Original Data）": "2016",
+      "CDIAC": "95.65",
+      "EDGAR": "93.71",
+      "undefined": "0.979646036",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2017",
+      "meandailyCO2": "95.08",
+      "Mean Daily CO2\r\n(Original Data）": "2017",
+      "EDGAR": "95.08",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2018",
+      "meandailyCO2": "96.84",
+      "Mean Daily CO2\r\n(Original Data）": "2018",
+      "EDGAR": "96.84",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2019",
+      "meandailyCO2": "98.21",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2020",
+      "meandailyCO2": "89.66",
+      "PrognosisData": "historic"
+    },
+    {
+      "Year": "2020",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "89.66",
+      "CO2WithoutLockdowns": "89.66",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2021",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "88.57",
+      "CO2WithoutLockdowns": "97.02",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2022",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "88.75",
+      "CO2WithoutLockdowns": "97.22",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2023",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "88.94",
+      "CO2WithoutLockdowns": "97.42",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2024",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "89.12",
+      "CO2WithoutLockdowns": "97.62",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2025",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "89.3",
+      "CO2WithoutLockdowns": "97.82",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2026",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "89.65",
+      "CO2WithoutLockdowns": "98.2",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2027",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "90",
+      "CO2WithoutLockdowns": "98.59",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2028",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "90.35",
+      "CO2WithoutLockdowns": "98.97",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2029",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "90.7",
+      "CO2WithoutLockdowns": "99.36",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2030",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "91.05",
+      "CO2WithoutLockdowns": "99.74",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2031",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "91.57",
+      "CO2WithoutLockdowns": "100.32",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2032",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "92.1",
+      "CO2WithoutLockdowns": "100.89",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2033",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "92.63",
+      "CO2WithoutLockdowns": "101.47",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2034",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "93.15",
+      "CO2WithoutLockdowns": "102.04",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2035",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "93.68",
+      "CO2WithoutLockdowns": "102.62",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2036",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "94.36",
+      "CO2WithoutLockdowns": "103.36",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2037",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "95.04",
+      "CO2WithoutLockdowns": "104.11",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2038",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "95.72",
+      "CO2WithoutLockdowns": "104.85",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2039",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "96.4",
+      "CO2WithoutLockdowns": "105.6",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2040",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "97.08",
+      "CO2WithoutLockdowns": "106.34",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2041",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "98.06",
+      "CO2WithoutLockdowns": "107.42",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2042",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "99.05",
+      "CO2WithoutLockdowns": "108.5",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2043",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "100.03",
+      "CO2WithoutLockdowns": "109.57",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2044",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "101.02",
+      "CO2WithoutLockdowns": "110.65",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2045",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "102",
+      "CO2WithoutLockdowns": "111.73",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2046",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "103.15",
+      "CO2WithoutLockdowns": "113",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2047",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "104.3",
+      "CO2WithoutLockdowns": "114.25",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2048",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "105.46",
+      "CO2WithoutLockdowns": "115.52",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2049",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "106.61",
+      "CO2WithoutLockdowns": "116.78",
+      "PrognosisData": "prognosis"
+    },
+    {
+      "Year": "2050",
+      "undefined": "-8.71%",
+      "CO2WithLockdowns": "107.76",
+      "CO2WithoutLockdowns": "118.04",
+      "PrognosisData": "prognosis"
+    }
+  ]
 }
