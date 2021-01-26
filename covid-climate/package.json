@@ -1,11 +1,11 @@
 {
   "name": "covid-climate",
-  "version": "0.3.0",
+  "version": "0.4.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:ci": "ng build --prod --base-href /InfoVis-Gruppe-13/",
+    "build:ci": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

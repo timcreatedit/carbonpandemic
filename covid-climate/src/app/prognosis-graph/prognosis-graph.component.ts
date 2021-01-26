@@ -39,15 +39,16 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   @Input() isSum = true;
 
   get unit(): string {
-    return this.isSum ? 'total MtCo2' : 'MtCo2/d';
+    return this.isSum ? 'total MtCO2' : 'MtCO2/d';
   }
 
   // region size
   width = 1400;
   height = 800;
+  adj = 25;
 
   // top right bottom left
-  padding: [number, number, number, number] = [50, 0, 20, 80];
+  padding: [number, number, number, number] = [50, 0, 20, 100];
   // endregion
 
   // region slider values
@@ -59,15 +60,37 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   };
   // endregion
 
+  private historicData;
+  private prognosisData;
+
   // region hover variables
+  private colorPositive = '#4ff396';
+  private colorNegative = '#fc7407';
+
   private hoverData = [
     {detail: '', text: '', unit: 'MtCo2', fill: 'white'}
   ];
   private hoverSelectedDate = [{date: '-'}];
 
+  // alignment
   private dateTextHeight = 120;
   private bigLineHeight = 80;
   private smallLineHeight = 35;
+
+  private hoverDateX = 80;
+  private hoverValuesX = 100;
+  private hoverUnitsX = 105;
+  private hoverDescribeX = 20;
+
+  private hoverLinePadding = 20;
+  private hoverLineY = 50;
+  private hoverLineWidth = 220;
+
+  private tooltipWidth = 220;
+  private tooltipHeight = 140;
+  private tooltipPrognosisHeight = 220;
+
+  private tooltipBudgetWidth = 320;
   // endregion
 
 
@@ -122,6 +145,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   ngAfterViewInit(): void {
     this.prognosisGraphSvg = this.prognosisGraph.nativeElement;
+    this.initOrUpdateData();
     this.initPrognosisGraph();
     this.initPrognosisHover();
     this.initCo2BudgetLines();
@@ -135,17 +159,27 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     }
     if (isNotNullOrUndefined(changes.selectedCountry)) {
       this.updatePrognosisGraph();
+      this.initOrUpdateData();
     } else if (isNotNullOrUndefined(changes.scenario2degree)) {
       this.updatePrognosisGraph();
       this.updateCo2BudgetLines();
+      this.initOrUpdateData();
     } else if (isNotNullOrUndefined(changes.isSum)) {
       this.updatePrognosisGraph();
       this.updateCo2BudgetLines();
+      this.initOrUpdateData();
     }
   }
 
   // endregion
-
+  private initOrUpdateData(): void {
+    this.historicData = this.dataService.getHistoricCo2Data({
+      prognosisDataFilter: [PrognosisDataIndicators.historic],
+    });
+    this.prognosisData = this.dataService.getHistoricCo2Data({
+      prognosisDataFilter: [PrognosisDataIndicators.prognosis],
+    });
+  }
   // region Prognosis Graph
   private initPrognosisGraph(): void {
     this.prognosisSvg = d3.select(this.prognosisGraphSvg);
@@ -155,7 +189,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .attr('viewBox', '-'
         + this.padding[3] + ' -'
         + this.padding[0] + ' '
-        + (this.width + this.padding[1] + this.padding[3]) + ' '
+        + (this.width + this.padding[1] + this.padding[3] + this.adj) + ' '
         + (this.height + this.padding[0] + this.padding[2]))
       .classed('svg-content', true);
 
@@ -270,6 +304,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     // this is the vertical line to follow mouse
     this.prognosisSvg.append('svg:rect')
       .attr('class', 'mouseLine')
+      .attr('height', this.height)
       .style('opacity', '0');
 
     // general group to hide or show the tooltip
@@ -308,32 +343,32 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       .selectAll('text').data(data).enter().append('text')
       .attr('class', 'tooltipHoverDate')
       .attr('y', this.smallLineHeight)
-      .attr('x', 80);
+      .attr('x', this.hoverDateX);
 
     tooltip.append('g')
       .attr('class', 'tooltipValuesText')
       .selectAll('text').data(data).enter().append('text')
       .attr('class', 'hoverValuesText')
-      .attr('x', 100);
+      .attr('x', this.hoverValuesX);
 
     tooltip.append('g')
       .attr('class', 'tooltipUnitsText')
       .selectAll('text').data(data).enter().append('text')
       .attr('class', 'hoverUnitsText')
-      .attr('x', 105);
+      .attr('x', this.hoverUnitsX);
 
     tooltip.append('g')
       .attr('class', 'tooltipDescribeText')
       .selectAll('text').data(data).enter().append('text')
       .attr('class', 'hoverDescribeText')
-      .attr('x', 20);
+      .attr('x', this.hoverDescribeX);
 
     tooltip.append('line')
       .attr('class', 'separationLine')
-      .attr('x1', 20)     // x position of the first end of the line
-      .attr('y1', 50)      // y position of the first end of the line
-      .attr('x2', 200)     // x position of the second end of the line
-      .attr('y2', 50);
+      .attr('x1', this.hoverLinePadding)     // x position of the first end of the line
+      .attr('y1', this.hoverLineY)      // y position of the first end of the line
+      .attr('x2', this.hoverLineWidth - this.hoverLinePadding)     // x position of the second end of the line
+      .attr('y2', this.hoverLineY);
   }
 
   private mouseover(): void {
@@ -351,31 +386,36 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private mousemovePrognosis(): void {
-    // Data
-    const historicData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: [PrognosisDataIndicators.historic],
-    });
-    const prognosisData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: [PrognosisDataIndicators.prognosis],
-    });
-    const allData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: null,
-    });
 
-    const tooltipSize = [220, 140]; // width, height
+    const tooltipSize = [this.tooltipWidth, this.tooltipHeight]; // width, height
 
     const mouseCoordinates: [number, number] = d3.pointer(event);
     const mousePosX = mouseCoordinates[0];
     const mousePosY = mouseCoordinates[1];
 
-    const objCo2 = this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, historicData, this.x, historicData.map(d => d.year));
+    const objCo2 =
+      this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.historicData, this.x, this.historicData.map(d => d.year));
     const year = this.x.invert(mousePosX).toFixed(0);
-
+    if (this.isSum){
+      console.log(this.isSum);
+      tooltipSize[0] =  this.tooltipBudgetWidth;
+      this.hoverDateX = 130;
+      this.hoverValuesX = 180;
+      this.hoverUnitsX = 185;
+      this.hoverDescribeX = 20;
+      this.hoverLineWidth = 320;
+    } else {
+      this.hoverDateX = 80;
+      this.hoverValuesX = 100;
+      this.hoverUnitsX = 105;
+      this.hoverDescribeX = 20;
+      this.hoverLineWidth = 220;
+    }
     if (!objCo2) {
       const objPrognosis =
-        this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, prognosisData, this.x, prognosisData.map((d => d.year)));
+        this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.prognosisData, this.x, this.prognosisData.map((d => d.year)));
 
-      tooltipSize[1] = 220;
+      tooltipSize[1] =  this.tooltipPrognosisHeight;
       this.hoverSelectedDate = [{date: year}];
 
       this.hoverData = [
@@ -383,13 +423,13 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
           detail: 'Prognosis 1: ',
           text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumNoLockdown : objPrognosis.co2PrognosisNoLockdown),
           unit: this.unit,
-          fill: '#FF5889'
+          fill: this.colorNegative
         },
         {
           detail: 'Prognosis 2: ',
           text: this.decimalPipe.transform(this.isSum ? objPrognosis.co2SumLockdown : objPrognosis.co2PrognosisLockdown),
           unit: this.unit,
-          fill: '#85FFBB'
+          fill: this.colorPositive
         }
       ];
     } else {
@@ -439,21 +479,26 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     tooltip.attr('height', tooltipHeight);
     tooltip.attr('width', tooltipWidth);
 
+    // line
+    tooltipGroup.selectAll('.separationLine')
+      .attr('x2', this.hoverLineWidth - this.hoverLinePadding);
     // Text
     // - Date
     tooltipGroup.selectAll('.tooltipDateGroup').selectAll('text').data(tooltipDate)
+      .attr('x', this.hoverDateX)
       .text(data => data.date);
     // - Values
     const valuesText = tooltipGroup.selectAll('.tooltipValuesText').selectAll('text').data(tooltipData);
     valuesText.exit().remove();
     valuesText.enter().append('text')
       .attr('class', 'hoverValuesText')
-      .attr('x', 100)
+      .attr('x', this.hoverValuesX)
       .style('fill', data => data.fill)
       .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.text));
     valuesText
       .style('fill', data => data.fill)
+      .attr('x', this.hoverValuesX)
       .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.text));
     // - Units
@@ -461,22 +506,24 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     unitsText.exit().remove();
     unitsText.enter().append('text')
       .attr('class', 'hoverUnitsText')
-      .attr('x', 105)
+      .attr('x', this.hoverUnitsX)
       .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
       .text(data => (data.unit));
     unitsText
       .attr('y', (data, index) => this.dateTextHeight + (index) * this.bigLineHeight)
+      .attr('x', this.hoverUnitsX)
       .text(data => (data.unit));
     // - Details
     const describeText = tooltipGroup.selectAll('.tooltipDescribeText').selectAll('text').data(tooltipData);
     describeText.exit().remove();
     describeText.enter().append('text')
       .attr('class', 'hoverDescribeText')
-      .attr('x', 20)
+      .attr('x', this.hoverDescribeX)
       .attr('y', (data, index) => this.dateTextHeight + index * this.bigLineHeight - this.smallLineHeight)
       .text(data => (data.detail));
     describeText
       .attr('y', (data, index) => this.dateTextHeight + index * this.bigLineHeight - this.smallLineHeight)
+      .attr('x', this.hoverDescribeX)
       .text(data => (data.detail));
   }
 

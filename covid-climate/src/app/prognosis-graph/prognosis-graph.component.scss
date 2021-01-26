@@ -72,7 +72,6 @@
       // HOVER
       .mouseLine {
         z-index: 10;
-        height: 80%;
         width: 2px;
         fill: white;
       }
@@ -126,16 +125,19 @@
   }
 
   .slider {
+    background-color: $backgroundColorLight;
     position: center;
-    width: 88%; //85%
-    margin-left: 5%;
+    width: 90%;
+    margin-left: 8%;
+    margin-right: 2%;
+    margin-top: 10%;
 
     font-weight: normal;
     -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
 
-    .ngx-slider-model-value, .ngx-slider-model-high, .ngx-slider-floor, .ngx-slider-ceil {
-      padding-bottom: 8px;
-      // TODO niki hier label abstand
+    .ngx-slider-bubble  { //includes all slider labels
+      padding-bottom: 10px;
+      font-size: small;
     }
 
     .ngx-slider-pointer {
@@ -144,10 +146,6 @@
       &:after {
         display: none;
       }
-    }
-
-    .ngx-slider-bubble {
-      padding-bottom: 10px;
     }
 
     .ngx-slider-selection {
