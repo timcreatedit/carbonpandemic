@@ -39,7 +39,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   @Input() isSum = true;
 
   get unit(): string {
-    return this.isSum ? 'total MtCo2' : 'MtCo2/d';
+    return this.isSum ? 'total MtCO2' : 'MtCO2/d';
   }
 
   // region size
@@ -48,7 +48,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   adj = 25;
 
   // top right bottom left
-  padding: [number, number, number, number] = [50, 0, 20, 80];
+  padding: [number, number, number, number] = [50, 0, 20, 100];
   // endregion
 
   // region slider values

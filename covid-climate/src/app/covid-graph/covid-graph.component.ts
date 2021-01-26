@@ -50,7 +50,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   height = 400;
 
   // top right bottom left
-  padding: [number, number, number, number] = [50, 0, 20, 80];
+  padding: [number, number, number, number] = [50, 0, 20, 100];
 
   // endregion
   yAxisText = 'in MtCO2/d';
