@@ -14,7 +14,7 @@ import {CovidDatapoint} from './core/models/coviddata.model';
 export class AppComponent implements OnInit {
   title = 'covid-climate';
 
-  selectedCountry: Countries = Countries.spain;
+  selectedCountry: Countries = Countries.world;
 
   selectedSector = 'All';
   sectorsToDisplay: Sectors[];
