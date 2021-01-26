@@ -701,15 +701,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
         data19 = data19.map( (d, i) => {
           // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
-          d.mtCo2 = d.mtCo2 / countryPopulation;
+          d.mtCo2 = (d.mtCo2 / countryPopulation);
           // console.log('--> ' + d.mtCo2);
           return d;
         });
 
         data20 = data20.map( (d, i) => {
-          d.mtCo2 = d.mtCo2 / countryPopulation;
+          d.mtCo2 = (d.mtCo2 / countryPopulation);
           return d;
         });
+
         break;
       default:
         console.log('none');
@@ -796,7 +797,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         this.y.domain([0, 100]);
         break;
       case 'relativeToPopulation':
-        this.y.domain([0, 0.0000001]);
+        this.y.domain([0, 0.00000007]);
         break;
       default:
         console.log('none');

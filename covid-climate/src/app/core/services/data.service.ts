@@ -30,6 +30,7 @@ export class DataService {
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
   private covidEuropeDatapoints: CovidDatapoint[] = [];
   private maxDate: Date;
+  private maxPerCapita: number;
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
 
@@ -41,6 +42,7 @@ export class DataService {
     this.combineCovidDataForWorld();
     this.combineCovidDataForEU28();
     this.combineCovidDataForRestOfWorld();
+    // this.readMaxPerCapita();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
@@ -230,6 +232,17 @@ export class DataService {
     });
   }
 
+  private readMaxPerCapita(): void {
+    const perCapitas = [];
+    (this.co2Datapoints as any).forEach(dp => {
+      if (Object.values(Countries).includes(dp.country)) {
+        const population = this.getPopulation(dp.country);
+        perCapitas.push((dp.mtCo2 / population));
+      }
+    });
+    this.maxPerCapita = Math.max(...perCapitas);
+  }
+
   // endregion
 
   // region Public Data Accessors
@@ -374,6 +387,10 @@ export class DataService {
         } as Co2Datapoint;
       })));
     return countrySummed.reduce((a, b) => [...a, ...b], []);
+  }
+
+  public getMaxPerCapita(): number {
+    return this.maxPerCapita;
   }
 
   //endregion
