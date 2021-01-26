@@ -253,7 +253,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       sumSectors: true,
     });
 
-    this.dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors);
+    this.dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute);
 
     this.dataCovid = this.dataService.getCovidData({
       countryFilter: [this.selectedCountry]
@@ -743,7 +743,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, true);
+    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute, true );
 
     // RELATIVE DATA
     const dataWorld19 = this.dataService.getCo2Data({
@@ -759,7 +759,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     if (this.showAbsolute.toString() === 'false') {
       this.yAxisText = 'in %';
-      console.log('compute and show relative dataset');
 
       data19 = data19.map( (d, i) => {
         d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
