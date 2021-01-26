@@ -5,4 +5,5 @@ export interface CovidDatapoint {
   country: Countries;
   continent: string;
   cases: number;
+  population: number;
 }

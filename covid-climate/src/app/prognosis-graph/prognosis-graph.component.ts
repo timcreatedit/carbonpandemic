@@ -397,7 +397,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.historicData, this.x, this.historicData.map(d => d.year));
     const year = this.x.invert(mousePosX).toFixed(0);
     if (this.isSum){
-      console.log(this.isSum);
       tooltipSize[0] =  this.tooltipBudgetWidth;
       this.hoverDateX = 130;
       this.hoverValuesX = 180;
