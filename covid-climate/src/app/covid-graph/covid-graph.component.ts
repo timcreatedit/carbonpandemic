@@ -475,7 +475,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
           {
             text: this.decimalPipe.transform(value),
             unit: 'MtCo2',
-            percent: '(' + ((value / sectorSum) * 100).toFixed(1).toString() + '%)',
+            percent:  '(' + ((value / sectorSum) * 100).toFixed(1).toString() + '%)',
             fill: this.getColorForSector(sector as Sectors),
           }
         );
