@@ -245,7 +245,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       this.showAbsolute = value;
       this.updateGraph();
       this.initOrUpdateData();
-      console.log('Absolute= ' + this.showAbsolute);
     }else {
       this.showAbsolute = value;
     }
@@ -288,16 +287,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     switch (this.showAbsolute) {
       case 'absolute':
         this.yAxisText = 'in MtCO2/d';
-        console.log('absolute');
         break;
       case 'relativeToWorld':
         this.yAxisText = 'in %';
-        console.log('compute and show relative dataset');
-
         this.data19 = this.data19.map( (d, i) => {
-          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
           d.mtCo2 = (d.mtCo2 / this.dataWorld19[i].mtCo2) * 100;
-          // console.log('--> ' + d.mtCo2);
           return d;
         });
 
@@ -309,13 +303,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         break;
       case 'relativeToPopulation':
         this.yAxisText = 'in tCO2/d p.P.';
-        console.log('compute and show relative dataset');
         const countryPopulation = this.dataService.getPopulation(this.selectedCountry);
 
         this.data19 = this.data19.map( (d, i) => {
-          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
-          // console.log('--> ' + d.mtCo2);
           return d;
         });
 
@@ -326,7 +317,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
         break;
       default:
-        console.log('none');
         break;
     }
   }
@@ -361,8 +351,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         lockdownEnd: data[lockdownInfo[1]]
       };
       this.lockdowns.push(lockdown);
-      // console.log('Lockdowns', this.lockdowns);
-
       data = data.slice(lockdownInfo[1] + 1);
     }
   }
@@ -904,16 +892,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     switch (this.showAbsolute) {
       case 'absolute':
         this.yAxisText = 'in MtCO2/d';
-        console.log('absolute');
         break;
       case 'relativeToWorld':
         this.yAxisText = 'in %';
-        console.log('compute and show relative dataset');
-
         data19 = data19.map( (d, i) => {
-          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
           d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
-          // console.log('--> ' + d.mtCo2);
           return d;
         });
 
@@ -925,23 +908,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         break;
       case 'relativeToPopulation':
         this.yAxisText = 'in tCO2/d p.P.';
-        console.log('compute and show relative dataset');
-
         data19 = data19.map( (d, i) => {
-          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
-          // console.log('--> ' + d.mtCo2);
           return d;
         });
-
         data20 = data20.map( (d, i) => {
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
-
         break;
       default:
-        console.log('none');
         break;
     }
     // END RELATIVE DATA
@@ -1012,8 +988,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       }).map(dp => dp.mtCo2)
       : [...data19.map(d => d.mtCo2), ...data20.map(d => d.mtCo2)];
     const maxValue = d3.max(data) * 1.1;
-    console.log(maxValue);
-
     this.x19.domain(d3.extent(data19.map(dp => dp.date)));
     this.x20.domain(d3.extent(data20.map(dp => dp.date)));
 
@@ -1028,7 +1002,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         this.y.domain([0, 0.07]);
         break;
       default:
-        console.log('none');
         break;
     }
 

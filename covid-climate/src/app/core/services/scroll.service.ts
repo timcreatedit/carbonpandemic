@@ -133,7 +133,7 @@ export class ScrollService {
       fromEvent(window, 'resize').pipe(startWith(0))])
       .pipe(
         map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
-        // tap(console.log),
+        tap(console.log),
         map(s => this.getCurrentConfig(s)),
         distinctUntilChanged(),
       ).subscribe(c => this.currentScrollConfig$.next(c));
