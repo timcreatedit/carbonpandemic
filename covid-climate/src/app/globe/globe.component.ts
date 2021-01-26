@@ -84,7 +84,10 @@ export class GlobeComponent implements AfterViewInit {
   }
 
   animation(time: number): void {
-    if (!this.active) return;
+    if (!this.active) {
+      this.renderer.clear();
+      return;
+    }
     this.setSize();
     this.globe.rotation.y = time / 10000;
     this.camera.position.y = -70 + (1 - this.relativeScroll) * 2400;
