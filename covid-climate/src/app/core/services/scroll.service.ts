@@ -147,7 +147,9 @@ export class ScrollService {
   constructor() {
     combineLatest([
       fromEvent(window, 'scroll').pipe(startWith(0)),
-      fromEvent(window, 'resize').pipe(startWith(0))])
+      fromEvent(window, 'resize').pipe(startWith(0)),
+      fromEvent(window, 'hashchange').pipe(startWith(0)),
+    ])
       .pipe(
         map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
       ).subscribe((v) => this.scrollValue$.next(v));

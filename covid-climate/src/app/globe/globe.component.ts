@@ -60,7 +60,7 @@ export class GlobeComponent implements AfterViewInit {
       .labelColor('color')
       .labelAltitude('height');
 
-    this.camera = new THREE.PerspectiveCamera(10);
+    this.camera = new THREE.PerspectiveCamera(20);
     this.camera.position.x = -100;
     this.camera.position.z = 700;
 
@@ -90,7 +90,7 @@ export class GlobeComponent implements AfterViewInit {
     }
     this.setSize();
     this.globe.rotation.y = time / 10000;
-    this.camera.position.y = -70 + (1 - this.relativeScroll) * 2400;
+    this.camera.position.y = -70 + (1 - this.relativeScroll) * 3000;
     this.renderer.render(this.scene, this.camera);
   }
 }
