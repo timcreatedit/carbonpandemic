@@ -30,6 +30,7 @@ export class DataService {
   private historicCo2Datapoints: HistoricCo2Datapoint[] = [];
   private covidEuropeDatapoints: CovidDatapoint[] = [];
   private maxDate: Date;
+  private maxPerCapita: number;
 
   private eu28 = [Countries.france, Countries.germany, Countries.italy, Countries.spain, Countries.uk, 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Sweden'];
 
@@ -41,12 +42,16 @@ export class DataService {
     this.combineCovidDataForWorld();
     this.combineCovidDataForEU28();
     this.combineCovidDataForRestOfWorld();
+    // this.readMaxPerCapita();
     console.log('All Data: ' + this.co2Datapoints.length);
     console.log('First Datapoint: ');
     console.log(this.co2Datapoints[0]);
     console.log((this.covidDatapoints));
     console.log((this.lockdownDatapoints[0]));
     console.log(this.covidEuropeDatapoints);
+    console.log('Population Rest: ' + this.getPopulation(Countries.rest));
+    console.log('Population World: ' + this.getPopulation(Countries.world));
+    console.log('Population EU28: ' + this.getPopulation(Countries.eu28));
   }
 
 
@@ -81,6 +86,7 @@ export class DataService {
           date: actualDate,
           cases: dp.cases,
           continent: dp.continentExp,
+          population: dp.popData2019,
         } as CovidDatapoint);
       }
     });
@@ -89,12 +95,15 @@ export class DataService {
 
   private combineCovidDataForWorld(): void {
     const holder = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (holder.hasOwnProperty(dp.date)) {
         holder[dp.date] = holder[dp.date] + dp.cases;
+        holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
       } else {
         holder[dp.date] = dp.cases;
+        holderPopulation[dp.date] = dp.population;
         dates.push(dp.date);
       }
     });
@@ -104,6 +113,7 @@ export class DataService {
         country: Countries.world,
         date,
         cases: holder[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -112,17 +122,18 @@ export class DataService {
 
   private combineCovidDataForRestOfWorld(): void {
     const holder = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (!Object.values(Countries).includes(dp.country)) {
-        if (dp.country) {
           if (holder.hasOwnProperty(dp.date)) {
             holder[dp.date] = holder[dp.date] + dp.cases;
+            holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
           } else {
             holder[dp.date] = dp.cases;
+            holderPopulation[dp.date] = dp.population;
             dates.push(dp.date);
           }
-        }
       }
     });
 
@@ -131,6 +142,7 @@ export class DataService {
         country: Countries.rest,
         date,
         cases: holder[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -139,13 +151,16 @@ export class DataService {
 
   private combineCovidDataForEU28(): void {
     const holderEurope = {};
+    const holderPopulation = {};
     const dates = [];
     (this.covidDatapoints as any).forEach(dp => {
       if (this.eu28.includes(dp.country)) {
         if (holderEurope.hasOwnProperty(dp.date)) {
           holderEurope[dp.date] = holderEurope[dp.date] + dp.cases;
+          holderPopulation[dp.date] = holderPopulation[dp.date] + dp.population;
         } else {
           holderEurope[dp.date] = dp.cases;
+          holderPopulation[dp.date] = dp.population;
           dates.push(dp.date);
         }
       }
@@ -156,6 +171,7 @@ export class DataService {
         country: Countries.eu28,
         date,
         cases: holderEurope[date],
+        population: holderPopulation[date],
       } as CovidDatapoint);
     }
 
@@ -171,7 +187,7 @@ export class DataService {
         this.lockdownDatapoints.push({
           date: actualDate,
           country: this.covidCountryToCountry(dp.countryName),
-          lockdown: dp.c6_Stay_at_home_requirements === 2,
+          lockdown: (dp.c6_Stay_at_home_requirements >= 2),
         } as LockdownDatapoint);
       }
     });
@@ -214,6 +230,17 @@ export class DataService {
       } as HistoricCo2Datapoint));
 
     });
+  }
+
+  private readMaxPerCapita(): void {
+    const perCapitas = [];
+    (this.co2Datapoints as any).forEach(dp => {
+      if (Object.values(Countries).includes(dp.country)) {
+        const population = this.getPopulation(dp.country);
+        perCapitas.push((dp.mtCo2 / population));
+      }
+    });
+    this.maxPerCapita = Math.max(...perCapitas);
   }
 
   // endregion
@@ -299,6 +326,7 @@ export class DataService {
   public getSectorsPerDay(
     country: Countries,
     sectors: Sectors[] = Object.values(Sectors),
+    showAbsolute: string,
     setRemainingToZero = false
   ): { [id: string]: number | Date }[] {
     const d = this.getCo2Data({countryFilter: [country], yearFilter: [2020]});
@@ -306,6 +334,16 @@ export class DataService {
     const days = dates.map(date => d.filter(dp => dp.date.getTime() === date));
     const sectorsPerDay = days.map(day => day.map(dp => dp.sector));
     const buffer: { [id: string]: number | Date }[] = [];
+
+    // For Relative Data
+    const dataWorld20 = this.getCo2Data({
+      yearFilter: [2020],
+      countryFilter: [Countries.world],
+      sumSectors: true,
+    });
+
+    const population = this.getPopulation(country);
+
     for (let i = 0; i < dates.length; i++) {
       const val = {['date']: new Date(dates[i])};
       for (const sector of sectorsPerDay[i]) {
@@ -315,12 +353,37 @@ export class DataService {
           }
           continue;
         }
-        val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
-      }
+
+        // RELATIVE DATA
+        switch (showAbsolute) {
+          case 'absolute':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2;
+            break;
+          case 'relativeToWorld':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / dataWorld20[i].mtCo2 * 100;
+            break;
+          case 'relativeToPopulation':
+            val[sector.valueOf()] = days[i].filter(dp => dp.sector === sector)[0].mtCo2 / population * 1000000;
+            break;
+          default:
+            console.log('none');
+            break;
+        }
+        // END RELATIVE DATA
+
+        }
+
       buffer.push(val);
     }
     return buffer;
   }
+
+
+  public getPopulation(selectedCountry: Countries): number {
+    const filteredList = this.getCovidData({countryFilter: [selectedCountry]});
+    return filteredList[filteredList.length - 1].population;
+  }
+
 
   // endregion
 
@@ -353,6 +416,10 @@ export class DataService {
         } as Co2Datapoint;
       })));
     return countrySummed.reduce((a, b) => [...a, ...b], []);
+  }
+
+  public getMaxPerCapita(): number {
+    return this.maxPerCapita;
   }
 
   //endregion

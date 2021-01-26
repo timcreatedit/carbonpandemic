@@ -39,7 +39,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() worstDayOf20 = new EventEmitter<Co2Datapoint>();
 
-  private showAbsolute = true;
+  private showAbsolute = 'absolute';
   private mouseOverGraph = false;
   private mouseCoordinates: [number, number] = [0, 0];
 
@@ -50,7 +50,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   height = 400;
 
   // top right bottom left
-  padding: [number, number, number, number] = [50, 0, 20, 80];
+  padding: [number, number, number, number] = [50, 0, 20, 100];
 
   // endregion
   yAxisText = 'in MtCO2/d';
@@ -261,7 +261,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       sumSectors: true,
     });
 
-    this.dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors);
+    this.dataSectors = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute);
 
     this.dataCovid = this.dataService.getCovidData({
       countryFilter: [this.selectedCountry]
@@ -812,7 +812,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, true);
+    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute, true );
 
     // RELATIVE DATA
     const dataWorld19 = this.dataService.getCo2Data({
@@ -826,20 +826,50 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       sumSectors: true,
     });
 
-    if (this.showAbsolute.toString() === 'false') {
-      this.yAxisText = 'in %';
-      console.log('compute and show relative dataset');
+    const countryPopulation = this.dataService.getPopulation(this.selectedCountry);
 
-      data19 = data19.map( (d, i) => {
-        d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
-        return d;
-      });
-      data20 = data20.map( (d, i) => {
-        d.mtCo2 = (d.mtCo2 / dataWorld20[i].mtCo2) * 100;
-        return d;
-      });
-    }else{
-      this.yAxisText = 'in MtCO2/d';
+    switch (this.showAbsolute) {
+      case 'absolute':
+        this.yAxisText = 'in MtCO2/d';
+        console.log('absolute');
+        break;
+      case 'relativeToWorld':
+        this.yAxisText = 'in %';
+        console.log('compute and show relative dataset');
+
+        data19 = data19.map( (d, i) => {
+          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
+          d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
+          // console.log('--> ' + d.mtCo2);
+          return d;
+        });
+
+        data20 = data20.map( (d, i) => {
+          d.mtCo2 = (d.mtCo2 / dataWorld20[i].mtCo2) * 100;
+          return d;
+        });
+
+        break;
+      case 'relativeToPopulation':
+        this.yAxisText = 'in tCO2/d p.P.';
+        console.log('compute and show relative dataset');
+
+        data19 = data19.map( (d, i) => {
+          // console.log('dataworld = ' + dataWorld19[i].mtCo2 + ' / data19 = ' + d.mtCo2);
+          d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
+          // console.log('--> ' + d.mtCo2);
+          return d;
+        });
+
+        data20 = data20.map( (d, i) => {
+          d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
+          return d;
+        });
+
+        break;
+      default:
+        console.log('none');
+        break;
     }
     // END RELATIVE DATA
 
@@ -909,14 +939,24 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       }).map(dp => dp.mtCo2)
       : [...data19.map(d => d.mtCo2), ...data20.map(d => d.mtCo2)];
     const maxValue = d3.max(data) * 1.1;
+    console.log(maxValue);
 
     this.x19.domain(d3.extent(data19.map(dp => dp.date)));
     this.x20.domain(d3.extent(data20.map(dp => dp.date)));
 
-    if (this.showAbsolute.toString() === 'true') {
-      this.y.domain([0, maxValue]);
-    } else {
-      this.y.domain([0, 100]);
+    switch (this.showAbsolute) {
+      case 'absolute':
+        this.y.domain([0, maxValue]);
+        break;
+      case 'relativeToWorld':
+        this.y.domain([0, 100]);
+        break;
+      case 'relativeToPopulation':
+        this.y.domain([0, 0.07]);
+        break;
+      default:
+        console.log('none');
+        break;
     }
 
     this.svg.select('#xAxis')
