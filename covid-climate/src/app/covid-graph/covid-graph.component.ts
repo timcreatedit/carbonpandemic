@@ -12,14 +12,16 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import * as d3 from 'd3';
-import { distinctUntilChanged } from 'rxjs/operators';
+import {distinctUntilChanged} from 'rxjs/operators';
 import {DataService} from '../core/services/data.service';
 import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {CovidDatapoint} from '../core/models/coviddata.model';
-import {LockdownDatapoint} from '../core/models/lockdowndata.model';
-import {DecimalPipe} from '@angular/common';
+import {Lockdown, LockdownDatapoint} from '../core/models/lockdowndata.model';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import {ScrollService} from '../core/services/scroll.service';
+import {LockdownService} from '../core/services/lockdown.service';
+import {HoverService} from '../core/services/hover.service';
 
 @Component({
   selector: 'app-covid-graph',
@@ -56,18 +58,18 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   yAxisText = 'in MtCO2/d';
 
   // region data
-  private data19;
-  private data20;
+  private data19: Co2Datapoint[];
+  private data20: Co2Datapoint[];
 
-  private dataWorld19;
-  private dataWorld20;
+  private dataWorld19: Co2Datapoint[];
+  private dataWorld20: Co2Datapoint[];
 
   private dataSectors;
 
-  private dataCovid;
-  private lockdownData;
+  private dataCovid: CovidDatapoint[];
+  private lockdownData: LockdownDatapoint[];
 
-  private lockdowns = [];
+  private lockdowns: Lockdown[] = [];
   // endregion
 
   // hover options
@@ -86,7 +88,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   private colorCovidCases = '#ff5889';
   private colorCovidLockdown = '#DCDCDC';
 
-  private hoverData: {unit: string; text: string; fill: string; percent: string, xText: number, xUnit: number, xPercent: number}[] = [
+  private hoverData: { unit: string; text: string; fill: string; percent: string, xText: number, xUnit: number, xPercent: number }[] = [
     {text: '0', unit: 'MtCo2', percent: '', fill: '#63f2ff', xText: 0, xUnit: 0, xPercent: 0},
     {text: '0', unit: 'MtCo2', percent: '', fill: 'white', xText: 0, xUnit: 0, xPercent: 0}
   ];
@@ -189,7 +191,13 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   private graphSvg: SVGElement;
   private covidGraphSvg: SVGElement;
 
-  constructor(private dataService: DataService, private scrollService: ScrollService, private decimalPipe: DecimalPipe) {
+  constructor(private dataService: DataService,
+              private lockdownService: LockdownService,
+              private hoverService: HoverService,
+              private scrollService: ScrollService,
+              private decimalPipe: DecimalPipe,
+              private datePipe: DatePipe,
+  ) {
   }
 
   ngOnInit(): void {
@@ -209,8 +217,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     this.updateCovidGraph();
     this.updateShowDifference(this.showDifference);
     this.updateShowSectors(this.showSectors);
-
-    this.updateLockdownsToSelectedCountry(this.lockdownData);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -218,15 +224,13 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
     if (isNotNullOrUndefined(changes.selectedCountry)) {
+      this.initOrUpdateData();
       this.updateGraph();
       this.updateCovidGraph();
-      this.initOrUpdateData();
-
-      this.updateLockdownsToSelectedCountry(this.lockdownData);
     }
     if (isNotNullOrUndefined(changes.selectedSectors)) {
-      this.updateGraph();
       this.initOrUpdateData();
+      this.updateGraph();
     }
     if (isNotNullOrUndefined(changes.showSectors?.currentValue)) {
       this.updateShowSectors(changes.showSectors.currentValue);
@@ -245,7 +249,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       this.showAbsolute = value;
       this.updateGraph();
       this.initOrUpdateData();
-    }else {
+    } else {
       this.showAbsolute = value;
     }
   }
@@ -269,9 +273,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry]
     });
 
-    this.lockdownData = this.dataService.getLockdownData({
+    this.lockdownData = this.lockdownService.getLockdownData({
       countryFilter: [this.selectedCountry],
     });
+
+    this.lockdowns = this.lockdownService.getLockdowns(this.selectedCountry);
 
     this.dataWorld19 = this.dataService.getCo2Data({
       yearFilter: [2019],
@@ -290,12 +296,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         break;
       case 'relativeToWorld':
         this.yAxisText = 'in %';
-        this.data19 = this.data19.map( (d, i) => {
+        this.data19 = this.data19.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / this.dataWorld19[i].mtCo2) * 100;
           return d;
         });
 
-        this.data20 = this.data20.map( (d, i) => {
+        this.data20 = this.data20.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / this.dataWorld20[i].mtCo2) * 100;
           return d;
         });
@@ -305,53 +311,17 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         this.yAxisText = 'in tCO2/d p.P.';
         const countryPopulation = this.dataService.getPopulation(this.selectedCountry);
 
-        this.data19 = this.data19.map( (d, i) => {
+        this.data19 = this.data19.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
-
-        this.data20 = this.data20.map( (d, i) => {
+        this.data20 = this.data20.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
-
         break;
       default:
         break;
-    }
-  }
-
-  private getLockdown(data: LockdownDatapoint[]): number[] {
-    let output;
-    const lockdownStart = data.findIndex(d => d.lockdown === true);
-    const lockdownLength = data.slice(lockdownStart).findIndex(d => d.lockdown === false);
-    let lockdownEnd = data.length - 1;
-    if (lockdownLength !== -1){
-      lockdownEnd = lockdownLength + lockdownStart - 1;
-    }
-    output = [lockdownStart, lockdownEnd];
-    return output;
-  }
-
-  private updateLockdownsToSelectedCountry(lockdownData: LockdownDatapoint[]): void {
-    let data = lockdownData;
-    let index = 0;
-    this.lockdowns = [];
-
-    while (data.find(d => d.lockdown === true) !== undefined) {
-      index += 1;
-      const lockdownInfo = this.getLockdown(data);
-      if (lockdownInfo[1] === 0 || lockdownInfo[0] === undefined || lockdownInfo[1] === undefined){
-        break;
-      }
-
-      const lockdown = {
-        lockdown: index,
-        lockdownStart: data[lockdownInfo[0]],
-        lockdownEnd: data[lockdownInfo[1]]
-      };
-      this.lockdowns.push(lockdown);
-      data = data.slice(lockdownInfo[1] + 1);
     }
   }
 
@@ -538,9 +508,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     const mousePosY = this.mouseCoordinates[1];
 
     // Values to mousePos
-    const obj19 = this.getCo2DataAtMousePosition(mousePosX, this.data19);
-    const obj20 = this.getCo2DataAtMousePosition(mousePosX, this.data20);
-    const obj20Sectors = this.getSectorStackAtDatapoint(mousePosX, this.dataSectors);
+    const obj19 = this.hoverService.getCo2DataAtMousePosition(mousePosX, this.data19, this.x19);
+    const obj20 = this.hoverService.getCo2DataAtMousePosition(mousePosX, this.data20, this.x20);
+    const obj20Sectors = this.hoverService.getSectorStackAtDatapoint(mousePosX, this.dataSectors, this.x20);
 
     // recover coordinate we need
     if (this.showDifference) {
@@ -599,10 +569,14 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
       this.hoverData = [
-        {text: this.decimalPipe.transform(obj19.mtCo2), unit, percent: '', fill: this.colorLine19,
-          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX},
-        {text: this.decimalPipe.transform(obj20.mtCo2), unit, percent: '', fill: this.colorLine20,
-          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX}
+        {
+          text: this.decimalPipe.transform(obj19.mtCo2), unit, percent: '', fill: this.colorLine19,
+          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
+        },
+        {
+          text: this.decimalPipe.transform(obj20.mtCo2), unit, percent: '', fill: this.colorLine20,
+          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
+        }
       ];
       this.updateTooltip('tooltipGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverDate);
     }
@@ -701,43 +675,45 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     const mousePosX = mouseCoordinates[0];
     const mousePosY = mouseCoordinates[1];
 
-    const objCovid = this.getCovidDataAtMousePosition(mousePosX, this.dataCovid);
+    const objCovid = this.hoverService.getCovidDataAtMousePosition(mousePosX, this.dataCovid, this.x20);
 
-    if (this.selectedCountry === 'WORLD' || this.selectedCountry === 'ROW' || this.selectedCountry === 'EU27 & UK'){
+    if (this.selectedCountry === 'WORLD' || this.selectedCountry === 'ROW' || this.selectedCountry === 'EU27 & UK') {
       tooltipSize[1] = this.tooltipCovidHeight - 40;
       this.hoverCovidData = [
-        {text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
-          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX}
+        {
+          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
+          xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
+        }
       ];
     } else {
       tooltipSize[1] = this.tooltipCovidHeight;
 
-      const objLockdown = this.getLockdownDataAtMousePosition(mousePosX, this.lockdownData);
+      const objLockdown = this.hoverService.getLockdownDataAtMousePosition(mousePosX, this.lockdownData, this.x20);
       let xV = this.hoverValuesX;
       let xU = this.hoverUnitsX;
 
       let lockdownStatus = 'No';
-      if (objLockdown.lockdown){
+      if (objLockdown.lockdown) {
+        const lockdown: Lockdown = this.lockdowns
+          .find(l => l.start.date.getTime() <= objLockdown.date.getTime() && l.end.date.getTime() >= objLockdown.date.getTime());
+        const start = this.datePipe.transform(lockdown.start.date, 'MMM d');
+        const end = this.datePipe.transform(lockdown.end.date, 'MMM d');
+        lockdownStatus = start + ' - ' + end;
 
-        for (const lockdown of this.lockdowns) {
-          if (lockdown.lockdownStart.date.getTime() <= objLockdown.date.getTime()
-            && lockdown.lockdownEnd.date.getTime() >= objLockdown.date.getTime()){
-            const start = this.dateToReadableString(lockdown.lockdownStart.date.toDateString());
-            const end = this.dateToReadableString(lockdown.lockdownEnd.date.toDateString());
-            lockdownStatus = start + ' - ' + end;
-
-            tooltipSize[0] = this.tooltipCovidLockdownWidth;
-            xV = 215;
-            xU = 220;
-          }
-        }
+        tooltipSize[0] = this.tooltipCovidLockdownWidth;
+        xV = 215;
+        xU = 220;
       }
 
       this.hoverCovidData = [
-        {text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
-          xText: xV, xUnit: xU, xPercent: this.hoverPercentX},
-        {text: lockdownStatus, unit: 'Lockdown', percent: '', fill: this.colorCovidLockdown,
-          xText: xV, xUnit: xU, xPercent: this.hoverPercentX}
+        {
+          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
+          xText: xV, xUnit: xU, xPercent: this.hoverPercentX
+        },
+        {
+          text: lockdownStatus, unit: 'Lockdown', percent: '', fill: this.colorCovidLockdown,
+          xText: xV, xUnit: xU, xPercent: this.hoverPercentX
+        }
       ];
     }
     this.hoverCovidDate = [{date: this.getDateString(mousePosX, ' 2020')}];
@@ -764,40 +740,10 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Helper functions
   private getDateString(mousePosX: number, year: string): string {
-    const dateToMousePosX = this.x20.invert(mousePosX).toDateString();
-    return this.dateToReadableString(dateToMousePosX) + year;
+    const dateToMousePosX = this.x20.invert(mousePosX);
+    return this.datePipe.transform(dateToMousePosX, 'MMM d') + year;
   }
 
-  private dateToReadableString(inputDate: string): string {
-    const removeFirstWord = inputDate.substr(inputDate.indexOf(' ') + 1);
-    return removeFirstWord.substr(0, removeFirstWord.lastIndexOf(' '));
-  }
-
-  private getLockdownDataAtMousePosition(xPos: number, data: LockdownDatapoint[]): LockdownDatapoint {
-    const dateAtMouse: Date = this.x20.invert(xPos);
-    const dataIndex = d3.bisect(data.map(d => d.date), dateAtMouse);
-    return data[dataIndex];
-  }
-
-  private getCovidDataAtMousePosition(xPos: number, data: CovidDatapoint[]): CovidDatapoint {
-    const dateAtMouse: Date = this.x20.invert(xPos);
-    const dataIndex = d3.bisect(data.map(d => d.date), dateAtMouse);
-    return data[dataIndex];
-  }
-
-  private getCo2DataAtMousePosition(xPos: number, data: Co2Datapoint[]): Co2Datapoint {
-    const is19Data = data.map(dp => dp.date.getFullYear()).includes(2019);
-    const dateAtMouse: Date = is19Data ? this.x19.invert(xPos) : this.x20.invert(xPos);
-    const dataIndex = d3.bisect(data.map(d => d.date), dateAtMouse);
-    return data[dataIndex];
-  }
-
-  private getSectorStackAtDatapoint(xPos: number, data: { [id: string]: number | Date }[]): { [id: string]: number | Date } {
-    const is19Data = data.map(dp => (dp.date as Date).getFullYear()).includes(2019);
-    const dateAtMouse: Date = is19Data ? this.x19.invert(xPos) : this.x20.invert(xPos);
-    const dataIndex = d3.bisect(data.map(d => d.date as Date), dateAtMouse);
-    return data[dataIndex];
-  }
 
   private updateTooltip(tooltipGroupName: string, tooltipHeight: number, tooltipWidth: number,
                         tooltipDataInput: any, tooltipDateInput: any): void {
@@ -873,7 +819,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
       sumSectors: true,
     });
-    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute, true );
+    const sectorData = this.dataService.getSectorsPerDay(this.selectedCountry, this.selectedSectors, this.showAbsolute, true);
 
     // RELATIVE DATA
     const dataWorld19 = this.dataService.getCo2Data({
@@ -895,12 +841,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         break;
       case 'relativeToWorld':
         this.yAxisText = 'in %';
-        data19 = data19.map( (d, i) => {
+        data19 = data19.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / dataWorld19[i].mtCo2) * 100;
           return d;
         });
 
-        data20 = data20.map( (d, i) => {
+        data20 = data20.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / dataWorld20[i].mtCo2) * 100;
           return d;
         });
@@ -908,11 +854,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         break;
       case 'relativeToPopulation':
         this.yAxisText = 'in tCO2/d p.P.';
-        data19 = data19.map( (d, i) => {
+        data19 = data19.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
-        data20 = data20.map( (d, i) => {
+        data20 = data20.map((d, i) => {
           d.mtCo2 = (d.mtCo2 / countryPopulation) * 1000000;
           return d;
         });
@@ -933,16 +879,12 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       countryFilter: [this.selectedCountry],
     });
 
-    const lockdownData = this.dataService.getLockdownData({
-      countryFilter: [this.selectedCountry],
-    });
-
     this.updateCovidAxes(covidData);
     this.updateCovidLines(covidData);
-    this.updateLockdownArea(lockdownData);
+    this.updateLockdownArea(this.lockdownData);
   }
 
-  updateShowDifference(show: boolean): void {
+  private updateShowDifference(show: boolean): void {
     const line19 = this.svg.select('.line19');
     const areaAbove = this.svg.select('.area-above');
     const areaBelow = this.svg.select('.area-below');
@@ -960,7 +902,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  updateShowSectors(show: boolean): void {
+  private updateShowSectors(show: boolean): void {
     const line19 = this.svg.select('.line19');
     const line20 = this.svg.select('.line20');
     const sectors = this.svg.selectAll('.sectorArea');
