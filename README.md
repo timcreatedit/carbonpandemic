@@ -1,4 +1,4 @@
-# Rettet die Pandemie unser Klima?
+# Will the Pandemic save our Climate?
 
 ### InfoVis Gruppe 13
 
@@ -6,14 +6,14 @@
 
 ![Screenshot](./Screenshot.png)
 
-
-
 >  Link to the current project status: https://carbonpandemic.info/
 
-Lockdowns, Reiseverbote und eine heruntergefahrene Wirtschaft - 2020 war auf Grund der COVID19 Pandemie nicht nur für die Menschen ein einzigartiges Jahr, sondern auch in Hinblick auf deren Hauptverursacher für Co2-Emissionen interessant.
-Die Hoffnung besteht, dass die durch diese besondere Lage bedingten Einschränkungen zumindest für die Aussichten auf einen zukünftigen Co2-Ausstieg einen wichtigen Schritt in die richtige Richtung darstellen könnten.
-Doch in wie fern hat die Pandemie die Co2 Emissionen 2020 im Verhältnis zu 2019 beeinflusst? Welche Einblicke kann man für die einzelnen Sektoren sammeln, aus denen sich die Emission zusammensetzt?
-Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unser Co2-Budget?
+
+
+Lockdowns, travel bans, and a shutdown economy - 2020 was not only a unique year for people due to the COVID-19 pandemic, but also interesting in terms of its major contributors to Co2 emissions.
+The hope is that the constraints imposed by this particular situation could be an important step in the right direction, at least for the prospects of a future Co2 phase-out.
+But to what extent has the pandemic affected Co2 emissions in 2020 relative to 2019? What insights can be gleaned for the individual sectors that make up the emissions?
+And how what impact would a continuation of these regulations have on our Co2 budget?
 
 ## Tips for an optimal Experience
 
@@ -28,7 +28,7 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 4. If you just want to run the project locally, run the start script with  ``npm run start``. The Angular CLI will handle building and serving the project for you. Check the console to see where your local dev server is running (usually ``localhost:4200/``).
 5. If you want to build the project, run the build script with ``npm run build:ci``. The resulting web page can be found in the 'dist' folder.
 
-## Milestone 4
+## Milestone 5
 
 ### Ziel 1: Fakten Darstellen
 
@@ -90,3 +90,4 @@ Und wie welchen Einfluss hätte eine Weiterführung dieser Regulationen auf unse
 - [X] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
 - [x] Hover Interaktion
 
+## Imprint
