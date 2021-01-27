@@ -2025,15 +2025,23 @@
       "PrognosisData": "historic"
     },
     {
+      "Year": "2019",
+      "undefined": "-8.71%",
+      "CO2WithoutLockdowns": "98.21",
+      "CO2WithLockdowns": "98.21",
+      "PrognosisData": "prognosis"
+    },
+    {
       "Year": "2020",
       "meandailyCO2": "89.66",
       "PrognosisData": "historic"
     },
+
     {
       "Year": "2020",
       "undefined": "-8.71%",
       "CO2WithLockdowns": "89.66",
-      "CO2WithoutLockdowns": "89.66",
+      "CO2WithoutLockdowns": "96.82",
       "PrognosisData": "prognosis"
     },
     {
