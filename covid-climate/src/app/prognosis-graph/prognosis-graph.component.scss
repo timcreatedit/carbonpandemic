@@ -133,7 +133,7 @@
     margin-top: 10%;
 
     font-weight: normal;
-    -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
+    -webkit-text-fill-color: rgba(255, 255, 255, 1);
 
     .ngx-slider-bubble  { //includes all slider labels
       padding-bottom: 10px;
@@ -141,15 +141,22 @@
     }
 
     .ngx-slider-pointer {
-      background-color: $accentColor2;
+      background-color: white;
+      border: solid $backgroundColorLight 1px;
 
       &:after {
         display: none;
       }
+      &:focus {
+        outline: 0 !important;
+      }
     }
 
+    .ngx-slider-bar {
+      background: $backgroundColorLight;
+    }
     .ngx-slider-selection {
-      background: $accentColor2;
+      background: white;
     }
   }
 }

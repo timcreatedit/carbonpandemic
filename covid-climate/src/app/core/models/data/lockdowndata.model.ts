@@ -5,3 +5,8 @@ export interface LockdownDatapoint {
   country: Countries;
   lockdown: boolean;
 }
+
+export interface Lockdown {
+  start: LockdownDatapoint;
+  end: LockdownDatapoint;
+}

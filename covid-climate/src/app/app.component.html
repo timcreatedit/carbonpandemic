@@ -191,15 +191,15 @@
         <ul>
           <li class="line2020">
             <div class="bullet"></div>
-            <span>Average MtCO<sub>2</sub> per day.</span>
+            <span>Average MtCO<sub>2</sub> per day</span>
           </li>
           <li class="linePrognosisLockdown">
             <div class="bullet"></div>
-            Continuation with regulations
+            Adjusted prognosis for continued regulations
           </li>
           <li class="linePrognosisNoLockdown">
             <div class="bullet"></div>
-            Continuation without regulations
+            Prognosis without regulations
           </li>
         </ul>
       </div>
@@ -296,6 +296,16 @@
         </ol>
       </div>
     </div>
+    <div class="scroll-prompt">
+    </div>
+    <div>
+      <h5>Imprint</h5>
+      This website was created by Niklas Esch, Yara Fanger, Louis Gr&uuml;ll, Niklas Hirsch and Tim Lehmann as part of
+      the Information Visualization course at LMU Munich. If you have any questions, you
+      can contact us via <a href="mailto:T.Lehmann@campus.lmu.de">e-mail</a>.
+    </div>
+    <div class="scroll-prompt">
+    </div>
   </div>
 
   <div id="graphs-container">
@@ -314,7 +324,9 @@
       ></app-prognosis-graph>
     </div>
   </div>
-
 </div>
+<app-globe [relativeScroll]="scrollService.currentScrollValue$ | async"
+           [active]="scrollService.showGlobe$ | async"></app-globe>
+
 
 

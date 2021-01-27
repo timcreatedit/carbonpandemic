@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Countries} from '../core/models/co2data.model';
+import {Countries} from '../core/models/data/co2data.model';
 import {ScrollService} from '../core/services/scroll.service';
 import {filter} from "rxjs/operators";
 
@@ -15,13 +15,13 @@ export class TopBarComponent implements OnInit {
   countries: string[] = Object.keys(Countries).map(k => Countries[k]);
   sectorKeys: any;
 
-  selectedCountry: string;
+  selectedCountry: string = Countries.world;
 
   constructor(readonly scrollService: ScrollService) {
   }
 
   ngOnInit(): void {
-    this.selectedCountry = Countries.germany.toString();
+    this.selectedCountry = Countries.world.toString();
     this.updateCountry(this.selectedCountry);
   }
 

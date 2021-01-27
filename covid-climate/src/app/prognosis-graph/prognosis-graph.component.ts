@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
-import {Countries} from '../core/models/co2data.model';
-import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
+import {Countries} from '../core/models/data/co2data.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/data/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {Options} from '@angular-slider/ngx-slider';
 import {HoverService} from '../core/services/hover.service';
@@ -216,15 +216,15 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.sliderSvg
       .append('path')
-      .attr('class', 'lineHistoric');
-
-    this.sliderSvg
-      .append('path')
       .attr('class', 'linePrognosisLockdown');
 
     this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisNoLockdown');
+
+    this.sliderSvg
+      .append('path')
+      .attr('class', 'lineHistoric');
   }
 
   private updatePrognosisGraph(animate: boolean = true): void {
@@ -397,7 +397,6 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.historicData, this.x, this.historicData.map(d => d.year));
     const year = this.x.invert(mousePosX).toFixed(0);
     if (this.isSum){
-      console.log(this.isSum);
       tooltipSize[0] =  this.tooltipBudgetWidth;
       this.hoverDateX = 130;
       this.hoverValuesX = 180;

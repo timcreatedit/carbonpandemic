@@ -14,6 +14,8 @@ export interface SiteScrollConfig {
   readonly prognosisSummedUp?: boolean;
 
   readonly topBarDropdownShown?: boolean;
+
+  readonly globeShown?: boolean;
 }
 
 export interface ScrollSection {
@@ -33,19 +35,18 @@ export class ScrollService {
 
   private readonly siteSections: ScrollSection[] = [
     {
-      section: [0, 0.1],
-      config: {
-      }
+      section: [0, 0.06],
+      config: {}
     },
     {
-      section: [0.1, 0.3],
+      section: [0.06, 0.24],
       config: {
         covidGraphShown: true,
         topBarDropdownShown: true,
       }
     },
     {
-      section: [0.3, 0.47],
+      section: [0.24, 0.38],
       config: {
         covidGraphShown: true,
         covidShowDifference: true,
@@ -53,7 +54,7 @@ export class ScrollService {
       }
     },
     {
-      section: [0.47, 0.7],
+      section: [0.38, 0.59],
       config: {
         covidGraphShown: true,
         covidShowSectors: true,
@@ -61,7 +62,7 @@ export class ScrollService {
       }
     },
     {
-      section: [0.7, .9],
+      section: [0.59, .75],
       config: {
         covidGraphShown: false,
         covidShowSectors: true,
@@ -70,7 +71,7 @@ export class ScrollService {
       }
     },
     {
-      section: [0.9, 1],
+      section: [0.75, 0.9],
       config: {
         covidGraphShown: false,
         covidShowSectors: true,
@@ -78,12 +79,22 @@ export class ScrollService {
         prognosisSummedUp: true,
         topBarDropdownShown: true,
       }
+    },
+    {
+      section: [0.9, 1],
+      config: {
+        globeShown: true,
+      }
     }
   ];
 
   //endregion
 
   private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
+
+  private readonly scrollValue$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  public readonly currentScrollValue$: Observable<number> = this.scrollValue$.asObservable();
 
   public readonly showCovidGraph$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
@@ -123,20 +134,30 @@ export class ScrollService {
 
   public readonly showTopBarDropdown$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
-  map(c => c.topBarDropdownShown ?? false),
-  distinctUntilChanged(),
-);
+    map(c => c.topBarDropdownShown ?? false),
+    distinctUntilChanged(),
+  );
+
+  public readonly showGlobe$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+    map(c => c.globeShown ?? false),
+    distinctUntilChanged(),
+  );
 
   constructor() {
     combineLatest([
       fromEvent(window, 'scroll').pipe(startWith(0)),
-      fromEvent(window, 'resize').pipe(startWith(0))])
+      fromEvent(window, 'resize').pipe(startWith(0)),
+      fromEvent(window, 'hashchange').pipe(startWith(0)),
+    ])
       .pipe(
         map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
-        tap(console.log),
-        map(s => this.getCurrentConfig(s)),
-        distinctUntilChanged(),
-      ).subscribe(c => this.currentScrollConfig$.next(c));
+      ).subscribe((v) => this.scrollValue$.next(v));
+
+    this.currentScrollValue$.pipe(
+      map(s => this.getCurrentConfig(s)),
+      distinctUntilChanged(),
+    ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
   private static getDocumentHeight(): number {
