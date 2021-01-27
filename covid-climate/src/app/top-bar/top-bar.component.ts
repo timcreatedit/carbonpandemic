@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Countries} from '../core/models/co2data.model';
+import {Countries} from '../core/models/data/co2data.model';
 import {ScrollService} from '../core/services/scroll.service';
 import {filter} from "rxjs/operators";
 

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import * as lockdownDataset from '../../../assets/datasets/data/lockdown-data.json';
-import {Lockdown, LockdownDatapoint} from '../models/lockdowndata.model';
+import {Lockdown, LockdownDatapoint} from '../models/data/lockdowndata.model';
 import {CountryService} from './country.service';
-import {Countries} from '../models/co2data.model';
+import {Countries} from '../models/data/co2data.model';
 
 export interface FilterOptions {
   countryFilter?: Countries[];

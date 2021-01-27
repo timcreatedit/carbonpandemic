@@ -9,7 +9,7 @@ import * as russia from 'src/assets/datasets/data/lockdown-data/covid-policy-tra
 import * as spain from 'src/assets/datasets/data/lockdown-data/covid-policy-tracker-spain.json';
 import * as uk from 'src/assets/datasets/data/lockdown-data/covid-policy-tracker-uk_nat_total.json';
 import * as us from 'src/assets/datasets/data/lockdown-data/covid-policy-tracker-usa_nat_total.json';
-import {LockdownDatapoint} from '../../../app/core/models/lockdowndata.model';
+import {LockdownDatapoint} from '../../../app/core/models/data/lockdowndata.model';
 
 export class LockdownData {
   private lockdownDatapoints: LockdownDatapoint[] = [];

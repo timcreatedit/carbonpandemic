@@ -4,10 +4,10 @@ import * as co2dataset from 'src/assets/datasets/data/co2-data.json';
 import * as covidDataset from 'src/assets/datasets/data/COVID-19 cases worldwide.json';
 import * as lockdownDataset from 'src/assets/datasets/data/lockdown-data.json';
 import * as historicCo2Dataset from 'src/assets/datasets/data/historical_co2_data_whole_world.json';
-import {Co2Datapoint, Countries, Sectors} from '../models/co2data.model';
-import {CovidDatapoint} from '../models/coviddata.model';
-import {LockdownDatapoint} from '../models/lockdowndata.model';
-import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/historicco2data.model';
+import {Co2Datapoint, Countries, Sectors} from '../models/data/co2data.model';
+import {CovidDatapoint} from '../models/data/coviddata.model';
+import {LockdownDatapoint} from '../models/data/lockdowndata.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../models/data/historicco2data.model';
 import * as d3 from 'd3';
 import {CountryService} from './country.service';
 

@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import * as d3 from 'd3';
 import {DataService} from '../core/services/data.service';
-import {Countries} from '../core/models/co2data.model';
-import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/historicco2data.model';
+import {Countries} from '../core/models/data/co2data.model';
+import {HistoricCo2Datapoint, PrognosisDataIndicators} from '../core/models/data/historicco2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {Options} from '@angular-slider/ngx-slider';
 import {HoverService} from '../core/services/hover.service';

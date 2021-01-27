@@ -14,14 +14,16 @@ import {
 import * as d3 from 'd3';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {DataService} from '../core/services/data.service';
-import {Co2Datapoint, Countries, Sectors} from '../core/models/co2data.model';
+import {Co2Datapoint, Countries, Sectors} from '../core/models/data/co2data.model';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import {CovidDatapoint} from '../core/models/coviddata.model';
-import {Lockdown, LockdownDatapoint} from '../core/models/lockdowndata.model';
+import {CovidDatapoint} from '../core/models/data/coviddata.model';
+import {Lockdown, LockdownDatapoint} from '../core/models/data/lockdowndata.model';
 import {DatePipe, DecimalPipe} from '@angular/common';
 import {ScrollService} from '../core/services/scroll.service';
 import {LockdownService} from '../core/services/lockdown.service';
 import {HoverService} from '../core/services/hover.service';
+import {HoverData} from '../core/models/hoverdata.model';
+import {ColorService} from '../core/services/color.service';
 
 @Component({
   selector: 'app-covid-graph',
@@ -73,27 +75,13 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   // endregion
 
   // hover options
-  private colorLine19 = '#6690ff';
-  private colorLine20 = '#ffffff';
 
-  private colorPositive = '#4ff396';
-  private colorNegative = '#fc7407';
-
-  private colorPower = '#ffdb21';
-  private colorGroundTransport = '#20E74B';
-  private colorIndustry = '#b968ff';
-  private colorResidential = '#f6304e';
-  private colorAviation = '#388bef';
-
-  private colorCovidCases = '#ff5889';
-  private colorCovidLockdown = '#DCDCDC';
-
-  private hoverData: { unit: string; text: string; fill: string; percent: string, xText: number, xUnit: number, xPercent: number }[] = [
+  private hoverData: HoverData[] = [
     {text: '0', unit: 'MtCo2', percent: '', fill: '#63f2ff', xText: 0, xUnit: 0, xPercent: 0},
     {text: '0', unit: 'MtCo2', percent: '', fill: 'white', xText: 0, xUnit: 0, xPercent: 0}
   ];
-  private hoverCovidData = [
-    {text: '0', unit: 'New cases', percent: '', fill: this.colorCovidCases, xText: 0, xUnit: 0, xPercent: 0}
+  private hoverCovidData: HoverData[] = [
+    {text: '0', unit: 'New cases', percent: '', fill: this.colorService.colorCovidCases, xText: 0, xUnit: 0, xPercent: 0}
   ];
 
   private hoverDate = [{date: '-'}];
@@ -195,6 +183,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
               private lockdownService: LockdownService,
               private hoverService: HoverService,
               private scrollService: ScrollService,
+              private colorService: ColorService,
               private decimalPipe: DecimalPipe,
               private datePipe: DatePipe,
   ) {
@@ -520,7 +509,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       const difference = obj20.mtCo2 - obj19.mtCo2;
       const percent = ((Math.abs(obj20.mtCo2 - obj19.mtCo2) / obj19.mtCo2) * 100).toFixed(1);
-      const fill = difference < 0 ? this.colorPositive : this.colorNegative;
+      const fill = difference < 0 ? this.colorService.colorPositive : this.colorService.colorNegative;
       const prefix = difference < 0 ? '' : '+';
       this.hoverData = [
         {
@@ -534,11 +523,11 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
         }
       ];
 
-      this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
+      this.hoverDate = [{date: this.getDateString(mousePosX, this.data20, ' 19/20')}];
       this.updateTooltip('tooltipGroup', tooltipSize[1], tooltipSize[0], this.hoverData, this.hoverDate);
     }
     if (this.showSectors) {
-      this.hoverDate = [{date: this.getDateString(mousePosX, ' 2020')}];
+      this.hoverDate = [{date: this.getDateString(mousePosX, this.data20, ' 2020')}];
       this.hoverData = [];
       const sectorsInDate = Object.keys(obj20Sectors).filter(k => k !== 'date').reverse();
       const sectorSum: number = Object.keys(obj20Sectors)
@@ -553,7 +542,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
             text: this.decimalPipe.transform(value),
             unit,
             percent: sectorsInDate.length > 1 ? '(' + ((value / sectorSum) * 100).toFixed(1).toString() + '%)' : '',
-            fill: this.getColorForSector(sector as Sectors),
+            fill: this.colorService.getColorForSector(sector as Sectors),
             xText: this.hoverValuesX,
             xUnit: this.hoverUnitsX,
             xPercent: this.hoverPercentX
@@ -567,14 +556,14 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.showSectors && !this.showDifference) {
       tooltipSize[1] = this.tooltipNormalHeight;
 
-      this.hoverDate = [{date: this.getDateString(mousePosX, ' 19/20')}];
+      this.hoverDate = [{date: this.getDateString(mousePosX, this.data20, ' 19/20')}];
       this.hoverData = [
         {
-          text: this.decimalPipe.transform(obj19.mtCo2), unit, percent: '', fill: this.colorLine19,
+          text: this.decimalPipe.transform(obj19.mtCo2), unit, percent: '', fill: this.colorService.colorLine19,
           xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
         },
         {
-          text: this.decimalPipe.transform(obj20.mtCo2), unit, percent: '', fill: this.colorLine20,
+          text: this.decimalPipe.transform(obj20.mtCo2), unit, percent: '', fill: this.colorService.colorLine20,
           xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
         }
       ];
@@ -594,21 +583,6 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.svg.select('.mouseLine')
       .attr('x', mousePosX);
-  }
-
-  private getColorForSector(sector: Sectors): string {
-    switch (sector) {
-      case Sectors.power:
-        return this.colorPower;
-      case Sectors.groundTransport:
-        return this.colorGroundTransport;
-      case Sectors.industry:
-        return this.colorIndustry;
-      case Sectors.residential:
-        return this.colorResidential;
-      case Sectors.domesticAviation:
-        return this.colorAviation;
-    }
   }
 
   private mouseover(): void {
@@ -681,7 +655,7 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
       tooltipSize[1] = this.tooltipCovidHeight - 40;
       this.hoverCovidData = [
         {
-          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
+          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorService.colorCovidCases,
           xText: this.hoverValuesX, xUnit: this.hoverUnitsX, xPercent: this.hoverPercentX
         }
       ];
@@ -707,16 +681,16 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
 
       this.hoverCovidData = [
         {
-          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorCovidCases,
+          text: this.decimalPipe.transform(objCovid.cases), unit: 'New cases', percent: '', fill: this.colorService.colorCovidCases,
           xText: xV, xUnit: xU, xPercent: this.hoverPercentX
         },
         {
-          text: lockdownStatus, unit: 'Lockdown', percent: '', fill: this.colorCovidLockdown,
+          text: lockdownStatus, unit: 'Lockdown', percent: '', fill: this.colorService.colorCovidLockdown,
           xText: xV, xUnit: xU, xPercent: this.hoverPercentX
         }
       ];
     }
-    this.hoverCovidDate = [{date: this.getDateString(mousePosX, ' 2020')}];
+    this.hoverCovidDate = [{date: this.getDateString(mousePosX, this.dataCovid, ' 2020')}];
 
     this.updateTooltip('tooltipCovidGroup', tooltipSize[1], tooltipSize[0], this.hoverCovidData, this.hoverCovidDate);
 
@@ -739,11 +713,9 @@ export class CovidGraphComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   // Helper functions
-  private getDateString(mousePosX: number, year: string): string {
-    const dateToMousePosX = this.x20.invert(mousePosX);
-    return this.datePipe.transform(dateToMousePosX, 'MMM d') + year;
+  private getDateString(mousePosX: number, data: { date: Date }[], year: string): string {
+    return this.datePipe.transform(this.hoverService.getDateAtPos(mousePosX, data, this.x20), 'MMM d') + year;
   }
-
 
   private updateTooltip(tooltipGroupName: string, tooltipHeight: number, tooltipWidth: number,
                         tooltipDataInput: any, tooltipDateInput: any): void {

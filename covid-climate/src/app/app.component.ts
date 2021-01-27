@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Co2Datapoint, Countries, Sectors} from './core/models/co2data.model';
+import {Co2Datapoint, Countries, Sectors} from './core/models/data/co2data.model';
 import {DataService} from './core/services/data.service';
 import {filter} from 'rxjs/operators';
 import {ScrollService} from './core/services/scroll.service';
-import {CovidDatapoint} from './core/models/coviddata.model';
+import {CovidDatapoint} from './core/models/data/coviddata.model';
 
 @Component({
   selector: 'app-root',
