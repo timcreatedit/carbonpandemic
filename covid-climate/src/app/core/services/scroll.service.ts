@@ -14,6 +14,8 @@ export interface SiteScrollConfig {
   readonly prognosisSummedUp?: boolean;
 
   readonly topBarDropdownShown?: boolean;
+
+  readonly globeShown?: boolean;
 }
 
 export interface ScrollSection {
@@ -81,6 +83,7 @@ export class ScrollService {
     {
       section: [0.9, 1],
       config: {
+        globeShown: true,
       }
     }
   ];
@@ -88,6 +91,10 @@ export class ScrollService {
   //endregion
 
   private readonly currentScrollConfig$: BehaviorSubject<SiteScrollConfig> = new BehaviorSubject<SiteScrollConfig>(this.initialConfig);
+
+  private readonly scrollValue$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  public readonly currentScrollValue$: Observable<number> = this.scrollValue$.asObservable();
 
   public readonly showCovidGraph$: Observable<boolean> = this.currentScrollConfig$.pipe(
     filter(isNotNullOrUndefined),
@@ -131,16 +138,26 @@ export class ScrollService {
     distinctUntilChanged(),
   );
 
+  public readonly showGlobe$: Observable<boolean> = this.currentScrollConfig$.pipe(
+    filter(isNotNullOrUndefined),
+    map(c => c.globeShown ?? false),
+    distinctUntilChanged(),
+  );
+
   constructor() {
     combineLatest([
       fromEvent(window, 'scroll').pipe(startWith(0)),
-      fromEvent(window, 'resize').pipe(startWith(0))])
+      fromEvent(window, 'resize').pipe(startWith(0)),
+      fromEvent(window, 'hashchange').pipe(startWith(0)),
+    ])
       .pipe(
         map(() => window.scrollY / (ScrollService.getDocumentHeight() - window.innerHeight)),
-        tap(console.log),
-        map(s => this.getCurrentConfig(s)),
-        distinctUntilChanged(),
-      ).subscribe(c => this.currentScrollConfig$.next(c));
+      ).subscribe((v) => this.scrollValue$.next(v));
+
+    this.currentScrollValue$.pipe(
+      map(s => this.getCurrentConfig(s)),
+      distinctUntilChanged(),
+    ).subscribe(c => this.currentScrollConfig$.next(c));
   }
 
   private static getDocumentHeight(): number {

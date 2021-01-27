@@ -216,15 +216,15 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
     this.sliderSvg
       .append('path')
-      .attr('class', 'lineHistoric');
-
-    this.sliderSvg
-      .append('path')
       .attr('class', 'linePrognosisLockdown');
 
     this.sliderSvg
       .append('path')
       .attr('class', 'linePrognosisNoLockdown');
+
+    this.sliderSvg
+      .append('path')
+      .attr('class', 'lineHistoric');
   }
 
   private updatePrognosisGraph(animate: boolean = true): void {

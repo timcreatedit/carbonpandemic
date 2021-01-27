@@ -29,6 +29,8 @@
     "ngx-slides": "^1.0.1",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.6.3",
+    "three": "^0.124.0",
+    "three-globe": "^2.11.2",
     "tslib": "^2.1.0",
     "zone.js": "~0.10.2"
   },
