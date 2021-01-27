@@ -4,6 +4,7 @@ import {DataService} from './core/services/data.service';
 import {filter} from 'rxjs/operators';
 import {ScrollService} from './core/services/scroll.service';
 import {CovidDatapoint} from './core/models/data/coviddata.model';
+import {HistoricService} from './core/services/historic.service';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private historicService: HistoricService,
     public scrollService: ScrollService,
   ) {
     this.scrollService.covidShowSectors$.pipe(
@@ -42,7 +44,7 @@ export class AppComponent implements OnInit {
 
     this.scrollService.showPrognosisGraph$.pipe(
       filter(d => d)
-    ).subscribe( () => this.onSelectCountry(Countries.world));
+    ).subscribe(() => this.onSelectCountry(Countries.world));
   }
 
   ngOnInit(): void {
@@ -72,8 +74,9 @@ export class AppComponent implements OnInit {
 
   updateScenario(scenario2Degree: boolean): void {
     this.scenario2Degree = scenario2Degree;
-    const totalBudget = this.dataService.getTotalEmissionsUntilYear(2020) + this.dataService.get2020RemainingBudget(this.scenario2Degree);
-    this.budgetDepletionYearWithRestrictions = this.dataService.getDepletionYear(totalBudget, true);
-    this.budgetDepletionYearWithoutRestrictions = this.dataService.getDepletionYear(totalBudget, false);
+    const totalBudget = this.historicService.getTotalEmissionsUntilYear(2020)
+      + this.historicService.get2020RemainingBudget(this.scenario2Degree);
+    this.budgetDepletionYearWithRestrictions = this.historicService.getDepletionYear(totalBudget, true);
+    this.budgetDepletionYearWithoutRestrictions = this.historicService.getDepletionYear(totalBudget, false);
   }
 }
