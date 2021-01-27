@@ -54,9 +54,9 @@
       <p></p>
       <p>Emissions are displayed in <i>Megatons of carbon dioxide per day</i>. One Megaton equals
         <strong> {{ 1000000 | number}}
-          metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases, while the
+          metric tons.</strong> The graph underneath gives insight into the number of Covid-19 cases <a href="#sourceBox">[6]</a>, while the
         transparent areas illustrate the periods of
-        when the selected country had a lockdown.</p>
+        when the selected country had a lockdown <a href="#sourceBox">[7]</a>.</p>
 
       <div class="info">
         <p *ngIf="worstCo2DayOf20">
@@ -300,6 +300,14 @@
           <li>Emissions Database for Global Atmospheric Research (EDGAR),
             (accessed 15.11.2020),
             <br> <a href="https://edgar.jrc.ec.europa.eu/">https://edgar.jrc.ec.europa.eu/</a>
+          </li>
+          <li>European Centre for Disease Prevention and Control (ECDC),
+            (accessed 15.12.2020),
+            <br> <a href="https://www.ecdc.europa.eu/en/covid-19-pandemic">https://www.ecdc.europa.eu/en/covid-19-pandemic</a>
+          </li>
+          <li>Oxford COVID-19 Government Response Tracker (OxCGRT),
+            (accessed 08.01.2021),
+            <br> <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker">https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker</a>
           </li>
         </ol>
       </div>
