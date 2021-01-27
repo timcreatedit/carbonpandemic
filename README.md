@@ -28,7 +28,7 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 4. If you just want to run the project locally, run the start script with  ``npm run start``. The Angular CLI will handle building and serving the project for you. Check the console to see where your local dev server is running (usually ``localhost:4200/``).
 5. If you want to build the project, run the build script with ``npm run build:ci``. The resulting web page can be found in the 'dist' folder.
 
-## Milestone 4
+## Milestone 5
 
 ### Ziel 1: Fakten Darstellen
 
@@ -90,3 +90,4 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 - [X] Countdown bis zum Ablauf des CO2 Budgets in beiden Szenarien
 - [x] Hover Interaktion
 
+## Imprint
