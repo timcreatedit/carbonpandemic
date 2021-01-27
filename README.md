@@ -28,7 +28,7 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 4. If you just want to run the project locally, run the start script with  ``npm run start``. The Angular CLI will handle building and serving the project for you. Check the console to see where your local dev server is running (usually ``localhost:4200/``).
 5. If you want to build the project, run the build script with ``npm run build:ci``. The resulting web page can be found in the 'dist' folder.
 
-## Milestone 5
+## Milestone 5 - Final Feature List
 
 ### Ziel 1: Fakten Darstellen
 
@@ -49,7 +49,7 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 
 - [x] Animierte Änderungen
 - [x] Detaillierte Informationen beim Hovern (Hover-Funktion)
-- [x] Wechsel zwischen absoluten und relativen Daten
+- [x] Wechsel zwischen absoluten und relativen Daten (im Vergleich zur weltweiten Emission und im Verhältnis zur Bevölkerungszahl)
 - [ ] Vergleichsmodus von 2 Ländern
 - [ ] Wechsel in Covid Chart zwischen Faktoren 	(Neuinfektionen, Gesamt, R-Wert)
 
@@ -59,7 +59,7 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 
 #### Must Have Features
 
-- [x] Sektoren visualisier als Stacked-area Chart
+- [x] Sektoren visualisiert als Stacked-area Chart
 - [x] Detaillierte Informationen beim Hover - genauere Zahlenansicht, Prozentanzeige (Hover-Funktion)
 - [x] Länderauswähl - Dropdown Menü
 - [x] Beschreibende und erklärende Texte
@@ -67,6 +67,7 @@ And how what impact would a continuation of these regulations have on our Co2 bu
 #### Nice to Have Features
 
 - [x] Animationen
+- [x] Anzeige einzelner Sektoren
 - [ ] Anzeige der anteiligen Änderungen je Sektor
 
 ***
