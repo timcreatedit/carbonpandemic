@@ -19,6 +19,7 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {Options} from '@angular-slider/ngx-slider';
 import {HoverService} from '../core/services/hover.service';
 import {DecimalPipe} from '@angular/common';
+import {HistoricService} from '../core/services/historic.service';
 
 @Component({
   selector: 'app-prognosis-graph',
@@ -28,10 +29,6 @@ import {DecimalPipe} from '@angular/common';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges {
-  constructor(private dataService: DataService,
-              private hoverService: HoverService,
-              private decimalPipe: DecimalPipe) {
-  }
 
   @ViewChild('prognosisGraph') prognosisGraph: ElementRef<SVGElement>;
   @Input() selectedCountry: Countries;
@@ -60,8 +57,9 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   };
   // endregion
 
-  private historicData;
-  private prognosisData;
+  private historicData: HistoricCo2Datapoint[];
+  private prognosisData: HistoricCo2Datapoint[];
+  private allData: HistoricCo2Datapoint[];
 
   // region hover variables
   private colorPositive = '#4ff396';
@@ -139,6 +137,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
 
   private prognosisGraphSvg: SVGElement;
 
+  constructor(private historicService: HistoricService,
+              private hoverService: HoverService,
+              private decimalPipe: DecimalPipe) {
+  }
+
   // region ng Methods
   ngOnInit(): void {
   }
@@ -158,28 +161,32 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       return;
     }
     if (isNotNullOrUndefined(changes.selectedCountry)) {
-      this.updatePrognosisGraph();
       this.initOrUpdateData();
+      this.updatePrognosisGraph();
     } else if (isNotNullOrUndefined(changes.scenario2degree)) {
+      this.initOrUpdateData();
       this.updatePrognosisGraph();
       this.updateCo2BudgetLines();
-      this.initOrUpdateData();
     } else if (isNotNullOrUndefined(changes.isSum)) {
+      this.initOrUpdateData();
       this.updatePrognosisGraph();
       this.updateCo2BudgetLines();
-      this.initOrUpdateData();
     }
   }
 
   // endregion
   private initOrUpdateData(): void {
-    this.historicData = this.dataService.getHistoricCo2Data({
+    this.historicData = this.historicService.getHistoricCo2Data({
       prognosisDataFilter: [PrognosisDataIndicators.historic],
     });
-    this.prognosisData = this.dataService.getHistoricCo2Data({
+    this.prognosisData = this.historicService.getHistoricCo2Data({
       prognosisDataFilter: [PrognosisDataIndicators.prognosis],
     });
+    this.allData = this.historicService.getHistoricCo2Data({
+      prognosisDataFilter: null,
+    });
   }
+
   // region Prognosis Graph
   private initPrognosisGraph(): void {
     this.prognosisSvg = d3.select(this.prognosisGraphSvg);
@@ -228,17 +235,8 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updatePrognosisGraph(animate: boolean = true): void {
-    const historicData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: [PrognosisDataIndicators.historic],
-    });
-    const prognosisData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: [PrognosisDataIndicators.prognosis],
-    });
-    const allData = this.dataService.getHistoricCo2Data({
-      prognosisDataFilter: null,
-    });
-    this.updatePrognosisAxes(prognosisData, allData, animate);
-    this.updatePrognosisLine(historicData, prognosisData, animate);
+    this.updatePrognosisAxes(this.prognosisData, this.allData, animate);
+    this.updatePrognosisLine(this.historicData, this.prognosisData, animate);
   }
 
   private updatePrognosisAxes(dataPrognosis: HistoricCo2Datapoint[], dataAll: HistoricCo2Datapoint[], animate: boolean = true): void {
@@ -396,8 +394,8 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
     const objCo2 =
       this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.historicData, this.x, this.historicData.map(d => d.year));
     const year = this.x.invert(mousePosX).toFixed(0);
-    if (this.isSum){
-      tooltipSize[0] =  this.tooltipBudgetWidth;
+    if (this.isSum) {
+      tooltipSize[0] = this.tooltipBudgetWidth;
       this.hoverDateX = 130;
       this.hoverValuesX = 180;
       this.hoverUnitsX = 185;
@@ -414,7 +412,7 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
       const objPrognosis =
         this.hoverService.getHistoricDatapointAtMousePosition(mousePosX, this.prognosisData, this.x, this.prognosisData.map((d => d.year)));
 
-      tooltipSize[1] =  this.tooltipPrognosisHeight;
+      tooltipSize[1] = this.tooltipPrognosisHeight;
       this.hoverSelectedDate = [{date: year}];
 
       this.hoverData = [
@@ -556,11 +554,11 @@ export class PrognosisGraphComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private updateCo2BudgetLines(animate: boolean = true): void {
-    const total2020 = this.dataService.getTotalEmissionsUntilYear(2020);
-    const totalBudget = total2020 + this.dataService.get2020RemainingBudget(this.scenario2degree);
+    const total2020 = this.historicService.getTotalEmissionsUntilYear(2020);
+    const totalBudget = total2020 + this.historicService.get2020RemainingBudget(this.scenario2degree);
 
-    const depletionYearLockdowns = this.x(this.dataService.getDepletionYear(totalBudget, true));
-    const depletionYearNoLockdowns = this.x(this.dataService.getDepletionYear(totalBudget, false));
+    const depletionYearLockdowns = this.x(this.historicService.getDepletionYear(totalBudget, true));
+    const depletionYearNoLockdowns = this.x(this.historicService.getDepletionYear(totalBudget, false));
 
 
     this.sliderSvg
