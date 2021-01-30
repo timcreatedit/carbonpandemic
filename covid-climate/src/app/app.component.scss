@@ -25,7 +25,7 @@ app-globe {
 
 #main-content {
   position: relative;
-  padding: $basicPadding;
+  padding: 128px $basicPadding;
   display: flex;
   flex-direction: row;
 
@@ -307,6 +307,7 @@ app-globe {
       margin-top: 0;
       padding: 240px 0;
       width: 100%;
+
       .end {
         margin-top: 60px;
         padding: 0 $middleMargin;
@@ -324,6 +325,7 @@ app-globe {
       .graph-container {
         padding: 0;
         background-color: $backgroundColor;
+
         &.hidden {
           z-index: -2;
           opacity: 0;
