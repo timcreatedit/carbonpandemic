@@ -13,6 +13,7 @@
   flex-direction: row-reverse;
 
   #dropDownMenu {
+    cursor: pointer;
     transition: 500ms ease;
     right: 50px;
     width: 20vw;
@@ -36,9 +37,8 @@
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
 
-    :focus {
-      outline: none !important;
-      border: none;
+    &:disabled {
+      cursor: default;
     }
 
     &.hidden {
